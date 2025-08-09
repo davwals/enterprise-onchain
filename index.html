@@ -1,453 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Enterprise Onchain</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg-dark: #1a1a1a;
-      --panel-dark:#262626;
-      --button-dark:#2a2a2a;
-      --bg-light:#f7f7f7;
-      --text-light:#111;
-      --accent:#d1ff4c; /* yellow/green accent */
-      --radius:12px;
-      --max-w:1200px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Podcast Landing Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Menlo&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Menlo', monospace;
+        margin: 0;
+        background-color: #ffffff;
+        color: #000000;
     }
-.trusted {
-  text-align: center;
-  margin-top: 40px;
-  color: #ddd;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.5rem;
-}
-
-.trusted h2 {
-  margin-bottom: 24px;
-}
-
-.logos-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-}
-
-.logo-box {
-  background-color: #f5f5f5;
-  border-radius: 12px;
-  padding: 12px 20px;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  min-width: 110px;
-}
-
-.logo-box img {
-  max-height: 40px;
-  max-width: 100%;
-  object-fit: contain;
-}
-
-.logo-box:hover {
-  opacity: 1;
-  cursor: pointer;
-}
-
-    /* Base */
-    html,body{height:100%;margin:0;}
-    body{
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg-dark);
-      color:#fff;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      transition: background 0.25s, color 0.25s;
+    header {
+        text-align: center;
+        padding: 2rem 1rem;
     }
-    .container{
-      max-width:var(--max-w);
-      margin:0 auto;
-      padding:0 20px;
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
     }
-
-    /* Header */
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 0;
+    .btn {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        margin: 0.25rem;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
     }
-    .brand{
-      font-family: "Inter", sans-serif;
-      font-weight:400;
-      font-style:normal;      /* non-italic */
-      letter-spacing:1px;
-      font-size:1.15rem;
+    .section-title {
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem;
+        text-align: center;
     }
-
-    nav {
-      display:flex;
-      align-items:center;
-      gap:10px;
+    .logos-section p {
+        font-size: 0.9rem;
+        font-weight: normal;
+        margin-bottom: 1rem;
+        text-align: center;
     }
-
-    /* top nav buttons — dark grey with accent outline */
-    .nav-btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:var(--button-dark);
-      color:#fff;
-      text-decoration:none;
-      font-size:0.88rem;
-      border:2px solid var(--accent);
-      transition: transform .14s ease, background .14s ease, color .14s ease;
-      height:36px;
+    .logos-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        justify-items: center;
+        align-items: center;
+        padding: 0 1rem;
     }
-    .nav-btn img.icon{ height:18px; width:auto; display:block; }
-    .nav-btn:hover{ transform:translateY(-3px); background:var(--accent); color:var(--bg-dark); }
-
-    /* theme toggle (sun/moon) */
-    .theme-toggle{
-      margin-left:8px;
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      border:2px solid var(--accent);
-      background:transparent;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      color:var(--accent);
-      font-size:16px;
+    .logos-grid img {
+        max-width: 100px;
+        filter: grayscale(100%);
     }
-    .theme-toggle:hover{ background:var(--accent); color:var(--bg-dark); }
-
-    /* Hero / Title */
-    .hero{
-      text-align:center;
-      padding:44px 0 18px;
+    .video-grid, .spotify-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        padding: 0 1rem;
     }
-    .site-title{
-      font-family:"Playfair Display", serif;
-      font-style:italic;
-      font-weight:400; /* unbold */
-      font-size:2.6rem;
-      margin:0 0 12px;
+    .video-card, .spotify-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #f9f9f9;
+        text-align: center;
     }
-    .tagline{ margin:0 auto; max-width:760px; color:#cfcfcf; line-height:1.45; }
-
-    /* Trusted logos (text placeholders for now) */
-    .trusted{
-      text-align:center;
-      margin-top:28px;
-      color:#9f9f9f;
+    .video-card iframe, .spotify-card iframe {
+        width: 100%;
+        height: 180px;
     }
-
-    /* Hosts cards side-by-side */
-    .hosts{
-      display:flex;
-      gap:28px;
-      justify-content:center;
-      align-items:stretch;
-      margin:40px 0;
-      flex-wrap:wrap;
+    .spotify-card a {
+        display: block;
+        padding: 0.5rem;
+        text-decoration: none;
+        font-family: 'Playfair Display', serif;
+        color: #000;
+        font-size: 0.9rem;
     }
-    .host-card{
-      width:360px;
-      background:var(--panel-dark);
-      padding:20px;
-      border-radius:var(--radius);
-      text-align:center;
-    }
-    .host-card img{
-      width:220px;
-      height:220px;
-      object-fit:cover;
-      border-radius:14px;     /* square with rounded corners (not circle) */
-      display:block;
-      margin:0 auto 14px;
-    }
-    .host-card h3{ margin:8px 0 6px; font-size:1.05rem; font-weight:500; }
-    .host-card p{ margin:0; color:#d6d6d6; line-height:1.45; font-size:0.95rem; }
-
-    /* Main grid for episodes + youtube column on right */
-    .content-grid{
-      display:grid;
-      grid-template-columns: 1fr 340px;
-      gap:28px;
-      align-items:start;
-      margin-bottom:36px;
-    }
-
-    /* Episodes column (left) */
-    .episodes-section{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .episode{
-      background:var(--panel-dark);
-      padding:16px;
-      border-radius:12px;
-    }
-    .episode h4{ margin:0 0 6px; font-size:1.05rem; }
-    .episode p{ margin:0; color:#d0d0d0; font-size:0.95rem; }
-
-    /* YouTube previews column (right) — small previews stacked */
-    .yt-column{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .yt-item{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      background:var(--panel-dark);
-      padding:10px;
-      border-radius:10px;
-    }
-    .yt-thumb{
-      width:160px;
-      height:90px;
-      border-radius:8px;
-      overflow:hidden;
-      flex:0 0 160px;
-    }
-    .yt-thumb iframe{ width:160px; height:90px; border:0; display:block; }
-    .yt-meta{ font-size:0.88rem; color:#eaeaea; line-height:1.25; }
-    .yt-meta strong{ display:block; color:#fff; margin-bottom:6px; font-weight:500; }
-
-    /* Subscribe area */
-    .subscribe{
-      margin:34px auto 60px;
-      text-align:center;
-      max-width:760px;
-    }
-    .subscribe .form{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      margin-top:12px;
-    }
-    .subscribe input[type="email"]{
-      padding:10px 14px;
-      border-radius:999px;
-      border:0;
-      width:320px;
-      background:#111;
-      color:#fff;
-      outline:none;
-    }
-    .cta-btn{
-      padding:8px 14px;
-      border-radius:999px;
-      background:var(--button-dark);
-      color:#fff;
-      border:2px solid var(--accent);
-      cursor:pointer;
-      font-size:0.95rem;
-    }
-    .cta-btn:hover{ background:var(--accent); color:var(--bg-dark); }
-
-    /* Footer */
-    footer{ text-align:center; color:#9a9a9a; padding:28px 0; font-size:0.9rem; }
-
-    /* Light mode */
-    body.light-mode{
-      background:var(--bg-light);
-      color:var(--text-light);
-    }
-    body.light-mode .panel{ background:#fff; }
-    body.light-mode .host-card,
-    body.light-mode .episode,
-    body.light-mode .yt-item,
-    body.light-mode .subscribe,
-    body.light-mode .cta-btn,
-    body.light-mode .nav-btn{
-      /* preserve same visual but invert text color for readability */
-      background:#fff;
-      color:var(--text-light);
-    }
-    body.light-mode .nav-btn{ background:#fff; border:2px solid var(--accent); }
-    body.light-mode .nav-btn:hover{ background:var(--accent); color:var(--bg-dark); }
-
-    /* Responsive */
-    @media (max-width:980px){
-      .content-grid{ grid-template-columns: 1fr; }
-      .yt-column{ order:2; }
-      .hosts{ flex-direction:column; align-items:center; }
-      .host-card{ width:90%; max-width:420px; }
-      .yt-thumb{ width:120px; height:68px; flex:0 0 120px; }
-      .yt-thumb iframe{ width:120px; height:68px; }
-      .subscribe input{ width:220px; }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <div class="brand">ΞNTERPRISE ONCHAIN</div>
+<header>
+    <h1>Podcast Landing Page</h1>
+    <a href="#" class="btn" target="_blank">Subscribe</a>
+    <a href="#" class="btn" target="_blank">Listen on Spotify</a>
+</header>
 
-      <nav>
-        <!-- Newsletter (user icon) -->
-        <a class="nav-btn" href="#" title="Newsletter">
-          <img class="icon" src="https://i.imgur.com/U9DcDsn.png" alt="newsletter icon">
-          <span>Newsletter</span>
-        </a>
-
-        <!-- YouTube -->
-        <a class="nav-btn" href="#" title="YouTube">
-          <!-- simple inline svg for YouTube icon (keeps system light) -->
-          <img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
-          <span>YouTube</span>
-        </a>
-
-        <!-- Spotify (user-provided icon) -->
-        <a class="nav-btn" href="#" title="Spotify">
-          <img class="icon" src="https://i.imgur.com/W0mUcqF.png" alt="Spotify">
-          <span>Spotify</span>
-        </a>
-
-        <!-- Apple Music -->
-        <a class="nav-btn" href="#" title="Apple Music">
-          <img class="icon" src="https://i.imgur.com/wmJQpuk.png" alt="Apple Music">
-          <span>Apple Music</span>
-        </a>
-
-        <!-- Theme toggle: sun / moon -->
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀</button>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero">
-        <h1 class="site-title">Enterprise Onchain</h1>
-        <p class="tagline">Conversations with leaders from the largest enterprises and institutions in the world deploying products onchain.</p>
-      </section>
-<section class="trusted container" aria-label="Trusted logos section">
-  <h2>Listened &amp; read by employees at</h2>
-  <div class="logos-container">
-    <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Logo 1" /></div>
-    <div class="logo-box"><img src="https://i.imgur.com/c8Plx6w.png" alt="Logo 2" /></div>
-    <div class="logo-box"><img src="https://i.imgur.com/rScrYmV.png" alt="Logo 3" /></div>
-    <div class="logo-box"><img src="https://i.imgur.com/3bjgQU6.png" alt="Logo 4" /></div>
-    <div class="logo-box"><img src="https://i.imgur.com/9QVm8xO.png" alt="Logo 5" /></div>
-    <div class="logo-box"><img src="https://i.imgur.com/OHwzeBl.png" alt="Logo 6" /></div>
-    <div class="logo-box"><img src="https://i.imgur.com/jEMqGPk.png" alt="Logo 7" /></div>
-  </div>
+<section class="logos-section">
+    <p>Listened & read by employees at</p>
+    <div class="logos-grid">
+        <img src="logo1.png" alt="Logo 1">
+        <img src="logo2.png" alt="Logo 2">
+        <img src="logo3.png" alt="Logo 3">
+        <img src="logo4.png" alt="Logo 4">
+        <img src="logo5.png" alt="Logo 5">
+        <img src="logo6.png" alt="Logo 6">
+        <img src="logo7.png" alt="Logo 7">
+        <img src="logo8.png" alt="Logo 8">
+    </div>
 </section>
 
-
-      <!-- Hosts -->
-      <section class="hosts" aria-label="Hosts">
-        <div class="host-card">
-          <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith — Headshot">
-      <h3>James Smith</h3>
-      <h4>Head of Ecosystem</h4>
-      <p>7 years + at the Ethereum Foundation and leads the Ecosystem Development cluster.</p>
+<section>
+    <h2 class="section-title">Latest YouTube Episodes</h2>
+    <div class="video-grid">
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=qtHRdJ6w45A" target="_blank">
+                <iframe src="https://www.youtube.com/embed/qtHRdJ6w45A" frameborder="0" allowfullscreen></iframe>
+            </a>
         </div>
-
-        <div class="host-card">
-          <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh — Headshot">
-      <h3David Walsh/h3>
-      <h4>Enterprise Lead</h4>
-      <p>Heads up Enterprise at the Ethereum Foundation. 5+ years building institutional staking products.</p>
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=cbpCOGXTW0o" target="_blank">
+                <iframe src="https://www.youtube.com/embed/cbpCOGXTW0o" frameborder="0" allowfullscreen></iframe>
+            </a>
         </div>
-      </section>
-
-      <!-- Episodes + YouTube previews on right -->
-      <section class="content-grid">
-        <!-- Left: episodes -->
-        <div class="episodes-section">
-          <h2 style="margin-top:0;">Latest Podcast Episodes</h2>
-
-          <div class="episode">
-            <h4>Episode 1 — Scaling L2s for the Enterprise</h4>
-            <p>How rollups, data availability layers, and zero-knowledge proofs are changing enterprise architectures.</p>
-          </div>
-
-          <div class="episode">
-            <h4>Episode 2 — Onchain Compliance Patterns</h4>
-            <p>Regulatory alignment and compliance tooling for public chains.</p>
-          </div>
-
-          <div class="episode">
-            <h4>Episode 3 — Data Pipelines & Observability</h4>
-            <p>Design patterns for streaming onchain data into enterprise analytics stacks.</p>
-          </div>
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=xxxxxx1" target="_blank">
+                <iframe src="https://www.youtube.com/embed/xxxxxx1" frameborder="0" allowfullscreen></iframe>
+            </a>
         </div>
-
-        <!-- Right: small youtube previews -->
-        <aside class="yt-column" aria-label="YouTube previews">
-          <div class="yt-item">
-            <div class="yt-thumb">
-              <iframe src="https://www.youtube.com/embed/n4OflWszcZ0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="yt-meta">
-              <strong>Scaling L2s for Enterprises</strong>
-              Guest: Protocol Lead · Length: 42m · Topic: Rollups & ZK Proofs
-            </div>
-          </div>
-
-          <div class="yt-item">
-            <div class="yt-thumb">
-              <iframe src="https://www.youtube.com/embed/iAEwUpcc8do" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="yt-meta">
-              <strong>Onchain Compliance & Controls</strong>
-              Guest: Head of Compliance · Length: 31m · Topic: Regulatory frameworks
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <!-- Subscribe -->
-      <section class="subscribe">
-        <h2 style="margin:0;">Subscribe to the Newsletter</h2>
-        <p style="margin:6px 0 0;color:#cfcfcf;">No noise — just pragmatic onchain strategies for enterprise leaders, every week.</p>
-
-        <div class="form" role="form" aria-label="Subscribe form" style="margin-top:12px;">
-          <input type="email" placeholder="Your business email" aria-label="Email address">
-          <button class="cta-btn" type="button">Join Free</button>
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=xxxxxx2" target="_blank">
+                <iframe src="https://www.youtube.com/embed/xxxxxx2" frameborder="0" allowfullscreen></iframe>
+            </a>
         </div>
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=xxxxxx3" target="_blank">
+                <iframe src="https://www.youtube.com/embed/xxxxxx3" frameborder="0" allowfullscreen></iframe>
+            </a>
+        </div>
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=xxxxxx4" target="_blank">
+                <iframe src="https://www.youtube.com/embed/xxxxxx4" frameborder="0" allowfullscreen></iframe>
+            </a>
+        </div>
+    </div>
+</section>
 
-        <p style="font-size:0.82rem;color:#9f9f9f;margin-top:10px;">Unsubscribe anytime. We respect your privacy.</p>
-      </section>
-    </main>
+<section>
+    <h2 class="section-title">Latest Podcast Episodes (Spotify)</h2>
+    <div class="spotify-grid">
+        <div class="spotify-card">
+            <a href="https://open.spotify.com/episode/0DCqVkDbWrtTbWRICbNxWz" target="_blank">Episode 1</a>
+        </div>
+        <div class="spotify-card">
+            <a href="https://open.spotify.com/episode/75RB7WQbKYLqAVGFYhk6qF" target="_blank">Episode 2</a>
+        </div>
+    </div>
+    <div style="padding: 1rem;">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/episode/27R3ppSdBQruurebNCbsTc?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+</section>
 
-    <footer>
-      © 2025 Enterprise Onchain. All rights reserved.
-    </footer>
-  </div>
-
-  <script>
-    // theme toggle
-    const btn = document.getElementById('themeToggle');
-    btn.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      const isLight = document.body.classList.contains('light-mode');
-      btn.textContent = isLight ? '☾' : '☀';
-    });
-  </script>
 </body>
 </html>
-
 
 
