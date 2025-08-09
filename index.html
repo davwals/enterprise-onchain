@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -108,49 +106,11 @@
     }
     .tagline{ margin:0 auto; max-width:760px; color:#cfcfcf; line-height:1.45; }
 
-    /* Trusted logos updated */
-    .trusted {
-      text-align: center;
-      margin-top: 28px;
-      color: #ddd;
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      font-size: 1.5rem;
-    }
-
-    .trusted h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .logos-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    .logo-box {
-      background: #f5f5f5;
-      border-radius: var(--radius);
-      padding: 0.8rem 1.2rem;
-      opacity: 0.5;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 60px;
-      min-width: 110px;
-    }
-
-    .logo-box img {
-      max-height: 50px;
-      max-width: 100%;
-      object-fit: contain;
-    }
-
-    .logo-box:hover {
-      opacity: 1;
-      cursor: pointer;
+    /* Trusted logos (text placeholders for now) */
+    .trusted{
+      text-align:center;
+      margin-top:28px;
+      color:#9f9f9f;
     }
 
     /* Hosts cards side-by-side */
@@ -289,124 +249,161 @@
       .yt-column{ order:2; }
       .hosts{ flex-direction:column; align-items:center; }
       .host-card{ width:90%; max-width:420px; }
+      .yt-thumb{ width:120px; height:68px; flex:0 0 120px; }
+      .yt-thumb iframe{ width:120px; height:68px; }
+      .subscribe input{ width:220px; }
     }
   </style>
 </head>
 <body>
 
-  <header class="container">
-    <div class="brand">enterpriseonchain.com</div>
-    <nav>
-      <a href="https://ethereum.org/en/" target="_blank" class="nav-btn" rel="noopener noreferrer">
-        <img class="icon" src="https://i.imgur.com/Q9nlQQj.png" alt="Ethereum Icon" /> Ethereum.org
-      </a>
-      <a href="https://ethresear.ch" target="_blank" class="nav-btn" rel="noopener noreferrer">
-        <img class="icon" src="https://i.imgur.com/kU4N5Vv.png" alt="EthResearch Icon" /> EthResearch
-      </a>
-      <button class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">☀️</button>
-    </nav>
-  </header>
+  <div class="container">
+    <header>
+      <div class="brand">ΞNTERPRISE ONCHAIN</div>
 
-  <section class="hero container">
-    <h1 class="site-title">Enterprise Onchain</h1>
-    <p class="tagline">The business-focused podcast and newsletter for executives & builders working with Ethereum blockchain technology.</p>
-  </section>
+      <nav>
+        <!-- Newsletter (user icon) -->
+        <a class="nav-btn" href="#" title="Newsletter">
+          <img class="icon" src="https://i.imgur.com/fZFBvJh.png" alt="newsletter icon">
+          <span>Newsletter</span>
+        </a>
 
-  <!-- Updated Trusted logos section -->
-  <section class="trusted container">
-    <h2>Listened &amp; read by employees at</h2>
-    <div class="logos-container">
-      <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Logo 1" /></div>
-      <div class="logo-box"><img src="https://i.imgur.com/c8Plx6w.png" alt="Logo 2" /></div>
-      <div class="logo-box"><img src="https://i.imgur.com/rScrYmV.png" alt="Logo 3" /></div>
-      <div class="logo-box"><img src="https://i.imgur.com/3bjgQU6.png" alt="Logo 4" /></div>
-      <div class="logo-box"><img src="https://i.imgur.com/9QVm8xO.png" alt="Logo 5" /></div>
-      <div class="logo-box"><img src="https://i.imgur.com/OHwzeBl.png" alt="Logo 6" /></div>
-      <div class="logo-box"><img src="https://i.imgur.com/jEMqGPk.png" alt="Logo 7" /></div>
-    </div>
-  </section>
+        <!-- YouTube -->
+        <a class="nav-btn" href="#" title="YouTube">
+          <!-- simple inline svg for YouTube icon (keeps system light) -->
+          <img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
+          <span>YouTube</span>
+        </a>
 
-  <!-- Hosts Cards -->
-  <section class="hosts container" aria-label="Podcast Hosts">
-    <article class="host-card">
-      <img src="https://pbs.twimg.com/profile_images/1686578409218417153/CsYJ0xsn_400x400.jpg" alt="Anna B" />
-      <h3>Anna B</h3>
-      <p>Enterprise Team Lead, Ethereum Foundation. Interested in how Ethereum transforms business & finance.</p>
-    </article>
-    <article class="host-card">
-      <img src="https://pbs.twimg.com/profile_images/1686578250041321472/rSSu7H7h_400x400.jpg" alt="Sam C" />
-      <h3>Sam C</h3>
-      <p>Head of Ecosystem, Ethereum Foundation. Focused on strategic partnerships and ecosystem growth.</p>
-    </article>
-  </section>
+        <!-- Spotify (user-provided icon) -->
+        <a class="nav-btn" href="#" title="Spotify">
+          <img class="icon" src="https://i.imgur.com/W0mUcqF.png" alt="Spotify">
+          <span>Spotify</span>
+        </a>
 
-  <!-- Main Content Grid -->
-  <main class="container content-grid">
+        <!-- Apple Music -->
+        <a class="nav-btn" href="#" title="Apple Music">
+          <img class="icon" src="https://i.imgur.com/wmJQpuk.png" alt="Apple Music">
+          <span>Apple Music</span>
+        </a>
 
-    <!-- Episodes Section -->
-    <section class="episodes-section" aria-label="Recent Episodes">
-      <article class="episode">
-        <h4>Episode 1: Introduction to Ethereum for Enterprises</h4>
-        <p>An overview of how Ethereum can be leveraged by businesses and institutions to innovate and scale.</p>
-      </article>
-      <article class="episode">
-        <h4>Episode 2: Regulatory Landscape and Compliance</h4>
-        <p>Understanding the regulatory challenges and opportunities when adopting Ethereum technology.</p>
-      </article>
-    </section>
+        <!-- Theme toggle: sun / moon -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀</button>
+      </nav>
+    </header>
 
-    <!-- YouTube Column -->
-    <aside class="yt-column" aria-label="YouTube Videos">
-      <div class="yt-item">
-        <div class="yt-thumb">
-          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen title="Video 1"></iframe>
+    <main>
+      <section class="hero">
+        <h1 class="site-title">Enterprise Onchain</h1>
+        <p class="tagline">Conversations with leaders from the largest enterprises and institutions in the world deploying products onchain.</p>
+      </section>
+<section class="trusted container" aria-label="Trusted logos section">
+  <h2>Listened &amp; read by employees at</h2>
+  <div class="logos-container">
+    <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Logo 1" /></div>
+    <div class="logo-box"><img src="https://i.imgur.com/c8Plx6w.png" alt="Logo 2" /></div>
+    <div class="logo-box"><img src="https://i.imgur.com/rScrYmV.png" alt="Logo 3" /></div>
+    <div class="logo-box"><img src="https://i.imgur.com/3bjgQU6.png" alt="Logo 4" /></div>
+    <div class="logo-box"><img src="https://i.imgur.com/9QVm8xO.png" alt="Logo 5" /></div>
+    <div class="logo-box"><img src="https://i.imgur.com/OHwzeBl.png" alt="Logo 6" /></div>
+    <div class="logo-box"><img src="https://i.imgur.com/jEMqGPk.png" alt="Logo 7" /></div>
+  </div>
+</section>
+
+
+      <!-- Hosts -->
+      <section class="hosts" aria-label="Hosts">
+        <div class="host-card">
+          <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith — Headshot">
+      <h3>James Smith</h3>
+      <h4>Head of Ecosystem</h4>
+      <p>7 years + at the Ethereum Foundation and leads the Ecosystem Development cluster.</p>
         </div>
-        <div class="yt-meta">
-          <strong>Ethereum in Finance</strong>
-          A short video explaining Ethereum's impact on the finance sector.
-        </div>
-      </div>
-      <div class="yt-item">
-        <div class="yt-thumb">
-          <iframe src="https://www.youtube.com/embed/oHg5SJYRHA0" allowfullscreen title="Video 2"></iframe>
-        </div>
-        <div class="yt-meta">
-          <strong>Enterprise Use Cases</strong>
-          Real-world examples of Ethereum applications in enterprise.
-        </div>
-      </div>
-    </aside>
 
-  </main>
+        <div class="host-card">
+          <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh — Headshot">
+      <h3David Walsh/h3>
+      <h4>Enterprise Lead</h4>
+      <p>Heads up Enterprise at the Ethereum Foundation. 5+ years building institutional staking products.</p>
+        </div>
+      </section>
 
-  <!-- Subscribe Section -->
-  <section class="subscribe container" aria-label="Subscribe to newsletter">
-    <h3>Subscribe to the newsletter</h3>
-    <form class="form" action="#" method="post">
-      <input type="email" name="email" placeholder="Your email address" required aria-label="Email address" />
-      <button type="submit" class="cta-btn">Subscribe</button>
-    </form>
-  </section>
+      <!-- Episodes + YouTube previews on right -->
+      <section class="content-grid">
+        <!-- Left: episodes -->
+        <div class="episodes-section">
+          <h2 style="margin-top:0;">Latest Podcast Episodes</h2>
 
-  <footer>
-    &copy; 2025 Enterprise Onchain — All rights reserved
-  </footer>
+          <div class="episode">
+            <h4>Episode 1 — Scaling L2s for the Enterprise</h4>
+            <p>How rollups, data availability layers, and zero-knowledge proofs are changing enterprise architectures.</p>
+          </div>
+
+          <div class="episode">
+            <h4>Episode 2 — Onchain Compliance Patterns</h4>
+            <p>Regulatory alignment and compliance tooling for public chains.</p>
+          </div>
+
+          <div class="episode">
+            <h4>Episode 3 — Data Pipelines & Observability</h4>
+            <p>Design patterns for streaming onchain data into enterprise analytics stacks.</p>
+          </div>
+        </div>
+
+        <!-- Right: small youtube previews -->
+        <aside class="yt-column" aria-label="YouTube previews">
+          <div class="yt-item">
+            <div class="yt-thumb">
+              <iframe src="https://www.youtube.com/embed/n4OflWszcZ0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="yt-meta">
+              <strong>Scaling L2s for Enterprises</strong>
+              Guest: Protocol Lead · Length: 42m · Topic: Rollups & ZK Proofs
+            </div>
+          </div>
+
+          <div class="yt-item">
+            <div class="yt-thumb">
+              <iframe src="https://www.youtube.com/embed/iAEwUpcc8do" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="yt-meta">
+              <strong>Onchain Compliance & Controls</strong>
+              Guest: Head of Compliance · Length: 31m · Topic: Regulatory frameworks
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Subscribe -->
+      <section class="subscribe">
+        <h2 style="margin:0;">Subscribe to the Newsletter</h2>
+        <p style="margin:6px 0 0;color:#cfcfcf;">No noise — just pragmatic onchain strategies for enterprise leaders, every week.</p>
+
+        <div class="form" role="form" aria-label="Subscribe form" style="margin-top:12px;">
+          <input type="email" placeholder="Your business email" aria-label="Email address">
+          <button class="cta-btn" type="button">Join Free</button>
+        </div>
+
+        <p style="font-size:0.82rem;color:#9f9f9f;margin-top:10px;">Unsubscribe anytime. We respect your privacy.</p>
+      </section>
+    </main>
+
+    <footer>
+      © 2025 Enterprise Onchain. All rights reserved.
+    </footer>
+  </div>
 
   <script>
-    // Theme toggle logic
-    const themeToggleBtn = document.querySelector('.theme-toggle');
-    const body = document.body;
-
-    themeToggleBtn.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      // Swap sun/moon emoji
-      if(body.classList.contains('light-mode')){
-        themeToggleBtn.textContent = '🌙';
-      } else {
-        themeToggleBtn.textContent = '☀️';
-      }
+    // theme toggle
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      btn.textContent = isLight ? '☾' : '☀';
     });
   </script>
-
 </body>
 </html>
+
+
+
