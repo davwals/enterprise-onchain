@@ -1,273 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Enterprise Onchain Podcast</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Onchain</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-dark: #1a1a1a;
-    --bg-light: #f8f8f8;
-    --text-dark: #fff;
-    --text-light: #1a1a1a;
-    --accent: #ccff00;
-    --secondary-dark: #262626;
-    --secondary-light: #ffffff;
+    --bg-dark: #1e1e1e;
+    --bg-light: #ffffff;
+    --text-dark: #ffffff;
+    --text-light: #000000;
+    --accent: #d1ff4c;
+    --button-dark: #2a2a2a;
   }
   body {
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-dark);
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s;
   }
-  body.light-mode {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-  }
-
-  /* Header */
   header {
-    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1300px;
-    margin: 0 auto;
+    padding: 1rem 2rem;
   }
   .logo {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
     font-weight: 400;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
   }
-  .top-buttons {
+  nav {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-  .icon-btn {
-    background-color: var(--accent);
-    color: var(--bg-dark);
-    padding: 0.4rem 0.8rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    text-decoration: none;
+  .nav-btn {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    transition: transform 0.2s ease;
-  }
-  .icon-btn:hover {
-    transform: scale(1.05);
-  }
-  body.light-mode .icon-btn {
-    background-color: var(--accent);
-    color: var(--bg-light);
-  }
-  .mode-toggle {
-    background-color: transparent;
+    background-color: var(--button-dark);
     border: 2px solid var(--accent);
-    color: var(--accent);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s, color 0.3s;
+    border-radius: 30px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: all 0.3s;
   }
-  .mode-toggle:hover {
+  .nav-btn img {
+    height: 18px;
+  }
+  .nav-btn:hover {
     background-color: var(--accent);
-    color: var(--bg-dark);
+    color: var(--text-light);
   }
-
-  /* Hero */
-  .hero {
-    text-align: center;
-    padding: 4rem 1rem 3rem;
+  .toggle-theme {
+    background: none;
+    border: none;
+    cursor: pointer;
   }
-  .hero h1 {
+  .toggle-theme img {
+    height: 20px;
+  }
+  h1 {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
   }
-  .hero p {
-    max-width: 700px;
-    margin: 0 auto;
-    color: #ccc;
+  section {
+    padding: 2rem;
   }
-  body.light-mode .hero p {
-    color: #555;
-  }
-
-  /* Logos */
-  .logo-slider {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 0;
-  }
-  .logo-slider span {
-    font-size: 1rem;
-    color: #999;
-  }
-  body.light-mode .logo-slider span {
-    color: #666;
-  }
-
-  /* Hosts */
   .hosts {
     display: flex;
     gap: 2rem;
-    flex-wrap: wrap;
     justify-content: center;
   }
-  .host-card {
-    flex: 1 1 45%;
-    background-color: var(--secondary-dark);
-    border-radius: 12px;
-    padding: 1rem;
+  .host {
     text-align: center;
-    transition: background-color 0.3s;
-    max-width: 400px;
+    max-width: 250px;
   }
-  body.light-mode .host-card {
-    background-color: var(--secondary-light);
-  }
-  .host-card img {
-    width: 200px;
-    height: 200px;
-    border-radius: 12px;
+  .host img {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
     object-fit: cover;
     margin-bottom: 1rem;
   }
-
-  /* Videos */
-  .video {
-    background-color: var(--secondary-dark);
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    transition: background-color 0.3s;
+  .logos {
+    text-align: center;
+    margin: 3rem 0;
   }
-  body.light-mode .video {
-    background-color: var(--secondary-light);
+  .logos img {
+    height: 40px;
+    margin: 0 1rem;
   }
-  .video iframe {
-    width: 100%;
-    height: 315px;
+  .youtube-section {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+  }
+  .video-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .video-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .video-item iframe {
+    width: 120px;
+    height: 70px;
     border-radius: 8px;
   }
-
-  /* Newsletter */
-  .newsletter {
-    background-color: var(--secondary-dark);
-    padding: 2rem;
-    border-radius: 12px;
+  .video-info {
+    font-size: 0.85rem;
+  }
+  .subscribe {
     text-align: center;
-    transition: background-color 0.3s;
+    margin: 3rem 0;
   }
-  body.light-mode .newsletter {
-    background-color: var(--secondary-light);
-  }
-  .newsletter input {
-    padding: 0.8rem;
-    border-radius: 50px;
+  .subscribe input {
+    padding: 0.6rem;
     border: none;
+    border-radius: 20px;
     margin-right: 0.5rem;
     width: 250px;
   }
-  footer {
-    text-align: center;
-    padding: 2rem;
-    color: #777;
+  .subscribe button {
+    background-color: var(--button-dark);
+    border: 2px solid var(--accent);
+    border-radius: 30px;
+    padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .subscribe button:hover {
+    background-color: var(--accent);
+    color: var(--text-light);
   }
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">ΞNTERPRISE ONCHAIN</div>
-  <div class="top-buttons">
-    <a href="#" class="icon-btn">📩 Newsletter</a>
-    <a href="#" class="icon-btn">▶ YouTube</a>
-    <a href="#" class="icon-btn">🎧 Spotify</a>
-    <a href="#" class="icon-btn">🎵 Apple Music</a>
-    <button class="mode-toggle" id="modeToggle" title="Toggle Light/Dark">☀</button>
-  </div>
+  <nav>
+    <a class="nav-btn" href="#"><img src="https://i.imgur.com/fZFBvJh.png">Newsletter</a>
+    <a class="nav-btn" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" height="18">YouTube</a>
+    <a class="nav-btn" href="#"><img src="https://i.imgur.com/W0mUcqF.png">Spotify</a>
+    <a class="nav-btn" href="#"><img src="https://i.imgur.com/wmJQpuk.png">Apple Music</a>
+    <button class="toggle-theme"><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/OOjs_UI_icon_moon.svg"></button>
+  </nav>
 </header>
 
-<div class="hero">
-  <h1>Enterprise Onchain</h1>
-  <p>Conversations with leaders from the largest enterprises and institutions in the world deploying products onchain.</p>
-</div>
+<h1>Conversations with leaders from the largest enterprises and institutions deploying onchain</h1>
 
-<section>
-  <h2 style="text-align:center;">Trusted by Industry Leaders</h2>
-  <div class="logo-slider">
-    <span>Ethereum Foundation</span>
-    <span>EY</span>
-    <span>Blackrock</span>
-    <span>Fidelity</span>
-    <span>Standard Chartered</span>
+<section class="hosts">
+  <div class="host">
+    <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith">
+    <h3>James Smith</h3>
+    <p>Head of Ecosystem at Ethereum Foundation</p>
+  </div>
+  <div class="host">
+    <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh">
+    <h3>David Walsh</h3>
+    <p>Enterprise Lead at Ethereum Foundation</p>
   </div>
 </section>
 
-<section>
-  <h2 style="text-align:center;">About the Hosts</h2>
-  <div class="hosts">
-    <div class="host-card">
-      <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith">
-      <h3>James Smith</h3>
-      <p>Head of Ecosystem at the Ethereum Foundation. James brings extensive experience in blockchain ecosystem growth, partnerships, and enterprise adoption strategies.</p>
+<section class="logos">
+  <p>Trusted by industry leaders</p>
+  <!-- Logos will go here -->
+</section>
+
+<section class="youtube-section">
+  <div>
+    <h2>Featured YouTube Videos</h2>
+    <p>Deep dives, whiteboard sessions, and conference talks.</p>
+  </div>
+  <div class="video-preview">
+    <div class="video-item">
+      <iframe src="https://www.youtube.com/embed/n4OflWszcZ0" frameborder="0" allowfullscreen></iframe>
+      <div class="video-info">
+        <strong>Scaling L2s for Enterprises</strong><br>
+        Guest: John Doe<br>
+        Length: 45m<br>
+        Topic: Rollups & ZK proofs
+      </div>
     </div>
-    <div class="host-card">
-      <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh">
-      <h3>David Walsh</h3>
-      <p>Enterprise Lead at the Ethereum Foundation. David specializes in guiding large institutions through blockchain integration, compliance frameworks, and scalable infrastructure design.</p>
+    <div class="video-item">
+      <iframe src="https://www.youtube.com/embed/iAEwUpcc8do" frameborder="0" allowfullscreen></iframe>
+      <div class="video-info">
+        <strong>Onchain Compliance</strong><br>
+        Guest: Jane Roe<br>
+        Length: 30m<br>
+        Topic: Regulatory frameworks
+      </div>
     </div>
   </div>
 </section>
 
-<section>
-  <h2 style="text-align:center;">Featured YouTube Videos</h2>
-  <div class="video">
-    <iframe src="https://www.youtube.com/embed/n4OflWszcZ0" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-  </div>
-  <div class="video">
-    <iframe src="https://www.youtube.com/embed/iAEwUpcc8do" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-  </div>
-</section>
-
-<section class="newsletter">
+<section class="subscribe">
   <h2>Subscribe to the Newsletter</h2>
   <p>No noise — just pragmatic onchain strategies for enterprise leaders, every week.</p>
   <input type="email" placeholder="Your business email">
-  <a href="#" class="icon-btn">📩</a>
-  <p style="font-size:0.8rem; color:#999;">Unsubscribe anytime. We respect your privacy.</p>
+  <button>Join Free</button>
+  <p style="font-size: 0.8rem;">Unsubscribe anytime. We respect your privacy.</p>
 </section>
 
-<footer>
+<footer style="text-align:center; padding: 1rem; font-size: 0.8rem;">
   © 2025 Enterprise Onchain. All rights reserved.
 </footer>
-
-<script>
-  const toggle = document.getElementById('modeToggle');
-  let dark = true;
-  toggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    dark = !dark;
-    toggle.textContent = dark ? '☀' : '🌙';
-  });
-</script>
-
 </body>
 </html>
