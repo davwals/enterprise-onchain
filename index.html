@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Enterprise Onchain Podcast</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-dark: #1a1a1a;
@@ -17,7 +17,7 @@
   }
   body {
     margin: 0;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-dark);
     transition: background-color 0.3s, color 0.3s;
@@ -26,6 +26,7 @@
     background-color: var(--bg-light);
     color: var(--text-light);
   }
+
   /* Header */
   header {
     padding: 1rem 2rem;
@@ -36,8 +37,9 @@
     margin: 0 auto;
   }
   .logo {
+    font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.3rem;
     letter-spacing: 1px;
   }
@@ -49,18 +51,17 @@
   .icon-btn {
     background-color: var(--accent);
     color: var(--bg-dark);
-    width: 36px;
-    height: 36px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 1.1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
     transition: transform 0.2s ease;
   }
   .icon-btn:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
   }
   body.light-mode .icon-btn {
     background-color: var(--accent);
@@ -84,14 +85,17 @@
     background-color: var(--accent);
     color: var(--bg-dark);
   }
+
   /* Hero */
   .hero {
     text-align: center;
     padding: 4rem 1rem 3rem;
   }
   .hero h1 {
-    font-size: 2.8rem;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
+    font-weight: 400;
+    font-size: 2.8rem;
     margin-bottom: 1rem;
   }
   .hero p {
@@ -102,32 +106,28 @@
   body.light-mode .hero p {
     color: #555;
   }
-  section {
-    max-width: 1100px;
-    margin: 3rem auto;
-    padding: 0 1rem;
-  }
-  /* Trusted logos */
+
+  /* Logos */
   .logo-slider {
     display: flex;
+    justify-content: center;
     gap: 2rem;
-    overflow-x: auto;
     padding: 1rem 0;
-    scrollbar-width: none;
   }
-  .logo-slider img {
-    height: 50px;
-    filter: brightness(0) invert(1);
-    transition: filter 0.3s;
+  .logo-slider span {
+    font-size: 1rem;
+    color: #999;
   }
-  body.light-mode .logo-slider img {
-    filter: none;
+  body.light-mode .logo-slider span {
+    color: #666;
   }
+
   /* Hosts */
   .hosts {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .host-card {
     flex: 1 1 45%;
@@ -136,34 +136,36 @@
     padding: 1rem;
     text-align: center;
     transition: background-color 0.3s;
+    max-width: 400px;
   }
   body.light-mode .host-card {
     background-color: var(--secondary-light);
   }
   .host-card img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
     object-fit: cover;
     margin-bottom: 1rem;
   }
-  /* Episodes / Videos */
-  .episode, .video {
+
+  /* Videos */
+  .video {
     background-color: var(--secondary-dark);
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1.5rem;
     transition: background-color 0.3s;
   }
-  body.light-mode .episode,
   body.light-mode .video {
     background-color: var(--secondary-light);
   }
-  .video img {
+  .video iframe {
     width: 100%;
+    height: 315px;
     border-radius: 8px;
-    margin-bottom: 0.5rem;
   }
+
   /* Newsletter */
   .newsletter {
     background-color: var(--secondary-dark);
@@ -195,10 +197,10 @@
 <header>
   <div class="logo">ΞNTERPRISE ONCHAIN</div>
   <div class="top-buttons">
-    <a href="#" class="icon-btn" title="Newsletter">📩</a>
-    <a href="#" class="icon-btn" title="YouTube">▶</a>
-    <a href="#" class="icon-btn" title="Spotify">🎧</a>
-    <a href="#" class="icon-btn" title="Apple Music">🎵</a>
+    <a href="#" class="icon-btn">📩 Newsletter</a>
+    <a href="#" class="icon-btn">▶ YouTube</a>
+    <a href="#" class="icon-btn">🎧 Spotify</a>
+    <a href="#" class="icon-btn">🎵 Apple Music</a>
     <button class="mode-toggle" id="modeToggle" title="Toggle Light/Dark">☀</button>
   </div>
 </header>
@@ -209,26 +211,26 @@
 </div>
 
 <section>
-  <h2>Trusted by Industry Leaders</h2>
+  <h2 style="text-align:center;">Trusted by Industry Leaders</h2>
   <div class="logo-slider">
-    <img src="ethereum-logo.png" alt="Ethereum Foundation">
-    <img src="ey-logo.png" alt="EY">
-    <img src="blackrock-logo.png" alt="Blackrock">
-    <img src="fidelity-logo.png" alt="Fidelity">
-    <img src="standardchartered-logo.png" alt="Standard Chartered">
+    <span>Ethereum Foundation</span>
+    <span>EY</span>
+    <span>Blackrock</span>
+    <span>Fidelity</span>
+    <span>Standard Chartered</span>
   </div>
 </section>
 
 <section>
-  <h2>About the Hosts</h2>
+  <h2 style="text-align:center;">About the Hosts</h2>
   <div class="hosts">
     <div class="host-card">
-      <img src="https://via.placeholder.com/120" alt="James Smith">
+      <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith">
       <h3>James Smith</h3>
       <p>Head of Ecosystem at the Ethereum Foundation. James brings extensive experience in blockchain ecosystem growth, partnerships, and enterprise adoption strategies.</p>
     </div>
     <div class="host-card">
-      <img src="https://via.placeholder.com/120" alt="David Walsh">
+      <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh">
       <h3>David Walsh</h3>
       <p>Enterprise Lead at the Ethereum Foundation. David specializes in guiding large institutions through blockchain integration, compliance frameworks, and scalable infrastructure design.</p>
     </div>
@@ -236,14 +238,12 @@
 </section>
 
 <section>
-  <h2>Featured YouTube Videos</h2>
+  <h2 style="text-align:center;">Featured YouTube Videos</h2>
   <div class="video">
-    <img src="https://via.placeholder.com/800x450" alt="Onchain Data Pipelines">
-    <h3>Onchain Data Pipelines for Enterprises</h3>
+    <iframe src="https://www.youtube.com/embed/n4OflWszcZ0" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
   </div>
   <div class="video">
-    <img src="https://via.placeholder.com/800x450" alt="Smart Contract Security">
-    <h3>Smart Contract Security Reviews</h3>
+    <iframe src="https://www.youtube.com/embed/iAEwUpcc8do" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
   </div>
 </section>
 
