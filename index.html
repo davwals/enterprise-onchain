@@ -15,7 +15,6 @@
       --panel-dark:#0f0f0f;
       --button-dark:#111;
       --accent:#d1ff4c;
-      --muted:#a7a7a7;
       --radius:14px;
       --max-w:1200px;
     }
@@ -24,25 +23,27 @@
     html,body{height:100%;margin:0;}
     body{
       font-family:'Satoshi',sans-serif;
-      letter-spacing:-0.03em;
+      letter-spacing:-0.03em; /* -3% */
       background:var(--bg-dark);
       color:#fff;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
+
+    /* Headings: Playfair, italic, regular weight */
     h1,h2,h3{
       font-family:'Playfair Display',serif;
       font-style:italic;
       font-weight:400;
       margin:0;
     }
+
     .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;}
 
     /* Header */
     header{
       display:flex;align-items:center;justify-content:space-between;
-      padding:22px 0;
-      position:relative;
+      padding:22px 0;position:relative;
     }
     .brand{font-size:1.15rem;opacity:.95;}
 
@@ -51,7 +52,8 @@
     .top-links{display:flex;align-items:center;gap:18px;}
     .top-link{
       color:#fff;text-decoration:none;font-size:0.98rem;
-      padding:6px 0;opacity:.95;transition:opacity .15s ease, transform .15s ease, color .15s ease, text-shadow .15s ease;
+      padding:6px 0;opacity:.95;
+      transition:opacity .15s ease, transform .15s ease, color .15s ease, text-shadow .15s ease;
     }
     .top-link:hover{
       opacity:1;transform:translateY(-1px);color:var(--accent);
@@ -60,30 +62,45 @@
     .top-link .arrow{color:#fff;margin-left:6px;transition:color .15s ease;}
     .top-link:hover .arrow{color:var(--accent);}
 
-    /* Mobile menu button */
+    /* Mobile menu button (hamburger) */
     .menu-btn{
-      display:none;background:var(--accent);border:none;border-radius:6px;
+      display:none;background:var(--accent);border:none;border-radius:8px;
       padding:8px 10px;cursor:pointer;
+      box-shadow:0 4px 16px rgba(209,255,76,.25);
     }
-    .menu-btn span{
-      display:block;width:20px;height:2px;background:#000;margin:4px 0;
-    }
+    .menu-btn span{display:block;width:20px;height:2px;background:#000;margin:4px 0;}
 
-    /* Mobile dropdown */
+    /* Mobile dropdown (animated) */
     .mobile-menu{
-      display:none;flex-direction:column;gap:12px;
+      position:absolute;right:0;top:60px;z-index:9999;
       background:var(--panel-dark);
-      position:absolute;top:60px;right:0;padding:12px 20px;
-      border-radius:var(--radius);
-      box-shadow:0 4px 20px rgba(0,0,0,0.5);
+      border-radius:12px;
+      padding:8px 0;
+      width:220px;
+      overflow:hidden;
+
+      /* animation props */
+      max-height:0;          /* collapsed */
+      opacity:0;
+      transform:translateY(-6px);
+      transition:max-height .28s ease, opacity .22s ease, transform .28s ease, visibility .28s ease;
+      visibility:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.5);
+    }
+    .mobile-menu.show{
+      max-height:320px;      /* expanded */
+      opacity:1;
+      transform:translateY(0);
+      visibility:visible;
     }
     .mobile-menu a{
-      color:#fff;text-decoration:none;
-      transition:color .15s ease, text-shadow .15s ease;
+      display:block;padding:12px 16px;color:#eaeaea;text-decoration:none;font-size:0.98rem;
+      transition:color .15s ease, text-shadow .15s ease, background .15s ease;
     }
     .mobile-menu a:hover{
       color:var(--accent);
       text-shadow:0 0 6px rgba(209,255,76,0.6);
+      background:#141414;
     }
 
     /* Hero */
@@ -93,12 +110,12 @@
     @media (min-width:1000px){ .site-title{font-size:3.2rem;} }
     .tagline{margin:12px auto 0;max-width:760px;color:#cfcfcf;line-height:1.5;}
 
-    /* Section spacing */
+    /* Section spacing rhythm */
     section{margin-top:56px;}
     section h2{margin-bottom:16px;}
     .trusted h3{margin-bottom:18px;}
 
-    /* Trusted / logos */
+    /* Trusted / logos (no outlines) */
     .trusted{text-align:center;}
     .logos-container{
       margin-top:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
@@ -136,19 +153,17 @@
     /* YouTube section */
     .youtube-section{margin-top:56px;}
     .youtube-section h2{margin-bottom:16px;}
-    .yt-grid{
-      display:grid;grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:14px;
-    }
+    .yt-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:14px;}
     .yt-card{
       background:var(--panel-dark);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+      transition:transform .18s ease, box-shadow .18s ease;
     }
     .yt-thumb{width:100%;height:0;padding-bottom:54%;position:relative;background:#000;overflow:hidden;}
     .yt-thumb img{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
       transition:transform .25s ease;
     }
-    .yt-card:hover .yt-thumb img{transform:scale(1.04);}
+    .yt-card:hover .yt-thumb img{transform:scale(1.04);} /* subtle hover zoom */
     .yt-meta{padding:10px 12px;color:#e6e6e6;font-size:0.88rem;line-height:1.35;}
     .yt-meta strong{display:block;color:#fff;margin-bottom:6px;font-weight:600;}
 
@@ -159,14 +174,16 @@
     .subscribe input[type="email"]{
       padding:12px 16px;border-radius:999px;border:1px solid #222;width:320px;background:#0b0b0b;color:#fff;outline:none;
     }
+    /* Join button matches bottom links + arrow; regular weight on mobile handled in media query */
     .cta-btn{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 12px;border-radius:999px;background:var(--button-dark);color:#fff;
       border:1.5px solid #2a2a2a;cursor:pointer;font-size:0.92rem;
       font-family:'Satoshi',sans-serif;letter-spacing:-0.03em;
       transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
-      height:38px;line-height:1;
+      height:38px;line-height:1;font-weight:500;
     }
+    .cta-btn .arrow{margin-left:6px;}
     .cta-btn:hover{
       background:#141414;border-color:var(--accent);color:var(--accent);
       transform:translateY(-1px);text-shadow:0 0 6px rgba(209,255,76,0.6);
@@ -180,7 +197,8 @@
     .nav-btn{
       display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
       background:var(--button-dark);color:#fff;text-decoration:none;font-size:0.92rem;
-      border:1.5px solid #2a2a2a;transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
+      border:1.5px solid #2a2a2a;
+      transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
       height:38px;line-height:1;
     }
     .nav-btn:hover{
@@ -195,144 +213,176 @@
     @media (max-width:900px){
       .top-links{display:none;}
       .menu-btn{display:block;}
-      .mobile-menu.show{display:flex;}
       .yt-grid{grid-template-columns:repeat(2,1fr);}
     }
     @media (max-width:600px){
       .yt-grid{grid-template-columns:1fr;}
       .logos-container{grid-template-columns:repeat(2,1fr);}
       .subscribe input[type="email"]{width:220px;}
+      .cta-btn{font-weight:400;} /* regular weight on mobile */
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <div class="brand">ΞNTERPRISE ONCHAIN</div>
-    <nav class="top-nav">
-      <div class="top-links">
-        <a class="top-link" href="#">Newsletter <span class="arrow">→</span></a>
-        <a class="top-link" href="#">YouTube <span class="arrow">→</span></a>
-        <a class="top-link" href="#">Spotify <span class="arrow">→</span></a>
-        <a class="top-link" href="#">Apple Music <span class="arrow">→</span></a>
-      </div>
-      <button class="menu-btn" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#">Newsletter</a>
-      <a href="#">YouTube</a>
-      <a href="#">Spotify</a>
-      <a href="#">Apple Music</a>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <h1 class="site-title">Enterprise <span class="accent">Onchain</span></h1>
-      <p class="tagline">Conversations with leaders from the largest enterprises and institutions in the world deploying products onchain.</p>
-    </section>
-
-    <!-- Trusted logos -->
-    <section class="trusted">
-      <h3>Listened &amp; read by employees at</h3>
-      <div class="logos-container">
-        <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/c8Plx6w.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/rScrYmV.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/3bjgQU6.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/9QVm8xO.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/OHwzeBl.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/jEMqGPk.png" alt=""></div>
-        <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt=""></div>
-      </div>
-    </section>
-
-    <!-- Hosts -->
-    <section class="trusted">
-      <h3>Meet Our Hosts</h3>
-    </section>
-    <section class="hosts">
-      <div class="host-card">
-        <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith">
-        <h3>James Smith</h3>
-        <h4>Head of Ecosystem</h4>
-        <p>7 years + at the Ethereum Foundation and leads the Ecosystem Development cluster.</p>
-      </div>
-      <div class="host-card">
-        <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh">
-        <h3>David Walsh</h3>
-        <h4>Enterprise Lead</h4>
-        <p>Heads up Enterprise at the Ethereum Foundation. 5+ years building institutional staking products.</p>
-      </div>
-    </section>
-
-    <!-- Spotify -->
-    <section>
-      <h2>Latest Podcast Episodes</h2>
-      <div class="spotify-embeds">
-        <iframe src="https://open.spotify.com/embed/episode/27R3ppSdBQruurebNCbsTc?utm_source=generator&theme=0"></iframe>
-        <iframe src="https://open.spotify.com/embed/episode/0DCqVkDbWrtTbWRICbNxWz?utm_source=generator&theme=0"></iframe>
-        <iframe src="https://open.spotify.com/embed/episode/75RB7WQbKYLqAVGFYhk6qF?utm_source=generator&theme=0"></iframe>
-      </div>
-    </section>
-
-    <!-- YouTube -->
-    <section class="youtube-section">
-      <h2>YouTube Previews</h2>
-      <div class="yt-grid">
-        <div class="yt-card">
-          <a href="https://www.youtube.com/watch?v=iClsnZ1KYSk" target="_blank">
-            <div class="yt-thumb"><img src="https://img.youtube.com/vi/iClsnZ1KYSk/hqdefault.jpg" alt=""></div>
-          </a>
-          <div class="yt-meta"><strong>Ethereum Tom Lee Interview</strong></div>
+  <div class="container">
+    <header>
+      <div class="brand">ΞNTERPRISE ONCHAIN</div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <div class="top-links" role="menubar">
+          <a class="top-link" href="#" role="menuitem">Newsletter <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="top-link" href="#" role="menuitem">YouTube <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="top-link" href="#" role="menuitem">Spotify <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="top-link" href="#" role="menuitem">Apple Music <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <div class="yt-card">
-          <a href="https://www.youtube.com/watch?v=WSN5BaCzsbo" target="_blank">
-            <div class="yt-thumb"><img src="https://img.youtube.com/vi/WSN5BaCzsbo/hqdefault.jpg" alt=""></div>
-          </a>
-          <div class="yt-meta"><strong>Ethereum Vitalik Interview</strong></div>
-        </div>
-        <div class="yt-card">
-          <a href="https://www.youtube.com/watch?v=HTveRlW7QPo" target="_blank">
-            <div class="yt-thumb"><img src="https://i.ytimg.com/vi/HTveRlW7QPo/hq720.jpg" alt=""></div>
-          </a>
-          <div class="yt-meta"><strong>Ethereum Panel Discussion</strong></div>
-        </div>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+
+      <!-- Animated mobile dropdown -->
+      <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile navigation">
+        <a href="#" role="menuitem">Newsletter</a>
+        <a href="#" role="menuitem">YouTube</a>
+        <a href="#" role="menuitem">Spotify</a>
+        <a href="#" role="menuitem">Apple Music</a>
       </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <h1 class="site-title">Enterprise <span class="accent">Onchain</span></h1>
+        <p class="tagline">Conversations with leaders from the largest enterprises and institutions in the world deploying products onchain.</p>
+      </section>
+
+      <!-- Trusted logos -->
+      <section class="trusted" aria-label="Trusted logos section">
+        <h3>Listened &amp; read by employees at</h3>
+        <div class="logos-container" aria-hidden="false">
+          <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Company 1 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/c8Plx6w.png" alt="Company 2 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/rScrYmV.png" alt="Company 3 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/3bjgQU6.png" alt="Company 4 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/9QVm8xO.png" alt="Company 5 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/OHwzeBl.png" alt="Company 6 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/jEMqGPk.png" alt="Company 7 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Company 8 logo"></div>
+        </div>
+      </section>
+
+      <section class="trusted" aria-label="Meet Our Hosts heading">
+        <h3>Meet Our Hosts</h3>
+      </section>
+
+      <!-- Hosts -->
+      <section class="hosts" aria-label="Hosts">
+        <div class="host-card">
+          <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith, Head of Ecosystem">
+          <h3>James Smith</h3>
+          <h4>Head of Ecosystem</h4>
+          <p>7 years + at the Ethereum Foundation and leads the Ecosystem Development cluster.</p>
+        </div>
+
+        <div class="host-card">
+          <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh, Enterprise Lead">
+          <h3>David Walsh</h3>
+          <h4>Enterprise Lead</h4>
+          <p>Heads up Enterprise at the Ethereum Foundation. 5+ years building institutional staking products.</p>
+        </div>
+      </section>
+
+      <!-- Latest Podcast Episodes (Spotify only) -->
+      <section>
+        <h2>Latest Podcast Episodes</h2>
+        <div class="spotify-embeds" aria-hidden="false">
+          <iframe src="https://open.spotify.com/embed/episode/27R3ppSdBQruurebNCbsTc?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 27R3ppSdBQruurebNCbsTc"></iframe>
+          <iframe src="https://open.spotify.com/embed/episode/0DCqVkDbWrtTbWRICbNxWz?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 0DCqVkDbWrtTbWRICbNxWz"></iframe>
+          <iframe src="https://open.spotify.com/embed/episode/75RB7WQbKYLqAVGFYhk6qF?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 75RB7WQbKYLqAVGFYhk6qF"></iframe>
+        </div>
+      </section>
+
+      <!-- YouTube Previews (<=3 per row, hover zoom) -->
+      <section class="youtube-section">
+        <h2>YouTube Previews</h2>
+        <div class="yt-grid" aria-label="YouTube previews grid">
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=iClsnZ1KYSk" target="_blank" rel="noopener">
+              <div class="yt-thumb"><img src="https://img.youtube.com/vi/iClsnZ1KYSk/hqdefault.jpg" alt="Ethereum Tom Lee Interview"></div>
+            </a>
+            <div class="yt-meta"><strong>Ethereum Tom Lee Interview</strong></div>
+          </div>
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=WSN5BaCzsbo" target="_blank" rel="noopener">
+              <div class="yt-thumb"><img src="https://img.youtube.com/vi/WSN5BaCzsbo/hqdefault.jpg" alt="Ethereum Vitalik Interview"></div>
+            </a>
+            <div class="yt-meta"><strong>Ethereum Vitalik Interview</strong></div>
+          </div>
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=HTveRlW7QPo" target="_blank" rel="noopener">
+              <div class="yt-thumb"><img src="https://i.ytimg.com/vi/HTveRlW7QPo/hq720.jpg" alt="Ethereum Panel Discussion"></div>
+            </a>
+            <div class="yt-meta"><strong>Ethereum Panel Discussion</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subscribe -->
+      <section class="subscribe">
+        <h2>Subscribe to the Newsletter</h2>
+        <p>No noise — just pragmatic onchain strategies for enterprise leaders, every week.</p>
+        <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+          <input type="email" placeholder="Your business email" required>
+          <button class="cta-btn" type="submit">Join Free <span class="arrow" aria-hidden="true">→</span></button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Bottom links -->
+    <section class="bottom-links" aria-label="Bottom links">
+      <a class="nav-btn" href="#" title="Newsletter" aria-label="Newsletter">
+        <img class="icon" src="https://i.imgur.com/U9DcDsn.png" alt="newsletter icon">
+        <span>Newsletter</span>
+      </a>
+      <a class="nav-btn" href="#" title="YouTube" aria-label="YouTube">
+        <img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
+        <span>YouTube</span>
+      </a>
+      <a class="nav-btn" href="#" title="Spotify" aria-label="Spotify">
+        <img class="icon" src="https://i.imgur.com/W0mUcqF.png" alt="Spotify">
+        <span>Spotify</span>
+      </a>
+      <a class="nav-btn" href="#" title="Apple Music" aria-label="Apple Music">
+        <img class="icon" src="https://i.imgur.com/wmJQpuk.png" alt="Apple Music">
+        <span>Apple Music</span>
+      </a>
     </section>
 
-    <!-- Subscribe -->
-    <section class="subscribe">
-      <h2>Subscribe to the Newsletter</h2>
-      <p>No noise — just pragmatic onchain strategies for enterprise leaders, every week.</p>
-      <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
-        <input type="email" placeholder="Your business email" required>
-        <button class="cta-btn" type="submit">Join Free</button>
-      </form>
-    </section>
-  </main>
+    <footer>
+      © 2025 Enterprise Onchain. All rights reserved.
+    </footer>
+  </div>
 
-  <!-- Bottom links -->
-  <section class="bottom-links">
-    <a class="nav-btn" href="#"><img class="icon" src="https://i.imgur.com/U9DcDsn.png" alt="">Newsletter</a>
-    <a class="nav-btn" href="#"><img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="">YouTube</a>
-    <a class="nav-btn" href="#"><img class="icon" src="https://i.imgur.com/W0mUcqF.png" alt="">Spotify</a>
-    <a class="nav-btn" href="#"><img class="icon" src="https://i.imgur.com/wmJQpuk.png" alt="">Apple Music</a>
-  </section>
+  <script>
+    // Animated mobile dropdown toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-  <footer>© 2025 Enterprise Onchain. All rights reserved.</footer>
-</div>
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('show');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
 
-<script>
-document.querySelector('.menu-btn').addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.toggle('show');
-});
-</script>
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('show');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
+
 
 
