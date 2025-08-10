@@ -1,219 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enterprise Onchain</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400&display=swap" rel="stylesheet">
-<style>
-/* Reset & base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Satoshi', sans-serif;
-  letter-spacing: -0.03em;
-  background-color: #0a0a0a;
-  color: white;
-  line-height: 1.6;
-  padding: 0;
-}
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 400;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enterprise Onchain</title>
 
-/* Top navigation */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-}
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-}
-.nav-links a {
-  color: white;
-  font-size: 1rem;
-}
-.nav-links a::after {
-  content: " →";
-}
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
 
-/* Mobile menu */
-.mobile-menu-btn {
-  display: none;
-  background-color: yellow;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-.mobile-dropdown {
-  display: none;
-  flex-direction: column;
-  background-color: #111;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-.mobile-dropdown a {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #222;
-}
-.mobile-dropdown a:hover {
-  background-color: #222;
-}
+  <style>
+    :root{
+      --bg-dark:#1a1a1a;
+      --panel-dark:#262626;
+      --button-dark:#2a2a2a;
+      --bg-light:#f7f7f7;  /* unused (dark-only) but keeping for consistency */
+      --text-light:#111;   /* unused (dark-only) but keeping for consistency */
+      --accent:#d1ff4c;    /* yellow/green accent */
+      --radius:12px;
+      --max-w:1200px;
+    }
 
-/* Sections */
-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-section h2 {
-  margin-bottom: 1.5rem;
-}
-section h3 {
-  margin-bottom: 1rem;
-}
+    /* Base */
+    html,body{height:100%;margin:0;}
+    body{
+      font-family:'Satoshi',sans-serif;
+      letter-spacing:-0.03em;               /* tighter body tracking */
+      background:var(--bg-dark);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    h1,h2,h3{
+      font-family:'Playfair Display',serif; /* headings in Playfair */
+      font-style:italic;
+      font-weight:400;
+      letter-spacing:normal;
+    }
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;}
 
-/* Spotify embeds */
-.spotify-embed {
-  width: 100%;
-  height: 152px;
-  border-radius: 12px;
-}
+    /* Header */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 0;
+    }
+    .brand{font-size:1.15rem;}
 
-/* YouTube section */
-.youtube-embeds {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-.youtube-embeds iframe {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-}
+    /* Top nav (desktop text + arrow) */
+    .top-nav{
+      display:flex;align-items:center;gap:10px;position:relative;
+    }
+    .top-links{
+      display:flex;align-items:center;gap:16px;
+    }
+    .top-link{
+      color:#fff;text-decoration:none;font-size:0.95rem;
+      padding:6px 0; /* slimmer height */
+    }
+    .top-link .arrow{color:var(--accent);margin-left:6px;}
 
-/* Bottom logos */
-.footer-logos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding: 2rem;
-}
-.footer-logos a {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.footer-logos img {
-  width: 28px;
-  height: 28px;
-}
-footer {
-  text-align: center;
-  font-size: 0.875rem;
-  padding: 1rem;
-  background-color: #0a0a0a;
-  border-top: 1px solid #222;
-}
+    /* Mobile menu button (yellow) */
+    .mobile-menu-btn{
+      display:none;
+      background:var(--accent);color:#111;border:2px solid var(--accent);
+      border-radius:10px;padding:6px 10px;font-weight:600;cursor:pointer;
+    }
+    .mobile-menu-btn:active{transform:translateY(1px);}
 
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  .mobile-menu-btn {
-    display: block;
-  }
-}
-</style>
+    /* Mobile dropdown */
+    .mobile-menu{
+      display:none;position:absolute;right:0;top:44px;z-index:9999;
+      background:#111;border:1px solid #333;border-radius:10px;
+      min-width:190px;overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+    .mobile-menu a{
+      display:block;padding:10px 12px;color:#eaeaea;text-decoration:none;font-size:0.95rem;
+      border-bottom:1px solid #1f1f1f;
+    }
+    .mobile-menu a:last-child{border-bottom:0;}
+    .mobile-menu a:hover{background:#1e1e1e;color:#fff;}
+
+    /* Hero */
+    .hero{text-align:center;padding:44px 0 18px;}
+    .site-title{font-size:2.6rem;margin:0 0 12px;}
+    @media (min-width:1000px){ .site-title{font-size:3rem;} }
+    .tagline{margin:0 auto;max-width:760px;color:#cfcfcf;line-height:1.45;}
+
+    /* Trusted / logos */
+    .trusted{text-align:center;margin-top:28px;}
+    .trusted h3{font-size:1.6rem;color:#fff;margin-bottom:18px;}
+    .logos-container{
+      margin-top:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:18px;align-items:center;justify-items:center;padding:8px 0 28px;
+    }
+    .logo-box{
+      background-color:transparent;border-radius:10px;padding:8px 10px;opacity:.85;
+      transition:transform .18s ease,opacity .18s ease;display:flex;align-items:center;justify-content:center;
+      height:48px;width:100%;max-width:160px;
+    }
+    .logo-box img{
+      max-height:36px;max-width:100%;object-fit:contain;
+      filter:grayscale(100%) contrast(.9) brightness(1.05);opacity:.95;
+    }
+    .logo-box:hover{opacity:1;transform:scale(1.03);cursor:pointer;}
+
+    /* Hosts */
+    .hosts{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin:40px 0;}
+    .host-card{width:360px;background:var(--panel-dark);padding:20px;border-radius:var(--radius);text-align:center;}
+    .host-card img{width:220px;height:220px;object-fit:cover;border-radius:14px;margin:0 auto 14px;}
+    .host-card h3{margin:6px 0 0;font-size:1.1rem;}
+    .host-card h4{margin:6px 0 8px;font-size:0.95rem;color:#d9d9d9;font-weight:600;font-style:normal;font-family:'Satoshi',sans-serif;}
+    .host-card p{margin:0;color:#d6d6d6;line-height:1.45;font-size:0.95rem;}
+
+    /* Episodes (Spotify embeds only) */
+    .spotify-embeds{display:grid;gap:12px;}
+    .spotify-embeds iframe{
+      border-radius:12px;width:100%;height:152px;border:0;
+    }
+
+    /* YouTube full-width section (moved under episodes) */
+    .youtube-section{margin-top:40px;}
+    .yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    .yt-card{background:var(--panel-dark);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+    .yt-thumb{width:100%;height:0;padding-bottom:56.25%;position:relative;background:#000;}
+    .yt-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+    .yt-meta{padding:10px 12px;color:#e6e6e6;font-size:0.9rem;line-height:1.3;}
+    .yt-meta strong{display:block;color:#fff;margin-bottom:6px;font-weight:500;font-style:normal;font-family:'Satoshi',sans-serif;}
+
+    /* Subscribe */
+    .subscribe{margin:34px auto 60px;text-align:center;max-width:760px;}
+    .subscribe .form{display:inline-flex;gap:10px;align-items:center;margin-top:12px;}
+    .subscribe input[type="email"]{
+      padding:10px 14px;border-radius:999px;border:0;width:320px;background:#111;color:#fff;outline:none;
+    }
+    .cta-btn{
+      padding:6px 12px;border-radius:999px;background:var(--button-dark);color:#fff;border:2px solid var(--accent);
+      cursor:pointer;font-size:0.88rem;font-family:'Playfair Display',serif;height:34px;line-height:1;
+    }
+    .cta-btn:hover{background:var(--accent);color:var(--bg-dark);}
+
+    /* Bottom static logo buttons (with your provided markup) */
+    .bottom-links{
+      display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:20px 0 10px;border-top:1px solid #2a2a2a;margin-top:10px;
+    }
+    .nav-btn{
+      display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
+      background:var(--button-dark);color:#fff;text-decoration:none;font-size:0.9rem;
+      border:2px solid var(--accent);transition:transform .14s ease, background .14s ease, color .14s ease;height:36px;line-height:1;
+    }
+    .nav-btn img.icon{height:18px;width:auto;display:block;}
+    .nav-btn:hover{transform:translateY(-2px);background:var(--accent);color:var(--bg-dark);}
+
+    /* Footer */
+    footer{text-align:center;color:#9a9a9a;padding:18px 0 28px;font-size:0.9rem;}
+
+    /* Responsive */
+    @media (max-width:1100px){
+      .yt-grid{grid-template-columns:repeat(2,1fr);}
+      .logos-container{grid-template-columns:repeat(3,1fr);}
+    }
+    @media (max-width:760px){
+      /* hide desktop links, show yellow menu */
+      .top-links{display:none;}
+      .mobile-menu-btn{display:inline-block;}
+      .host-card{width:90%;max-width:420px;}
+      .logos-container{grid-template-columns:repeat(2,1fr);gap:12px;}
+      .subscribe input[type="email"]{width:200px;}
+      .yt-grid{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Enterprise Onchain</h1>
-  <nav>
-    <div class="nav-links">
-      <a href="#">Newsletter</a>
-      <a href="#">YouTube</a>
-      <a href="#">Spotify</a>
-      <a href="#">Apple Music</a>
-    </div>
-    <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-    <div class="mobile-dropdown" id="mobileMenu">
-      <a href="#">Newsletter →</a>
-      <a href="#">YouTube →</a>
-      <a href="#">Spotify →</a>
-      <a href="#">Apple Music →</a>
-    </div>
-  </nav>
-</header>
+  <div class="container">
+    <header>
+      <div class="brand">ΞNTERPRISE ONCHAIN</div>
 
-<main>
-  <section>
-    <h2>Latest Podcast Episodes</h2>
-    <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/example1" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-    <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/example2" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-  </section>
+      <!-- Top navigation -->
+      <nav class="top-nav" aria-label="Primary navigation">
+        <div class="top-links" role="menubar">
+          <a class="top-link" href="#" role="menuitem" aria-label="Newsletter">Newsletter <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="top-link" href="#" role="menuitem" aria-label="YouTube">YouTube <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="top-link" href="#" role="menuitem" aria-label="Spotify">Spotify <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="top-link" href="#" role="menuitem" aria-label="Apple Music">Apple Music <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
 
-  <section>
-    <h2>YouTube Videos</h2>
-    <div class="youtube-embeds">
-      <iframe src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </section>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-haspopup="true" aria-expanded="false" aria-controls="mobileMenu">Menu ☰</button>
+        <div class="mobile-menu" id="mobileMenu" role="menu" aria-label="Mobile navigation">
+          <a href="#" role="menuitem">Newsletter →</a>
+          <a href="#" role="menuitem">YouTube →</a>
+          <a href="#" role="menuitem">Spotify →</a>
+          <a href="#" role="menuitem">Apple Music →</a>
+        </div>
+      </nav>
+    </header>
 
-  <section>
-    <h3>Listened & read by employees at</h3>
-    <p>[Logos or names of companies go here]</p>
-  </section>
-</main>
+    <main>
+      <section class="hero">
+        <h1 class="site-title">Enterprise Onchain</h1>
+        <p class="tagline">Conversations with leaders from the largest enterprises and institutions in the world deploying products onchain.</p>
+      </section>
 
-<div class="footer-logos">
-  <a class="nav-btn" href="#" title="Newsletter" aria-label="Newsletter">
-    <img src="https://i.imgur.com/U9DcDsn.png" alt="newsletter icon">
-    <span>Newsletter</span>
-  </a>
-  <a class="nav-btn" href="#" title="YouTube" aria-label="YouTube">
-    <img src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
-    <span>YouTube</span>
-  </a>
-  <a class="nav-btn" href="#" title="Spotify" aria-label="Spotify">
-    <img src="https://i.imgur.com/W0mUcqF.png" alt="Spotify">
-    <span>Spotify</span>
-  </a>
-  <a class="nav-btn" href="#" title="Apple Music" aria-label="Apple Music">
-    <img src="https://i.imgur.com/wmJQpuk.png" alt="Apple Music">
-    <span>Apple Music</span>
-  </a>
-</div>
+      <!-- Trusted logos -->
+      <section class="trusted" aria-label="Trusted logos section">
+        <h3>Listened &amp; read by employees at</h3>
+        <div class="logos-container" aria-hidden="false">
+          <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Company 1 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/c8Plx6w.png" alt="Company 2 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/rScrYmV.png" alt="Company 3 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/3bjgQU6.png" alt="Company 4 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/9QVm8xO.png" alt="Company 5 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/OHwzeBl.png" alt="Company 6 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/jEMqGPk.png" alt="Company 7 logo"></div>
+          <div class="logo-box"><img src="https://i.imgur.com/7DijE27.png" alt="Company 8 logo"></div>
+        </div>
+      </section>
 
-<footer>
-  © 2025 Enterprise Onchain. All rights reserved.
-</footer>
+      <!-- Hosts -->
+      <section class="hosts" aria-label="Hosts">
+        <div class="host-card">
+          <img src="https://i.imgur.com/Y8p0mn6.jpeg" alt="James Smith, Head of Ecosystem">
+          <h3>James Smith</h3>
+          <h4>Head of Ecosystem</h4>
+          <p>7 years + at the Ethereum Foundation and leads the Ecosystem Development cluster.</p>
+        </div>
 
-<script>
-function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-}
-</script>
+        <div class="host-card">
+          <img src="https://i.imgur.com/XwhT568.jpeg" alt="David Walsh, Enterprise Lead">
+          <h3>David Walsh</h3>
+          <h4>Enterprise Lead</h4>
+          <p>Heads up Enterprise at the Ethereum Foundation. 5+ years building institutional staking products.</p>
+        </div>
+      </section>
 
-</body>
-</html>
+      <!-- Latest Podcast Episodes (Spotify only) -->
+      <section>
+        <h2>Latest Podcast Episodes</h2>
+        <div class="spotify-embeds" aria-hidden="false">
+          <iframe src="https://open.spotify.com/embed/episode/27R3ppSdBQruurebNCbsTc?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 27R3ppSdBQruurebNCbsTc"></iframe>
+          <iframe src="https://open.spotify.com/embed/episode/0DCqVkDbWrtTbWRICbNxWz?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loa_
