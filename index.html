@@ -14,9 +14,9 @@
       --bg-dark:#1a1a1a;
       --panel-dark:#262626;
       --button-dark:#2a2a2a;
-      --bg-light:#f7f7f7;  /* unused (dark-only) but keeping for consistency */
-      --text-light:#111;   /* unused (dark-only) but keeping for consistency */
-      --accent:#d1ff4c;    /* yellow/green accent */
+      --bg-light:#f7f7f7; /* unused (dark only) */
+      --text-light:#111;  /* unused (dark only) */
+      --accent:#d1ff4c;   /* yellow/green accent */
       --radius:12px;
       --max-w:1200px;
     }
@@ -25,14 +25,14 @@
     html,body{height:100%;margin:0;}
     body{
       font-family:'Satoshi',sans-serif;
-      letter-spacing:-0.03em;               /* tighter body tracking */
+      letter-spacing:-0.03em;
       background:var(--bg-dark);
       color:#fff;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
     h1,h2,h3{
-      font-family:'Playfair Display',serif; /* headings in Playfair */
+      font-family:'Playfair Display',serif;
       font-style:italic;
       font-weight:400;
       letter-spacing:normal;
@@ -47,15 +47,11 @@
     .brand{font-size:1.15rem;}
 
     /* Top nav (desktop text + arrow) */
-    .top-nav{
-      display:flex;align-items:center;gap:10px;position:relative;
-    }
-    .top-links{
-      display:flex;align-items:center;gap:16px;
-    }
+    .top-nav{display:flex;align-items:center;gap:10px;position:relative;}
+    .top-links{display:flex;align-items:center;gap:16px;}
     .top-link{
       color:#fff;text-decoration:none;font-size:0.95rem;
-      padding:6px 0; /* slimmer height */
+      padding:6px 0; /* slimmer */
     }
     .top-link .arrow{color:var(--accent);margin-left:6px;}
 
@@ -65,7 +61,6 @@
       background:var(--accent);color:#111;border:2px solid var(--accent);
       border-radius:10px;padding:6px 10px;font-weight:600;cursor:pointer;
     }
-    .mobile-menu-btn:active{transform:translateY(1px);}
 
     /* Mobile dropdown */
     .mobile-menu{
@@ -113,13 +108,11 @@
     .host-card h4{margin:6px 0 8px;font-size:0.95rem;color:#d9d9d9;font-weight:600;font-style:normal;font-family:'Satoshi',sans-serif;}
     .host-card p{margin:0;color:#d6d6d6;line-height:1.45;font-size:0.95rem;}
 
-    /* Episodes (Spotify embeds only) */
+    /* Spotify embeds (section under hosts) */
     .spotify-embeds{display:grid;gap:12px;}
-    .spotify-embeds iframe{
-      border-radius:12px;width:100%;height:152px;border:0;
-    }
+    .spotify-embeds iframe{border-radius:12px;width:100%;height:152px;border:0;}
 
-    /* YouTube full-width section (moved under episodes) */
+    /* YouTube full-width section */
     .youtube-section{margin-top:40px;}
     .yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
     .yt-card{background:var(--panel-dark);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
@@ -140,7 +133,7 @@
     }
     .cta-btn:hover{background:var(--accent);color:var(--bg-dark);}
 
-    /* Bottom static logo buttons (with your provided markup) */
+    /* Bottom static icon buttons (your exact markup style) */
     .bottom-links{
       display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;
       padding:20px 0 10px;border-top:1px solid #2a2a2a;margin-top:10px;
@@ -240,4 +233,129 @@
         <h2>Latest Podcast Episodes</h2>
         <div class="spotify-embeds" aria-hidden="false">
           <iframe src="https://open.spotify.com/embed/episode/27R3ppSdBQruurebNCbsTc?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 27R3ppSdBQruurebNCbsTc"></iframe>
-          <iframe src="https://open.spotify.com/embed/episode/0DCqVkDbWrtTbWRICbNxWz?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loa_
+          <iframe src="https://open.spotify.com/embed/episode/0DCqVkDbWrtTbWRICbNxWz?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 0DCqVkDbWrtTbWRICbNxWz"></iframe>
+          <iframe src="https://open.spotify.com/embed/episode/75RB7WQbKYLqAVGFYhk6qF?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Episode 75RB7WQbKYLqAVGFYhk6qF"></iframe>
+        </div>
+      </section>
+
+      <!-- YouTube Videos (separate section) -->
+      <section class="youtube-section">
+        <h2>YouTube Videos</h2>
+        <div class="yt-grid" aria-label="YouTube previews grid">
+          <!-- 1 -->
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=qtHRdJ6w45A" target="_blank" rel="noopener">
+              <div class="yt-thumb">
+                <img src="https://img.youtube.com/vi/qtHRdJ6w45A/hqdefault.jpg" alt="Oldcast Landing Page — Video">
+              </div>
+            </a>
+            <div class="yt-meta">
+              <strong>Oldcast Landing Page — Video</strong>
+              Guest: — · Length: — · Topic: Landing page review
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=cbpCOGXTW0o" target="_blank" rel="noopener">
+              <div class="yt-thumb">
+                <img src="https://img.youtube.com/vi/cbpCOGXTW0o/hqdefault.jpg" alt="Oldcast Landing Page — Video 2">
+              </div>
+            </a>
+            <div class="yt-meta">
+              <strong>Oldcast Landing Page — Video 2</strong>
+              Guest: — · Length: — · Topic: Design notes
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=n4OflWszcZ0" target="_blank" rel="noopener">
+              <div class="yt-thumb">
+                <img src="https://img.youtube.com/vi/n4OflWszcZ0/hqdefault.jpg" alt="Scaling L2s for Enterprises thumbnail">
+              </div>
+            </a>
+            <div class="yt-meta">
+              <strong>Scaling L2s for Enterprises</strong>
+              Guest: Protocol Lead · Length: 42m · Topic: Rollups & ZK Proofs
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=iAEwUpcc8do" target="_blank" rel="noopener">
+              <div class="yt-thumb">
+                <img src="https://img.youtube.com/vi/iAEwUpcc8do/hqdefault.jpg" alt="Onchain Compliance & Controls thumbnail">
+              </div>
+            </a>
+            <div class="yt-meta">
+              <strong>Onchain Compliance & Controls</strong>
+              Guest: Head of Compliance · Length: 31m · Topic: Regulatory frameworks
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subscribe -->
+      <section class="subscribe">
+        <h2>Subscribe to the Newsletter</h2>
+        <p style="margin:6px 0 0;color:#cfcfcf;">No noise — just pragmatic onchain strategies for enterprise leaders, every week.</p>
+
+        <form class="form" role="form" aria-label="Subscribe form" style="margin-top:12px;" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+          <input type="email" placeholder="Your business email" aria-label="Email address" required>
+          <button class="cta-btn" type="submit">Join Free</button>
+        </form>
+
+        <p style="font-size:0.82rem;color:#9f9f9f;margin-top:10px;">Unsubscribe anytime. We respect your privacy.</p>
+      </section>
+    </main>
+
+    <!-- Bottom static icon/text buttons (exact markup) -->
+    <section class="bottom-links" aria-label="Bottom links">
+      <a class="nav-btn" href="#" title="Newsletter" aria-label="Newsletter">
+        <img class="icon" src="https://i.imgur.com/U9DcDsn.png" alt="newsletter icon">
+        <span>Newsletter</span>
+      </a>
+
+      <a class="nav-btn" href="#" title="YouTube" aria-label="YouTube">
+        <img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
+        <span>YouTube</span>
+      </a>
+
+      <a class="nav-btn" href="#" title="Spotify" aria-label="Spotify">
+        <img class="icon" src="https://i.imgur.com/W0mUcqF.png" alt="Spotify">
+        <span>Spotify</span>
+      </a>
+
+      <a class="nav-btn" href="#" title="Apple Music" aria-label="Apple Music">
+        <img class="icon" src="https://i.imgur.com/wmJQpuk.png" alt="Apple Music">
+        <span>Apple Music</span>
+      </a>
+    </section>
+
+    <footer>
+      © 2025 Enterprise Onchain. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu toggle (yellow button)
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const menu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      const showing = menu.style.display === 'block';
+      menu.style.display = showing ? 'none' : 'block';
+      menuBtn.setAttribute('aria-expanded', String(!showing));
+    });
+
+    // Close the mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+        menu.style.display = 'none';
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>
