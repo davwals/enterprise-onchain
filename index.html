@@ -60,11 +60,11 @@
       padding:22px 0;position:relative;
     }
     .brand img {
-      height:24px;
+      height:16px;
       display:block;
     }
     @media (min-width:80px){
-      .brand img { height:20px; }
+      .brand img { height:16px; }
     }
 
     /* Top nav */
@@ -282,10 +282,21 @@
           <div class="logo-box"><img src="https://i.imgur.com/Mamkc4H.png" alt="UBS"></div>
           <div class="logo-box"><img src="https://i.imgur.com/t5YGLcA.png" alt="AWS"></div>
         </div>
+
+      <section class="subscribe">
+        <h2>Subscribe to the Newsletter</h2>
+        <p>No noise, just the latest trends and news from industry leaders.</p>
+        <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+          <input type="email" placeholder="Your business email" required>
+          <button class="cta-btn" type="submit">Join Free <span class="arrow">→</span></button>
+        </form>
+      </section>
+
+        
       </section>
 
       <section class="trusted">
-        <h3>Meet Our Hosts</h3>
+        <h3>Meet the Team</h3>
       </section>
 
       <section class="hosts">
@@ -336,14 +347,6 @@
         </div>
       </section>
 
-      <section class="subscribe">
-        <h2>Subscribe to the Newsletter</h2>
-        <p>No noise, just the latest trends and news from industry leaders.</p>
-        <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
-          <input type="email" placeholder="Your business email" required>
-          <button class="cta-btn" type="submit">Join Free <span class="arrow">→</span></button>
-        </form>
-      </section>
     </main>
 
     <section class="bottom-links">
