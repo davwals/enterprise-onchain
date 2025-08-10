@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Enterprise Onchain</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/Q2BUcTV.png">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
@@ -24,8 +25,8 @@
     html,body{height:100%;margin:0;}
     body{
       font-family:'Satoshi',sans-serif;
-      font-weight:400; /* Satoshi regular everywhere */
       letter-spacing:-0.03em;
+      font-weight:400; /* Satoshi regular everywhere */
       background:var(--bg-dark);
       color:#fff;
       -webkit-font-smoothing:antialiased;
@@ -61,7 +62,9 @@
       display:flex;align-items:center;justify-content:space-between;
       padding:22px 0;position:relative;
     }
-    .brand{font-size:1.15rem;opacity:.95;}
+    .brand{display:flex;align-items:center;}
+    .brand img{height:32px;display:block;}
+    @media (min-width:900px){ .brand img{height:40px;} }
 
     /* Top nav */
     .top-nav{display:flex;align-items:center;gap:12px;}
@@ -169,11 +172,11 @@
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 12px;border-radius:999px;background:var(--button-dark);color:#fff;
       border:1.5px solid #2a2a2a;cursor:pointer;font-size:0.92rem;
-      height:38px;line-height:1;font-weight:400;
+      letter-spacing:-0.03em;font-weight:400;
       transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
     }
-    .cta-btn .arrow{margin-left:6px;}
     .cta-btn:hover{background:#141414;border-color:var(--accent);color:var(--accent);transform:translateY(-1px);text-shadow:var(--glow);}
+    .cta-btn .arrow{margin-left:6px;}
 
     /* Bottom links */
     .bottom-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:26px 0 14px;border-top:1px solid #1f1f1f;margin-top:6px;}
@@ -200,7 +203,9 @@
 
   <div class="container">
     <header>
-      <div class="brand">ΞNTERPRISE ONCHAIN</div>
+      <div class="brand">
+        <img src="https://i.imgur.com/tRng9Cp.png" alt="Enterprise Onchain Logo">
+      </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <div class="top-links" role="menubar">
           <a class="top-link" href="#" role="menuitem">Newsletter <span class="arrow" aria-hidden="true">→</span></a>
@@ -357,3 +362,4 @@
   </script>
 </body>
 </html>
+
