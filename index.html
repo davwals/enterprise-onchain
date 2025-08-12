@@ -15,7 +15,7 @@
       --bg-dark:#000;
       --panel-dark:#0f0f0f;
       --button-dark:#111;
-     --accent:#d1ff4c;
+      --accent:#d1ff4c;
       --radius:14px;
       --max-w:1200px;
     }
@@ -45,12 +45,7 @@
       font-style:normal;
       font-weight:400;
     }
-    .site-title .accent {
-      color:var(--accent);
-      font-family:inherit;
-      font-style:inherit;
-      font-weight:inherit;
-    }
+    .site-title .accent { color:var(--accent); }
 
     .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;}
 
@@ -59,13 +54,7 @@
       display:flex;align-items:center;justify-content:space-between;
       padding:22px 0;position:relative;
     }
-    .brand img {
-      height:18px;
-      display:block;
-    }
-    @media (min-width:60px){
-      .brand img { height:18px; }
-    }
+    .brand img { height:18px; display:block; }
 
     /* Top nav */
     .top-nav{display:flex;align-items:center;gap:12px;}
@@ -79,8 +68,6 @@
       opacity:1;transform:translateY(-1px);color:var(--accent);
       text-shadow:0 0 6px rgba(209,255,76,0.6);
     }
-    .top-link .arrow{color:#fff;margin-left:6px;transition:color .15s ease;}
-    .top-link:hover .arrow{color:var(--accent);}
 
     /* Mobile menu button */
     .menu-btn{
@@ -129,10 +116,7 @@
 
     /* Sections */
     section{margin-top:56px;}
-    section h2 {
-      margin-bottom: 16px;
-      text-align: center;
-    }
+    section h2 { margin-bottom:16px; text-align:center; }
 
     .trusted h3{margin-bottom:18px;}
 
@@ -204,9 +188,7 @@
       padding:12px 16px;border-radius:999px;border:1px solid #222;width:320px;background:#0b0b0b;color:#fff;outline:none;
     }
 
-    .subscribe .cta-btn {
-      margin-top: 12px;
-    }
+    .subscribe .cta-btn { margin-top:12px; }
 
     .cta-btn{
       display:inline-flex;align-items:center;gap:8px;
@@ -264,24 +246,24 @@
       </div>
       <nav class="top-nav">
         <div class="top-links">
-          <a class="top-link" href="https://enterpriseonchain.substack.com/">Newsletter <span class="arrow">→</span></a>
-          <a class="top-link" href="#">YouTube <span class="arrow">→</span></a>
-          <a class="top-link" href="#">Spotify <span class="arrow">→</span></a>
-          <a class="top-link" href="#">Apple Podcasts <span class="arrow">→</span></a>
-          <a class="top-link" href="#">LinkedIn <span class="arrow">→</span></a>
-          <a class="top-link" href="https://x.com/enteronchain">X <span class="arrow">→</span></a>
+          <a class="top-link" href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">Newsletter <span class="arrow">→</span></a>
+          <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">YouTube <span class="arrow">→</span></a>
+          <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">Spotify <span class="arrow">→</span></a>
+          <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">Apple Podcasts <span class="arrow">→</span></a>
+          <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">LinkedIn <span class="arrow">→</span></a>
+          <a class="top-link" href="https://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X <span class="arrow">→</span></a>
         </div>
         <button class="menu-btn" id="menuBtn" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </nav>
       <div class="mobile-menu" id="mobileMenu">
-        <a href="#">Newsletter</a>
-        <a href="#">YouTube</a>
-        <a href="#">Spotify</a>
-        <a href="#">Apple Podcasts</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">X</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Newsletter</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Spotify</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">X</a>
       </div>
     </header>
 
@@ -324,19 +306,19 @@
         <h2>Featured YouTube Videos ↓ </h2>
         <div class="yt-grid">
           <div class="yt-card">
-            <a href="https://www.youtube.com/watch?v=iClsnZ1KYSk" target="_blank">
+            <a href="https://www.youtube.com/watch?v=iClsnZ1KYSk" target="_blank" rel="noopener noreferrer">
               <div class="yt-thumb"><img src="https://img.youtube.com/vi/iClsnZ1KYSk/hqdefault.jpg" alt="Ethereum Tom Lee Interview"></div>
             </a>
             <div class="yt-meta"><strong>Tom Lee discusses Bitmines's strategy for 2025 and predicts ETH to $16K</strong></div>
           </div>
           <div class="yt-card">
-            <a href="https://www.youtube.com/watch?v=WSN5BaCzsbo" target="_blank">
+            <a href="https://www.youtube.com/watch?v=WSN5BaCzsbo" target="_blank" rel="noopener noreferrer">
               <div class="yt-thumb"><img src="https://img.youtube.com/vi/WSN5BaCzsbo/hqdefault.jpg" alt="Ethereum Vitalik Interview"></div>
             </a>
             <div class="yt-meta"><strong>Vitalik discusses ETH treasury companies and L2s</strong></div>
           </div>
           <div class="yt-card">
-            <a href="https://www.youtube.com/watch?v=HTveRlW7QPo" target="_blank">
+            <a href="https://www.youtube.com/watch?v=HTveRlW7QPo" target="_blank" rel="noopener noreferrer">
               <div class="yt-thumb"><img src="https://i.ytimg.com/vi/HTveRlW7QPo/hq720.jpg" alt="Ethereum Panel Discussion"></div>
             </a>
             <div class="yt-meta"><strong>Larry Fink goes all in on Tokenization on Ethereum</strong></div>
@@ -355,10 +337,10 @@
           <h4>Head of Ecosystem @ Ethereum Foundation</h4>
           <p>James has spent 7+ years at the EF and currently leads the Ecosystem Development cluster.</p>
           <div class="social-links">
-            <a class="nav-btn" href="https://www.linkedin.com/in/jamesmith/" title="LinkedIn" aria-label="LinkedIn">
+            <a class="nav-btn" href="https://www.linkedin.com/in/jamesmith/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
               <span>LinkedIn</span>
             </a>
-            <a class="nav-btn" href="https://x.com/james_gaps" title="X" aria-label="X">
+            <a class="nav-btn" href="https://x.com/james_gaps" title="X" aria-label="X" target="_blank" rel="noopener noreferrer">
               <span>X</span>
             </a>
           </div>
@@ -369,10 +351,10 @@
           <h4>Enterprise Lead @ Ethereum Foundation</h4>
           <p>David leads Enterprise at the EF & has spent the past 5+ years building institutional staking products.</p>
           <div class="social-links">
-            <a class="nav-btn" href="https://www.linkedin.com/in/davwals/" title="LinkedIn" aria-label="LinkedIn">
+            <a class="nav-btn" href="https://www.linkedin.com/in/davwals/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
               <span>LinkedIn</span>
             </a>
-            <a class="nav-btn" href="https://x.com/davwals" title="X" aria-label="X">
+            <a class="nav-btn" href="https://x.com/davwals" title="X" aria-label="X" target="_blank" rel="noopener noreferrer">
               <span>X</span>
             </a>
           </div>
@@ -382,32 +364,32 @@
       <section class="subscribe">
         <h2>Work With Us ↓</h2>
         <p>If you want to contact us to organize an appearance, sponsor the show or provide any other feedback, please reach out below.</p>
-        <a href="mailto:your@email.com" class="nav-btn">Get in Touch →</a>
+        <a href="mailto:your@email.com" class="nav-btn" target="_blank" rel="noopener noreferrer">Get in Touch →</a>
       </section>
     </main>
 
     <section class="bottom-links">
-      <a class="nav-btn" href="#" title="Newsletter" aria-label="Newsletter">
+      <a class="nav-btn" href="#" title="Newsletter" aria-label="Newsletter" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/U9DcDsn.png" alt="Newsletter icon">
         <span>Newsletter</span>
       </a>
-      <a class="nav-btn" href="#" title="YouTube" aria-label="YouTube">
+      <a class="nav-btn" href="#" title="YouTube" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
         <span>YouTube</span>
       </a>
-      <a class="nav-btn" href="#" title="Spotify" aria-label="Spotify">
+      <a class="nav-btn" href="#" title="Spotify" aria-label="Spotify" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/W0mUcqF.png" alt="Spotify">
         <span>Spotify</span>
       </a>
-      <a class="nav-btn" href="#" title="Apple Podcasts" aria-label="Apple Podcasts">
+      <a class="nav-btn" href="#" title="Apple Podcasts" aria-label="Apple Podcasts" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/LKA3ZMX.png" alt="Apple Podcasts">
         <span>Apple Podcasts</span>
       </a>
-      <a class="nav-btn" href="#" title="LinkedIn" aria-label="LinkedIn">
+      <a class="nav-btn" href="#" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/oVmVVmA.png" alt="LinkedIn">
         <span>LinkedIn</span>
       </a>
-      <a class="nav-btn" href="https://x.com/enteronchain" title="X" aria-label="X">
+      <a class="nav-btn" href="https://x.com/enteronchain" title="X" aria-label="X" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/FBdpDeb.jpeg" alt="X">
         <span>X</span>
       </a>
@@ -427,4 +409,3 @@
   </script>
 </body>
 </html>
-
