@@ -45,7 +45,9 @@
       font-style:normal;
       font-weight:400;
     }
+    .site-title { font-size:2.7rem; letter-spacing:-0.01em; }
     .site-title .accent { color:var(--accent); }
+    @media (min-width:1000px){ .site-title{font-size:3.2rem;} }
 
     .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;}
 
@@ -110,8 +112,6 @@
 
     /* Hero */
     .hero{text-align:center;padding:64px 0 24px;}
-    .site-title{font-size:2.7rem;letter-spacing:-0.01em;}
-    @media (min-width:1000px){ .site-title{font-size:3.2rem;} }
     .tagline{margin:12px auto 0;max-width:760px;color:#cfcfcf;line-height:1.5;}
 
     /* Sections */
@@ -158,63 +158,16 @@
       margin-top: 14px;
     }
 
-    /* Spotify */
-    .spotify-embeds{display:grid;gap:14px;margin-top:24px;}
-    .spotify-embeds iframe{
-      border-radius:12px;width:100%;height:152px;border:0;background:#000;
-    }
+    /* Center buttons for Spotify/YouTube */
+    .center-btn { text-align:center; margin-top:16px; }
 
-    /* YouTube */
-    .youtube-section{margin-top:56px;}
-    .yt-grid{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:14px;}
-    .yt-card{
-      background:var(--panel-dark);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
-      transition:transform .18s ease, box-shadow .18s ease;
-    }
-    .yt-thumb{width:100%;height:0;padding-bottom:54%;position:relative;background:#000;overflow:hidden;}
-    .yt-thumb img{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      transition:transform .25s ease;
-    }
-    .yt-card:hover .yt-thumb img{transform:scale(1.04);}
-    .yt-meta{padding:10px 12px;color:#e6e6e6;font-size:0.88rem;line-height:1.35;}
-    .yt-meta strong{display:block;color:#fff;margin-bottom:6px;font-weight:600;}
-
-    /* Subscribe */
-    .subscribe{text-align:center;max-width:760px;margin:40px auto 72px;}
-    .subscribe p{color:#cfcfcf;margin-bottom:12px;}
-    .subscribe form{display:inline-flex;gap:10px;align-items:center;}
-    .subscribe input[type="email"]{
-      padding:12px 16px;border-radius:999px;border:1px solid #222;width:320px;background:#0b0b0b;color:#fff;outline:none;
-    }
-
-    .subscribe .cta-btn { margin-top:12px; }
-
-    .cta-btn{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border-radius:999px;background:var(--button-dark);color:#fff;
-      border:1.5px solid #2a2a2a;cursor:pointer;font-size:0.92rem;
-      font-family:'Satoshi',sans-serif;letter-spacing:-0.03em;font-weight:500;
-      transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
-      height:38px;line-height:1;
-    }
-    .cta-btn .arrow{margin-left:6px;}
-    .cta-btn:hover{
-      background:#141414;border-color:var(--accent);color:var(--accent);
-      transform:translateY(-1px);text-shadow:0 0 6px rgba(209,255,76,0.6);
-    }
-
-    /* Bottom links */
-    .bottom-links{
-      display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;
-      padding:26px 0 14px;border-top:1px solid #1f1f1f;margin-top:6px;
-    }
     .nav-btn{
       display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
       background:var(--button-dark);color:#fff;text-decoration:none;font-size:0.92rem;
-      border:1.5px solid #2a2a2a;
+      border:1.5px solid #2a2a2a;cursor:pointer;
       transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
       height:38px;line-height:1;
+      font-family:'Satoshi',sans-serif;letter-spacing:-0.03em;font-weight:500;
     }
     .nav-btn:hover{
       background:#141414;border-color:var(--accent);color:var(--accent);
@@ -250,8 +203,6 @@
           <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">YouTube <span class="arrow">→</span></a>
           <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">Spotify <span class="arrow">→</span></a>
           <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">Apple Podcasts <span class="arrow">→</span></a>
-          <a class="top-link" href="#" target="_blank" rel="noopener noreferrer">LinkedIn <span class="arrow">→</span></a>
-          <a class="top-link" href="https://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X <span class="arrow">→</span></a>
         </div>
         <button class="menu-btn" id="menuBtn" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -262,14 +213,13 @@
         <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
         <a href="#" target="_blank" rel="noopener noreferrer">Spotify</a>
         <a href="#" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
-        <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X</a>
       </div>
     </header>
 
     <main>
+      <!-- Hero -->
       <section class="hero">
-        <h1 class="site-title">Enterprise <span class="accent">Onchain</span></h1>
+        <h1 class="site-title"><span class="accent"> Enterprise Onchain </span> </h1>
         <p class="tagline">Podcast with leaders from the world's largest enterprises and institutions who are deploying <i>onchain.</i></p>
         <p class="tagline">Join our newsletter, read by 9,000+ business leaders.</p>
       </section>
@@ -295,13 +245,16 @@
       
       <section>
         <h2>Listen on Spotify ↓ </h2>
-        <a href="spotify.com" class="nav-btn" target="_blank" rel="noopener noreferrer">Follow on Spotify →</a>
+        <div class="center-btn">
+          <a href="spotify.com" class="nav-btn" target="_blank" rel="noopener noreferrer">Follow on Spotify →</a>
+        </div>
       </section>
 
       <section class="youtube-section">
         <h2>Watch on YouTube ↓ </h2>
-               <a href="youtube.com" class="nav-btn" target="_blank" rel="noopener noreferrer">Subscribe on YouTube →</a>
-
+        <div class="center-btn">
+          <a href="youtube.com" class="nav-btn" target="_blank" rel="noopener noreferrer"> <h4 Subscribe on YouTube → </h4></a>
+        </div>
       </section>
 
       <section class="trusted">
@@ -378,12 +331,4 @@
 
   <script>
     const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('show');
-      menuBtn.setAttribute('aria-expanded', mobileMenu.classList.contains('show'));
-    });
-  </script>
-</body>
-</html>
+    const mobile
