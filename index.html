@@ -39,6 +39,17 @@
       font-weight:400;
       margin:0;
     }
+
+    /* Ensure hero spans use the h1 font (Playfair Display Italic) */
+.site-title span { 
+  font-family: inherit; 
+  font-style: inherit; 
+}
+
+/* Word colors */
+.site-title .enterprise { color: #fff; }
+.site-title .onchain { color: var(--accent); }
+
     h2, h3, h4, p, a, button, input, label, span, strong, em {
       font-family:'Satoshi',sans-serif;
       letter-spacing:-0.03em;
@@ -167,7 +178,7 @@
       border:1.5px solid #2a2a2a;cursor:pointer;
       transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
       height:38px;line-height:1;
-      font-family:'Satoshi',sans-serif;letter-spacing:-0.03em;font-weight:500;
+      font-family:'Satoshi',sans-serif;letter-spacing:-0.03em;font-weight:400;
     }
     .nav-btn:hover{
       background:#141414;border-color:var(--accent);color:var(--accent);
@@ -219,7 +230,10 @@
     <main>
       <!-- Hero -->
       <section class="hero">
-        <h1 class="site-title"><span class="accent"> Enterprise Onchain </span> </h1>
+<h1 class="site-title">
+  <span class="enterprise">Enterprise</span>
+  <span class="onchain">onchain</span>
+</h1>
         <p class="tagline">Podcast with leaders from the world's largest enterprises and institutions who are deploying <i>onchain.</i></p>
         <p class="tagline">Join our newsletter, read by 9,000+ business leaders.</p>
       </section>
