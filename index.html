@@ -337,13 +337,37 @@
       <a class="nav-btn" href="https://podcasts.apple.com/pt/podcast/enterprise-onchain/id1840906022?l=en-GB" title="Apple Podcasts" aria-label="Apple Podcasts" target="_blank" rel="noopener noreferrer">
         <img class="icon" src="https://i.imgur.com/LKA3ZMX.png" alt="Apple Podcasts">
         <span>Apple Podcasts</span>
-      </a
+      </a>
                 </div>
     </section>
 
     <footer>© 2025 Enterprise Onchain. All rights reserved.</footer>
   </div>
 
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const mobile
+ <script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('show');
+    menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // optional: close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+      mobileMenu.classList.remove('show');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // optional: close menu on Esc key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      mobileMenu.classList.remove('show');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+</body>
+</html>
