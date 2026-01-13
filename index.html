@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Enterprise Onchain</title>
+  <title>Enterprise Onchain - Join 9,000+ Business Leaders</title>
+  <meta name="description" content="The world's largest enterprises and institutions are deploying onchain. Join 9,000+ business leaders learning how with institutional crypto adoption insights, enterprise blockchain case studies, and weekly analysis.">
   <link rel="icon" type="image/png" href="https://i.imgur.com/dBi3e0w.png">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet">
 
   <style>
@@ -16,8 +17,9 @@
       --panel-dark:#0f0f0f;
       --button-dark:#111;
       --accent:#d1ff4c;
+      --accent-hover:#e0ff7a;
       --radius:14px;
-      --max-w:1200px;
+      --max-w:1100px;
     }
 
     *,*::before,*::after{box-sizing:border-box}
@@ -30,344 +32,661 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       font-weight:400;
+      line-height:1.6;
     }
 
     /* Typography */
     h1 {
       font-family:'Playfair Display',serif;
       font-style:italic;
-      font-weight:400;
+      font-weight:700;
       margin:0;
+      line-height:1.1;
     }
 
-    /* Ensure hero spans use the h1 font (Playfair Display Italic) */
-.site-title span { 
-  font-family: inherit; 
-  font-style: inherit; 
-}
-
-/* Word colors */
-.site-title .enterprise { color: #fff; }
-.site-title .onchain { color: var(--accent); }
-
-    h2, h3, h4, p, a, button, input, label, span, strong, em {
+    h2 {
       font-family:'Satoshi',sans-serif;
-      letter-spacing:-0.03em;
-      font-style:normal;
-      font-weight:400;
+      font-weight:700;
+      font-size:2rem;
+      letter-spacing:-0.02em;
+      margin:0 0 1rem;
+      line-height:1.2;
     }
-    .site-title { font-size:2.7rem; letter-spacing:-0.01em; }
-    .site-title .accent { color:var(--accent); }
-    @media (min-width:1000px){ .site-title{font-size:3.2rem;} }
 
-    .container{max-width:var(--max-w);margin:0 auto;padding:0 20px;}
+    h3 {
+      font-family:'Satoshi',sans-serif;
+      font-weight:600;
+      font-size:1.25rem;
+      letter-spacing:-0.02em;
+      margin:0 0 0.5rem;
+    }
+
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
 
     /* Header */
     header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:22px 0;position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 0;
+      border-bottom:1px solid #1a1a1a;
+      margin-bottom:20px;
     }
-    .brand img { height:18px; display:block; }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand img {
+      height:32px;
+      display:block;
+    }
+    .brand-text {
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      font-size:1.4rem;
+      font-weight:400;
+      color:#fff;
+    }
+    .brand-text .onchain {
+      color:var(--accent);
+    }
 
     /* Top nav */
-    .top-nav{display:flex;align-items:center;gap:12px;}
-    .top-links{display:flex;align-items:center;gap:18px;}
+    .top-nav{display:flex;align-items:center;gap:20px;}
     .top-link{
-      color:#fff;text-decoration:none;font-size:0.98rem;
-      padding:6px 0;opacity:.95;
-      transition:opacity .15s ease, transform .15s ease, color .15s ease, text-shadow .15s ease;
+      color:#ccc;
+      text-decoration:none;
+      font-size:0.95rem;
+      transition:color .2s ease;
     }
     .top-link:hover{
-      opacity:1;transform:translateY(-1px);color:var(--accent);
-      text-shadow:0 0 6px rgba(209,255,76,0.6);
+      color:var(--accent);
     }
 
-    /* Mobile menu button */
+    /* Mobile menu */
     .menu-btn{
-      display:none;background:var(--accent);border:none;border-radius:8px;
-      padding:8px 10px;cursor:pointer;
-      box-shadow:0 4px 16px rgba(209,255,76,.25);
+      display:none;
+      background:transparent;
+      border:1px solid #333;
+      border-radius:8px;
+      padding:8px 10px;
+      cursor:pointer;
     }
-    .menu-btn span{display:block;width:20px;height:2px;background:#000;margin:4px 0;}
+    .menu-btn span{
+      display:block;
+      width:20px;
+      height:2px;
+      background:#fff;
+      margin:4px 0;
+    }
 
-    /* Mobile dropdown */
     .mobile-menu{
-      position:absolute;right:0;top:60px;z-index:9999;
+      position:absolute;
+      right:24px;
+      top:70px;
+      z-index:9999;
       background:var(--panel-dark);
+      border:1px solid #222;
       border-radius:12px;
       padding:8px 0;
-      width:220px;
-      overflow:hidden;
+      width:200px;
       max-height:0;
       opacity:0;
-      transform:translateY(-6px);
-      transition:max-height .28s ease, opacity .22s ease, transform .28s ease, visibility .28s ease;
-      visibility:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,.5);
+      overflow:hidden;
+      transition:max-height .3s ease, opacity .3s ease;
     }
     .mobile-menu.show{
-      max-height:320px;
+      max-height:300px;
       opacity:1;
-      transform:translateY(0);
-      visibility:visible;
     }
     .mobile-menu a{
-      display:block;padding:12px 16px;color:#eaeaea;text-decoration:none;font-size:0.98rem;
-      transition:color .15s ease, text-shadow .15s ease, background .15s ease;
+      display:block;
+      padding:12px 16px;
+      color:#ccc;
+      text-decoration:none;
+      font-size:0.95rem;
+      transition:background .2s ease, color .2s ease;
     }
     .mobile-menu a:hover{
+      background:#141414;
       color:var(--accent);
-      text-shadow:0 0 6px rgba(209,255,76,0.6);
+    }
+
+    /* Hero Section - Above the fold */
+    .hero{
+      text-align:center;
+      padding:60px 0;
+      max-width:900px;
+      margin:0 auto;
+    }
+
+    .hero h1{
+      font-size:3.5rem;
+      margin-bottom:24px;
+      line-height:1.1;
+    }
+
+    .hero h1 .enterprise {
+      color:#fff;
+    }
+
+    .hero h1 .onchain {
+      color:var(--accent);
+    }
+
+    .hero-stat{
+      font-size:1.3rem;
+      color:#aaa;
+      margin-bottom:16px;
+      font-weight:500;
+    }
+
+    .hero-stat strong{
+      color:var(--accent);
+      font-weight:700;
+    }
+
+    .hero-tagline{
+      font-size:1.25rem;
+      color:#bbb;
+      margin-bottom:40px;
+      line-height:1.5;
+    }
+
+    /* Email Signup Form */
+    .email-signup{
+      background:var(--panel-dark);
+      border:1px solid #222;
+      border-radius:var(--radius);
+      padding:32px;
+      max-width:500px;
+      margin:0 auto;
+    }
+
+    .email-signup h3{
+      text-align:center;
+      margin-bottom:20px;
+      font-size:1.1rem;
+    }
+
+    .email-form{
+      display:flex;
+      gap:10px;
+      flex-direction:column;
+    }
+
+    .email-form input[type="email"]{
+      flex:1;
+      padding:14px 16px;
+      border:1px solid #333;
+      border-radius:8px;
+      background:#000;
+      color:#fff;
+      font-size:1rem;
+      font-family:'Satoshi',sans-serif;
+      transition:border-color .2s ease;
+    }
+
+    .email-form input[type="email"]:focus{
+      outline:none;
+      border-color:var(--accent);
+    }
+
+    .email-form input[type="email"]::placeholder{
+      color:#666;
+    }
+
+    .cta-btn{
+      padding:14px 32px;
+      background:var(--accent);
+      color:#000;
+      border:none;
+      border-radius:8px;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      font-family:'Satoshi',sans-serif;
+      transition:background .2s ease, transform .2s ease;
+    }
+
+    .cta-btn:hover{
+      background:var(--accent-hover);
+      transform:translateY(-1px);
+    }
+
+    /* Logo Bar */
+    .logo-bar{
+      text-align:center;
+      padding:60px 0;
+      border-bottom:1px solid #1a1a1a;
+    }
+
+    .logo-bar h3{
+      color:#888;
+      font-size:0.95rem;
+      font-weight:500;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+      margin-bottom:32px;
+    }
+
+    .logos-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+      gap:32px 24px;
+      align-items:center;
+      justify-items:center;
+      max-width:900px;
+      margin:0 auto;
+    }
+
+    .logo-item{
+      height:60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0.6;
+      transition:opacity .3s ease, transform .3s ease;
+    }
+
+    .logo-item:hover{
+      opacity:1;
+      transform:scale(1.05);
+    }
+
+    .logo-item img{
+      max-height:50px;
+      max-width:100%;
+      object-fit:contain;
+      filter:grayscale(100%) brightness(2);
+    }
+
+    /* Value Props Section */
+    .value-props{
+      padding:80px 0;
+      border-bottom:1px solid #1a1a1a;
+    }
+
+    .value-props h2{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .props-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:40px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+
+    .prop-card{
+      text-align:center;
+      padding:32px 24px;
+    }
+
+    .prop-icon{
+      font-size:2.5rem;
+      margin-bottom:20px;
+    }
+
+    .prop-card h3{
+      margin-bottom:12px;
+      color:#fff;
+    }
+
+    .prop-card p{
+      color:#aaa;
+      font-size:1rem;
+      line-height:1.6;
+    }
+
+    /* Content Preview */
+    .content-preview{
+      padding:80px 0;
+      border-bottom:1px solid #1a1a1a;
+    }
+
+    .content-preview h2{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .content-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:30px;
+    }
+
+    .content-card{
+      background:var(--panel-dark);
+      border:1px solid #222;
+      border-radius:var(--radius);
+      padding:32px;
+      transition:border-color .3s ease, transform .3s ease;
+    }
+
+    .content-card:hover{
+      border-color:#333;
+      transform:translateY(-4px);
+    }
+
+    .content-tag{
+      display:inline-block;
+      padding:4px 12px;
+      background:#1a1a1a;
+      color:var(--accent);
+      border-radius:6px;
+      font-size:0.85rem;
+      font-weight:500;
+      margin-bottom:16px;
+    }
+
+    .content-card h3{
+      margin-bottom:12px;
+      font-size:1.3rem;
+      line-height:1.3;
+    }
+
+    .content-card p{
+      color:#aaa;
+      font-size:0.95rem;
+      line-height:1.6;
+      margin-bottom:16px;
+    }
+
+    .content-card a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:500;
+      transition:color .2s ease;
+    }
+
+    .content-card a:hover{
+      color:var(--accent-hover);
+    }
+
+    /* CTA Section */
+    .cta-section{
+      padding:80px 0;
+      text-align:center;
+    }
+
+    .cta-section h2{
+      margin-bottom:16px;
+    }
+
+    .cta-section p{
+      color:#aaa;
+      font-size:1.1rem;
+      margin-bottom:40px;
+    }
+
+    /* Footer */
+    footer{
+      padding:60px 0 40px;
+      border-top:1px solid #1a1a1a;
+      text-align:center;
+    }
+
+    .footer-social{
+      display:flex;
+      justify-content:center;
+      gap:24px;
+      margin-bottom:32px;
+    }
+
+    .social-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 20px;
+      background:var(--button-dark);
+      border:1px solid #2a2a2a;
+      border-radius:8px;
+      color:#fff;
+      text-decoration:none;
+      font-size:0.95rem;
+      transition:border-color .2s ease, background .2s ease;
+    }
+
+    .social-btn:hover{
+      border-color:var(--accent);
       background:#141414;
     }
 
-    /* Hero */
-    .hero{text-align:center;padding:64px 0 24px;}
-    .tagline{margin:12px auto 0;max-width:760px;color:#cfcfcf;line-height:1.5;}
-
-    /* Sections */
-    section{margin-top:56px;}
-    section h2 { margin-bottom:16px; text-align:center; }
-
-    .trusted h3{margin-bottom:18px;}
-
-    /* Logos smaller */
-    .trusted{text-align:center;}
-    .logos-container{
-      margin-top:12px;
-      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:18px;align-items:center;justify-items:center;padding:8px 0 28px;
-    }
-    .logo-box{
-      background:transparent;border-radius:12px;padding:6px;opacity:.9;
-      transition:transform .18s ease,opacity .18s ease;
-      display:flex;align-items:center;justify-content:center;
-      height:100px;width:100%;max-width:130px;
-    }
-    .logo-box img{
-      max-height:100px;max-width:100%;object-fit:contain;
-      filter:grayscale(100%) contrast(.92) brightness(1.05);opacity:.6;
-    }
-    .logo-box:hover{opacity:1;transform:translateY(-2px) scale(1.02);}
-
-    /* Hosts */
-    .hosts{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:22px 0;}
-    .host-card{
-      width:360px;background:var(--panel-dark);padding:20px;border-radius:var(--radius);
-      text-align:center;
-    }
-    .host-card img{width:220px;height:220px;object-fit:cover;border-radius:16px;margin:0 auto 14px;}
-    .host-card h3{margin:6px 0 0;font-size:1.12rem;}
-    .host-card h4{margin:6px 0 8px;font-size:0.95rem;color:#d9d9d9;font-weight:500;font-style:normal;}
-    .host-card p{margin:0;color:#d6d6d6;line-height:1.5;font-size:0.95rem;}
-
-    /* Social buttons inside host cards */
-    .host-card .social-links {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 14px;
+    .social-btn img{
+      height:16px;
+      width:auto;
     }
 
-    /* Center buttons for Spotify/YouTube */
-    .center-btn { text-align:center; margin-top:16px; }
-
-    .nav-btn{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
-      background:var(--button-dark);color:#fff;text-decoration:none;font-size:0.92rem;
-      border:1.5px solid #2a2a2a;cursor:pointer;
-      transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease,text-shadow .14s ease;
-      height:38px;line-height:1;
-      font-family:'Satoshi',sans-serif;letter-spacing:-0.03em;font-weight:400;
+    .footer-text{
+      color:#666;
+      font-size:0.9rem;
     }
-    .nav-btn:hover{
-      background:#141414;border-color:var(--accent);color:var(--accent);
-      transform:translateY(-1px);text-shadow:0 0 6px rgba(209,255,76,0.6);
-    }
-    .nav-btn img.icon{height:18px;width:auto;display:block;}
-
-    footer{text-align:center;color:#9a9a9a;padding:20px 0 30px;font-size:0.9rem;}
 
     /* Responsive */
     @media (max-width:900px){
-      .top-links{display:none;}
+      .top-nav{display:none;}
       .menu-btn{display:block;}
-      .yt-grid{grid-template-columns:repeat(2,1fr);}
+
+      .hero h1{
+        font-size:2.5rem;
+      }
+
+      .hero-stat{
+        font-size:1.1rem;
+      }
+
+      .hero-tagline{
+        font-size:1.1rem;
+      }
+
+      .email-signup{
+        padding:24px;
+      }
+
+      .logos-grid{
+        grid-template-columns:repeat(3, 1fr);
+        gap:24px;
+      }
+
+      .props-grid{
+        grid-template-columns:1fr;
+        gap:32px;
+      }
+
+      .content-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer-social{
+        flex-wrap:wrap;
+        gap:12px;
+      }
     }
+
     @media (max-width:600px){
-      .yt-grid{grid-template-columns:1fr;}
-      .logos-container{grid-template-columns:repeat(2,1fr);}
-      .subscribe input[type="email"]{width:220px;}
-      .cta-btn{font-weight:400;}
+      .hero h1{
+        font-size:2rem;
+      }
+
+      h2{
+        font-size:1.6rem;
+      }
+
+      .email-form{
+        flex-direction:column;
+      }
+
+      .logos-grid{
+        grid-template-columns:repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Header -->
     <header>
       <div class="brand">
         <img src="https://i.imgur.com/dBi3e0w.png" alt="Enterprise Onchain Logo">
+        <span class="brand-text">Enterprise <span class="onchain">Onchain</span></span>
       </div>
       <nav class="top-nav">
-        <div class="top-links">
-          <a class="top-link" href="http://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X <span class="arrow">→</span></a>
-          <a class="top-link" href="https://www.linkedin.com/company/enterpriseonchain/" rel="noopener noreferrer">LinkedIn <span class="arrow">→</span></a>
-          <a class="top-link" href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">Newsletter <span class="arrow">→</span></a>
-          <a class="top-link" href="https://www.youtube.com/@enterpriseonchain" target="_blank" rel="noopener noreferrer">YouTube <span class="arrow">→</span></a>
-        </div>
-        <button class="menu-btn" id="menuBtn" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+        <a class="top-link" href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">Newsletter</a>
+        <a class="top-link" href="https://www.youtube.com/@enterpriseonchain" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a class="top-link" href="http://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X</a>
+        <a class="top-link" href="https://www.linkedin.com/company/enterpriseonchain/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
       <div class="mobile-menu" id="mobileMenu">
-       <a href="http://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X</a>
-        <a href="https://www.linkedin.com/company/enterpriseonchain/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">Newsletter</a>
         <a href="https://www.youtube.com/@enterpriseonchain" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href="http://x.com/enteronchain" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://www.linkedin.com/company/enterpriseonchain/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </header>
 
     <main>
-      <!-- Hero -->
+      <!-- Hero Section -->
       <section class="hero">
-<h1 class="site-title">
-  <span class="enterprise">Enterprise</span>
-  <span class="onchain">Onchain</span>
-</h1>
-        <p class="tagline">The world's largest enterprises and institutions are deploying <i>onchain.</i></p>
-        <p class="tagline">Join our newsletter, read by 9,000+ business leaders to learn how.</p>
+        <h1>
+          <span class="enterprise">The World's Largest Enterprises Are Deploying </span>
+          <span class="onchain">Onchain</span>
+        </h1>
+        <p class="hero-stat">Join <strong>9,000+ business leaders</strong> staying ahead of institutional crypto adoption</p>
+        <p class="hero-tagline">Get weekly insights on enterprise blockchain case studies, institutional moves, and onchain deployment strategies.</p>
+
+        <!-- Primary Email Signup -->
+        <div class="email-signup">
+          <h3>Subscribe to the Newsletter</h3>
+          <iframe src="https://enterpriseonchain.substack.com/embed" width="100%" height="150" style="border:0px solid #000; background:transparent; border-radius:8px;" frameborder="0" scrolling="no"></iframe>
+        </div>
       </section>
 
-      <section class="subscribe">
-        <h2>Subscribe to Our Newsletter ↓</h2>
-        <div class="center-btn">
-        <iframe src="https://enterpriseonchain.substack.com/embed" width="350" height="150" style="border:0px solid #000; background:black;" frameborder="0" scrolling="no"></iframe>
-          </div>
-      </section>
-      
-      <section class="trusted">
-        <h4>Read by leaders at </h4>
-        <div class="logos-container">
-          <div class="logo-box"><img src="https://i.imgur.com/XfjgxGH.png" alt="Microsoft"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/SGFRKRM.png" alt="Google"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/rmQWASy.png" alt="Mckinsey"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/fde7Oxn.png" alt="Amazon"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/RgLxwXt.png" alt="Deloitte"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/EnimNpr.png" alt="Ibm"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/voiTYnm.png" alt="EF"></div>
-          <div class="logo-box"><img src="https://i.imgur.com/8GtVY5U.png" alt="Santander"></div>
-        </div>        
-      </section>
-      
-      <section class="trusted">
-        <h2>Enterprise Onchain Contributors ↓ </h2>
-      </section>
-      
-      <section class="hosts">
-        <div class="host-card">
-          <img src="https://i.imgur.com/YBJniYw.png" alt="James Smith, Head of Ecosystem">
-          <h3>James Smith</h3>
-          <h4>Head of Ecosystem @ Ethereum Foundation</h4>
-          <p>James has been at the EF for 5+ years and spearheads Ecosystem Development</p>
-          <div class="social-links">
-            <a class="nav-btn" href="https://www.linkedin.com/in/jamesmith/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <span>LinkedIn →</span>
-            </a>
-            <a class="nav-btn" href="https://x.com/james_gaps" title="X" aria-label="X" target="_blank" rel="noopener noreferrer">
-              <span>X →</span>
-            </a>
-          </div>
+      <!-- Logo Bar -->
+      <section class="logo-bar">
+        <h3>Read by leaders at</h3>
+        <div class="logos-grid">
+          <div class="logo-item"><img src="https://i.imgur.com/XfjgxGH.png" alt="Microsoft"></div>
+          <div class="logo-item"><img src="https://i.imgur.com/SGFRKRM.png" alt="Google"></div>
+          <div class="logo-item"><img src="https://i.imgur.com/rmQWASy.png" alt="McKinsey"></div>
+          <div class="logo-item"><img src="https://i.imgur.com/fde7Oxn.png" alt="Amazon"></div>
+          <div class="logo-item"><img src="https://i.imgur.com/RgLxwXt.png" alt="Deloitte"></div>
+          <div class="logo-item"><img src="https://i.imgur.com/EnimNpr.png" alt="IBM"></div>
+          <div class="logo-item"><img src="https://i.imgur.com/8GtVY5U.png" alt="Santander"></div>
+          <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/BlackRock_wordmark.svg/320px-BlackRock_wordmark.svg.png" alt="BlackRock"></div>
+          <div class="logo-item"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/JPMorgan_Chase_Bank_logo.svg/320px-JPMorgan_Chase_Bank_logo.svg.png" alt="JPMorgan"></div>
         </div>
-        <div class="host-card">
-          <img src="https://i.imgur.com/3Fn0ZCz.png" alt="David Walsh, Enterprise Lead">
-          <h3>David Walsh</h3>
-          <h4>Head of Enterprise @ Ethereum Foundation</h4>
-          <p>David leads Enterprise/Institutional relations at the EF & has spent the past 5+ years building staking products.</p>
-          <div class="social-links">
-            <a class="nav-btn" href="https://www.linkedin.com/in/davwals/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <span>LinkedIn →</span>
-            </a>
-            <a class="nav-btn" href="https://x.com/davwals" title="X" aria-label="X" target="_blank" rel="noopener noreferrer">
-              <span>X →</span>
-            </a>
+      </section>
+
+      <!-- Value Props Section -->
+      <section class="value-props">
+        <h2>What You'll Learn</h2>
+        <div class="props-grid">
+          <div class="prop-card">
+            <div class="prop-icon">🏢</div>
+            <h3>Institutional Crypto Adoption</h3>
+            <p>Track how Fortune 500 companies and global institutions are deploying blockchain technology and digital assets in production.</p>
+          </div>
+          <div class="prop-card">
+            <div class="prop-icon">📊</div>
+            <h3>Enterprise Case Studies</h3>
+            <p>Deep dives into real-world implementations from Microsoft, JPMorgan, BlackRock, and other market leaders.</p>
+          </div>
+          <div class="prop-card">
+            <div class="prop-icon">💡</div>
+            <h3>Weekly Strategic Analysis</h3>
+            <p>Expert commentary on regulatory developments, partnership announcements, and market shifts affecting enterprise blockchain.</p>
           </div>
         </div>
       </section>
-      
-      <section class="subscribe">
-        <h2>Reach Out ↓</h2>
-                <div class="center-btn">
-        <p>If you want to contact us, please reach out below.</p>
-        <a href="https://airtable.com/appybu2Y6KiUzuHjJ/pagpMMoJaAwEa2StD/form" class="nav-btn" target="_blank" rel="noopener noreferrer">Get in Touch →</a>
-                </div>
+
+      <!-- Content Preview -->
+      <section class="content-preview">
+        <h2>Recent Coverage</h2>
+        <div class="content-grid">
+          <div class="content-card">
+            <span class="content-tag">Newsletter</span>
+            <h3>BlackRock's Tokenized Fund Crosses $1B</h3>
+            <p>How BlackRock's BUIDL fund became the largest tokenized treasury product and what it means for institutional DeFi adoption.</p>
+            <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">Read more →</a>
+          </div>
+          <div class="content-card">
+            <span class="content-tag">Podcast</span>
+            <h3>Inside JPMorgan's Onyx Platform</h3>
+            <p>An exclusive look at how one of the world's largest banks is processing billions in blockchain-based transactions.</p>
+            <a href="https://open.spotify.com/show/6piY0ttC8ZSgYQX1YRuP36" target="_blank" rel="noopener noreferrer">Listen now →</a>
+          </div>
+          <div class="content-card">
+            <span class="content-tag">Analysis</span>
+            <h3>Microsoft's Web3 Infrastructure Play</h3>
+            <p>Breaking down Azure's blockchain services and Microsoft's positioning in enterprise crypto infrastructure.</p>
+            <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">Read more →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Secondary CTA -->
+      <section class="cta-section">
+        <h2>Join 9,000+ Enterprise Leaders</h2>
+        <p>Don't miss the next institutional crypto move. Subscribe now.</p>
+        <div class="email-signup">
+          <iframe src="https://enterpriseonchain.substack.com/embed" width="100%" height="150" style="border:0px solid #000; background:transparent; border-radius:8px;" frameborder="0" scrolling="no"></iframe>
+        </div>
       </section>
     </main>
 
-    <section>
-<h2>Listen on Spotify ↓ </h2>
-  <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/0uqSKCJKVArgCfX0hDQflF?utm_source=generator&theme=0" width="100%" height="180" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-<div class="center-btn">
-
-  <a href="https://open.spotify.com/show/6piY0ttC8ZSgYQX1YRuP36?_reload_cause=banner-auto-reload" class="nav-btn" target="_blank" rel="noopener noreferrer">Follow on Spotify →</a>
-</div>
-</section>
-
-
-<section class="youtube-section">
-<h2>Watch on YouTube ↓ </h2>
-<div class="center-btn">
-<a href="https://www.youtube.com/@enterpriseonchain" class="nav-btn" target="_blank" rel="noopener noreferrer">Subscribe on YouTube →</a>
-</div>
-</section>
-
-    <section class="bottom-links">
-              <div class="center-btn">
-        <a class="nav-btn" href="http://x.com/enteronchain" title="X" aria-label="X" target="_blank" rel="noopener noreferrer">
-        <img class="icon" src="https://i.imgur.com/5NNR3Cf.png" alt="X">
-        <span>X</span>
-      </a>
-      <a class="nav-btn" href="https://www.linkedin.com/company/enterpriseonchain/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-        <img class="icon" src="https://i.imgur.com/2SffyGW.png" alt="LinkedIn">
-        <span>LinkedIn</span>
-      </a>
-      <a class="nav-btn" href="https://enterpriseonchain.substack.com/" title="Newsletter" aria-label="Newsletter" target="_blank" rel="noopener noreferrer">
-        <img class="icon" src="https://i.imgur.com/U9DcDsn.png" alt="Newsletter icon">
-        <span>Newsletter</span>
-      </a>
-      <a class="nav-btn" href="https://www.youtube.com/@enterpriseonchain" title="YouTube" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-        <img class="icon" src="https://i.imgur.com/XJtJCM5.png" alt="YouTube">
-        <span>YouTube</span>
-      </a>
-                </div>
-    </section>
-
-    <footer>© 2025 Enterprise Onchain. All rights reserved.</footer>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-social">
+        <a class="social-btn" href="http://x.com/enteronchain" target="_blank" rel="noopener noreferrer">
+          <img src="https://i.imgur.com/5NNR3Cf.png" alt="">
+          <span>X</span>
+        </a>
+        <a class="social-btn" href="https://www.linkedin.com/company/enterpriseonchain/" target="_blank" rel="noopener noreferrer">
+          <img src="https://i.imgur.com/2SffyGW.png" alt="">
+          <span>LinkedIn</span>
+        </a>
+        <a class="social-btn" href="https://www.youtube.com/@enterpriseonchain" target="_blank" rel="noopener noreferrer">
+          <img src="https://i.imgur.com/XJtJCM5.png" alt="">
+          <span>YouTube</span>
+        </a>
+        <a class="social-btn" href="https://open.spotify.com/show/6piY0ttC8ZSgYQX1YRuP36" target="_blank" rel="noopener noreferrer">
+          <span>Podcast</span>
+        </a>
+        <a class="social-btn" href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener noreferrer">
+          <img src="https://i.imgur.com/U9DcDsn.png" alt="">
+          <span>Newsletter</span>
+        </a>
+      </div>
+      <p class="footer-text">© 2025 Enterprise Onchain. All rights reserved.</p>
+    </footer>
   </div>
 
- <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-  menuBtn?.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('show');
-    menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
+    menuBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
 
-  // optional: close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-      mobileMenu.classList.remove('show');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    }
-  });
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('show');
+      }
+    });
 
-  // optional: close menu on Esc key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      mobileMenu.classList.remove('show');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    }
-  });
-</script>
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        mobileMenu.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>
