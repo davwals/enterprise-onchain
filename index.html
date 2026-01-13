@@ -163,8 +163,9 @@
 
     .hero h1{
       font-size:3.5rem;
-      margin-bottom:24px;
+      margin-bottom:32px;
       line-height:1.1;
+      animation:fadeInUp 0.8s ease-out;
     }
 
     .hero h1 .enterprise {
@@ -175,14 +176,29 @@
       color:var(--accent);
     }
 
-    .hero-stat{
-      font-size:1.3rem;
-      color:#aaa;
-      margin-bottom:16px;
-      font-weight:500;
+    /* Subscriber Badge */
+    .subscriber-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--panel-dark);
+      border:1px solid #222;
+      border-radius:50px;
+      padding:12px 24px;
+      margin-bottom:20px;
+      animation:fadeInUp 0.8s ease-out 0.2s both;
     }
 
-    .hero-stat strong{
+    .badge-indicator{
+      width:8px;
+      height:8px;
+      background:var(--accent);
+      border-radius:50%;
+      animation:pulse 2s ease-in-out infinite;
+      box-shadow:0 0 8px rgba(209,255,76,0.6);
+    }
+
+    .subscriber-badge strong{
       color:var(--accent);
       font-weight:700;
     }
@@ -192,6 +208,30 @@
       color:#bbb;
       margin-bottom:40px;
       line-height:1.5;
+      animation:fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes pulse{
+      0%, 100%{
+        opacity:1;
+        transform:scale(1);
+      }
+      50%{
+        opacity:0.6;
+        transform:scale(1.2);
+      }
     }
 
     /* Email Signup Form */
@@ -202,6 +242,14 @@
       padding:32px;
       max-width:500px;
       margin:0 auto;
+      animation:fadeInUp 0.8s ease-out 0.6s both;
+      box-shadow:0 4px 20px rgba(0,0,0,0.3);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .email-signup:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 25px rgba(209,255,76,0.1);
     }
 
     .email-signup h3{
@@ -286,13 +334,24 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      opacity:0.6;
+      opacity:0;
+      animation:fadeIn 0.6s ease-out forwards;
       transition:opacity .3s ease, transform .3s ease;
     }
 
+    .logo-item:nth-child(1){animation-delay:0.1s;}
+    .logo-item:nth-child(2){animation-delay:0.2s;}
+    .logo-item:nth-child(3){animation-delay:0.3s;}
+    .logo-item:nth-child(4){animation-delay:0.4s;}
+    .logo-item:nth-child(5){animation-delay:0.5s;}
+    .logo-item:nth-child(6){animation-delay:0.6s;}
+    .logo-item:nth-child(7){animation-delay:0.7s;}
+    .logo-item:nth-child(8){animation-delay:0.8s;}
+    .logo-item:nth-child(9){animation-delay:0.9s;}
+
     .logo-item:hover{
-      opacity:1;
-      transform:scale(1.05);
+      opacity:1 !important;
+      transform:scale(1.1);
     }
 
     .logo-item img{
@@ -300,6 +359,17 @@
       max-width:100%;
       object-fit:contain;
       filter:grayscale(100%) brightness(2);
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:0.6;
+        transform:translateY(0);
+      }
     }
 
     /* Value Props Section */
@@ -324,11 +394,27 @@
     .prop-card{
       text-align:center;
       padding:32px 24px;
+      border-radius:var(--radius);
+      background:var(--panel-dark);
+      border:1px solid transparent;
+      transition:border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .prop-card:hover{
+      border-color:#333;
+      transform:translateY(-4px);
+      box-shadow:0 8px 30px rgba(209,255,76,0.08);
     }
 
     .prop-icon{
       font-size:2.5rem;
       margin-bottom:20px;
+      display:inline-block;
+      transition:transform 0.3s ease;
+    }
+
+    .prop-card:hover .prop-icon{
+      transform:scale(1.15);
     }
 
     .prop-card h3{
@@ -364,12 +450,14 @@
       border:1px solid #222;
       border-radius:var(--radius);
       padding:32px;
-      transition:border-color .3s ease, transform .3s ease;
+      transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+      box-shadow:0 2px 10px rgba(0,0,0,0.2);
     }
 
     .content-card:hover{
-      border-color:#333;
-      transform:translateY(-4px);
+      border-color:#444;
+      transform:translateY(-6px);
+      box-shadow:0 12px 40px rgba(209,255,76,0.12);
     }
 
     .content-tag{
@@ -411,14 +499,30 @@
     .cta-section{
       padding:80px 0;
       text-align:center;
+      background:linear-gradient(135deg, rgba(209,255,76,0.08) 0%, rgba(209,255,76,0.03) 100%);
+      border-radius:var(--radius);
+      margin:0 24px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cta-section::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--accent), transparent);
     }
 
     .cta-section h2{
       margin-bottom:16px;
+      font-size:2.2rem;
     }
 
     .cta-section p{
-      color:#aaa;
+      color:#bbb;
       font-size:1.1rem;
       margin-bottom:40px;
     }
@@ -475,8 +579,9 @@
         font-size:2.5rem;
       }
 
-      .hero-stat{
-        font-size:1.1rem;
+      .subscriber-badge{
+        font-size:0.9rem;
+        padding:10px 20px;
       }
 
       .hero-tagline{
@@ -501,6 +606,15 @@
         grid-template-columns:1fr;
       }
 
+      .cta-section{
+        margin:0 12px;
+        padding:60px 20px;
+      }
+
+      .cta-section h2{
+        font-size:1.8rem;
+      }
+
       .footer-social{
         flex-wrap:wrap;
         gap:12px;
@@ -510,6 +624,11 @@
     @media (max-width:600px){
       .hero h1{
         font-size:2rem;
+      }
+
+      .subscriber-badge{
+        font-size:0.85rem;
+        padding:8px 16px;
       }
 
       h2{
@@ -522,6 +641,14 @@
 
       .logos-grid{
         grid-template-columns:repeat(2, 1fr);
+      }
+
+      .cta-section{
+        padding:50px 20px;
+      }
+
+      .cta-section h2{
+        font-size:1.5rem;
       }
     }
   </style>
@@ -558,7 +685,10 @@
           <span class="enterprise">The World's Largest Enterprises Are Deploying </span>
           <span class="onchain">Onchain</span>
         </h1>
-        <p class="hero-stat">Join <strong>9,000+ business leaders</strong> staying ahead of institutional crypto adoption</p>
+        <div class="subscriber-badge">
+          <span class="badge-indicator"></span>
+          <span><strong>9,000+ business leaders</strong> reading</span>
+        </div>
         <p class="hero-tagline">Get weekly insights on enterprise blockchain case studies, institutional moves, and onchain deployment strategies.</p>
 
         <!-- Primary Email Signup -->
