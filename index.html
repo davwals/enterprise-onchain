@@ -59,17 +59,17 @@
                 </div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-manrope font-bold text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight">Track Institutional Crypto Adoption</h1>
                 <p class="text-lg text-zinc-500 dark:text-zinc-400 max-w-md mb-8 leading-relaxed">Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.</p>
-                <div class="max-w-sm mb-4">
-                    <iframe src="https://enterpriseonchain.substack.com/embed" width="100%" height="80" style="border:none; background:transparent;" frameborder="0" scrolling="no"></iframe>
-                </div>
+                <form action="https://enterpriseonchain.substack.com/api/v1/free?nojs=true" method="post" target="hidden_iframe" onsubmit="showThankYou(this)" class="flex gap-2 max-w-sm mb-4">
+                    <input type="email" name="email" placeholder="name@organization.com" required class="flex-1 h-10 px-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700 placeholder:text-zinc-400 transition-all shadow-sm">
+                    <button type="submit" class="h-10 px-4 rounded-md bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors whitespace-nowrap">Join Free</button>
+                </form>
+                <iframe name="hidden_iframe" style="display:none;"></iframe>
                 <div class="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
                     <div class="flex -space-x-2">
                         <div class="w-6 h-6 rounded-full bg-zinc-300 dark:bg-zinc-700 border-2 border-white dark:border-zinc-950"></div>
                         <div class="w-6 h-6 rounded-full bg-zinc-400 dark:bg-zinc-600 border-2 border-white dark:border-zinc-950"></div>
                         <div class="w-6 h-6 rounded-full bg-zinc-500 dark:bg-zinc-500 border-2 border-white dark:border-zinc-950"></div>
                     </div>
-                    <span>Join <strong class="text-zinc-900 dark:text-white">9,000+</strong> subscribers</span>
-                </div>
             </div>
             <div class="relative h-64 lg:h-96 w-full bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden flex items-end justify-center animate-on-scroll">
                 <svg viewBox="0 0 400 200" class="w-full h-full p-6" preserveAspectRatio="xMidYMid meet">
