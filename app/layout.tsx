@@ -61,7 +61,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans">
+      <body className="font-manrope">
         <Providers>{children}</Providers>
       </body>
     </html>

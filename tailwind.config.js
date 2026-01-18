@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
+        manrope: ['Manrope', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
