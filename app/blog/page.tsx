@@ -16,11 +16,12 @@ const categories = [
 ]
 
 interface BlogPageProps {
-  searchParams: { category?: string }
+  searchParams: Promise<{ category?: string }>
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
-  const selectedCategory = searchParams.category || 'all'
+  const params = await searchParams
+  const selectedCategory = params.category || 'all'
 
   // Fetch articles from database
   const articles = await prisma.article.findMany({

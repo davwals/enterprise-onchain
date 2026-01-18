@@ -9,12 +9,13 @@ import { Clock, Calendar, ArrowLeft, Share2 } from 'lucide-react'
 export const dynamic = 'force-dynamic'
 
 interface ArticlePageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: ArticlePageProps) {
+  const { slug } = await params
   const article = await prisma.article.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   })
 
   if (!article) {
@@ -41,8 +42,9 @@ export async function generateMetadata({ params }: ArticlePageProps) {
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { slug } = await params
   const article = await prisma.article.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     include: {
       author: {
         select: {
