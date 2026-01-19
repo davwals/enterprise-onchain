@@ -45,7 +45,6 @@
                     <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
                     <svg id="moonIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
-                <a href="terminal" class="hidden sm:inline-flex h-8 items-center justify-center rounded-md border border-zinc-200 dark:border-zinc-700 px-4 text-xs font-medium text-zinc-600 dark:text-zinc-300 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800">Login</a>
                 <a href="#" id="navJoinBtn" class="hidden sm:inline-flex h-8 items-center justify-center rounded-md bg-zinc-900 dark:bg-white px-4 text-xs font-medium text-white dark:text-zinc-900 shadow transition-all hover:bg-zinc-700 dark:hover:bg-zinc-200">Join Community</a>
             </div>
         </div>
@@ -58,11 +57,13 @@
                     <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span></span>
                     <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Live Now</span>
                 </div>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-manrope font-bold text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight">Track Institutional Crypto Adoption</h1>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-manrope font-bold text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight">Track Institutional Crypto Adoption</h1>
                 <p class="text-lg text-zinc-500 dark:text-zinc-400 max-w-md mb-8 leading-relaxed">Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.</p>
-                <div class="max-w-sm mb-4">
-                    <iframe src="https://enterpriseonchain.substack.com/embed" width="100%" height="80" style="border:none; background:transparent;" frameborder="0" scrolling="no"></iframe>
-                </div>
+                <form action="https://enterpriseonchain.substack.com/api/v1/free?nojs=true" method="post" target="hidden_iframe" onsubmit="showThankYou(this)" class="flex gap-2 max-w-sm mb-4">
+                    <input type="email" name="email" placeholder="name@organization.com" required class="flex-1 h-10 px-3 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700 placeholder:text-zinc-400 transition-all shadow-sm">
+                    <button type="submit" class="h-10 px-4 rounded-md bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors whitespace-nowrap">Join Free</button>
+                </form>
+                <iframe name="hidden_iframe" style="display:none;"></iframe>
                 <div class="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
                     <div class="flex -space-x-2">
                         <div class="w-6 h-6 rounded-full bg-zinc-300 dark:bg-zinc-700 border-2 border-white dark:border-zinc-950"></div>
@@ -243,9 +244,11 @@
         <div class="max-w-2xl mx-auto px-6 text-center">
             <h2 class="text-3xl font-manrope text-zinc-900 dark:text-white mb-4 tracking-tight">Don't Miss the Institutional Crypto Revolution</h2>
             <p class="text-zinc-500 mb-8">Stay ahead with the latest news, insights, and analysis on institutional adoption.</p>
-            <div class="max-w-sm mx-auto mb-6">
-                <iframe src="https://enterpriseonchain.substack.com/embed" width="100%" height="80" style="border:none; background:transparent;" frameborder="0" scrolling="no"></iframe>
-            </div>
+            <form action="https://enterpriseonchain.substack.com/api/v1/free?nojs=true" method="post" target="hidden_iframe2" onsubmit="showThankYou(this)" class="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto mb-6">
+                <input type="email" name="email" placeholder="name@organization.com" required class="flex-1 h-11 px-4 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-600 transition-all">
+                <button type="submit" class="h-11 px-6 rounded-md bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors whitespace-nowrap">Join Free</button>
+            </form>
+            <iframe name="hidden_iframe2" style="display:none;"></iframe>
             <p class="text-sm text-zinc-500 mb-16"><strong class="text-zinc-700 dark:text-zinc-300">9,000+</strong> executives already subscribed</p>
             <div class="flex flex-col md:flex-row justify-between items-center text-xs text-zinc-400 pt-8 border-t border-zinc-200 dark:border-zinc-800">
                 <div class="mb-4 md:mb-0">© 2025 Enterprise Onchain. All rights reserved.</div>
@@ -270,12 +273,25 @@
                 <div class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-emerald-600 dark:text-emerald-400"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></div>
                 <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-2">Don't miss out!</h3>
                 <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Join 9,000+ executives staying ahead of institutional crypto adoption.</p>
-                <div class="w-full"><iframe src="https://enterpriseonchain.substack.com/embed" width="100%" height="80" style="border:none; background:transparent;" frameborder="0" scrolling="no"></iframe></div>
+                <form action="https://enterpriseonchain.substack.com/api/v1/free?nojs=true" method="post" target="hidden_iframe3" onsubmit="showThankYou(this)" class="flex flex-col gap-3 w-full">
+                    <input type="email" name="email" placeholder="name@organization.com" required class="h-11 px-4 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all w-full">
+                    <button type="submit" class="h-11 px-6 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium transition-colors w-full">Join Free</button>
+                </form>
+                <iframe name="hidden_iframe3" style="display:none;"></iframe>
                 <p class="text-xs text-zinc-400 mt-4">No spam. Unsubscribe anytime.</p>
             </div>
         </div>
     </div>
     <script>
+        function showThankYou(form) {
+            const button = form.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.textContent = '✓ Subscribed!';
+            button.disabled = true;
+            button.classList.add('bg-emerald-600', 'dark:bg-emerald-600', 'text-white', 'dark:text-white');
+            form.querySelector('input[type="email"]').value = '';
+            setTimeout(() => { button.textContent = originalText; button.disabled = false; button.classList.remove('bg-emerald-600', 'dark:bg-emerald-600'); }, 3000);
+        }
         const toggleBtn = document.getElementById('themeToggle');
         const html = document.documentElement;
         const sunIcon = document.getElementById('sunIcon');
