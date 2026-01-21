@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import Sidebar from '@/components/layout/Sidebar';
 
 export default function Home() {
   const [isDark, setIsDark] = useState(true);
   const [popupActive, setPopupActive] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const popupShownRef = useRef(false);
 
   // Theme toggle
@@ -193,10 +195,24 @@ export default function Home() {
         }
       `}</style>
 
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors md:hidden"
+              aria-label="Open menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
             <img src="https://i.imgur.com/LJ0gSjb.jpeg" alt="Enterprise Onchain" className="w-6 h-6 rounded-full" />
             <span className="text-sm font-semibold tracking-tight">Enterprise Onchain</span>
           </div>

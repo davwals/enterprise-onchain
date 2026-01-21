@@ -1,55 +1,23 @@
-import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
-import { getPreviewContent } from '@/lib/newsletter'
-import ContentGate from '@/components/blog/ContentGate'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import Link from 'next/link'
-import { Clock, Calendar, ArrowLeft, Share2 } from 'lucide-react'
-
-// Force dynamic rendering
-export const dynamic = 'force-dynamic'
+import { notFound } from 'next/navigation'
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>
 }
 
-export async function generateMetadata({ params }: ArticlePageProps) {
-  const { slug } = await params
-  const article = await prisma.article.findUnique({
-    where: { slug },
-  })
-
-  if (!article) {
-    return {
-      title: 'Article Not Found',
-    }
-  }
-
-  return {
-    title: `${article.title} | Enterprise Onchain`,
-    description: article.excerpt,
-    openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      images: article.coverImage ? [article.coverImage] : [],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: article.excerpt,
-      images: article.coverImage ? [article.coverImage] : [],
-    },
-  }
-}
-
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params
+  const session = await getServerSession(authOptions)
+
   const article = await prisma.article.findUnique({
     where: { slug },
     include: {
       author: {
         select: {
           name: true,
-          email: true,
         },
       },
     },
@@ -59,141 +27,97 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound()
   }
 
-  // Generate preview content (first 4 paragraphs)
-  const previewHtml = getPreviewContent(article.content, 4)
-
-  const categoryColors: Record<string, string> = {
-    news: 'bg-blue-100 text-blue-700',
-    insight: 'bg-purple-100 text-purple-700',
-    podcast: 'bg-orange-100 text-orange-700',
-    jobs: 'bg-emerald-100 text-emerald-700',
-    'deep-dive': 'bg-red-100 text-red-700',
-  }
+  const contentLength = article.content.length
+  const previewLength = Math.floor(contentLength * 0.3)
+  const previewContent = article.content.substring(0, previewLength)
+  const isAuthenticated = !!session
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <img
-                src="https://i.imgur.com/LJ0gSjb.jpeg"
-                alt="Enterprise Onchain"
-                className="h-8 w-8 rounded"
-              />
-              <span className="font-bold text-xl">ENTERPRISE ONCHAIN</span>
-            </Link>
+    <div className="min-h-screen bg-white dark:bg-zinc-950">
+      <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <img
+              src="https://i.imgur.com/LJ0gSjb.jpeg"
+              alt="Enterprise Onchain"
+              className="w-6 h-6 rounded-full"
+            />
+            <span className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-white">Enterprise Onchain</span>
+          </Link>
 
-            <nav className="hidden md:flex items-center gap-6">
-              <Link href="/" className="text-gray-700 hover:text-gray-900">
-                Home
-              </Link>
-              <Link href="/blog" className="text-gray-900 font-medium">
-                Newsletter
-              </Link>
-            </nav>
-
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
+            {!isAuthenticated && (
               <Link
                 href="/login"
-                className="text-gray-700 hover:text-gray-900 hidden sm:block"
+                className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors text-sm"
               >
                 Sign In
               </Link>
-              <Link
-                href="/subscribe"
-                className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
-              >
-                Subscribe
-              </Link>
-            </div>
+            )}
+            <Link
+              href="/subscribe"
+              className="h-8 px-4 rounded-md bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors inline-flex items-center"
+            >
+              Subscribe
+            </Link>
           </div>
         </div>
       </header>
 
-      {/* Article content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to articles
-        </Link>
-
-        {/* Category badge */}
-        <div className="mb-4">
-          <span
-            className={`px-3 py-1 rounded-full text-sm font-medium ${
-              categoryColors[article.category] || 'bg-gray-100 text-gray-700'
-            }`}
-          >
-            {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
-          </span>
-        </div>
-
-        {/* Title and meta */}
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          {article.title}
-        </h1>
-
-        {article.subtitle && (
-          <p className="text-xl text-gray-600 mb-6">{article.subtitle}</p>
-        )}
-
-        {/* Author and metadata */}
-        <div className="flex items-center gap-6 text-gray-600 mb-8 pb-8 border-b border-gray-200">
-          <span>By {article.author.name || 'Enterprise Onchain'}</span>
-          <span className="flex items-center gap-1">
-            <Calendar className="w-4 h-4" />
-            {article.publishedAt
-              ? new Date(article.publishedAt).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })
-              : 'Draft'}
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            {article.readTime} min read
-          </span>
-        </div>
-
-        {/* Cover image */}
-        {article.coverImage && (
-          <div className="mb-12 rounded-xl overflow-hidden">
-            <img
-              src={article.coverImage}
-              alt={article.title}
-              className="w-full h-auto"
-            />
+      <article className="max-w-3xl mx-auto px-6 py-16">
+        <div className="mb-8">
+          <div className="text-sm text-emerald-600 dark:text-emerald-400 font-medium mb-4 uppercase tracking-wide">
+            {article.category}
           </div>
-        )}
-
-        {/* Content with gate */}
-        <ContentGate previewHtml={previewHtml} fullHtml={article.content} />
-
-        {/* Share buttons */}
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <div className="flex items-center gap-4">
-            <span className="text-gray-600 font-medium">Share this article:</span>
-            <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-              <Share2 className="w-5 h-5 text-gray-600" />
-            </button>
+          <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-6 leading-tight">
+            {article.title}
+          </h1>
+          <div className="flex items-center gap-4 text-zinc-600 dark:text-zinc-400 text-sm">
+            <span>{article.author.name}</span>
+            <span>•</span>
+            <span>{new Date(article.publishedAt || '').toLocaleDateString()}</span>
           </div>
         </div>
-      </main>
 
-      {/* Related articles section - placeholder */}
-      <section className="border-t border-gray-200 py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Related Articles</h2>
-          <p className="text-gray-600">More articles coming soon...</p>
+        <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-zinc-900 dark:prose-headings:text-white prose-p:text-zinc-600 dark:prose-p:text-zinc-400">
+          <div dangerouslySetInnerHTML={{ __html: isAuthenticated ? article.content : previewContent }} />
         </div>
-      </section>
+
+        {!isAuthenticated && (
+          <div className="mt-8 relative">
+            <div className="absolute -top-32 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white dark:to-zinc-950 pointer-events-none" />
+
+            <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-8 text-center">
+              <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600 dark:text-emerald-400">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">
+                Continue Reading
+              </h3>
+              <p className="text-zinc-600 dark:text-zinc-400 mb-6">
+                Sign in to read the full article and access our complete archive of institutional crypto insights.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  href={`/login?callbackUrl=/blog/${article.slug}`}
+                  className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium"
+                >
+                  Sign In to Continue
+                </Link>
+                <Link
+                  href="/subscribe"
+                  className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors font-medium"
+                >
+                  Subscribe
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </article>
     </div>
   )
 }
