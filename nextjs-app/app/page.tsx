@@ -218,14 +218,24 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-center text-xs font-medium text-zinc-400 mb-6 uppercase tracking-wider">Trusted by teams at</p>
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 opacity-60 grayscale">
-            <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300" style={{ fontFamily: 'serif' }}>
-              J.P.Morgan
-            </span>
+            <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300" style={{ fontFamily: 'serif' }}>J.P.Morgan</span>
             <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Morgan Stanley</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Microsoft</span>
-            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Google</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Citi</span>
             <span className="text-lg font-semibold tracking-tighter text-zinc-800 dark:text-zinc-300">BARCLAYS</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Franklin Templeton</span>
+            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Google</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Microsoft</span>
+            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Amazon</span>
+            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">World Bank</span>
+            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Pfizer</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Mercedes-Benz</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Vodafone</span>
+            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">McKinsey</span>
+            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">Deloitte</span>
             <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">PwC</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Stanford</span>
+            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Harvard</span>
+            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">S&P Global</span>
           </div>
         </div>
       </section>
