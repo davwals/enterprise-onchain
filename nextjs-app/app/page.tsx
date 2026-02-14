@@ -5,7 +5,13 @@ import Sidebar from '@/components/layout/Sidebar'
 
 export default function HomePage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('darkMode')
+      return saved !== null ? saved === 'true' : true
+    }
+    return true
+  })
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [popupShown, setPopupShown] = useState(false)
 
@@ -65,8 +71,10 @@ export default function HomePage() {
   }, [popupShown, isDark])
 
   const toggleTheme = () => {
-    setIsDark(!isDark)
-    if (!isDark) {
+    const newValue = !isDark
+    setIsDark(newValue)
+    localStorage.setItem('darkMode', String(newValue))
+    if (newValue) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
@@ -82,7 +90,11 @@ export default function HomePage() {
     button.textContent = '✓ Subscribed!'
     button.disabled = true
     button.classList.add('!bg-emerald-600', 'dark:!bg-emerald-600', '!text-white', 'dark:!text-white')
-    input.value = ''
+
+    // Delay clearing the input so the form POST to Substack completes first
+    setTimeout(() => {
+      input.value = ''
+    }, 500)
 
     setTimeout(() => {
       button.textContent = originalText

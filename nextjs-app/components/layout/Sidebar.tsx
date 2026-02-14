@@ -65,26 +65,36 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           {/* Navigation Links */}
           <nav className="space-y-2">
             <Link
-              href="/"
+              href="/terminal"
               onClick={onClose}
               className="block px-4 py-2 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
-              Home
+              Terminal
             </Link>
+            <a
+              href="https://enterpriseonchain.substack.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+              className="block px-4 py-2 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            >
+              Newsletter ↗
+            </a>
             <Link
               href="/blog"
               onClick={onClose}
               className="block px-4 py-2 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
-              Newsletter
+              Articles
             </Link>
             <a
-              href="https://institutions.ethereum.org"
+              href="https://www.youtube.com/@enterpriseonchain"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={onClose}
               className="block px-4 py-2 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
-              Tracker ↗
+              Podcast ↗
             </a>
           </nav>
 
@@ -97,13 +107,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             >
               Sign In
             </Link>
-            <Link
-              href="/subscribe"
+            <a
+              href="https://enterpriseonchain.substack.com/subscribe"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={onClose}
               className="block w-full px-4 py-2 text-center rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors font-medium"
             >
               Subscribe
-            </Link>
+            </a>
           </div>
         </div>
       </div>

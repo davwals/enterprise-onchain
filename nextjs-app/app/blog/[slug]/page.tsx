@@ -56,12 +56,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 Sign In
               </Link>
             )}
-            <Link
-              href="/subscribe"
+            <a
+              href="https://enterpriseonchain.substack.com/subscribe"
+              target="_blank"
+              rel="noopener noreferrer"
               className="h-8 px-4 rounded-md bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors inline-flex items-center"
             >
               Subscribe
-            </Link>
+            </a>
           </div>
         </div>
       </header>
@@ -114,12 +116,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 >
                   Sign In to Continue
                 </Link>
-                <Link
-                  href="/subscribe"
+                <a
+                  href="https://enterpriseonchain.substack.com/subscribe"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-6 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors font-medium"
                 >
                   Subscribe
-                </Link>
+                </a>
               </div>
             </div>
           </div>

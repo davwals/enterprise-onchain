@@ -59,12 +59,14 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             >
               Sign In
             </Link>
-            <Link
-              href="/subscribe"
+            <a
+              href="https://enterpriseonchain.substack.com/subscribe"
+              target="_blank"
+              rel="noopener noreferrer"
               className="h-8 px-4 rounded-md bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors inline-flex items-center"
             >
               Subscribe
-            </Link>
+            </a>
           </div>
         </div>
       </header>
