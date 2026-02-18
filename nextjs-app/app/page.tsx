@@ -10,20 +10,17 @@ export default function HomePage() {
   const [popupShown, setPopupShown] = useState(false)
 
   useEffect(() => {
-    // Check if popup was already shown
     const wasShown = localStorage.getItem('exitPopupShown')
     if (wasShown) {
       setPopupShown(true)
     }
 
-    // Apply dark mode
     if (isDark) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
 
-    // Intersection Observer for scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -37,7 +34,6 @@ export default function HomePage() {
 
     document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el))
 
-    // Exit intent detection
     const handleMouseOut = (e: MouseEvent) => {
       if (!popupShown && e.clientY < 10 && e.relatedTarget === null) {
         setIsPopupOpen(true)
@@ -48,7 +44,6 @@ export default function HomePage() {
 
     document.addEventListener('mouseout', handleMouseOut)
 
-    // Escape key handler
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setIsPopupOpen(false)
@@ -81,13 +76,11 @@ export default function HomePage() {
 
     button.textContent = '✓ Subscribed!'
     button.disabled = true
-    button.classList.add('!bg-emerald-600', 'dark:!bg-emerald-600', '!text-white', 'dark:!text-white')
     input.value = ''
 
     setTimeout(() => {
       button.textContent = originalText
       button.disabled = false
-      button.classList.remove('!bg-emerald-600', 'dark:!bg-emerald-600', '!text-white', 'dark:!text-white')
     }, 3000)
   }
 
@@ -116,7 +109,7 @@ export default function HomePage() {
             </button>
             <div className="flex items-center gap-2">
               <img src="https://i.imgur.com/LJ0gSjb.jpeg" alt="Enterprise Onchain" className="w-6 h-6 rounded-full" />
-              <span className="text-sm font-semibold tracking-tight">Enterprise Onchain</span>
+              <span className="text-sm tracking-tight text-zinc-900 dark:text-white">Enterprise Onchain</span>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -139,22 +132,26 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="pt-32 pb-20 overflow-hidden relative">
-        <div className="absolute inset-0 -z-10 bg-grid-pattern" />
+      {/* Hero Section */}
+      <main className="pt-32 sm:pt-40 pb-16 sm:pb-24 overflow-hidden border-b border-zinc-100 dark:border-zinc-800 relative">
+        <div className="absolute inset-0 -z-10 bg-grid-pattern mask-fade" />
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-on-scroll">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Live Now</span>
+          {/* Left: Content */}
+          <div className="max-w-xl animate-on-scroll">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 dark:bg-zinc-500 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-500 dark:bg-zinc-400" />
+                </span>
+                <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Live Now</span>
+              </div>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-manrope font-bold text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight">
-              Track Institutional Crypto Adoption
+            <h1 className="text-4xl sm:text-5xl font-sans text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight">
+              Track Institutional Adoption of Crypto<br />
+              <span className="text-zinc-400 dark:text-zinc-500">in One Place.</span>
             </h1>
-            <p className="text-lg text-zinc-500 dark:text-zinc-400 max-w-md mb-8 leading-relaxed">
+            <p className="text-base text-zinc-500 dark:text-zinc-400 max-w-md mb-8 leading-relaxed">
               Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.
             </p>
             <form
@@ -186,29 +183,52 @@ export default function HomePage() {
                 <div className="w-6 h-6 rounded-full bg-zinc-500 dark:bg-zinc-500 border-2 border-white dark:border-zinc-950" />
               </div>
               <span>
-                Join <strong className="text-zinc-900 dark:text-white">9,000+</strong> subscribers
+                Join <span className="text-zinc-900 dark:text-white">8,000+</span> subscribers from leading institutions
               </span>
             </div>
           </div>
+
+          {/* Right: Chart Graphic with Cityscape */}
           <div className="relative h-64 lg:h-96 w-full bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden flex items-end justify-center animate-on-scroll">
-            <svg viewBox="0 0 400 200" className="w-full h-full p-6" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#10b981', stopOpacity: 0.3 }} />
-                  <stop offset="100%" style={{ stopColor: '#10b981', stopOpacity: 0 }} />
-                </linearGradient>
-              </defs>
-              <path d="M 0 150 Q 50 140 100 120 T 200 80 T 300 60 T 400 30 L 400 200 L 0 200 Z" fill="url(#chartGradient)" />
-              <path d="M 0 150 Q 50 140 100 120 T 200 80 T 300 60 T 400 30" fill="none" stroke="#10b981" strokeWidth="3" strokeLinecap="round" />
-              <circle cx="400" cy="30" r="4" fill="#10b981" />
-              <circle cx="400" cy="30" r="8" fill="#10b981" opacity="0.3">
-                <animate attributeName="r" values="8;16;8" dur="2s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-              </circle>
-              <text x="320" y="26" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="10" className="fill-zinc-900 dark:fill-white font-medium">
-                $2.4T TVL
-              </text>
-            </svg>
+            {/* Cityscape buildings */}
+            <div className="absolute inset-0 text-zinc-300 dark:text-zinc-700 pointer-events-none">
+              <div className="building" style={{ left: '1rem', width: '2rem', height: '6rem' }} />
+              <div className="building" style={{ left: '3.5rem', width: '3rem', height: '10rem' }} />
+              <div className="building" style={{ left: '7rem', width: '4rem', height: '8rem' }} />
+              <div className="building" style={{ left: '12rem', width: '2.5rem', height: '14rem' }} />
+              <div className="building" style={{ left: '16rem', width: '3.5rem', height: '7rem' }} />
+              <div className="building" style={{ left: '20rem', width: '5rem', height: '12rem' }} />
+              <div className="building" style={{ right: '2.5rem', width: '3rem', height: '9rem' }} />
+              <div className="building" style={{ right: '6rem', width: '4rem', height: '5rem' }} />
+              <div className="building" style={{ right: '11rem', width: '2rem', height: '11rem' }} />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-white dark:from-zinc-950/10 dark:to-zinc-950 opacity-50" />
+            </div>
+
+            {/* Line Chart SVG */}
+            <div className="absolute inset-0 p-8 flex items-end">
+              <svg viewBox="0 0 400 200" className="w-full h-full drop-shadow-lg">
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#71717a" stopOpacity={0.15} />
+                    <stop offset="100%" stopColor="#71717a" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                {/* Grid lines */}
+                <line x1="0" y1="150" x2="400" y2="150" stroke="currentColor" className="text-zinc-200 dark:text-zinc-800" strokeWidth="1" strokeDasharray="4" />
+                <line x1="0" y1="100" x2="400" y2="100" stroke="currentColor" className="text-zinc-200 dark:text-zinc-800" strokeWidth="1" strokeDasharray="4" />
+                <line x1="0" y1="50" x2="400" y2="50" stroke="currentColor" className="text-zinc-200 dark:text-zinc-800" strokeWidth="1" strokeDasharray="4" />
+
+                {/* Chart area fill */}
+                <path d="M0,160 Q40,150 80,110 T160,120 T240,80 T320,40 T400,20 L400,200 L0,200 Z" fill="url(#chartGradient)" />
+                {/* Chart line */}
+                <path d="M0,160 Q40,150 80,110 T160,120 T240,80 T320,40 T400,20" fill="none" stroke="#71717a" strokeWidth="2" strokeLinecap="round" className="dark:stroke-zinc-400" />
+
+                {/* Data point */}
+                <circle cx="320" cy="40" r="3" className="fill-white dark:fill-zinc-900 stroke-zinc-500 dark:stroke-zinc-400" strokeWidth="2" />
+                <rect x="280" y="10" width="80" height="24" rx="4" className="fill-white dark:fill-zinc-800 stroke-zinc-200 dark:stroke-zinc-700" strokeWidth="1" />
+                <text x="320" y="26" textAnchor="middle" fontFamily="var(--font-jetbrains-mono), JetBrains Mono, monospace" fontSize="10" className="fill-zinc-900 dark:fill-white">$2.4T TVL</text>
+              </svg>
+            </div>
           </div>
         </div>
       </main>
@@ -216,26 +236,16 @@ export default function HomePage() {
       {/* Trust Bar */}
       <section className="bg-zinc-50/50 dark:bg-zinc-900/30 border-b border-zinc-100 dark:border-zinc-800/50 py-8">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs font-medium text-zinc-400 mb-6 uppercase tracking-wider">Trusted by teams at</p>
+          <p className="text-center text-xs font-medium text-zinc-400 mb-6 uppercase tracking-wider">
+            Trusted by over 8,000 executives at top firms including
+          </p>
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 opacity-60 grayscale">
             <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300" style={{ fontFamily: 'serif' }}>J.P.Morgan</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Morgan Stanley</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Citi</span>
-            <span className="text-lg font-semibold tracking-tighter text-zinc-800 dark:text-zinc-300">BARCLAYS</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Franklin Templeton</span>
-            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Google</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Microsoft</span>
-            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Amazon</span>
-            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">World Bank</span>
-            <span className="text-lg font-medium tracking-tight text-zinc-800 dark:text-zinc-300">Pfizer</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Mercedes-Benz</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Vodafone</span>
-            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">McKinsey</span>
-            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">Deloitte</span>
-            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">PwC</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Stanford</span>
-            <span className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Harvard</span>
-            <span className="text-lg font-semibold text-zinc-800 dark:text-zinc-300">S&P Global</span>
+            <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300">Morgan Stanley</span>
+            <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300">Microsoft</span>
+            <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300">Google</span>
+            <span className="text-lg tracking-tighter text-zinc-800 dark:text-zinc-300 uppercase">Barclays</span>
+            <span className="text-lg tracking-tight text-zinc-800 dark:text-zinc-300">PwC</span>
           </div>
         </div>
       </section>
@@ -244,7 +254,7 @@ export default function HomePage() {
       <section className="bg-white dark:bg-zinc-950 py-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 animate-on-scroll">
-            <h2 className="text-2xl font-manrope mb-3 tracking-tight">Market Coverage</h2>
+            <h2 className="text-2xl font-sans mb-3 tracking-tight text-zinc-900 dark:text-white">Market Coverage</h2>
             <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xl">Covering areas such as:</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -328,12 +338,13 @@ export default function HomePage() {
               <div
                 key={idx}
                 onClick={openPopup}
-                className="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 cursor-pointer market-card"
+                className="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-300 cursor-pointer market-card animate-on-scroll"
+                style={{ transitionDelay: `${(idx % 4) * 100 + 100}ms` }}
               >
-                <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-zinc-100 dark:group-hover:bg-zinc-700 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 transition-colors">
                   {item.icon}
                 </div>
-                <h3 className="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400">
+                <h3 className="font-medium text-sm text-zinc-900 dark:text-zinc-100">
                   {item.title}
                 </h3>
               </div>
@@ -348,10 +359,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="animate-on-scroll">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm mb-8">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-semibold tracking-wide text-zinc-300 uppercase">Enterprise Onchain Podcast</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-pulse" />
+              <span className="text-xs tracking-wide text-zinc-300 uppercase">Enterprise Onchain Podcast</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-manrope mb-4 text-white">Enterprise Onchain</h2>
+            <h2 className="text-3xl md:text-4xl font-sans mb-4 text-white tracking-tight">Enterprise Onchain</h2>
             <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-8 max-w-md">
               Podcast with leaders from the space. Hear directly from executives driving institutional crypto adoption.
             </p>
@@ -360,7 +371,7 @@ export default function HomePage() {
                 href="https://www.youtube.com/@enterpriseonchain"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="h-11 inline-flex items-center justify-center px-6 rounded-lg bg-white text-zinc-950 text-sm font-semibold hover:bg-zinc-200 transition-colors"
+                className="h-11 inline-flex items-center justify-center px-6 rounded-lg bg-white text-zinc-950 text-sm font-medium hover:bg-zinc-200 transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2">
                   <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
@@ -383,29 +394,28 @@ export default function HomePage() {
             </div>
           </div>
           <div className="relative animate-on-scroll delay-200">
-            <div className="absolute -inset-4 bg-emerald-500/10 blur-3xl rounded-full" />
-            <div className="relative p-5 rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-md shadow-2xl">
+            <div className="absolute -inset-4 bg-zinc-500/5 blur-3xl rounded-full" />
+            <div className="relative p-5 rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-md shadow-2xl hover:-translate-y-1 transition-transform duration-500">
               <div className="flex items-start justify-between mb-4">
-                <div className="w-10 h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white">
+                <div className="w-10 h-10 rounded bg-zinc-800 flex items-center justify-center text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 19v3m7-12v2a7 7 0 0 1-14 0v-2" />
-                    <rect width="6" height="13" x="9" y="2" rx="3" />
+                    <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
                   </svg>
                 </div>
                 <span className="text-[10px] font-mono text-zinc-500 border border-zinc-800 px-2 py-1 rounded">EP. 07</span>
               </div>
-              <h3 className="text-sm font-medium text-white mb-1">Why Traditional Finance is Moving Onchain</h3>
+              <h3 className="text-sm text-white mb-1">Why Traditional Finance is Moving Onchain</h3>
               <p className="text-xs text-zinc-500 mb-4">Featuring Head of Digital Assets @ Large Bank</p>
               <div className="flex items-center gap-3">
-                <button className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
+                <button className="w-8 h-8 rounded-full bg-white text-zinc-950 flex items-center justify-center hover:scale-105 transition-transform">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" />
                   </svg>
                 </button>
                 <div className="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
-                  <div className="h-full w-1/3 bg-emerald-500 rounded-full" />
+                  <div className="h-full w-1/3 bg-zinc-500 rounded-full" />
                 </div>
-                <span className="text-[10px] font-mono text-zinc-500">32:14</span>
+                <span className="text-[10px] font-mono text-zinc-500">14:20</span>
               </div>
             </div>
           </div>
@@ -416,7 +426,7 @@ export default function HomePage() {
       <section className="py-24 bg-white dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-8 animate-on-scroll">
-            <h2 className="text-2xl font-manrope mb-3 tracking-tight">Live News Monitor</h2>
+            <h2 className="text-2xl font-sans mb-3 tracking-tight text-zinc-900 dark:text-white">Live News Monitor</h2>
             <p className="text-sm text-zinc-500 dark:text-zinc-400">Real-time institutional blockchain activity and announcements.</p>
           </div>
           <div className="rounded-xl border border-zinc-200 dark:border-zinc-700/50 bg-white dark:bg-zinc-950 overflow-hidden shadow-sm animate-on-scroll delay-100">
@@ -429,30 +439,30 @@ export default function HomePage() {
                   description: 'The banking giant announces its first tokenized fund product on Ethereum, targeting institutional investors.',
                   time: '2 hours ago',
                   tag: 'Tokenization',
-                  tagColor: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400',
+                  tagColor: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300',
                 },
                 {
                   logo: 'SC',
-                  logoBg: 'bg-blue-900',
+                  logoBg: 'bg-zinc-700',
                   title: 'Standard Chartered Raises ETH Price Target to $40,000',
                   description: 'Analysts cite growing institutional adoption and ETF inflows as key drivers for the bullish outlook.',
                   time: '5 hours ago',
                   tag: 'Research',
-                  tagColor: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400',
+                  tagColor: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300',
                 },
                 {
                   logo: 'MS',
-                  logoBg: 'bg-indigo-600',
+                  logoBg: 'bg-zinc-600',
                   title: 'Morgan Stanley Goes All-In on Crypto',
                   description: 'The $1.8T bank launches crypto ETFs and announces tokenization wallet.',
                   time: 'Yesterday',
                   tag: 'Adoption',
-                  tagColor: 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400',
+                  tagColor: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300',
                 },
               ].map((item, idx) => (
                 <div key={idx} onClick={openPopup} className="p-5 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors cursor-pointer news-item">
                   <div className="flex items-start gap-4">
-                    <div className={`w-10 h-10 rounded-full ${item.logoBg} text-white flex items-center justify-center text-xs font-bold shrink-0`}>
+                    <div className={`w-10 h-10 rounded-full ${item.logoBg} text-white flex items-center justify-center text-xs shrink-0`}>
                       {item.logo}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -474,8 +484,8 @@ export default function HomePage() {
       {/* Footer */}
       <footer id="waitlist" className="bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 pt-20 pb-12">
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-manrope text-zinc-900 dark:text-white mb-4 tracking-tight">
-            Don't Miss the Institutional Crypto Revolution
+          <h2 className="text-3xl font-sans text-zinc-900 dark:text-white mb-4 tracking-tight">
+            Don&apos;t Miss the Institutional Crypto Revolution
           </h2>
           <p className="text-zinc-500 mb-8">Stay ahead with the latest news, insights, and analysis on institutional adoption.</p>
           <form
@@ -501,20 +511,14 @@ export default function HomePage() {
           </form>
           <iframe name="hidden_iframe2" style={{ display: 'none' }} />
           <p className="text-sm text-zinc-500 mb-16">
-            <strong className="text-zinc-700 dark:text-zinc-300">9,000+</strong> executives already subscribed
+            <span className="text-zinc-700 dark:text-zinc-300">8,000+</span> executives already subscribed
           </p>
           <div className="flex flex-col md:flex-row justify-between items-center text-xs text-zinc-400 pt-8 border-t border-zinc-200 dark:border-zinc-800">
             <div className="mb-4 md:mb-0">© 2025 Enterprise Onchain. All rights reserved.</div>
             <div className="flex items-center gap-6">
-              <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                About
-              </a>
-              <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                Privacy
-              </a>
-              <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                Contact
-              </a>
+              <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">About</a>
+              <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Privacy</a>
+              <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
               <div className="flex items-center gap-4 ml-2">
                 <a href="https://www.youtube.com/@enterpriseonchain" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -559,14 +563,14 @@ export default function HomePage() {
               </svg>
             </button>
             <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-emerald-600 dark:text-emerald-400">
+              <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-zinc-600 dark:text-zinc-400">
                   <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
                   <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">Don't miss out!</h3>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Join 9,000+ executives staying ahead of institutional crypto adoption.</p>
+              <h3 className="text-xl text-zinc-900 dark:text-white mb-2">Don&apos;t miss out!</h3>
+              <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Join 8,000+ executives staying ahead of institutional crypto adoption.</p>
               <form
                 action="https://enterpriseonchain.substack.com/api/v1/free?nojs=true"
                 method="post"
@@ -579,9 +583,9 @@ export default function HomePage() {
                   name="email"
                   placeholder="name@organization.com"
                   required
-                  className="h-11 px-4 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all w-full"
+                  className="h-11 px-4 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-600 transition-all w-full"
                 />
-                <button type="submit" className="h-11 px-6 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium transition-colors w-full">
+                <button type="submit" className="h-11 px-6 rounded-md bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors w-full">
                   Join Free
                 </button>
               </form>
@@ -595,8 +599,25 @@ export default function HomePage() {
       <style jsx>{`
         .bg-grid-pattern {
           background-size: 40px 40px;
-          background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+          background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+        }
+        :global(.dark) .bg-grid-pattern {
+          background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+        }
+        .mask-fade {
+          -webkit-mask-image: linear-gradient(to bottom, white, transparent);
+          mask-image: linear-gradient(to bottom, white, transparent);
+        }
+        .building {
+          position: absolute;
+          bottom: 0;
+          background-color: currentColor;
+          opacity: 0.1;
+        }
+        :global(.dark) .building {
+          opacity: 0.2;
         }
         .animate-on-scroll {
           opacity: 0;
@@ -607,18 +628,10 @@ export default function HomePage() {
           opacity: 1;
           transform: translateY(0);
         }
-        .delay-100 {
-          transition-delay: 100ms;
-        }
-        .delay-200 {
-          transition-delay: 200ms;
-        }
-        .delay-300 {
-          transition-delay: 300ms;
-        }
-        .delay-400 {
-          transition-delay: 400ms;
-        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
         .popup-overlay {
           opacity: 0;
           visibility: hidden;

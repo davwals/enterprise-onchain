@@ -35,7 +35,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         />
       )}
 
-      {/* Sidebar - matches homepage design */}
+      {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
@@ -59,7 +59,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               alt="Enterprise Onchain"
               className="w-8 h-8 rounded-full"
             />
-            <span className="font-semibold text-lg text-zinc-900 dark:text-white">Enterprise Onchain</span>
+            <span className="text-lg text-zinc-900 dark:text-white">Enterprise Onchain</span>
           </div>
 
           {/* Navigation Links */}
@@ -84,7 +84,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               rel="noopener noreferrer"
               className="block px-4 py-2 rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
-              Tracker ↗
+              Tracker
             </a>
           </nav>
 
@@ -98,9 +98,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               Sign In
             </Link>
             <Link
-              href="/subscribe"
+              href="/blog"
               onClick={onClose}
-              className="block w-full px-4 py-2 text-center rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors font-medium"
+              className="block w-full px-4 py-2 text-center rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-medium"
             >
               Subscribe
             </Link>

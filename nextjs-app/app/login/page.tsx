@@ -1,11 +1,11 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
@@ -34,19 +34,19 @@ export default function LoginPage() {
     return (
       <div className="min-h-screen bg-white dark:bg-zinc-950 flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600 dark:text-emerald-400">
+          <div className="w-16 h-16 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center mx-auto mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-zinc-600 dark:text-zinc-400">
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
               <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
           </div>
-          <h1 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white">Check your email</h1>
+          <h1 className="text-3xl mb-4 text-zinc-900 dark:text-white tracking-tight">Check your email</h1>
           <p className="text-zinc-600 dark:text-zinc-400 mb-8">
-            We sent a magic link to <strong className="text-zinc-900 dark:text-white">{email}</strong>. Click the link in your email to sign in.
+            We sent a magic link to <span className="text-zinc-900 dark:text-white">{email}</span>. Click the link in your email to sign in.
           </p>
           <Link
             href="/"
-            className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
+            className="text-zinc-700 dark:text-zinc-300 hover:underline font-medium"
           >
             Return to home
           </Link>
@@ -66,7 +66,7 @@ export default function LoginPage() {
               className="w-16 h-16 rounded-full mx-auto mb-4"
             />
           </Link>
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">Welcome back</h1>
+          <h1 className="text-3xl text-zinc-900 dark:text-white mb-2 tracking-tight">Welcome back</h1>
           <p className="text-zinc-600 dark:text-zinc-400">Sign in to access premium content</p>
         </div>
 
@@ -82,14 +82,14 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-600 focus:border-transparent transition-all"
                 placeholder="name@organization.com"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Sending...' : 'Send magic link'}
             </button>
@@ -119,5 +119,17 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white dark:bg-zinc-950 flex items-center justify-center">
+        <div className="text-zinc-500">Loading...</div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }

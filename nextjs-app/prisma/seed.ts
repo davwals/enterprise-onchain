@@ -1,6 +1,10 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../app/generated/prisma'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { Pool } from 'pg'
 
-const prisma = new PrismaClient()
+const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+const adapter = new PrismaPg(pool)
+const prisma = new PrismaClient({ adapter })
 
 async function main() {
   // Create a sample user
@@ -33,7 +37,7 @@ async function main() {
         content: '<p>2024 has been a breakthrough year for institutional Ethereum adoption, with major financial institutions launching blockchain initiatives.</p><p>Morgan Stanley, BlackRock, and Citigroup have all announced significant Ethereum-based projects this quarter.</p><p>The trend toward tokenization of real-world assets (RWAs) continues to accelerate, with over $2 billion in assets now tokenized on Ethereum.</p><p>Key drivers include regulatory clarity, improved infrastructure, and growing demand for 24/7 settlement capabilities.</p><p>Industry analysts predict this trend will continue, with institutional adoption expected to triple by 2025.</p>',
         category: 'insight',
         isPublished: true,
-        publishedAt: new Date(Date.now() - 86400000), // 1 day ago
+        publishedAt: new Date(Date.now() - 86400000),
         authorId: user.id,
       },
       {
@@ -43,7 +47,7 @@ async function main() {
         content: '<p>BlackRock\'s USD Institutional Digital Liquidity Fund (BUIDL) has crossed the $500 million mark in assets under management.</p><p>Launched earlier this year, BUIDL provides qualified investors with access to tokenized U.S. Treasury securities on the Ethereum blockchain.</p><p>The fund offers instant settlement and 24/7 trading, making it attractive to institutional investors seeking efficient treasury management.</p><p>This milestone demonstrates growing institutional confidence in blockchain technology for traditional asset management.</p><p>BlackRock CEO Larry Fink has called tokenization "the next generation for markets" and a multi-trillion dollar opportunity.</p>',
         category: 'news',
         isPublished: true,
-        publishedAt: new Date(Date.now() - 172800000), // 2 days ago
+        publishedAt: new Date(Date.now() - 172800000),
         authorId: user.id,
       },
     ],
