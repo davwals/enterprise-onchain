@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stablecoin Intelligence | Enterprise Onchain</title>
+    
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Manrope', sans-serif; }
+        .gradient-border {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            padding: 1px;
+            border-radius: 12px;
+        }
+        .gradient-border-inner {
+            background: #0f172a;
+            border-radius: 11px;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen">
+    
+    <!-- Header -->
+    <header class="border-b border-slate-800 sticky top-0 bg-slate-950/90 backdrop-blur-md z-50">
+        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://i.imgur.com/LJ0gSjb.jpeg" alt="Logo" class="w-6 h-6 rounded-full">
+                <span class="font-semibold">Enterprise Onchain</span>
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">Showcase</span>
+            </div>
+            <a href="/" class="text-sm text-slate-400 hover:text-white transition-colors">← Back to Home</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Page Title -->
+        <div class="mb-12">
+            <h1 class="text-3xl font-bold mb-3">Stablecoin Market Intelligence</h1>
+            <p class="text-slate-400 max-w-2xl">Real-time insights into the $304B stablecoin market. Understand trends, identify opportunities, and track institutional adoption.</p>
+        </div>
+
+        <!-- Key Metrics Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <p class="text-sm text-slate-400 mb-1">Total Stablecoin Market</p>
+                <p class="text-2xl font-bold">$304.3B</p>
+                <p class="text-sm text-emerald-400">↑ 607% since 2022</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <p class="text-sm text-slate-400 mb-1">USDT Dominance</p>
+                <p class="text-2xl font-bold">60.3%</p>
+                <p class="text-sm text-slate-400">$183.4B market cap</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <p class="text-sm text-slate-400 mb-1">Fastest Growing (6M)</p>
+                <p class="text-2xl font-bold text-emerald-400">USDe</p>
+                <p class="text-sm text-emerald-400">↑ 412% to $6.2B</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <p class="text-sm text-slate-400 mb-1">Non-USD Stablecoins</p>
+                <p class="text-2xl font-bold">$2.1B</p>
+                <p class="text-sm text-emerald-400">↑ 89% YoY</p>
+            </div>
+        </div>
+
+        <!-- Main Chart Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Chart -->
+            <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-lg font-semibold">Stablecoin Market Cap</h2>
+                        <p class="text-sm text-slate-400">Historical growth by asset</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-3 py-1 text-xs bg-slate-800 rounded-md hover:bg-slate-700 transition-colors">1Y</button>
+                        <button class="px-3 py-1 text-xs bg-emerald-500/20 text-emerald-400 rounded-md">5Y</button>
+                        <button class="px-3 py-1 text-xs bg-slate-800 rounded-md hover:bg-slate-700 transition-colors">All</button>
+                    </div>
+                </div>
+                <div class="h-72">
+                    <canvas id="stablecoinChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Insight Panel -->
+            <div class="gradient-border">
+                <div class="gradient-border-inner p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold">Key Insight</h3>
+                    </div>
+                    
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        <strong class="text-white">USDT maintains dominance</strong> but market share is gradually shifting. USDC has stabilized at ~24% after recovering from the 2023 SVB crisis. 
+                    </p>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        <strong class="text-white">Ethena's USDe</strong> is the breakout performer, growing 412% in 6 months through its novel yield-bearing mechanism.
+                    </p>
+                    <p class="text-slate-400 text-xs">
+                        💡 For treasury teams: Diversification across stablecoins reduces single-issuer risk.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions Panel -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 mb-8">
+            <h3 class="font-semibold mb-4 flex items-center gap-2">
+                <span class="text-xl">🔍</span> Questions This Dashboard Answers
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <button class="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg text-sm transition-colors">
+                    Which stablecoin has grown the most in the last 6 months?
+                </button>
+                <button class="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg text-sm transition-colors">
+                    How are non-USD stablecoins performing?
+                </button>
+                <button class="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg text-sm transition-colors">
+                    What's driving Tether's market dominance?
+                </button>
+                <button class="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg text-sm transition-colors">
+                    Which yield-bearing stablecoins are gaining traction?
+                </button>
+                <button class="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg text-sm transition-colors">
+                    How has USDC recovered since the SVB crisis?
+                </button>
+                <button class="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg text-sm transition-colors">
+                    What percentage of stablecoins are fully backed?
+                </button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            
+            <!-- Top Stablecoins -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                <h3 class="font-semibold mb-4">Top Stablecoins by Market Cap</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <span class="text-slate-500 w-4">1</span>
+                            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-xs font-bold">₮</div>
+                            <div>
+                                <p class="font-medium">USDT</p>
+                                <p class="text-xs text-slate-400">Tether</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$183.4B</p>
+                            <p class="text-xs text-emerald-400">+2.1%</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <span class="text-slate-500 w-4">2</span>
+                            <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-xs font-bold text-blue-400">$</div>
+                            <div>
+                                <p class="font-medium">USDC</p>
+                                <p class="text-xs text-slate-400">Circle</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$72.8B</p>
+                            <p class="text-xs text-emerald-400">+5.3%</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <span class="text-slate-500 w-4">3</span>
+                            <div class="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center text-xs font-bold text-yellow-400">◈</div>
+                            <div>
+                                <p class="font-medium">USDe</p>
+                                <p class="text-xs text-slate-400">Ethena</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$6.2B</p>
+                            <p class="text-xs text-emerald-400">+412%</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <span class="text-slate-500 w-4">4</span>
+                            <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-xs font-bold text-purple-400">◆</div>
+                            <div>
+                                <p class="font-medium">DAI</p>
+                                <p class="text-xs text-slate-400">MakerDAO</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$5.1B</p>
+                            <p class="text-xs text-red-400">-8.2%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-USD Stablecoins -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                <h3 class="font-semibold mb-4">Non-USD Stablecoins Growth</h3>
+                <p class="text-sm text-slate-400 mb-4">Emerging alternatives to dollar-denominated stablecoins</p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>EURT (Euro)</span>
+                            <span class="text-emerald-400">$412M (+67%)</span>
+                        </div>
+                        <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>XSGD (Singapore Dollar)</span>
+                            <span class="text-emerald-400">$189M (+124%)</span>
+                        </div>
+                        <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-500 rounded-full" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>GYEN (Japanese Yen)</span>
+                            <span class="text-emerald-400">$98M (+89%)</span>
+                        </div>
+                        <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>BRZ (Brazilian Real)</span>
+                            <span class="text-emerald-400">$67M (+156%)</span>
+                        </div>
+                        <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-yellow-500 rounded-full" style="width: 25%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-slate-800/50 rounded-lg border border-slate-700">
+                    <p class="text-sm text-slate-300">
+                        <strong class="text-white">Why it matters:</strong> Non-USD stablecoins enable local currency settlement without forex conversion, reducing costs for cross-border payments in emerging markets.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 rounded-xl p-8 text-center">
+            <h3 class="text-xl font-semibold mb-2">Want deeper analysis?</h3>
+            <p class="text-slate-400 mb-6">Get weekly intelligence reports delivered to your inbox.</p>
+            <a href="/" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors">
+                Subscribe to Enterprise Onchain
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-slate-500">
+            <p>Data sourced from Token Terminal, DeFiLlama, and CoinGecko. Last updated: Feb 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Stablecoin Market Cap Chart
+        const ctx = document.getElementById('stablecoinChart').getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan 22', 'Jul 22', 'Jan 23', 'Jul 23', 'Jan 24', 'Jul 24', 'Jan 25', 'Jul 25', 'Jan 26'],
+                datasets: [
+                    {
+                        label: 'USDT',
+                        data: [78, 66, 68, 83, 95, 112, 135, 160, 183],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'USDC',
+                        data: [45, 55, 44, 26, 28, 35, 48, 62, 73],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Others',
+                        data: [12, 14, 13, 15, 18, 25, 32, 40, 48],
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#94a3b8',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.1)'
+                        },
+                        ticks: {
+                            color: '#64748b'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.1)'
+                        },
+                        ticks: {
+                            color: '#64748b',
+                            callback: function(value) {
+                                return '$' + value + 'B';
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
