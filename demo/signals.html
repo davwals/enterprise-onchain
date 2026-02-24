@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGNALS | Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+            --accent-purple: #a78bfa;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 12px;
+        }
+        
+        .top-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar-left { display: flex; align-items: center; gap: 16px; }
+        .logo { color: var(--accent-orange); font-weight: 700; font-size: 14px; letter-spacing: 2px; }
+        .function-badge { background: var(--accent-orange); color: #000; padding: 4px 12px; font-weight: 700; font-size: 11px; letter-spacing: 1px; }
+        .breadcrumb { color: var(--text-muted); font-size: 11px; }
+        .breadcrumb a { color: var(--accent-blue); text-decoration: none; }
+        .top-bar-right { display: flex; align-items: center; gap: 20px; font-size: 11px; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); display: inline-block; margin-right: 4px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .time { color: var(--accent-amber); font-weight: 500; }
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1px;
+            background: var(--border-color);
+            min-height: calc(100vh - 90px);
+        }
+        
+        .panel { background: var(--bg-primary); padding: 12px; }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .panel-title { color: var(--accent-orange); font-weight: 600; font-size: 11px; letter-spacing: 1px; }
+        .panel-subtitle { color: var(--text-muted); font-size: 10px; }
+        
+        /* Signal Cards */
+        .signal-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .signal-card:hover {
+            border-color: var(--accent-orange);
+        }
+        
+        .signal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .signal-protocol {
+            color: var(--accent-cyan);
+            font-weight: 500;
+            font-size: 12px;
+        }
+        
+        .signal-badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+        
+        .signal-badge.bullish { background: rgba(0, 210, 106, 0.2); color: var(--accent-green); }
+        .signal-badge.bearish { background: rgba(255, 59, 59, 0.2); color: var(--accent-red); }
+        .signal-badge.neutral { background: rgba(255, 176, 0, 0.2); color: var(--accent-amber); }
+        
+        .signal-metric {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .signal-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .signal-context {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+        
+        /* Developer Activity */
+        .dev-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 11px;
+            align-items: center;
+        }
+        
+        .dev-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dev-protocol {
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+        
+        .dev-stat {
+            text-align: center;
+        }
+        
+        .dev-bar {
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        
+        .dev-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 3px;
+        }
+        
+        /* Sentiment Gauge */
+        .sentiment-gauge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+        }
+        
+        .gauge-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .gauge-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .gauge-bar {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-amber), var(--accent-green));
+            border-radius: 4px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .gauge-indicator {
+            position: absolute;
+            top: -4px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            border: 2px solid var(--bg-primary);
+            transform: translateX(-50%);
+        }
+        
+        .gauge-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        /* Transaction Patterns */
+        .pattern-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 6px;
+        }
+        
+        .pattern-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        
+        .pattern-type {
+            font-size: 10px;
+            color: var(--accent-purple);
+            font-weight: 500;
+        }
+        
+        .pattern-time {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .pattern-desc {
+            font-size: 11px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .pattern-detail {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+        
+        /* Social Mentions */
+        .mention-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .mention-source {
+            font-size: 10px;
+            color: var(--accent-amber);
+            width: 60px;
+        }
+        
+        .mention-content {
+            flex: 1;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .mention-time {
+            font-size: 9px;
+            color: var(--text-muted);
+            width: 50px;
+            text-align: right;
+        }
+        
+        /* Heatmap */
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2px;
+            margin: 12px 0;
+        }
+        
+        .heatmap-cell {
+            aspect-ratio: 1;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .heatmap-cell.low { background: rgba(0, 210, 106, 0.2); }
+        .heatmap-cell.medium { background: rgba(0, 210, 106, 0.5); }
+        .heatmap-cell.high { background: rgba(0, 210, 106, 0.8); }
+        .heatmap-cell.very-high { background: var(--accent-green); }
+        .heatmap-cell.negative { background: rgba(255, 59, 59, 0.5); }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            font-size: 10px;
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            text-align: left;
+            padding: 8px 6px;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        .data-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Alert Box */
+        .alert-box {
+            background: rgba(255, 107, 0, 0.1);
+            border: 1px solid var(--accent-orange);
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .alert-title {
+            color: var(--accent-orange);
+            font-weight: 600;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+        
+        .alert-desc {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-key { color: var(--accent-orange); margin-right: 4px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="logo">EO</span>
+            <span class="function-badge">F6 SIGNALS</span>
+            <span class="breadcrumb"><a href="index.html">Terminal</a> / Alternative Data</span>
+        </div>
+        <div class="top-bar-right">
+            <span><span class="status-dot"></span>24 ACTIVE SIGNALS</span>
+            <span class="time" id="current-time">09:42:18 CET</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left: Developer Activity -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">DEVELOPER ACTIVITY</div>
+                    <div class="panel-subtitle">GitHub commits, PRs, contributors</div>
+                </div>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">🔥 UNUSUAL ACTIVITY</div>
+                <div class="alert-desc">Arbitrum dev activity up 340% this week. Major protocol upgrade detected.</div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">Arbitrum</span>
+                    <span class="signal-badge bullish">BULLISH</span>
+                </div>
+                <div class="signal-metric">Weekly Commits</div>
+                <div class="signal-value positive">+340%</div>
+                <div class="signal-context">847 commits vs 192 avg • 34 active contributors</div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">Uniswap</span>
+                    <span class="signal-badge bullish">BULLISH</span>
+                </div>
+                <div class="signal-metric">Weekly Commits</div>
+                <div class="signal-value positive">+89%</div>
+                <div class="signal-context">V4 development accelerating • 28 contributors</div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">Aave</span>
+                    <span class="signal-badge neutral">NEUTRAL</span>
+                </div>
+                <div class="signal-metric">Weekly Commits</div>
+                <div class="signal-value">+12%</div>
+                <div class="signal-context">GHO integrations ongoing • 18 contributors</div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">Optimism</span>
+                    <span class="signal-badge bearish">BEARISH</span>
+                </div>
+                <div class="signal-metric">Weekly Commits</div>
+                <div class="signal-value negative">-24%</div>
+                <div class="signal-context">Post-Bedrock slowdown • 12 contributors</div>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-title" style="margin-bottom: 12px;">DEV ACTIVITY RANKING</div>
+                <div class="dev-item">
+                    <span class="dev-protocol">Arbitrum</span>
+                    <span>847</span>
+                    <span class="positive">+340%</span>
+                    <div>
+                        <div class="dev-bar"><div class="dev-bar-fill" style="width: 100%;"></div></div>
+                    </div>
+                </div>
+                <div class="dev-item">
+                    <span class="dev-protocol">Ethereum</span>
+                    <span>624</span>
+                    <span class="positive">+8%</span>
+                    <div>
+                        <div class="dev-bar"><div class="dev-bar-fill" style="width: 74%;"></div></div>
+                    </div>
+                </div>
+                <div class="dev-item">
+                    <span class="dev-protocol">Uniswap</span>
+                    <span>412</span>
+                    <span class="positive">+89%</span>
+                    <div>
+                        <div class="dev-bar"><div class="dev-bar-fill" style="width: 49%;"></div></div>
+                    </div>
+                </div>
+                <div class="dev-item">
+                    <span class="dev-protocol">Compound</span>
+                    <span>187</span>
+                    <span class="positive">+24%</span>
+                    <div>
+                        <div class="dev-bar"><div class="dev-bar-fill" style="width: 22%;"></div></div>
+                    </div>
+                </div>
+                <div class="dev-item">
+                    <span class="dev-protocol">Aave</span>
+                    <span>156</span>
+                    <span class="positive">+12%</span>
+                    <div>
+                        <div class="dev-bar"><div class="dev-bar-fill" style="width: 18%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center: Social Sentiment -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">SOCIAL SENTIMENT</div>
+                    <div class="panel-subtitle">Twitter, Discord, Telegram analysis</div>
+                </div>
+            </div>
+            
+            <div class="sentiment-gauge">
+                <div class="gauge-label">MARKET SENTIMENT INDEX</div>
+                <div class="gauge-value positive">68</div>
+                <div class="gauge-bar">
+                    <div class="gauge-indicator" style="left: 68%;"></div>
+                </div>
+                <div class="gauge-labels">
+                    <span>Extreme Fear</span>
+                    <span>Neutral</span>
+                    <span>Extreme Greed</span>
+                </div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">ETH Mentions</span>
+                    <span class="signal-badge bullish">+42%</span>
+                </div>
+                <div class="signal-metric">24H Social Volume</div>
+                <div class="signal-value">847K</div>
+                <div class="signal-context">Sentiment: 72% positive • Influencer ratio: HIGH</div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">ARB Mentions</span>
+                    <span class="signal-badge bullish">+156%</span>
+                </div>
+                <div class="signal-metric">24H Social Volume</div>
+                <div class="signal-value">124K</div>
+                <div class="signal-context">Sentiment: 84% positive • Trending on CT</div>
+            </div>
+            
+            <div class="signal-card">
+                <div class="signal-header">
+                    <span class="signal-protocol">UNI Mentions</span>
+                    <span class="signal-badge bullish">+89%</span>
+                </div>
+                <div class="signal-metric">24H Social Volume</div>
+                <div class="signal-value">78K</div>
+                <div class="signal-context">Sentiment: 68% positive • Fee switch hype</div>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-title" style="margin-bottom: 12px;">TRENDING MENTIONS</div>
+                
+                <div class="mention-item">
+                    <span class="mention-source">CT</span>
+                    <span class="mention-content">"ARB dev activity is off the charts. Something big is coming" - @DefiDegen</span>
+                    <span class="mention-time">12m</span>
+                </div>
+                <div class="mention-item">
+                    <span class="mention-source">Discord</span>
+                    <span class="mention-content">"UNI fee switch vote passed! This is huge for tokenomics" - Uniswap</span>
+                    <span class="mention-time">24m</span>
+                </div>
+                <div class="mention-item">
+                    <span class="mention-source">CT</span>
+                    <span class="mention-content">"MakerDAO DSR at 8% is insane. DAI yield farming szn" - @Sassal0x</span>
+                    <span class="mention-time">38m</span>
+                </div>
+                <div class="mention-item">
+                    <span class="mention-source">Telegram</span>
+                    <span class="mention-content">"Whale alert: 12,400 ETH deposited to Aave" - Whale Alert</span>
+                    <span class="mention-time">45m</span>
+                </div>
+                <div class="mention-item">
+                    <span class="mention-source">CT</span>
+                    <span class="mention-content">"Curve 3pool looking scary. 78% USDT concentration" - @CurveFinance</span>
+                    <span class="mention-time">1h</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-title" style="margin-bottom: 8px;">SENTIMENT HEATMAP (7D)</div>
+                <div class="heatmap">
+                    <div class="heatmap-cell low"></div>
+                    <div class="heatmap-cell medium"></div>
+                    <div class="heatmap-cell high"></div>
+                    <div class="heatmap-cell very-high"></div>
+                    <div class="heatmap-cell high"></div>
+                    <div class="heatmap-cell medium"></div>
+                    <div class="heatmap-cell high"></div>
+                    <div class="heatmap-cell very-high"></div>
+                    <div class="heatmap-cell very-high"></div>
+                    <div class="heatmap-cell high"></div>
+                    <div class="heatmap-cell medium"></div>
+                    <div class="heatmap-cell high"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--text-muted);">
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                    <span>Sun</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Transaction Patterns -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">ON-CHAIN PATTERNS</div>
+                    <div class="panel-subtitle">Smart money & whale movements</div>
+                </div>
+            </div>
+            
+            <div class="pattern-item">
+                <div class="pattern-header">
+                    <span class="pattern-type">🐋 WHALE ACCUMULATION</span>
+                    <span class="pattern-time">2m ago</span>
+                </div>
+                <div class="pattern-desc">Large ETH accumulation detected</div>
+                <div class="pattern-detail">
+                    12,400 ETH ($47.7M) moved to Aave from unknown wallet<br>
+                    <span class="positive">Signal: BULLISH</span>
+                </div>
+            </div>
+            
+            <div class="pattern-item">
+                <div class="pattern-header">
+                    <span class="pattern-type">📊 EXCHANGE OUTFLOW</span>
+                    <span class="pattern-time">15m ago</span>
+                </div>
+                <div class="pattern-desc">Binance ETH reserves declining</div>
+                <div class="pattern-detail">
+                    24H outflow: 34,200 ETH ($131M)<br>
+                    <span class="positive">Signal: BULLISH</span>
+                </div>
+            </div>
+            
+            <div class="pattern-item">
+                <div class="pattern-header">
+                    <span class="pattern-type">💰 SMART MONEY</span>
+                    <span class="pattern-time">28m ago</span>
+                </div>
+                <div class="pattern-desc">Jump Trading increasing ARB position</div>
+                <div class="pattern-detail">
+                    Bought 2.4M ARB ($4.2M) over 6 hours<br>
+                    <span class="positive">Signal: BULLISH</span>
+                </div>
+            </div>
+            
+            <div class="pattern-item">
+                <div class="pattern-header">
+                    <span class="pattern-type">⚠️ RISK PATTERN</span>
+                    <span class="pattern-time">45m ago</span>
+                </div>
+                <div class="pattern-desc">Curve 3pool imbalance deepening</div>
+                <div class="pattern-detail">
+                    USDT concentration now 78.4% (was 65%)<br>
+                    <span class="negative">Signal: BEARISH</span>
+                </div>
+            </div>
+            
+            <div class="pattern-item">
+                <div class="pattern-header">
+                    <span class="pattern-type">🔄 BRIDGE FLOW</span>
+                    <span class="pattern-time">1h ago</span>
+                </div>
+                <div class="pattern-desc">Heavy L2 bridging activity</div>
+                <div class="pattern-detail">
+                    $89M bridged to Arbitrum (24H high)<br>
+                    <span class="positive">Signal: BULLISH for ARB</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-title" style="margin-bottom: 12px;">WHALE WALLET TRACKER</div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>WALLET</th>
+                            <th>ACTION</th>
+                            <th>AMOUNT</th>
+                            <th>TIME</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-cyan);">Jump Trading</td>
+                            <td class="positive">BUY</td>
+                            <td>2.4M ARB</td>
+                            <td>28m</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-cyan);">Wintermute</td>
+                            <td class="positive">DEPOSIT</td>
+                            <td>$47M USDC</td>
+                            <td>45m</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-cyan);">0x7a2...</td>
+                            <td class="negative">SELL</td>
+                            <td>8,400 ETH</td>
+                            <td>1h</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-cyan);">Alameda</td>
+                            <td class="negative">TRANSFER</td>
+                            <td>$12M</td>
+                            <td>2h</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-cyan);">0xdea...</td>
+                            <td class="positive">STAKE</td>
+                            <td>4,200 ETH</td>
+                            <td>3h</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-title" style="margin-bottom: 12px;">CORRELATION SIGNALS</div>
+                <div class="signal-card">
+                    <div class="signal-metric">Dev Activity → Price (30D)</div>
+                    <div class="signal-value">0.72</div>
+                    <div class="signal-context">Strong positive correlation detected</div>
+                </div>
+                <div class="signal-card">
+                    <div class="signal-metric">Social Volume → Volume (24H)</div>
+                    <div class="signal-value">0.84</div>
+                    <div class="signal-context">Very strong positive correlation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <span><span class="footer-key">F5</span><a href="yields.html">YIELDS</a></span>
+            <span><span class="footer-key">F7</span><a href="compare.html">COMPARE</a></span>
+            <span><span class="footer-key">A</span>ALERTS</span>
+            <span><span class="footer-key">E</span>EXPORT</span>
+        </div>
+        <span>SIGNALS v1.2.0 • 24 Active Signals • Updated: <span id="update-time">09:42:18</span></span>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+            document.getElementById('current-time').textContent = timeStr;
+            document.getElementById('update-time').textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F5') window.location.href = 'yields.html';
+            if (e.key === 'F7') window.location.href = 'compare.html';
+            if (e.key === 'Escape') window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETWORK | Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+            --accent-purple: #a78bfa;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 12px;
+        }
+        
+        .top-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar-left { display: flex; align-items: center; gap: 16px; }
+        .logo { color: var(--accent-orange); font-weight: 700; font-size: 14px; letter-spacing: 2px; }
+        .function-badge { background: var(--accent-orange); color: #000; padding: 4px 12px; font-weight: 700; font-size: 11px; letter-spacing: 1px; }
+        .breadcrumb { color: var(--text-muted); font-size: 11px; }
+        .breadcrumb a { color: var(--accent-blue); text-decoration: none; }
+        .top-bar-right { display: flex; align-items: center; gap: 20px; font-size: 11px; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); display: inline-block; margin-right: 4px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .time { color: var(--accent-amber); font-weight: 500; }
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        
+        /* Tab Navigation */
+        .tab-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            padding: 0 16px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            font-size: 11px;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        
+        .tab:hover {
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            color: var(--accent-orange);
+            border-bottom-color: var(--accent-orange);
+        }
+        
+        .tab-badge {
+            background: var(--accent-red);
+            color: #fff;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 320px;
+            gap: 1px;
+            background: var(--border-color);
+            min-height: calc(100vh - 130px);
+        }
+        
+        .panel { background: var(--bg-primary); padding: 12px; }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .panel-title { color: var(--accent-orange); font-weight: 600; font-size: 11px; letter-spacing: 1px; }
+        .panel-subtitle { color: var(--text-muted); font-size: 10px; }
+        
+        /* Contacts List */
+        .contact-list { display: flex; flex-direction: column; gap: 6px; }
+        
+        .contact-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .contact-item:hover, .contact-item.active {
+            border-color: var(--accent-orange);
+            background: var(--bg-tertiary);
+        }
+        
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+        }
+        
+        .contact-avatar.online::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            border: 2px solid var(--bg-panel);
+        }
+        
+        .contact-info { flex: 1; min-width: 0; }
+        
+        .contact-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        
+        .contact-role {
+            font-size: 10px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .contact-meta {
+            text-align: right;
+        }
+        
+        .contact-time {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .unread-badge {
+            background: var(--accent-orange);
+            color: #000;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+        
+        /* Chat Area */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 180px);
+        }
+        
+        .chat-header {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-recipient {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .chat-status {
+            font-size: 10px;
+            color: var(--accent-green);
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-action {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        
+        .chat-action:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 10px 14px;
+            border-radius: 4px;
+        }
+        
+        .message.sent {
+            background: var(--accent-orange);
+            color: #000;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        
+        .message.received {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        
+        .message-text {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .message-time {
+            font-size: 9px;
+            opacity: 0.7;
+            margin-top: 4px;
+            text-align: right;
+        }
+        
+        .message.received .message-time {
+            color: var(--text-muted);
+        }
+        
+        .chat-input-container {
+            border-top: 1px solid var(--border-color);
+            padding: 12px 16px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+        }
+        
+        .chat-input:focus {
+            border-color: var(--accent-orange);
+        }
+        
+        .send-btn {
+            background: var(--accent-orange);
+            border: none;
+            color: #000;
+            padding: 10px 20px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        
+        /* Deal Flow & Jobs */
+        .deal-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .deal-card:hover {
+            border-color: var(--accent-orange);
+        }
+        
+        .deal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .deal-type {
+            font-size: 9px;
+            padding: 3px 8px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+        
+        .deal-type.seed { background: rgba(167, 139, 250, 0.2); color: var(--accent-purple); }
+        .deal-type.series-a { background: rgba(0, 212, 212, 0.2); color: var(--accent-cyan); }
+        .deal-type.series-b { background: rgba(77, 166, 255, 0.2); color: var(--accent-blue); }
+        .deal-type.token { background: rgba(255, 176, 0, 0.2); color: var(--accent-amber); }
+        
+        .deal-date {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .deal-company {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .deal-desc {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .deal-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 10px;
+        }
+        
+        .deal-stat {
+            color: var(--text-muted);
+        }
+        
+        .deal-stat span {
+            color: var(--accent-amber);
+            font-weight: 500;
+        }
+        
+        /* Job Listings */
+        .job-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .job-card:hover {
+            border-color: var(--accent-orange);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .job-company {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .job-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .job-company-name {
+            font-size: 11px;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+        
+        .job-location {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .job-new {
+            font-size: 8px;
+            background: var(--accent-green);
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+        
+        .job-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .job-tag {
+            font-size: 9px;
+            padding: 3px 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            border-radius: 2px;
+        }
+        
+        .job-salary {
+            font-size: 11px;
+            color: var(--accent-amber);
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-key { color: var(--accent-orange); margin-right: 4px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="logo">EO</span>
+            <span class="function-badge">F10 NETWORK</span>
+            <span class="breadcrumb"><a href="index.html">Terminal</a> / Professional Network</span>
+        </div>
+        <div class="top-bar-right">
+            <span><span class="status-dot"></span>ONLINE</span>
+            <span>2,847 Members</span>
+            <span class="time" id="current-time">09:42:18 CET</span>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        <div class="tab active">MESSAGES <span class="tab-badge">3</span></div>
+        <div class="tab">DEAL FLOW</div>
+        <div class="tab">JOBS</div>
+        <div class="tab">DIRECTORY</div>
+        <div class="tab">EVENTS</div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left: Contacts -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 180px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">CONVERSATIONS</div>
+                    <div class="panel-subtitle">12 active threads</div>
+                </div>
+            </div>
+            
+            <div class="contact-list">
+                <div class="contact-item active">
+                    <div class="contact-avatar" style="position: relative;">MC</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Marcus Chen</div>
+                        <div class="contact-role">Partner @ Paradigm</div>
+                    </div>
+                    <div class="contact-meta">
+                        <div class="contact-time">09:38</div>
+                        <span class="unread-badge">2</span>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-avatar">SK</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Sarah Kim</div>
+                        <div class="contact-role">Research Lead @ Delphi</div>
+                    </div>
+                    <div class="contact-meta">
+                        <div class="contact-time">Yesterday</div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-avatar">AT</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Alex Thompson</div>
+                        <div class="contact-role">Head of DeFi @ Galaxy</div>
+                    </div>
+                    <div class="contact-meta">
+                        <div class="contact-time">Yesterday</div>
+                        <span class="unread-badge">1</span>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-avatar">EV</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Elena Volkov</div>
+                        <div class="contact-role">PM @ Aave</div>
+                    </div>
+                    <div class="contact-meta">
+                        <div class="contact-time">Jan 12</div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-avatar">JP</div>
+                    <div class="contact-info">
+                        <div class="contact-name">James Park</div>
+                        <div class="contact-role">Trader @ Jump</div>
+                    </div>
+                    <div class="contact-meta">
+                        <div class="contact-time">Jan 10</div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-avatar">LW</div>
+                    <div class="contact-info">
+                        <div class="contact-name">Lisa Wang</div>
+                        <div class="contact-role">Founder @ Protocol Labs</div>
+                    </div>
+                    <div class="contact-meta">
+                        <div class="contact-time">Jan 8</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center: Chat -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-recipient">
+                    <div class="contact-avatar">MC</div>
+                    <div>
+                        <div class="chat-name">Marcus Chen</div>
+                        <div class="chat-status">● Online</div>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="chat-action">📞 Call</button>
+                    <button class="chat-action">📎 Files</button>
+                    <button class="chat-action">⋮</button>
+                </div>
+            </div>
+            
+            <div class="chat-messages">
+                <div class="message received">
+                    <div class="message-text">Hey! Saw your analysis on Aave treasury. Really solid work. We're looking at a similar thesis internally.</div>
+                    <div class="message-time">09:24</div>
+                </div>
+                
+                <div class="message sent">
+                    <div class="message-text">Thanks Marcus! Happy to share more details. The GHO growth trajectory is particularly interesting.</div>
+                    <div class="message-time">09:28</div>
+                </div>
+                
+                <div class="message received">
+                    <div class="message-text">Agreed. We've been tracking GHO since launch. The interest rate mechanics create a unique value accrual mechanism. Would love to compare notes.</div>
+                    <div class="message-time">09:32</div>
+                </div>
+                
+                <div class="message sent">
+                    <div class="message-text">Absolutely. I can send over our internal model if you want to take a look. Shows projected revenue impact through 2025.</div>
+                    <div class="message-time">09:35</div>
+                </div>
+                
+                <div class="message received">
+                    <div class="message-text">That would be great. Also wanted to ask - are you going to ETHDenver? We're hosting a dinner for institutional folks on the 28th.</div>
+                    <div class="message-time">09:38</div>
+                </div>
+                
+                <div class="message received">
+                    <div class="message-text">Should be good group - a16z, Polychain, Coinbase Ventures. Thinking it could be valuable to connect.</div>
+                    <div class="message-time">09:38</div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Type a message...">
+                <button class="send-btn">SEND</button>
+            </div>
+        </div>
+
+        <!-- Right: Deal Flow & Jobs -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 180px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">DEAL FLOW</div>
+                    <div class="panel-subtitle">Latest opportunities</div>
+                </div>
+            </div>
+            
+            <div class="deal-card">
+                <div class="deal-header">
+                    <span class="deal-type seed">SEED</span>
+                    <span class="deal-date">Posted 2h ago</span>
+                </div>
+                <div class="deal-company">Lattice Protocol</div>
+                <div class="deal-desc">Modular liquidity layer for cross-chain DeFi. Building on top of Eigenlayer.</div>
+                <div class="deal-stats">
+                    <span class="deal-stat">Raising: <span>$4M</span></span>
+                    <span class="deal-stat">Lead: <span>Paradigm</span></span>
+                </div>
+            </div>
+            
+            <div class="deal-card">
+                <div class="deal-header">
+                    <span class="deal-type series-a">SERIES A</span>
+                    <span class="deal-date">Posted 1d ago</span>
+                </div>
+                <div class="deal-company">Axiom Labs</div>
+                <div class="deal-desc">ZK coprocessor for smart contracts. Enables complex computation off-chain with on-chain verification.</div>
+                <div class="deal-stats">
+                    <span class="deal-stat">Raising: <span>$18M</span></span>
+                    <span class="deal-stat">Lead: <span>a16z</span></span>
+                </div>
+            </div>
+            
+            <div class="deal-card">
+                <div class="deal-header">
+                    <span class="deal-type token">TOKEN</span>
+                    <span class="deal-date">Posted 2d ago</span>
+                </div>
+                <div class="deal-company">Vertex Protocol</div>
+                <div class="deal-desc">Perpetuals DEX on Arbitrum. Looking for strategic partners for upcoming token launch.</div>
+                <div class="deal-stats">
+                    <span class="deal-stat">FDV: <span>$200M</span></span>
+                    <span class="deal-stat">TGE: <span>Q1 2025</span></span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div class="panel-header">
+                    <div>
+                        <div class="panel-title">JOBS</div>
+                        <div class="panel-subtitle">Featured positions</div>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-company">
+                            <div class="job-logo">A</div>
+                            <div>
+                                <div class="job-company-name">Aave</div>
+                                <div class="job-location">Remote</div>
+                            </div>
+                        </div>
+                        <span class="job-new">NEW</span>
+                    </div>
+                    <div class="job-title">Senior Protocol Engineer</div>
+                    <div class="job-tags">
+                        <span class="job-tag">Solidity</span>
+                        <span class="job-tag">DeFi</span>
+                        <span class="job-tag">Security</span>
+                    </div>
+                    <div class="job-salary">$180K - $280K + tokens</div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-company">
+                            <div class="job-logo">U</div>
+                            <div>
+                                <div class="job-company-name">Uniswap Labs</div>
+                                <div class="job-location">NYC / Remote</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="job-title">DeFi Research Analyst</div>
+                    <div class="job-tags">
+                        <span class="job-tag">Research</span>
+                        <span class="job-tag">Tokenomics</span>
+                        <span class="job-tag">Data</span>
+                    </div>
+                    <div class="job-salary">$140K - $200K + tokens</div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-header">
+                        <div class="job-company">
+                            <div class="job-logo">P</div>
+                            <div>
+                                <div class="job-company-name">Paradigm</div>
+                                <div class="job-location">San Francisco</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="job-title">Investment Associate</div>
+                    <div class="job-tags">
+                        <span class="job-tag">Investing</span>
+                        <span class="job-tag">Due Diligence</span>
+                        <span class="job-tag">DeFi</span>
+                    </div>
+                    <div class="job-salary">$150K - $250K + carry</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <span><span class="footer-key">F9</span><a href="coverage.html">COVERAGE</a></span>
+            <span><span class="footer-key">F1</span><a href="pulse.html">PULSE</a></span>
+            <span><span class="footer-key">N</span>NEW MESSAGE</span>
+            <span><span class="footer-key">S</span>SEARCH</span>
+        </div>
+        <span>NETWORK v1.0.0 • 2,847 Members • End-to-End Encrypted</span>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Contact selection
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.contact-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Send message on Enter
+        document.querySelector('.chat-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                // Would send message here
+                this.value = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F9') window.location.href = 'coverage.html';
+            if (e.key === 'F1') window.location.href = 'pulse.html';
+            if (e.key === 'Escape') window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

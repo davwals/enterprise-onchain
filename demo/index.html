@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --border-bright: #3d4a5c;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Terminal Header */
+        .terminal-header {
+            background: linear-gradient(180deg, #1a1f2e 0%, var(--bg-secondary) 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-amber));
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #000;
+        }
+        
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-orange);
+            letter-spacing: 2px;
+        }
+        
+        .logo-subtitle {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+        
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 11px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .status-label { color: var(--text-muted); }
+        .status-value { color: var(--text-primary); }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: 4px;
+        }
+        
+        .welcome-title span {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+        
+        .welcome-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+        }
+        
+        /* Function Grid */
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+        }
+        
+        .function-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .function-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-amber));
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .function-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 0, 0.15);
+        }
+        
+        .function-card:hover::before {
+            opacity: 1;
+        }
+        
+        .function-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .function-key {
+            background: var(--accent-orange);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+        }
+        
+        .function-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+        
+        .function-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .function-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .function-tag {
+            font-size: 9px;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            padding: 3px 8px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--accent-amber);
+        }
+        
+        .stat-change {
+            font-size: 11px;
+            margin-top: 4px;
+        }
+        
+        .stat-change.positive { color: var(--accent-green); }
+        .stat-change.negative { color: var(--accent-red); }
+        
+        /* Footer */
+        .terminal-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-left {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-key {
+            color: var(--accent-orange);
+            margin-right: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .quick-stats { grid-template-columns: repeat(2, 1fr); }
+            .function-grid { grid-template-columns: 1fr; }
+            .header-status { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="terminal-header">
+        <div class="header-top">
+            <div class="logo">
+                <div class="logo-icon">EO</div>
+                <div>
+                    <div class="logo-text">ENTERPRISE ONCHAIN</div>
+                    <div class="logo-subtitle">INSTITUTIONAL BLOCKCHAIN INTELLIGENCE</div>
+                </div>
+            </div>
+            <div class="header-status">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span class="status-label">NETWORK:</span>
+                    <span class="status-value">MAINNET</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">BLOCK:</span>
+                    <span class="status-value">19,847,293</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">GAS:</span>
+                    <span class="status-value">24 GWEI</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">ETH/USD:</span>
+                    <span class="status-value" style="color: var(--accent-green);">$3,847.24</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="welcome-section">
+            <h1 class="welcome-title">TERMINAL <span>FUNCTIONS</span></h1>
+            <p class="welcome-subtitle">SELECT A FUNCTION TO BEGIN • PRESS F-KEY FOR QUICK ACCESS</p>
+        </section>
+
+        <section class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-label">TOTAL VALUE LOCKED</div>
+                <div class="stat-value">$87.4B</div>
+                <div class="stat-change positive">▲ 2.4% 24H</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">PROTOCOLS TRACKED</div>
+                <div class="stat-value">2,847</div>
+                <div class="stat-change positive">▲ 12 NEW</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">TREASURY MONITORED</div>
+                <div class="stat-value">$24.1B</div>
+                <div class="stat-change negative">▼ 0.8% 24H</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">GOVERNANCE ACTIVE</div>
+                <div class="stat-value">847</div>
+                <div class="stat-change positive">▲ 34 NEW</div>
+            </div>
+        </section>
+
+        <section class="function-grid">
+            <a href="pulse.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F1</span>
+                    <span class="function-name">PULSE</span>
+                </div>
+                <p class="function-desc">Morning brief with top on-chain events, treasury movements, and governance updates. Your daily institutional crypto digest.</p>
+                <div class="function-tags">
+                    <span class="function-tag">MORNING BRIEF</span>
+                    <span class="function-tag">ALERTS</span>
+                    <span class="function-tag">GOVERNANCE</span>
+                </div>
+            </a>
+
+            <a href="flows.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F2</span>
+                    <span class="function-name">FLOWS</span>
+                </div>
+                <p class="function-desc">Protocol relationship mapping and fund flow visualization. Track treasury allocations and cross-protocol capital movements.</p>
+                <div class="function-tags">
+                    <span class="function-tag">FUND FLOWS</span>
+                    <span class="function-tag">TREASURY</span>
+                    <span class="function-tag">SANKEY</span>
+                </div>
+            </a>
+
+            <a href="oracle.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F3</span>
+                    <span class="function-name">ORACLE</span>
+                </div>
+                <p class="function-desc">AI-powered natural language interface for on-chain queries. Ask questions about protocols, transactions, and market data.</p>
+                <div class="function-tags">
+                    <span class="function-tag">AI ASSISTANT</span>
+                    <span class="function-tag">NL QUERIES</span>
+                    <span class="function-tag">ANALYTICS</span>
+                </div>
+            </a>
+
+            <a href="research.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F4</span>
+                    <span class="function-name">RESEARCH</span>
+                </div>
+                <p class="function-desc">Institutional-grade DeFi research reports and tokenomics analysis. Deep dives into protocol mechanics and risk factors.</p>
+                <div class="function-tags">
+                    <span class="function-tag">REPORTS</span>
+                    <span class="function-tag">TOKENOMICS</span>
+                    <span class="function-tag">ANALYSIS</span>
+                </div>
+            </a>
+
+            <a href="yields.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F5</span>
+                    <span class="function-name">YIELDS</span>
+                </div>
+                <p class="function-desc">Real-time staking yields, APY trends, and validator performance tracking. Optimize your yield strategies across protocols.</p>
+                <div class="function-tags">
+                    <span class="function-tag">STAKING</span>
+                    <span class="function-tag">APY</span>
+                    <span class="function-tag">VALIDATORS</span>
+                </div>
+            </a>
+
+            <a href="signals.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F6</span>
+                    <span class="function-name">SIGNALS</span>
+                </div>
+                <p class="function-desc">Alternative data feeds including developer activity, social sentiment, and transaction patterns. Predictive on-chain indicators.</p>
+                <div class="function-tags">
+                    <span class="function-tag">ALT DATA</span>
+                    <span class="function-tag">SENTIMENT</span>
+                    <span class="function-tag">DEV ACTIVITY</span>
+                </div>
+            </a>
+
+            <a href="compare.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F7</span>
+                    <span class="function-name">COMPARE</span>
+                </div>
+                <p class="function-desc">Side-by-side protocol comparisons with comprehensive benchmarking. Evaluate metrics, risks, and competitive positioning.</p>
+                <div class="function-tags">
+                    <span class="function-tag">BENCHMARKS</span>
+                    <span class="function-tag">COMPARISON</span>
+                    <span class="function-tag">METRICS</span>
+                </div>
+            </a>
+
+            <a href="treasury.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F8</span>
+                    <span class="function-name">TREASURY</span>
+                </div>
+                <p class="function-desc">Deep protocol financials analysis. Track revenue streams, token distribution, runway calculations, and burn rates.</p>
+                <div class="function-tags">
+                    <span class="function-tag">FINANCIALS</span>
+                    <span class="function-tag">REVENUE</span>
+                    <span class="function-tag">RUNWAY</span>
+                </div>
+            </a>
+
+            <a href="coverage.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F9</span>
+                    <span class="function-name">COVERAGE</span>
+                </div>
+                <p class="function-desc">Analyst consensus and sell-side coverage. Track price targets, ratings, and research notes from top crypto analysts.</p>
+                <div class="function-tags">
+                    <span class="function-tag">ANALYSTS</span>
+                    <span class="function-tag">RATINGS</span>
+                    <span class="function-tag">TARGETS</span>
+                </div>
+            </a>
+
+            <a href="network.html" class="function-card">
+                <div class="function-header">
+                    <span class="function-key">F10</span>
+                    <span class="function-name">NETWORK</span>
+                </div>
+                <p class="function-desc">Professional network for institutional crypto. Secure messaging, deal flow tracking, and job board for the ecosystem.</p>
+                <div class="function-tags">
+                    <span class="function-tag">MESSAGING</span>
+                    <span class="function-tag">DEALS</span>
+                    <span class="function-tag">JOBS</span>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <footer class="terminal-footer">
+        <div class="footer-left">
+            <span><span class="footer-key">F1-F10</span> FUNCTIONS</span>
+            <span><span class="footer-key">ESC</span> MENU</span>
+            <span><span class="footer-key">?</span> HELP</span>
+        </div>
+        <div>
+            <span>ENTERPRISE ONCHAIN TERMINAL v2.4.1 • © 2024</span>
+        </div>
+    </footer>
+
+    <script>
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            const pages = ['pulse', 'flows', 'oracle', 'research', 'yields', 'signals', 'compare', 'treasury', 'coverage', 'network'];
+            if (e.key >= 'F1' && e.key <= 'F10') {
+                e.preventDefault();
+                const index = parseInt(e.key.substring(1)) - 1;
+                window.location.href = pages[index] + '.html';
+            }
+        });
+
+        // Animate stats
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = obj.innerHTML.includes('$') ? '$' + value.toLocaleString() + (obj.innerHTML.includes('B') ? 'B' : '') : value.toLocaleString();
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
+</body>
+</html>

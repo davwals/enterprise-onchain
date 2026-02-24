@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESEARCH | Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+            --accent-purple: #a78bfa;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 12px;
+        }
+        
+        .top-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar-left { display: flex; align-items: center; gap: 16px; }
+        .logo { color: var(--accent-orange); font-weight: 700; font-size: 14px; letter-spacing: 2px; }
+        .function-badge { background: var(--accent-orange); color: #000; padding: 4px 12px; font-weight: 700; font-size: 11px; letter-spacing: 1px; }
+        .breadcrumb { color: var(--text-muted); font-size: 11px; }
+        .breadcrumb a { color: var(--accent-blue); text-decoration: none; }
+        .top-bar-right { display: flex; align-items: center; gap: 20px; font-size: 11px; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); display: inline-block; margin-right: 4px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .time { color: var(--accent-amber); font-weight: 500; }
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        
+        /* Search Bar */
+        .search-bar {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 11px;
+        }
+        
+        .search-input:focus { outline: none; border-color: var(--accent-orange); }
+        .search-input::placeholder { color: var(--text-muted); }
+        
+        .filter-pills {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .filter-pill {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        
+        .filter-pill:hover, .filter-pill.active {
+            background: var(--accent-orange);
+            color: #000;
+            border-color: var(--accent-orange);
+        }
+        
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 350px 1fr 320px;
+            gap: 1px;
+            background: var(--border-color);
+            min-height: calc(100vh - 130px);
+        }
+        
+        .panel { background: var(--bg-primary); padding: 12px; }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .panel-title { color: var(--accent-orange); font-weight: 600; font-size: 11px; letter-spacing: 1px; }
+        .panel-subtitle { color: var(--text-muted); font-size: 10px; }
+        
+        /* Report List */
+        .report-list { display: flex; flex-direction: column; gap: 8px; }
+        
+        .report-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .report-item:hover, .report-item.selected {
+            border-color: var(--accent-orange);
+            background: var(--bg-tertiary);
+        }
+        
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+        
+        .report-type {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+        
+        .report-type.protocol { background: rgba(77, 166, 255, 0.2); color: var(--accent-blue); }
+        .report-type.tokenomics { background: rgba(167, 139, 250, 0.2); color: var(--accent-purple); }
+        .report-type.risk { background: rgba(255, 59, 59, 0.2); color: var(--accent-red); }
+        .report-type.sector { background: rgba(0, 212, 212, 0.2); color: var(--accent-cyan); }
+        
+        .report-date { font-size: 9px; color: var(--text-muted); }
+        
+        .report-title {
+            font-size: 12px;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        
+        .report-author {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .report-metrics {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            font-size: 10px;
+        }
+        
+        .metric { color: var(--text-muted); }
+        .metric span { color: var(--text-secondary); }
+        
+        /* Report Content */
+        .report-content {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 180px);
+        }
+        
+        .report-full-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-full-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .report-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .report-body {
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .report-body h2 {
+            color: var(--accent-orange);
+            font-size: 14px;
+            margin: 24px 0 12px 0;
+            font-weight: 600;
+        }
+        
+        .report-body h3 {
+            color: var(--text-primary);
+            font-size: 12px;
+            margin: 16px 0 8px 0;
+            font-weight: 600;
+        }
+        
+        .report-body p {
+            margin-bottom: 12px;
+        }
+        
+        .report-body ul {
+            margin-left: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .report-body li {
+            margin-bottom: 6px;
+        }
+        
+        /* Data Tables in Report */
+        .report-table {
+            width: 100%;
+            margin: 16px 0;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        
+        .report-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .report-table tr:hover td {
+            background: var(--bg-panel);
+        }
+        
+        /* Key Metrics Box */
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .key-metric {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .key-metric-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .key-metric-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-amber);
+        }
+        
+        /* Sidebar */
+        .sidebar-section {
+            margin-bottom: 16px;
+        }
+        
+        .sidebar-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 6px;
+            font-size: 10px;
+        }
+        
+        .sidebar-item-title {
+            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .sidebar-item-value {
+            color: var(--text-secondary);
+        }
+        
+        .rating-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .rating-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .rating-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .rating-scale {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-key { color: var(--accent-orange); margin-right: 4px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="logo">EO</span>
+            <span class="function-badge">F4 RESEARCH</span>
+            <span class="breadcrumb"><a href="index.html">Terminal</a> / Institutional Analysis</span>
+        </div>
+        <div class="top-bar-right">
+            <span><span class="status-dot"></span>847 Reports</span>
+            <span class="time" id="current-time">09:42:18 CET</span>
+        </div>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search reports by protocol, topic, or author...">
+        <div class="filter-pills">
+            <span class="filter-pill active">All</span>
+            <span class="filter-pill">Protocol</span>
+            <span class="filter-pill">Tokenomics</span>
+            <span class="filter-pill">Risk</span>
+            <span class="filter-pill">Sector</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left: Report List -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 180px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">LATEST REPORTS</div>
+                    <div class="panel-subtitle">Institutional-grade analysis</div>
+                </div>
+            </div>
+            
+            <div class="report-list">
+                <div class="report-item selected">
+                    <div class="report-header">
+                        <span class="report-type protocol">Protocol Deep Dive</span>
+                        <span class="report-date">Jan 15, 2025</span>
+                    </div>
+                    <div class="report-title">Aave V3: Comprehensive Protocol Analysis & Investment Thesis</div>
+                    <div class="report-author">By Enterprise Onchain Research</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>42</span></span>
+                        <span class="metric">Rating: <span class="positive">BUY</span></span>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <div class="report-header">
+                        <span class="report-type tokenomics">Tokenomics</span>
+                        <span class="report-date">Jan 14, 2025</span>
+                    </div>
+                    <div class="report-title">MakerDAO Economic Model: DSR Impact & Token Value Accrual</div>
+                    <div class="report-author">By Messari Research</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>28</span></span>
+                        <span class="metric">Rating: <span class="positive">HOLD</span></span>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <div class="report-header">
+                        <span class="report-type risk">Risk Assessment</span>
+                        <span class="report-date">Jan 14, 2025</span>
+                    </div>
+                    <div class="report-title">Curve Finance: Liquidity Concentration & Systemic Risk Analysis</div>
+                    <div class="report-author">By Gauntlet Network</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>35</span></span>
+                        <span class="metric">Risk: <span class="negative">ELEVATED</span></span>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <div class="report-header">
+                        <span class="report-type sector">Sector Report</span>
+                        <span class="report-date">Jan 13, 2025</span>
+                    </div>
+                    <div class="report-title">L2 Competitive Landscape: Arbitrum vs Optimism vs Base</div>
+                    <div class="report-author">By Delphi Digital</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>54</span></span>
+                        <span class="metric">Top Pick: <span style="color: var(--accent-cyan);">ARB</span></span>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <div class="report-header">
+                        <span class="report-type protocol">Protocol Deep Dive</span>
+                        <span class="report-date">Jan 12, 2025</span>
+                    </div>
+                    <div class="report-title">Lido Finance: Staking Dominance & Decentralization Roadmap</div>
+                    <div class="report-author">By The Block Research</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>38</span></span>
+                        <span class="metric">Rating: <span class="positive">BUY</span></span>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <div class="report-header">
+                        <span class="report-type tokenomics">Tokenomics</span>
+                        <span class="report-date">Jan 11, 2025</span>
+                    </div>
+                    <div class="report-title">Uniswap Fee Switch Economics: Revenue Projections & Impact</div>
+                    <div class="report-author">By Enterprise Onchain Research</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>24</span></span>
+                        <span class="metric">Rating: <span class="positive">BUY</span></span>
+                    </div>
+                </div>
+                
+                <div class="report-item">
+                    <div class="report-header">
+                        <span class="report-type risk">Risk Assessment</span>
+                        <span class="report-date">Jan 10, 2025</span>
+                    </div>
+                    <div class="report-title">Stablecoin Risk Framework: USDT, USDC, DAI Comparison</div>
+                    <div class="report-author">By Chaos Labs</div>
+                    <div class="report-metrics">
+                        <span class="metric">Pages: <span>46</span></span>
+                        <span class="metric">Safest: <span class="positive">USDC</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center: Report Content -->
+        <div class="report-content">
+            <div class="report-full-header">
+                <span class="report-type protocol" style="display: inline-block; margin-bottom: 12px;">Protocol Deep Dive</span>
+                <h1 class="report-full-title">Aave V3: Comprehensive Protocol Analysis & Investment Thesis</h1>
+                <div class="report-meta">
+                    <span>Published: January 15, 2025</span>
+                    <span>Author: Enterprise Onchain Research</span>
+                    <span>42 Pages</span>
+                    <span style="color: var(--accent-green);">Rating: BUY</span>
+                </div>
+            </div>
+            
+            <div class="key-metrics">
+                <div class="key-metric">
+                    <div class="key-metric-label">TOTAL TVL</div>
+                    <div class="key-metric-value">$12.4B</div>
+                </div>
+                <div class="key-metric">
+                    <div class="key-metric-label">MARKET CAP</div>
+                    <div class="key-metric-value">$2.1B</div>
+                </div>
+                <div class="key-metric">
+                    <div class="key-metric-label">P/TVL RATIO</div>
+                    <div class="key-metric-value">0.17x</div>
+                </div>
+                <div class="key-metric">
+                    <div class="key-metric-label">ANNUALIZED REV</div>
+                    <div class="key-metric-value">$124M</div>
+                </div>
+                <div class="key-metric">
+                    <div class="key-metric-label">P/E RATIO</div>
+                    <div class="key-metric-value">16.9x</div>
+                </div>
+                <div class="key-metric">
+                    <div class="key-metric-label">PRICE TARGET</div>
+                    <div class="key-metric-value positive">$185</div>
+                </div>
+            </div>
+            
+            <div class="report-body">
+                <h2>Executive Summary</h2>
+                <p>Aave V3 represents the most sophisticated decentralized lending protocol in the DeFi ecosystem, with a TVL of $12.4B across 7 chains. Our analysis indicates significant undervaluation relative to protocol fundamentals and growth trajectory.</p>
+                
+                <p><strong>Key Investment Highlights:</strong></p>
+                <ul>
+                    <li>Market leader with 35% share of decentralized lending TVL</li>
+                    <li>GHO stablecoin showing strong growth (+340% since launch)</li>
+                    <li>Multi-chain expansion driving new user acquisition</li>
+                    <li>Strong governance with $48M treasury runway</li>
+                    <li>Technical moat through safety module and risk management</li>
+                </ul>
+                
+                <h2>Protocol Overview</h2>
+                <p>Aave V3 launched in January 2023, introducing several key innovations including efficiency mode (E-Mode), isolation mode, and portal functionality for cross-chain liquidity. The protocol has since expanded to Arbitrum, Optimism, Polygon, Avalanche, Base, and Metis.</p>
+                
+                <h3>TVL Breakdown by Chain</h3>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Chain</th>
+                            <th>TVL</th>
+                            <th>Market Share</th>
+                            <th>30D Growth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-blue);">Ethereum</td>
+                            <td>$8.24B</td>
+                            <td>66.5%</td>
+                            <td class="positive">+8.4%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-blue);">Arbitrum</td>
+                            <td>$1.87B</td>
+                            <td>15.1%</td>
+                            <td class="positive">+12.7%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-blue);">Polygon</td>
+                            <td>$892M</td>
+                            <td>7.2%</td>
+                            <td class="negative">-2.1%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-blue);">Optimism</td>
+                            <td>$724M</td>
+                            <td>5.8%</td>
+                            <td class="positive">+5.3%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-blue);">Avalanche</td>
+                            <td>$412M</td>
+                            <td>3.3%</td>
+                            <td class="negative">-4.2%</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-blue);">Base</td>
+                            <td>$256M</td>
+                            <td>2.1%</td>
+                            <td class="positive">+24.8%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>Revenue Analysis</h2>
+                <p>Aave generates revenue through interest rate spreads between borrowers and lenders, with the protocol taking a portion of the interest paid. Current annualized revenue stands at $124M, representing a P/E ratio of 16.9x—significantly below traditional finance lending platforms.</p>
+                
+                <h3>Revenue Streams</h3>
+                <ul>
+                    <li><strong>Interest Rate Spread:</strong> $98M annually (79% of revenue)</li>
+                    <li><strong>Flash Loan Fees:</strong> $14M annually (11% of revenue)</li>
+                    <li><strong>Liquidation Fees:</strong> $8M annually (7% of revenue)</li>
+                    <li><strong>GHO Interest:</strong> $4M annually (3% of revenue)</li>
+                </ul>
+                
+                <h2>Competitive Position</h2>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Protocol</th>
+                            <th>TVL</th>
+                            <th>Chains</th>
+                            <th>P/E</th>
+                            <th>Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-amber);">Aave V3</td>
+                            <td>$12.4B</td>
+                            <td>7</td>
+                            <td>16.9x</td>
+                            <td>$124M</td>
+                        </tr>
+                        <tr>
+                            <td>Compound V3</td>
+                            <td>$2.1B</td>
+                            <td>3</td>
+                            <td>24.2x</td>
+                            <td>$18M</td>
+                        </tr>
+                        <tr>
+                            <td>Spark (MakerDAO)</td>
+                            <td>$1.8B</td>
+                            <td>1</td>
+                            <td>N/A</td>
+                            <td>$12M</td>
+                        </tr>
+                        <tr>
+                            <td>Morpho</td>
+                            <td>$1.2B</td>
+                            <td>2</td>
+                            <td>N/A</td>
+                            <td>$8M</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>Risk Factors</h2>
+                <ul>
+                    <li><strong>Smart Contract Risk:</strong> Complex multi-chain deployments increase attack surface</li>
+                    <li><strong>Regulatory Risk:</strong> DeFi lending protocols face increasing regulatory scrutiny</li>
+                    <li><strong>Competition:</strong> New entrants and existing protocols innovating rapidly</li>
+                    <li><strong>Market Risk:</strong> TVL highly correlated with ETH price movements</li>
+                </ul>
+                
+                <h2>Investment Recommendation</h2>
+                <p>We initiate coverage of AAVE with a <span class="positive" style="font-weight: 600;">BUY</span> rating and a 12-month price target of <span class="positive" style="font-weight: 600;">$185</span> (40% upside from current levels). Our thesis is based on:</p>
+                <ul>
+                    <li>Undervaluation relative to revenue generation</li>
+                    <li>GHO stablecoin growth potential</li>
+                    <li>Multi-chain expansion momentum</li>
+                    <li>Strong protocol moat and governance</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right: Sidebar -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 180px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">REPORT SUMMARY</div>
+                </div>
+            </div>
+            
+            <div class="rating-box" style="margin-bottom: 16px;">
+                <div class="rating-label">ANALYST RATING</div>
+                <div class="rating-value">BUY</div>
+                <div class="rating-scale">Price Target: $185 (+40%)</div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="panel-title" style="margin-bottom: 8px;">KEY METRICS</div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">Market Cap</div>
+                    <div class="sidebar-item-value">$2.1B (Rank #48)</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">Fully Diluted Value</div>
+                    <div class="sidebar-item-value">$2.3B</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">Circulating Supply</div>
+                    <div class="sidebar-item-value">14.8M AAVE (92.5%)</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">Treasury</div>
+                    <div class="sidebar-item-value">$48M (24mo runway)</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="panel-title" style="margin-bottom: 8px;">VALUATION</div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">P/E Ratio</div>
+                    <div class="sidebar-item-value">16.9x</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">P/TVL Ratio</div>
+                    <div class="sidebar-item-value">0.17x</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-item-title">P/S Ratio</div>
+                    <div class="sidebar-item-value">12.4x</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="panel-title" style="margin-bottom: 8px;">RELATED REPORTS</div>
+                <div class="sidebar-item" style="cursor: pointer;">
+                    <div class="sidebar-item-title">GHO Stablecoin Analysis</div>
+                    <div class="sidebar-item-value">Dec 2024 • 18 pages</div>
+                </div>
+                <div class="sidebar-item" style="cursor: pointer;">
+                    <div class="sidebar-item-title">DeFi Lending Comparison</div>
+                    <div class="sidebar-item-value">Nov 2024 • 32 pages</div>
+                </div>
+                <div class="sidebar-item" style="cursor: pointer;">
+                    <div class="sidebar-item-title">Aave Safety Module Deep Dive</div>
+                    <div class="sidebar-item-value">Oct 2024 • 24 pages</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 16px; padding: 10px; background: var(--bg-panel); border: 1px solid var(--border-color);">
+                <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px;">ACTIONS</div>
+                <button style="width: 100%; background: var(--accent-orange); border: none; padding: 8px; color: #000; font-family: inherit; font-weight: 600; font-size: 10px; cursor: pointer; margin-bottom: 6px;">DOWNLOAD PDF</button>
+                <button style="width: 100%; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 8px; color: var(--text-secondary); font-family: inherit; font-size: 10px; cursor: pointer;">ADD TO WATCHLIST</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <span><span class="footer-key">F3</span><a href="oracle.html">ORACLE</a></span>
+            <span><span class="footer-key">F5</span><a href="yields.html">YIELDS</a></span>
+            <span><span class="footer-key">D</span>DOWNLOAD</span>
+            <span><span class="footer-key">B</span>BOOKMARK</span>
+        </div>
+        <span>RESEARCH v1.3.0 • 847 Reports Available • Updated Daily</span>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        document.querySelectorAll('.report-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.report-item').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F3') window.location.href = 'oracle.html';
+            if (e.key === 'F5') window.location.href = 'yields.html';
+            if (e.key === 'Escape') window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

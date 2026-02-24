@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORACLE | Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --border-bright: #3d4a5c;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+            --accent-purple: #a78bfa;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 12px;
+        }
+        
+        .top-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo { color: var(--accent-orange); font-weight: 700; font-size: 14px; letter-spacing: 2px; }
+        
+        .function-badge {
+            background: var(--accent-orange);
+            color: #000;
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .breadcrumb { color: var(--text-muted); font-size: 11px; }
+        .breadcrumb a { color: var(--accent-blue); text-decoration: none; }
+        
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+        }
+        
+        .status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            display: inline-block;
+            margin-right: 4px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .time { color: var(--accent-amber); font-weight: 500; }
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 320px;
+            gap: 1px;
+            background: var(--border-color);
+            min-height: calc(100vh - 90px);
+        }
+        
+        .panel {
+            background: var(--bg-primary);
+            padding: 12px;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .panel-title {
+            color: var(--accent-orange);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .panel-subtitle { color: var(--text-muted); font-size: 10px; }
+        
+        /* Query History */
+        .query-history {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .query-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .query-item:hover {
+            border-color: var(--accent-orange);
+        }
+        
+        .query-time {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .query-text {
+            font-size: 11px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .query-type {
+            font-size: 9px;
+            padding: 2px 6px;
+            background: var(--bg-tertiary);
+            color: var(--accent-cyan);
+            display: inline-block;
+            border-radius: 2px;
+        }
+        
+        /* Chat Interface */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 135px);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .message {
+            max-width: 90%;
+            padding: 12px 16px;
+            border-radius: 4px;
+        }
+        
+        .message.user {
+            background: var(--bg-panel);
+            border: 1px solid var(--accent-orange);
+            border-left: 3px solid var(--accent-orange);
+            align-self: flex-end;
+        }
+        
+        .message.assistant {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-cyan);
+            align-self: flex-start;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .message-sender {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--accent-orange);
+        }
+        
+        .message.assistant .message-sender {
+            color: var(--accent-cyan);
+        }
+        
+        .message-time {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .message-content {
+            font-size: 12px;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .message-content code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 2px;
+            color: var(--accent-amber);
+        }
+        
+        .message-content pre {
+            background: var(--bg-primary);
+            padding: 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Data Response Tables */
+        .data-response {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            margin: 12px 0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .data-response-header {
+            background: var(--bg-tertiary);
+            padding: 8px 12px;
+            font-size: 10px;
+            color: var(--accent-amber);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-response table {
+            width: 100%;
+            font-size: 11px;
+            border-collapse: collapse;
+        }
+        
+        .data-response th {
+            text-align: left;
+            padding: 8px 12px;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 500;
+            background: var(--bg-secondary);
+        }
+        
+        .data-response td {
+            padding: 8px 12px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .data-response tr:hover td {
+            background: var(--bg-panel);
+        }
+        
+        /* Input Area */
+        .chat-input-container {
+            border-top: 1px solid var(--border-color);
+            padding: 16px;
+            background: var(--bg-secondary);
+        }
+        
+        .suggested-queries {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .suggested-query {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            font-size: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .suggested-query:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+        
+        .chat-input-row {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+            resize: none;
+        }
+        
+        .chat-input:focus {
+            border-color: var(--accent-orange);
+        }
+        
+        .chat-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .send-btn {
+            background: var(--accent-orange);
+            border: none;
+            color: #000;
+            padding: 12px 24px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.15s;
+        }
+        
+        .send-btn:hover {
+            background: var(--accent-amber);
+        }
+        
+        /* Context Panel */
+        .context-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .context-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .context-value {
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+        
+        .context-value.highlight {
+            color: var(--accent-amber);
+        }
+        
+        /* Data Sources */
+        .source-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .source-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            font-size: 10px;
+        }
+        
+        .source-name {
+            color: var(--accent-blue);
+        }
+        
+        .source-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .source-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+        
+        .source-dot.active { background: var(--accent-green); }
+        .source-dot.slow { background: var(--accent-amber); }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-key { color: var(--accent-orange); margin-right: 4px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--accent-orange); }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="logo">EO</span>
+            <span class="function-badge">F3 ORACLE</span>
+            <span class="breadcrumb"><a href="index.html">Terminal</a> / AI Assistant</span>
+        </div>
+        <div class="top-bar-right">
+            <span><span class="status-dot"></span>CONNECTED</span>
+            <span>Model: <span style="color: var(--accent-cyan);">GPT-4 Turbo</span></span>
+            <span class="time" id="current-time">09:42:18 CET</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left: Query History -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">QUERY HISTORY</div>
+                    <div class="panel-subtitle">Recent conversations</div>
+                </div>
+            </div>
+            
+            <div class="query-history">
+                <div class="query-item" style="border-color: var(--accent-orange);">
+                    <div class="query-time">09:38 CET • Active</div>
+                    <div class="query-text">What's the current TVL breakdown for Aave V3?</div>
+                    <span class="query-type">PROTOCOL</span>
+                </div>
+                
+                <div class="query-item">
+                    <div class="query-time">09:24 CET</div>
+                    <div class="query-text">Show me the largest treasury movements in the last 24 hours</div>
+                    <span class="query-type">TREASURY</span>
+                </div>
+                
+                <div class="query-item">
+                    <div class="query-time">09:15 CET</div>
+                    <div class="query-text">Compare staking yields between Lido, Rocket Pool, and Coinbase</div>
+                    <span class="query-type">YIELDS</span>
+                </div>
+                
+                <div class="query-item">
+                    <div class="query-time">08:52 CET</div>
+                    <div class="query-text">What governance proposals are currently active for top 10 DeFi protocols?</div>
+                    <span class="query-type">GOVERNANCE</span>
+                </div>
+                
+                <div class="query-item">
+                    <div class="query-time">08:34 CET</div>
+                    <div class="query-text">Calculate the P/E ratio for MKR based on protocol revenue</div>
+                    <span class="query-type">VALUATION</span>
+                </div>
+                
+                <div class="query-item">
+                    <div class="query-time">08:12 CET</div>
+                    <div class="query-text">Show whale wallet activity for ETH in the past hour</div>
+                    <span class="query-type">WHALE WATCH</span>
+                </div>
+                
+                <div class="query-item">
+                    <div class="query-time">Yesterday</div>
+                    <div class="query-text">What's the correlation between developer commits and token price for L2s?</div>
+                    <span class="query-type">SIGNALS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center: Chat Interface -->
+        <div class="chat-container">
+            <div class="chat-messages">
+                <div class="message user">
+                    <div class="message-header">
+                        <span class="message-sender">YOU</span>
+                        <span class="message-time">09:38 CET</span>
+                    </div>
+                    <div class="message-content">
+                        What's the current TVL breakdown for Aave V3?
+                    </div>
+                </div>
+                
+                <div class="message assistant">
+                    <div class="message-header">
+                        <span class="message-sender">ORACLE</span>
+                        <span class="message-time">09:38 CET</span>
+                    </div>
+                    <div class="message-content">
+                        <p>Here's the current TVL breakdown for <strong>Aave V3</strong> across all deployed chains:</p>
+                        
+                        <div class="data-response">
+                            <div class="data-response-header">AAVE V3 TVL BREAKDOWN • Updated 09:38 CET</div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>CHAIN</th>
+                                        <th>TVL</th>
+                                        <th>% SHARE</th>
+                                        <th>24H Δ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="color: var(--accent-blue);">Ethereum</td>
+                                        <td>$8.24B</td>
+                                        <td>66.5%</td>
+                                        <td class="positive">+2.1%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-blue);">Arbitrum</td>
+                                        <td>$1.87B</td>
+                                        <td>15.1%</td>
+                                        <td class="positive">+4.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-blue);">Polygon</td>
+                                        <td>$892M</td>
+                                        <td>7.2%</td>
+                                        <td class="negative">-0.8%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-blue);">Optimism</td>
+                                        <td>$724M</td>
+                                        <td>5.8%</td>
+                                        <td class="positive">+1.4%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-blue);">Avalanche</td>
+                                        <td>$412M</td>
+                                        <td>3.3%</td>
+                                        <td class="negative">-1.2%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-blue);">Base</td>
+                                        <td>$256M</td>
+                                        <td>2.1%</td>
+                                        <td class="positive">+8.7%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p><strong>Key Insights:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 8px; color: var(--text-secondary);">
+                            <li>Total Aave V3 TVL: <code>$12.39B</code> (+2.4% 24H)</li>
+                            <li>Ethereum dominance increased by 0.8% this week</li>
+                            <li>Base showing strongest growth (+8.7%) after Coinbase integrations</li>
+                            <li>Polygon experiencing minor outflows to Arbitrum</li>
+                        </ul>
+                        
+                        <p style="margin-top: 12px; color: var(--text-muted); font-size: 10px;">
+                            Data sources: DefiLlama, Dune Analytics, Aave Subgraph
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="message user">
+                    <div class="message-header">
+                        <span class="message-sender">YOU</span>
+                        <span class="message-time">09:40 CET</span>
+                    </div>
+                    <div class="message-content">
+                        What about the asset composition on Ethereum mainnet?
+                    </div>
+                </div>
+                
+                <div class="message assistant">
+                    <div class="message-header">
+                        <span class="message-sender">ORACLE</span>
+                        <span class="message-time">09:40 CET</span>
+                    </div>
+                    <div class="message-content">
+                        <p>Here's the asset composition for <strong>Aave V3 on Ethereum</strong>:</p>
+                        
+                        <div class="data-response">
+                            <div class="data-response-header">ASSET COMPOSITION • Ethereum Mainnet</div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ASSET</th>
+                                        <th>SUPPLIED</th>
+                                        <th>BORROWED</th>
+                                        <th>UTILIZATION</th>
+                                        <th>SUPPLY APY</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="color: var(--accent-amber);">WETH</td>
+                                        <td>$3.12B</td>
+                                        <td>$1.87B</td>
+                                        <td>59.9%</td>
+                                        <td class="positive">2.84%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-amber);">wstETH</td>
+                                        <td>$2.41B</td>
+                                        <td>$124M</td>
+                                        <td>5.1%</td>
+                                        <td class="positive">0.12%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-amber);">USDC</td>
+                                        <td>$1.24B</td>
+                                        <td>$892M</td>
+                                        <td>71.9%</td>
+                                        <td class="positive">5.42%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-amber);">USDT</td>
+                                        <td>$687M</td>
+                                        <td>$498M</td>
+                                        <td>72.5%</td>
+                                        <td class="positive">5.67%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-amber);">WBTC</td>
+                                        <td>$524M</td>
+                                        <td>$187M</td>
+                                        <td>35.7%</td>
+                                        <td class="positive">0.24%</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: var(--accent-amber);">DAI</td>
+                                        <td>$198M</td>
+                                        <td>$142M</td>
+                                        <td>71.7%</td>
+                                        <td class="positive">5.18%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p><strong>Notable:</strong> Stablecoin utilization rates are elevated (>70%), suggesting strong borrowing demand. This typically correlates with increased market activity and leverage positioning.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="suggested-queries">
+                    <span class="suggested-query">Compare to Compound V3</span>
+                    <span class="suggested-query">Show liquidation risk</span>
+                    <span class="suggested-query">Historical TVL chart</span>
+                    <span class="suggested-query">Top depositors</span>
+                </div>
+                <div class="chat-input-row">
+                    <textarea class="chat-input" rows="2" placeholder="Ask anything about on-chain data, protocols, or markets..."></textarea>
+                    <button class="send-btn">SEND</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Context Panel -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">QUERY CONTEXT</div>
+                    <div class="panel-subtitle">Current session data</div>
+                </div>
+            </div>
+            
+            <div class="context-item">
+                <div class="context-label">ACTIVE PROTOCOL</div>
+                <div class="context-value highlight">Aave V3</div>
+            </div>
+            
+            <div class="context-item">
+                <div class="context-label">CHAIN FOCUS</div>
+                <div class="context-value">Ethereum Mainnet</div>
+            </div>
+            
+            <div class="context-item">
+                <div class="context-label">TIME RANGE</div>
+                <div class="context-value">Real-time + 24H historical</div>
+            </div>
+            
+            <div class="context-item">
+                <div class="context-label">TOKENS IN SCOPE</div>
+                <div class="context-value" style="font-size: 10px;">WETH, wstETH, USDC, USDT, WBTC, DAI</div>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-header">
+                    <div>
+                        <div class="panel-title">DATA SOURCES</div>
+                        <div class="panel-subtitle">Connected APIs</div>
+                    </div>
+                </div>
+                
+                <div class="source-list">
+                    <div class="source-item">
+                        <span class="source-name">DefiLlama API</span>
+                        <span class="source-status"><span class="source-dot active"></span>45ms</span>
+                    </div>
+                    <div class="source-item">
+                        <span class="source-name">Dune Analytics</span>
+                        <span class="source-status"><span class="source-dot active"></span>120ms</span>
+                    </div>
+                    <div class="source-item">
+                        <span class="source-name">The Graph</span>
+                        <span class="source-status"><span class="source-dot active"></span>85ms</span>
+                    </div>
+                    <div class="source-item">
+                        <span class="source-name">Etherscan API</span>
+                        <span class="source-status"><span class="source-dot active"></span>62ms</span>
+                    </div>
+                    <div class="source-item">
+                        <span class="source-name">CoinGecko</span>
+                        <span class="source-status"><span class="source-dot slow"></span>340ms</span>
+                    </div>
+                    <div class="source-item">
+                        <span class="source-name">Alchemy Node</span>
+                        <span class="source-status"><span class="source-dot active"></span>28ms</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 16px;">
+                <div class="panel-header">
+                    <div>
+                        <div class="panel-title">CAPABILITIES</div>
+                    </div>
+                </div>
+                
+                <div style="font-size: 10px; color: var(--text-secondary);">
+                    <div style="padding: 6px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-green);">●</span> Protocol TVL & metrics
+                    </div>
+                    <div style="padding: 6px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-green);">●</span> Treasury analysis
+                    </div>
+                    <div style="padding: 6px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-green);">●</span> Governance tracking
+                    </div>
+                    <div style="padding: 6px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-green);">●</span> Yield comparisons
+                    </div>
+                    <div style="padding: 6px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-green);">●</span> Whale watching
+                    </div>
+                    <div style="padding: 6px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-green);">●</span> Token valuations
+                    </div>
+                    <div style="padding: 6px 0;">
+                        <span style="color: var(--accent-green);">●</span> Risk assessment
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 16px; padding: 10px; background: var(--bg-panel); border: 1px solid var(--border-color);">
+                <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 6px;">EXAMPLE QUERIES</div>
+                <div style="font-size: 10px; color: var(--text-secondary); line-height: 1.8;">
+                    "Show ETH whale movements > $1M"<br>
+                    "Calculate MKR P/E ratio"<br>
+                    "Compare L2 transaction fees"<br>
+                    "Active governance votes today"
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <span><span class="footer-key">F2</span><a href="flows.html">FLOWS</a></span>
+            <span><span class="footer-key">F4</span><a href="research.html">RESEARCH</a></span>
+            <span><span class="footer-key">⌘+K</span>NEW QUERY</span>
+            <span><span class="footer-key">E</span>EXPORT</span>
+        </div>
+        <span>ORACLE v2.1.0 • Model: GPT-4-Turbo • Context: 128K tokens</span>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Suggested query clicks
+        document.querySelectorAll('.suggested-query').forEach(q => {
+            q.addEventListener('click', function() {
+                document.querySelector('.chat-input').value = this.textContent;
+                document.querySelector('.chat-input').focus();
+            });
+        });
+
+        // Send on Enter (but allow Shift+Enter for newlines)
+        document.querySelector('.chat-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                // Would send message here
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F2') window.location.href = 'flows.html';
+            if (e.key === 'F4') window.location.href = 'research.html';
+            if (e.key === 'Escape') window.location.href = 'index.html';
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.querySelector('.chat-input').focus();
+                document.querySelector('.chat-input').value = '';
+            }
+        });
+    </script>
+</body>
+</html>

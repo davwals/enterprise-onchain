@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVERAGE | Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+            --accent-purple: #a78bfa;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 12px;
+        }
+        
+        .top-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar-left { display: flex; align-items: center; gap: 16px; }
+        .logo { color: var(--accent-orange); font-weight: 700; font-size: 14px; letter-spacing: 2px; }
+        .function-badge { background: var(--accent-orange); color: #000; padding: 4px 12px; font-weight: 700; font-size: 11px; letter-spacing: 1px; }
+        .breadcrumb { color: var(--text-muted); font-size: 11px; }
+        .breadcrumb a { color: var(--accent-blue); text-decoration: none; }
+        .top-bar-right { display: flex; align-items: center; gap: 20px; font-size: 11px; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); display: inline-block; margin-right: 4px; }
+        .time { color: var(--accent-amber); font-weight: 500; }
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        
+        /* Main Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 320px 1fr 350px;
+            gap: 1px;
+            background: var(--border-color);
+            min-height: calc(100vh - 90px);
+        }
+        
+        .panel { background: var(--bg-primary); padding: 12px; }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .panel-title { color: var(--accent-orange); font-weight: 600; font-size: 11px; letter-spacing: 1px; }
+        .panel-subtitle { color: var(--text-muted); font-size: 10px; }
+        
+        /* Token List */
+        .token-list { display: flex; flex-direction: column; gap: 6px; }
+        
+        .token-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .token-item:hover, .token-item.selected {
+            border-color: var(--accent-orange);
+            background: var(--bg-tertiary);
+        }
+        
+        .token-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .token-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .token-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .token-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .token-ticker {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+        
+        .token-stats {
+            text-align: right;
+        }
+        
+        .token-price {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .token-change {
+            font-size: 10px;
+        }
+        
+        .token-consensus {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+            font-size: 10px;
+        }
+        
+        .consensus-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .consensus-label { color: var(--text-muted); }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 16px;
+        }
+        
+        /* Consensus Summary */
+        .consensus-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .summary-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .summary-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .summary-detail {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* Rating Distribution */
+        .rating-distribution {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+        }
+        
+        .rating-title {
+            font-size: 11px;
+            color: var(--accent-orange);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .rating-bar-container {
+            display: flex;
+            gap: 4px;
+            height: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .rating-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: #000;
+            border-radius: 2px;
+        }
+        
+        .rating-segment.buy { background: var(--accent-green); }
+        .rating-segment.hold { background: var(--accent-amber); }
+        .rating-segment.sell { background: var(--accent-red); }
+        
+        .rating-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+        }
+        
+        /* Price Targets */
+        .price-targets {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+        }
+        
+        .target-visual {
+            position: relative;
+            height: 60px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            margin: 16px 0;
+        }
+        
+        .target-range {
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            right: 15%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-amber), var(--accent-green));
+            transform: translateY(-50%);
+            border-radius: 2px;
+        }
+        
+        .target-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .target-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-primary);
+        }
+        
+        .target-dot.low { background: var(--accent-red); }
+        .target-dot.current { background: var(--accent-amber); }
+        .target-dot.avg { background: var(--accent-cyan); }
+        .target-dot.high { background: var(--accent-green); }
+        
+        .target-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            position: absolute;
+            top: 20px;
+            white-space: nowrap;
+        }
+        
+        .target-value {
+            font-size: 10px;
+            font-weight: 600;
+            position: absolute;
+            bottom: 20px;
+            white-space: nowrap;
+        }
+        
+        .target-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .target-stat {
+            text-align: center;
+            padding: 8px;
+            background: var(--bg-tertiary);
+        }
+        
+        .target-stat-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .target-stat-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Analyst Table */
+        .analyst-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        
+        .analyst-table th {
+            text-align: left;
+            padding: 10px 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 10px;
+        }
+        
+        .analyst-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .analyst-table tr:hover td {
+            background: var(--bg-panel);
+        }
+        
+        .analyst-name {
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+        
+        .analyst-firm {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .rating-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 2px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+        
+        .rating-badge.buy { background: rgba(0, 210, 106, 0.2); color: var(--accent-green); }
+        .rating-badge.hold { background: rgba(255, 176, 0, 0.2); color: var(--accent-amber); }
+        .rating-badge.sell { background: rgba(255, 59, 59, 0.2); color: var(--accent-red); }
+        
+        /* Research Notes */
+        .research-notes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .note-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .note-item:hover {
+            border-color: var(--accent-orange);
+        }
+        
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .note-analyst {
+            font-size: 11px;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+        
+        .note-date {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        .note-title {
+            font-size: 12px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        
+        .note-excerpt {
+            font-size: 10px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .note-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            font-size: 10px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-key { color: var(--accent-orange); margin-right: 4px; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="logo">EO</span>
+            <span class="function-badge">F9 COVERAGE</span>
+            <span class="breadcrumb"><a href="index.html">Terminal</a> / Analyst Consensus</span>
+        </div>
+        <div class="top-bar-right">
+            <span><span class="status-dot"></span>248 Analysts</span>
+            <span class="time" id="current-time">09:42:18 CET</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left: Token List -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">COVERED TOKENS</div>
+                    <div class="panel-subtitle">By analyst count</div>
+                </div>
+            </div>
+            
+            <div class="token-list">
+                <div class="token-item selected">
+                    <div class="token-row">
+                        <div class="token-info">
+                            <div class="token-icon">A</div>
+                            <div>
+                                <div class="token-name">Aave</div>
+                                <div class="token-ticker">AAVE</div>
+                            </div>
+                        </div>
+                        <div class="token-stats">
+                            <div class="token-price positive">$142.87</div>
+                            <div class="token-change positive">+3.4%</div>
+                        </div>
+                    </div>
+                    <div class="token-consensus">
+                        <div class="consensus-item">
+                            <span class="consensus-label">Analysts:</span>
+                            <span>18</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Consensus:</span>
+                            <span class="positive">BUY</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Target:</span>
+                            <span>$185</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="token-item">
+                    <div class="token-row">
+                        <div class="token-info">
+                            <div class="token-icon">U</div>
+                            <div>
+                                <div class="token-name">Uniswap</div>
+                                <div class="token-ticker">UNI</div>
+                            </div>
+                        </div>
+                        <div class="token-stats">
+                            <div class="token-price positive">$12.84</div>
+                            <div class="token-change positive">+5.2%</div>
+                        </div>
+                    </div>
+                    <div class="token-consensus">
+                        <div class="consensus-item">
+                            <span class="consensus-label">Analysts:</span>
+                            <span>24</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Consensus:</span>
+                            <span class="positive">BUY</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Target:</span>
+                            <span>$18</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="token-item">
+                    <div class="token-row">
+                        <div class="token-info">
+                            <div class="token-icon">M</div>
+                            <div>
+                                <div class="token-name">Maker</div>
+                                <div class="token-ticker">MKR</div>
+                            </div>
+                        </div>
+                        <div class="token-stats">
+                            <div class="token-price positive">$1,847</div>
+                            <div class="token-change positive">+2.1%</div>
+                        </div>
+                    </div>
+                    <div class="token-consensus">
+                        <div class="consensus-item">
+                            <span class="consensus-label">Analysts:</span>
+                            <span>16</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Consensus:</span>
+                            <span style="color: var(--accent-amber);">HOLD</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Target:</span>
+                            <span>$2,100</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="token-item">
+                    <div class="token-row">
+                        <div class="token-info">
+                            <div class="token-icon">L</div>
+                            <div>
+                                <div class="token-name">Lido</div>
+                                <div class="token-ticker">LDO</div>
+                            </div>
+                        </div>
+                        <div class="token-stats">
+                            <div class="token-price positive">$2.84</div>
+                            <div class="token-change negative">-1.2%</div>
+                        </div>
+                    </div>
+                    <div class="token-consensus">
+                        <div class="consensus-item">
+                            <span class="consensus-label">Analysts:</span>
+                            <span>14</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Consensus:</span>
+                            <span class="positive">BUY</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Target:</span>
+                            <span>$4.50</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="token-item">
+                    <div class="token-row">
+                        <div class="token-info">
+                            <div class="token-icon">AR</div>
+                            <div>
+                                <div class="token-name">Arbitrum</div>
+                                <div class="token-ticker">ARB</div>
+                            </div>
+                        </div>
+                        <div class="token-stats">
+                            <div class="token-price positive">$1.74</div>
+                            <div class="token-change positive">+8.4%</div>
+                        </div>
+                    </div>
+                    <div class="token-consensus">
+                        <div class="consensus-item">
+                            <span class="consensus-label">Analysts:</span>
+                            <span>22</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Consensus:</span>
+                            <span class="positive">BUY</span>
+                        </div>
+                        <div class="consensus-item">
+                            <span class="consensus-label">Target:</span>
+                            <span>$2.80</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center: Main Content -->
+        <div class="main-content">
+            <div class="consensus-summary">
+                <div class="summary-card">
+                    <div class="summary-label">CONSENSUS RATING</div>
+                    <div class="summary-value positive">BUY</div>
+                    <div class="summary-detail">Strong Buy: 11/18</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">AVG PRICE TARGET</div>
+                    <div class="summary-value" style="color: var(--accent-amber);">$185</div>
+                    <div class="summary-detail positive">+29.5% upside</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">ANALYSTS COVERING</div>
+                    <div class="summary-value" style="color: var(--accent-cyan);">18</div>
+                    <div class="summary-detail">+3 last 30D</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-label">LAST RATING</div>
+                    <div class="summary-value positive">BUY</div>
+                    <div class="summary-detail">Messari • 2d ago</div>
+                </div>
+            </div>
+
+            <div class="rating-distribution">
+                <div class="rating-title">RATING DISTRIBUTION</div>
+                <div class="rating-bar-container">
+                    <div class="rating-segment buy" style="flex: 11;">Strong Buy (11)</div>
+                    <div class="rating-segment buy" style="flex: 4;">Buy (4)</div>
+                    <div class="rating-segment hold" style="flex: 2;">Hold (2)</div>
+                    <div class="rating-segment sell" style="flex: 1;">Sell (1)</div>
+                </div>
+                <div class="rating-legend">
+                    <span class="positive">Strong Buy: 61%</span>
+                    <span class="positive">Buy: 22%</span>
+                    <span style="color: var(--accent-amber);">Hold: 11%</span>
+                    <span class="negative">Sell: 6%</span>
+                </div>
+            </div>
+
+            <div class="price-targets">
+                <div class="rating-title">PRICE TARGET RANGE</div>
+                <div class="target-visual">
+                    <div class="target-range"></div>
+                    <div class="target-marker" style="left: 15%;">
+                        <div class="target-dot low"></div>
+                        <span class="target-label">LOW</span>
+                        <span class="target-value negative">$95</span>
+                    </div>
+                    <div class="target-marker" style="left: 45%;">
+                        <div class="target-dot current"></div>
+                        <span class="target-label">CURRENT</span>
+                        <span class="target-value" style="color: var(--accent-amber);">$143</span>
+                    </div>
+                    <div class="target-marker" style="left: 65%;">
+                        <div class="target-dot avg"></div>
+                        <span class="target-label">AVG TARGET</span>
+                        <span class="target-value" style="color: var(--accent-cyan);">$185</span>
+                    </div>
+                    <div class="target-marker" style="left: 85%;">
+                        <div class="target-dot high"></div>
+                        <span class="target-label">HIGH</span>
+                        <span class="target-value positive">$250</span>
+                    </div>
+                </div>
+                <div class="target-stats">
+                    <div class="target-stat">
+                        <div class="target-stat-label">LOW TARGET</div>
+                        <div class="target-stat-value negative">$95</div>
+                    </div>
+                    <div class="target-stat">
+                        <div class="target-stat-label">MEDIAN</div>
+                        <div class="target-stat-value">$178</div>
+                    </div>
+                    <div class="target-stat">
+                        <div class="target-stat-label">AVERAGE</div>
+                        <div class="target-stat-value">$185</div>
+                    </div>
+                    <div class="target-stat">
+                        <div class="target-stat-label">HIGH TARGET</div>
+                        <div class="target-stat-value positive">$250</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyst Ratings Table -->
+            <div style="background: var(--bg-panel); border: 1px solid var(--border-color); padding: 16px;">
+                <div class="rating-title">ANALYST RATINGS</div>
+                <table class="analyst-table">
+                    <thead>
+                        <tr>
+                            <th>ANALYST</th>
+                            <th>RATING</th>
+                            <th>TARGET</th>
+                            <th>PREV</th>
+                            <th>DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="analyst-name">Marcus Chen</div>
+                                <div class="analyst-firm">Messari</div>
+                            </td>
+                            <td><span class="rating-badge buy">STRONG BUY</span></td>
+                            <td class="positive">$210</td>
+                            <td>$185</td>
+                            <td>Jan 13</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="analyst-name">Sarah Kim</div>
+                                <div class="analyst-firm">Delphi Digital</div>
+                            </td>
+                            <td><span class="rating-badge buy">BUY</span></td>
+                            <td class="positive">$195</td>
+                            <td>$180</td>
+                            <td>Jan 10</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="analyst-name">Alex Thompson</div>
+                                <div class="analyst-firm">The Block</div>
+                            </td>
+                            <td><span class="rating-badge buy">STRONG BUY</span></td>
+                            <td class="positive">$220</td>
+                            <td>NEW</td>
+                            <td>Jan 8</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="analyst-name">Elena Volkov</div>
+                                <div class="analyst-firm">Galaxy Digital</div>
+                            </td>
+                            <td><span class="rating-badge hold">HOLD</span></td>
+                            <td>$155</td>
+                            <td>$140</td>
+                            <td>Jan 5</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="analyst-name">James Park</div>
+                                <div class="analyst-firm">Pantera</div>
+                            </td>
+                            <td><span class="rating-badge buy">BUY</span></td>
+                            <td class="positive">$185</td>
+                            <td>$170</td>
+                            <td>Jan 3</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="analyst-name">Michael Brown</div>
+                                <div class="analyst-firm">Standard Crypto</div>
+                            </td>
+                            <td><span class="rating-badge sell">SELL</span></td>
+                            <td class="negative">$95</td>
+                            <td>$110</td>
+                            <td>Dec 28</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Right: Research Notes -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 90px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">RESEARCH NOTES</div>
+                    <div class="panel-subtitle">Latest analyst coverage</div>
+                </div>
+            </div>
+            
+            <div class="research-notes">
+                <div class="note-item">
+                    <div class="note-header">
+                        <span class="note-analyst">Messari Research</span>
+                        <span class="note-date">Jan 13</span>
+                    </div>
+                    <div class="note-title">Aave V3: GHO Stablecoin Creates New Revenue Stream</div>
+                    <div class="note-excerpt">GHO adoption accelerating with $120M minted. We see significant revenue potential from interest on outstanding GHO. Raising price target to $210...</div>
+                    <div class="note-meta">
+                        <span class="positive">▲ PT $210</span>
+                        <span class="rating-badge buy">STRONG BUY</span>
+                    </div>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-header">
+                        <span class="note-analyst">Delphi Digital</span>
+                        <span class="note-date">Jan 10</span>
+                    </div>
+                    <div class="note-title">Lending Protocol Comparison: Aave Maintains Lead</div>
+                    <div class="note-excerpt">Our updated analysis shows Aave maintaining its dominant position with 35% market share. Multi-chain strategy paying dividends...</div>
+                    <div class="note-meta">
+                        <span class="positive">▲ PT $195</span>
+                        <span class="rating-badge buy">BUY</span>
+                    </div>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-header">
+                        <span class="note-analyst">The Block Research</span>
+                        <span class="note-date">Jan 8</span>
+                    </div>
+                    <div class="note-title">Initiating Coverage: Aave Protocol Deep Dive</div>
+                    <div class="note-excerpt">We initiate coverage with Strong Buy. Aave's moat in DeFi lending is substantial, supported by $48M treasury and strong governance...</div>
+                    <div class="note-meta">
+                        <span style="color: var(--accent-cyan);">NEW COVERAGE</span>
+                        <span class="rating-badge buy">STRONG BUY</span>
+                    </div>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-header">
+                        <span class="note-analyst">Galaxy Digital</span>
+                        <span class="note-date">Jan 5</span>
+                    </div>
+                    <div class="note-title">DeFi Sector Review: Cautious Near-Term Outlook</div>
+                    <div class="note-excerpt">While fundamentals remain strong, elevated utilization rates and potential regulatory headwinds warrant caution. Maintain HOLD...</div>
+                    <div class="note-meta">
+                        <span style="color: var(--accent-amber);">— PT $155</span>
+                        <span class="rating-badge hold">HOLD</span>
+                    </div>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-header">
+                        <span class="note-analyst">Standard Crypto</span>
+                        <span class="note-date">Dec 28</span>
+                    </div>
+                    <div class="note-title">Aave: Valuation Stretched After Recent Rally</div>
+                    <div class="note-excerpt">Following 80% run from lows, we see limited near-term upside. P/E of 17x appears full given competitive pressures. Downgrade to SELL...</div>
+                    <div class="note-meta">
+                        <span class="negative">▼ PT $95</span>
+                        <span class="rating-badge sell">SELL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <span><span class="footer-key">F8</span><a href="treasury.html">TREASURY</a></span>
+            <span><span class="footer-key">F10</span><a href="network.html">NETWORK</a></span>
+            <span><span class="footer-key">A</span>ALL ANALYSTS</span>
+            <span><span class="footer-key">E</span>EXPORT</span>
+        </div>
+        <span>COVERAGE v1.1.0 • 248 Analysts • 847 Ratings • Updated: <span id="update-time">09:42:18</span></span>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+            document.getElementById('current-time').textContent = timeStr;
+            document.getElementById('update-time').textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        document.querySelectorAll('.token-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.token-item').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F8') window.location.href = 'treasury.html';
+            if (e.key === 'F10') window.location.href = 'network.html';
+            if (e.key === 'Escape') window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

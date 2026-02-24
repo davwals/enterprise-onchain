@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PULSE | Enterprise Onchain Terminal</title>
+    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #0f1419;
+            --bg-tertiary: #151b24;
+            --bg-panel: #1a222d;
+            --border-color: #2a3441;
+            --border-bright: #3d4a5c;
+            --text-primary: #e8e8e8;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb000;
+            --accent-green: #00d26a;
+            --accent-red: #ff3b3b;
+            --accent-blue: #4da6ff;
+            --accent-cyan: #00d4d4;
+            --accent-purple: #a78bfa;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        /* Top Bar */
+        .top-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo {
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        .function-badge {
+            background: var(--accent-orange);
+            color: #000;
+            padding: 4px 12px;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .breadcrumb {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+        
+        .breadcrumb a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .time {
+            color: var(--accent-amber);
+            font-weight: 500;
+        }
+        
+        /* Main Grid Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr 300px;
+            grid-template-rows: auto 1fr;
+            gap: 1px;
+            background: var(--border-color);
+            min-height: calc(100vh - 45px);
+        }
+        
+        .panel {
+            background: var(--bg-primary);
+            padding: 12px;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .panel-title {
+            color: var(--accent-orange);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .panel-subtitle {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+        
+        /* Morning Brief Header */
+        .brief-header {
+            grid-column: 1 / -1;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .brief-date {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .brief-date span {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+        
+        .brief-meta {
+            display: flex;
+            gap: 24px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        .brief-meta span {
+            color: var(--text-secondary);
+        }
+        
+        /* Market Summary */
+        .market-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .market-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 2px;
+        }
+        
+        .market-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .market-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .market-change {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        
+        .positive { color: var(--accent-green); }
+        .negative { color: var(--accent-red); }
+        
+        /* Events List */
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .event-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-orange);
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        
+        .event-item:hover {
+            border-color: var(--accent-orange);
+            background: var(--bg-tertiary);
+        }
+        
+        .event-item.critical {
+            border-left-color: var(--accent-red);
+        }
+        
+        .event-item.success {
+            border-left-color: var(--accent-green);
+        }
+        
+        .event-time {
+            font-size: 10px;
+            color: var(--accent-amber);
+            margin-bottom: 4px;
+        }
+        
+        .event-title {
+            font-size: 11px;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .event-desc {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .event-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+        }
+        
+        .tag {
+            font-size: 9px;
+            padding: 2px 6px;
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+            border-radius: 2px;
+        }
+        
+        .tag.governance { background: rgba(167, 139, 250, 0.2); color: var(--accent-purple); }
+        .tag.treasury { background: rgba(255, 176, 0, 0.2); color: var(--accent-amber); }
+        .tag.defi { background: rgba(0, 210, 106, 0.2); color: var(--accent-green); }
+        
+        /* Treasury Movements Table */
+        .data-table {
+            width: 100%;
+            font-size: 11px;
+        }
+        
+        .data-table th {
+            text-align: left;
+            padding: 8px 6px;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-tertiary);
+        }
+        
+        .data-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .data-table tr:hover td {
+            background: var(--bg-panel);
+        }
+        
+        .protocol-name {
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+        
+        .amount-large {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        /* Governance Panel */
+        .gov-item {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 2px;
+        }
+        
+        .gov-protocol {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        
+        .gov-name {
+            color: var(--accent-cyan);
+            font-weight: 500;
+            font-size: 11px;
+        }
+        
+        .gov-status {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+        
+        .gov-status.active {
+            background: rgba(0, 210, 106, 0.2);
+            color: var(--accent-green);
+        }
+        
+        .gov-status.pending {
+            background: rgba(255, 176, 0, 0.2);
+            color: var(--accent-amber);
+        }
+        
+        .gov-title {
+            font-size: 10px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        
+        .gov-votes {
+            display: flex;
+            gap: 12px;
+            font-size: 10px;
+        }
+        
+        .vote-bar {
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        
+        .vote-fill {
+            height: 100%;
+            background: var(--accent-green);
+        }
+        
+        /* Alert Banner */
+        .alert-banner {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid var(--accent-red);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            grid-column: 1 / -1;
+        }
+        
+        .alert-icon {
+            color: var(--accent-red);
+            font-size: 14px;
+        }
+        
+        .alert-text {
+            color: var(--accent-red);
+            font-size: 11px;
+            flex: 1;
+        }
+        
+        .alert-time {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-bright);
+            border-radius: 3px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .footer-key {
+            color: var(--accent-orange);
+            margin-right: 4px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span class="logo">EO</span>
+            <span class="function-badge">F1 PULSE</span>
+            <span class="breadcrumb"><a href="index.html">Terminal</a> / Morning Brief</span>
+        </div>
+        <div class="top-bar-right">
+            <div class="status">
+                <div class="status-dot"></div>
+                <span>LIVE</span>
+            </div>
+            <span>ETH: <span class="positive">$3,847.24</span></span>
+            <span>BTC: <span class="positive">$67,842</span></span>
+            <span class="time" id="current-time">09:42:18 CET</span>
+        </div>
+    </div>
+
+    <div class="alert-banner">
+        <span class="alert-icon">⚠</span>
+        <span class="alert-text">ALERT: Unusual activity detected - Aave treasury moved $47M USDC to new multisig</span>
+        <span class="alert-time">2 min ago</span>
+    </div>
+
+    <div class="main-grid">
+        <div class="brief-header">
+            <div class="brief-date">JANUARY <span>15, 2025</span> MORNING BRIEF</div>
+            <div class="brief-meta">
+                <span>Last updated: <span>09:42 CET</span></span>
+                <span>Events: <span>47 significant</span></span>
+                <span>Alerts: <span style="color: var(--accent-red);">3 critical</span></span>
+            </div>
+            <div class="market-row">
+                <div class="market-item">
+                    <div class="market-label">TOTAL DeFi TVL</div>
+                    <div class="market-value">$87.4B</div>
+                    <div class="market-change positive">▲ 2.4%</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-label">24H VOLUME</div>
+                    <div class="market-value">$4.2B</div>
+                    <div class="market-change positive">▲ 18.7%</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-label">ETH STAKED</div>
+                    <div class="market-value">34.2M</div>
+                    <div class="market-change positive">▲ 0.12%</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-label">GAS (GWEI)</div>
+                    <div class="market-value">24</div>
+                    <div class="market-change negative">▼ 34%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left Panel: Key Events -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 220px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">KEY EVENTS</div>
+                    <div class="panel-subtitle">Last 24 hours</div>
+                </div>
+                <select style="background: var(--bg-panel); border: 1px solid var(--border-color); color: var(--text-secondary); padding: 4px 8px; font-size: 10px; font-family: inherit;">
+                    <option>All Categories</option>
+                    <option>Treasury</option>
+                    <option>Governance</option>
+                    <option>DeFi</option>
+                </select>
+            </div>
+            
+            <div class="event-list">
+                <div class="event-item critical">
+                    <div class="event-time">09:38 CET • CRITICAL</div>
+                    <div class="event-title">Aave Treasury Transfer: $47M USDC</div>
+                    <div class="event-desc">Large treasury movement to new multisig wallet. Requires attention.</div>
+                    <div class="event-tags">
+                        <span class="tag treasury">TREASURY</span>
+                        <span class="tag">AAVE</span>
+                    </div>
+                </div>
+                
+                <div class="event-item success">
+                    <div class="event-time">08:15 CET</div>
+                    <div class="event-title">Uniswap V4 Governance Vote Passed</div>
+                    <div class="event-desc">UIP-47 approved with 89.2% support. Fee switch activation scheduled.</div>
+                    <div class="event-tags">
+                        <span class="tag governance">GOVERNANCE</span>
+                        <span class="tag">UNI</span>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-time">07:42 CET</div>
+                    <div class="event-title">MakerDAO Stability Fee Adjustment</div>
+                    <div class="event-desc">DSR increased to 8.0% from 5.0%. Significant yield impact expected.</div>
+                    <div class="event-tags">
+                        <span class="tag defi">DEFI</span>
+                        <span class="tag">MKR</span>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-time">06:30 CET</div>
+                    <div class="event-title">Lido Validator Exit: 12,400 ETH</div>
+                    <div class="event-desc">Scheduled validator rotation complete. No abnormal activity.</div>
+                    <div class="event-tags">
+                        <span class="tag">STAKING</span>
+                        <span class="tag">LDO</span>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-time">05:18 CET</div>
+                    <div class="event-title">Compound III Market Expansion</div>
+                    <div class="event-desc">New wstETH market launched with $50M initial liquidity.</div>
+                    <div class="event-tags">
+                        <span class="tag defi">DEFI</span>
+                        <span class="tag">COMP</span>
+                    </div>
+                </div>
+                
+                <div class="event-item critical">
+                    <div class="event-time">04:52 CET • CRITICAL</div>
+                    <div class="event-title">Curve Pool Imbalance Alert</div>
+                    <div class="event-desc">3pool showing 78% USDT concentration. Monitor for depeg risk.</div>
+                    <div class="event-tags">
+                        <span class="tag treasury">RISK</span>
+                        <span class="tag">CRV</span>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-time">03:24 CET</div>
+                    <div class="event-title">Arbitrum Sequencer Revenue: $2.4M</div>
+                    <div class="event-desc">Record daily revenue. Network activity at all-time high.</div>
+                    <div class="event-tags">
+                        <span class="tag">L2</span>
+                        <span class="tag">ARB</span>
+                    </div>
+                </div>
+                
+                <div class="event-item success">
+                    <div class="event-time">02:11 CET</div>
+                    <div class="event-title">ENS Revenue Distribution</div>
+                    <div class="event-desc">$8.2M distributed to DAO. Quarterly revenue up 34%.</div>
+                    <div class="event-tags">
+                        <span class="tag governance">GOVERNANCE</span>
+                        <span class="tag">ENS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Panel: Treasury Movements -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 220px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">TREASURY MOVEMENTS</div>
+                    <div class="panel-subtitle">Transactions > $1M</div>
+                </div>
+                <span class="panel-subtitle">47 movements</span>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>TIME</th>
+                        <th>PROTOCOL</th>
+                        <th>ACTION</th>
+                        <th>AMOUNT</th>
+                        <th>DESTINATION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>09:38</td>
+                        <td class="protocol-name">Aave</td>
+                        <td>Transfer</td>
+                        <td class="amount-large negative">-$47.0M</td>
+                        <td>New Multisig</td>
+                    </tr>
+                    <tr>
+                        <td>08:42</td>
+                        <td class="protocol-name">Uniswap</td>
+                        <td>Grant</td>
+                        <td class="amount-large negative">-$12.5M</td>
+                        <td>UF Grants</td>
+                    </tr>
+                    <tr>
+                        <td>07:55</td>
+                        <td class="protocol-name">MakerDAO</td>
+                        <td>Buy</td>
+                        <td class="amount-large positive">+$25.0M</td>
+                        <td>T-Bills</td>
+                    </tr>
+                    <tr>
+                        <td>07:12</td>
+                        <td class="protocol-name">Lido</td>
+                        <td>Deposit</td>
+                        <td class="amount-large positive">+$8.4M</td>
+                        <td>stETH Buffer</td>
+                    </tr>
+                    <tr>
+                        <td>06:48</td>
+                        <td class="protocol-name">Compound</td>
+                        <td>Transfer</td>
+                        <td class="amount-large negative">-$5.2M</td>
+                        <td>Dev Fund</td>
+                    </tr>
+                    <tr>
+                        <td>05:30</td>
+                        <td class="protocol-name">Arbitrum</td>
+                        <td>Sequencer</td>
+                        <td class="amount-large positive">+$2.4M</td>
+                        <td>DAO Treasury</td>
+                    </tr>
+                    <tr>
+                        <td>04:15</td>
+                        <td class="protocol-name">Optimism</td>
+                        <td>Grant</td>
+                        <td class="amount-large negative">-$18.7M</td>
+                        <td>RetroPGF</td>
+                    </tr>
+                    <tr>
+                        <td>03:42</td>
+                        <td class="protocol-name">dYdX</td>
+                        <td>Buyback</td>
+                        <td class="amount-large negative">-$4.8M</td>
+                        <td>Token Burn</td>
+                    </tr>
+                    <tr>
+                        <td>02:58</td>
+                        <td class="protocol-name">Curve</td>
+                        <td>Fee Dist</td>
+                        <td class="amount-large positive">+$3.1M</td>
+                        <td>veCRV</td>
+                    </tr>
+                    <tr>
+                        <td>02:11</td>
+                        <td class="protocol-name">ENS</td>
+                        <td>Revenue</td>
+                        <td class="amount-large positive">+$8.2M</td>
+                        <td>DAO Treasury</td>
+                    </tr>
+                    <tr>
+                        <td>01:45</td>
+                        <td class="protocol-name">GMX</td>
+                        <td>Fee Share</td>
+                        <td class="amount-large positive">+$1.8M</td>
+                        <td>GLP Holders</td>
+                    </tr>
+                    <tr>
+                        <td>00:32</td>
+                        <td class="protocol-name">Frax</td>
+                        <td>AMO</td>
+                        <td class="amount-large negative">-$15.0M</td>
+                        <td>Curve Pool</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 16px; padding: 12px; background: var(--bg-panel); border: 1px solid var(--border-color);">
+                <div class="panel-title" style="margin-bottom: 8px;">NET FLOW SUMMARY (24H)</div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 11px;">
+                    <div>
+                        <div class="market-label">INFLOWS</div>
+                        <div class="positive" style="font-size: 16px; font-weight: 600;">+$48.9M</div>
+                    </div>
+                    <div>
+                        <div class="market-label">OUTFLOWS</div>
+                        <div class="negative" style="font-size: 16px; font-weight: 600;">-$103.2M</div>
+                    </div>
+                    <div>
+                        <div class="market-label">NET</div>
+                        <div class="negative" style="font-size: 16px; font-weight: 600;">-$54.3M</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Governance -->
+        <div class="panel" style="overflow-y: auto; max-height: calc(100vh - 220px);">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-title">ACTIVE GOVERNANCE</div>
+                    <div class="panel-subtitle">12 proposals</div>
+                </div>
+            </div>
+            
+            <div class="gov-item">
+                <div class="gov-protocol">
+                    <span class="gov-name">UNISWAP</span>
+                    <span class="gov-status active">PASSED</span>
+                </div>
+                <div class="gov-title">UIP-47: Fee Switch Activation</div>
+                <div class="gov-votes">
+                    <span class="positive">FOR: 89.2%</span>
+                    <span class="negative">AGAINST: 10.8%</span>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 89.2%"></div>
+                </div>
+            </div>
+            
+            <div class="gov-item">
+                <div class="gov-protocol">
+                    <span class="gov-name">AAVE</span>
+                    <span class="gov-status pending">VOTING</span>
+                </div>
+                <div class="gov-title">AIP-312: GHO Stability Module</div>
+                <div class="gov-votes">
+                    <span class="positive">FOR: 76.4%</span>
+                    <span class="negative">AGAINST: 23.6%</span>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 76.4%"></div>
+                </div>
+            </div>
+            
+            <div class="gov-item">
+                <div class="gov-protocol">
+                    <span class="gov-name">COMPOUND</span>
+                    <span class="gov-status pending">VOTING</span>
+                </div>
+                <div class="gov-title">Proposal 187: wstETH Market</div>
+                <div class="gov-votes">
+                    <span class="positive">FOR: 94.1%</span>
+                    <span class="negative">AGAINST: 5.9%</span>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 94.1%"></div>
+                </div>
+            </div>
+            
+            <div class="gov-item">
+                <div class="gov-protocol">
+                    <span class="gov-name">ARBITRUM</span>
+                    <span class="gov-status pending">VOTING</span>
+                </div>
+                <div class="gov-title">AIP-42: Sequencer Revenue Split</div>
+                <div class="gov-votes">
+                    <span class="positive">FOR: 67.8%</span>
+                    <span class="negative">AGAINST: 32.2%</span>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 67.8%"></div>
+                </div>
+            </div>
+            
+            <div class="gov-item">
+                <div class="gov-protocol">
+                    <span class="gov-name">MAKERDAO</span>
+                    <span class="gov-status active">PASSED</span>
+                </div>
+                <div class="gov-title">Executive: DSR to 8%</div>
+                <div class="gov-votes">
+                    <span class="positive">FOR: 100%</span>
+                    <span class="negative">AGAINST: 0%</span>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            
+            <div class="gov-item">
+                <div class="gov-protocol">
+                    <span class="gov-name">LIDO</span>
+                    <span class="gov-status pending">VOTING</span>
+                </div>
+                <div class="gov-title">LIP-28: stETH Withdrawals V2</div>
+                <div class="gov-votes">
+                    <span class="positive">FOR: 82.3%</span>
+                    <span class="negative">AGAINST: 17.7%</span>
+                </div>
+                <div class="vote-bar">
+                    <div class="vote-fill" style="width: 82.3%"></div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 16px; padding: 12px; background: var(--bg-panel); border: 1px solid var(--border-color);">
+                <div class="panel-title" style="margin-bottom: 8px;">UPCOMING VOTES</div>
+                <div style="font-size: 10px; color: var(--text-secondary);">
+                    <div style="padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-amber);">IN 2H</span> • ENS Working Group Budget
+                    </div>
+                    <div style="padding: 4px 0; border-bottom: 1px solid var(--border-color);">
+                        <span style="color: var(--accent-amber);">IN 6H</span> • Optimism RetroPGF Round 4
+                    </div>
+                    <div style="padding: 4px 0;">
+                        <span style="color: var(--accent-amber);">IN 12H</span> • dYdX Chain Migration
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <span><span class="footer-key">←</span><a href="index.html">MENU</a></span>
+            <span><span class="footer-key">F2</span><a href="flows.html">FLOWS</a></span>
+            <span><span class="footer-key">R</span>REFRESH</span>
+            <span><span class="footer-key">E</span>EXPORT</span>
+        </div>
+        <span>PULSE v1.4.2 • Data: Ethereum Mainnet • Updated: <span id="update-time">09:42:18</span></span>
+    </div>
+
+    <script>
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' CET';
+            document.getElementById('current-time').textContent = timeStr;
+            document.getElementById('update-time').textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'Escape') window.location.href = 'index.html';
+            if (e.key === 'F2') window.location.href = 'flows.html';
+            if (e.key === 'r' || e.key === 'R') location.reload();
+        });
+    </script>
+</body>
+</html>
