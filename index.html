@@ -1,670 +1,1126 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Onchain | Track Institutional Crypto Adoption</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="https://i.imgur.com/LJ0gSjb.jpeg">
-    <link rel="apple-touch-icon" href="https://i.imgur.com/LJ0gSjb.jpeg">
-    
-    <!-- Open Graph / LinkedIn -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://enterpriseonchain.com/">
-    <meta property="og:title" content="Enterprise Onchain | Track Institutional Crypto Adoption">
-    <meta property="og:description" content="Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.">
-    <meta property="og:image" content="https://enterpriseonchain.com/og-image.jpg">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://enterpriseonchain.com/">
-    <meta name="twitter:title" content="Enterprise Onchain | Track Institutional Crypto Adoption">
-    <meta name="twitter:description" content="Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.">
-    <meta name="twitter:image" content="https://enterpriseonchain.com/og-image.jpg">
-    
-    <!-- Additional SEO -->
-    <meta name="description" content="Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.">
-    <meta name="keywords" content="institutional crypto, tokenization, RWA, blockchain adoption, enterprise ethereum">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'manrope': ['Manrope', 'sans-serif'],
-                        'mono': ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Manrope', sans-serif; }
-        
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #e4e4e7;
-            border-radius: 9999px;
-        }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #3f3f46;
-        }
-        
-        /* Grid Pattern */
-        .bg-grid-pattern {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-        }
-        .dark .bg-grid-pattern {
-            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-        }
-        
-        /* Building elements for cityscape */
-        .building {
-            position: absolute;
-            bottom: 0;
-            background-color: currentColor;
-            opacity: 0.1;
-        }
-        .dark .building {
-            opacity: 0.2;
-        }
-        
-        /* Scroll animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Staggered animation delays */
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
-        .delay-500 { transition-delay: 500ms; }
-        .delay-600 { transition-delay: 600ms; }
-        .delay-700 { transition-delay: 700ms; }
-        
-        /* Exit popup animation */
-        .popup-overlay {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .popup-content {
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .popup-overlay.active .popup-content {
-            transform: scale(1) translateY(0);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ── SEO ── -->
+<title>Enterprise Onchain | Track Institutional Crypto Adoption</title>
+<meta name="description" content="The weekly intelligence briefing on institutional Ethereum and blockchain adoption. Covering tokenization, stablecoins, DeFi, ETF flows, and regulatory shifts. Read by leaders at 200+ institutions.">
+<meta name="keywords" content="institutional Ethereum, blockchain adoption, tokenization, stablecoins, RWA, DeFi, Ethereum institutions, blockchain newsletter, institutional crypto, enterprise blockchain, Ethereum ETF, digital asset custody">
+<meta name="author" content="Enterprise Onchain">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://enterpriseonchain.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Enterprise Onchain">
+<meta property="og:title" content="Enterprise Onchain · Institutional Crypto Intelligence">
+<meta property="og:description" content="Leading institutional crypto newsletter for decision makers. Read by leaders at 200+ institutions.">
+<meta property="og:url" content="https://enterpriseonchain.com/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@enteronchain">
+<meta name="twitter:creator" content="@enteronchain">
+<meta name="twitter:title" content="Enterprise Onchain · Institutional Crypto Intelligence">
+<meta name="twitter:description" content="Leading institutional crypto newsletter for decision makers. Read by leaders at 200+ institutions.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://enterpriseonchain.com/#organization",
+      "name": "Enterprise Onchain",
+      "url": "https://enterpriseonchain.com/",
+      "description": "Intelligence briefing on institutional Ethereum and blockchain adoption, tokenization, stablecoins, and regulatory developments.",
+      "founder": [
+        {"@type": "Person", "name": "James Smith", "jobTitle": "Head of Ecosystem Development, Ethereum Foundation", "sameAs": "https://x.com/snapcrackle"},
+        {"@type": "Person", "name": "David Walsh", "jobTitle": "Head of Institutions, Ethereum Foundation", "sameAs": "https://x.com/davwals"}
+      ],
+      "sameAs": [
+        "https://x.com/enteronchain",
+        "https://www.linkedin.com/company/enterpriseonchain",
+        "https://enterpriseonchain.substack.com/"
+      ],
+      "knowsAbout": ["Ethereum", "blockchain", "tokenization", "stablecoins", "DeFi", "institutional adoption", "real-world assets", "digital asset custody"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://enterpriseonchain.com/#website",
+      "url": "https://enterpriseonchain.com/",
+      "name": "Enterprise Onchain",
+      "description": "Leading institutional crypto newsletter for decision makers.",
+      "publisher": {"@id": "https://enterpriseonchain.com/#organization"},
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "NewsMediaOrganization",
+      "name": "Enterprise Onchain Weekly",
+      "url": "https://enterpriseonchain.substack.com/",
+      "parentOrganization": {"@id": "https://enterpriseonchain.com/#organization"},
+      "description": "A weekly newsletter covering institutional Ethereum and blockchain adoption, read by 8,000+ subscribers at 200+ institutions."
+    }
+  ]
+}
+</script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+
+<!-- Fonts -->
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<!-- Commit Mono — Berkeley Mono alternative, Bloomberg-terminal aesthetic -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@font-face{font-family:'Commit Mono';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/eigilnikolajsen/commit-mono@master/fonts/otf/CommitMono-400-Regular.otf') format('opentype')}
+@font-face{font-family:'Commit Mono';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/eigilnikolajsen/commit-mono@master/fonts/otf/CommitMono-500-Regular.otf') format('opentype')}
+@font-face{font-family:'Commit Mono';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/eigilnikolajsen/commit-mono@master/fonts/otf/CommitMono-600-Regular.otf') format('opentype')}
+@font-face{font-family:'Commit Mono';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/eigilnikolajsen/commit-mono@master/fonts/otf/CommitMono-700-Regular.otf') format('opentype')}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  color-scheme:dark;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Montserrat','Helvetica Neue',sans-serif;
+  --mono:'Commit Mono','JetBrains Mono','IBM Plex Mono',ui-monospace,monospace;
+  --green:#5cb888;--red:#d45d5d;--accent:#c9a96e;
+  --t:.4s cubic-bezier(.4,0,.2,1);
+  --radius:20px;--radius-sm:12px;--radius-xs:6px;
+  --max-content:1400px;
+  --pad-x-desktop:64px;
+  --pad-x-tablet:40px;
+  --pad-x-mobile:20px;
+  --nav-height-desktop:68px;
+  --nav-height-mobile:56px;
+}
+[data-theme="dark"]{--bg:#111110;--bg2:#161614;--bg3:#1c1c19;--fg:#ede8df;--fg2:rgba(237,232,223,0.72);--fg3:rgba(237,232,223,0.42);--fg4:rgba(237,232,223,0.22);--border:rgba(237,232,223,0.07);--border2:rgba(237,232,223,0.14);--glow:rgba(201,169,110,.035);--orb:#ede8df;--orb-cbg:#111110;--orb-cf:#ede8df;--btn-bg:#ede8df;--btn-fg:#111110;--btn-ghost-border:rgba(237,232,223,0.18);--dot-pattern:radial-gradient(circle,rgba(237,232,223,.04) 1px,transparent 1px);--card-shadow:none;--nav-solid:rgba(17,17,16,.95);--drawer-bg:rgba(17,17,16,.98)}
+[data-theme="light"]{--bg:#f0ece4;--bg2:#e8e4db;--bg3:#ddd9d0;--fg:#1a1918;--fg2:rgba(26,25,24,0.75);--fg3:rgba(26,25,24,0.55);--fg4:rgba(26,25,24,0.28);--border:rgba(26,25,24,0.08);--border2:rgba(26,25,24,0.16);--glow:rgba(201,169,110,.05);--orb:#1a1918;--orb-cbg:#1a1918;--orb-cf:#f0ece4;--btn-bg:#1a1918;--btn-fg:#f0ece4;--btn-ghost-border:rgba(26,25,24,0.2);--dot-pattern:radial-gradient(circle,rgba(26,25,24,.06) 1px,transparent 1px);--card-shadow:0 1px 3px rgba(0,0,0,.04);--nav-solid:rgba(240,236,228,.96);--drawer-bg:rgba(240,236,228,.98)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background var(--t),color var(--t)}
+body.drawer-open{overflow:hidden}
+a{color:inherit;text-decoration:none}::selection{background:rgba(201,169,110,.3)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:var(--dot-pattern);background-size:20px 20px;transition:background var(--t)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");opacity:.4}
+
+h1,h2,h3,h4,h5,h6{font-weight:inherit;line-height:inherit}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes lineReveal{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+@keyframes chartGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes checkIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ethFloat{0%,100%{transform:translate(-50%,calc(-50% - 3px))}50%{transform:translate(-50%,calc(-50% + 3px))}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.fu{opacity:0;transform:translateY(20px);animation:fadeUp .7s ease-out forwards}
+.fi{opacity:0;animation:fadeIn 1s ease-out forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.3s}.d4{animation-delay:.45s}.d5{animation-delay:.6s}.d6{animation-delay:.75s}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease-out,transform .6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ NAV ═══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:14px clamp(20px,4vw,48px);
+  display:flex;align-items:center;justify-content:space-between;
+  background:transparent;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:background .3s,padding .3s;
+}
+nav::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--border2);
+  opacity:.55;transition:opacity .3s;
+}
+nav.scrolled{background:var(--nav-solid);padding-top:10px;padding-bottom:10px}
+nav.scrolled::after{opacity:.9}
+
+.nav-logo{
+  font-family:var(--serif);font-weight:400;font-size:clamp(14px,1.3vw,17px);
+  letter-spacing:-.005em;
+  display:flex;align-items:center;gap:10px;color:var(--fg);
+}
+.nav-logo-mark{width:24px;height:24px;display:block;flex-shrink:0}
+.logo-dark{display:block}.logo-light{display:none}
+[data-theme="light"] .logo-dark{display:none}
+[data-theme="light"] .logo-light{display:block}
+.orb-f{fill:var(--fg);transition:fill var(--t)}
+
+.nav-r{display:flex;gap:2px;align-items:center}
+.nav-r a.nav-link{
+  font-family:var(--sans);font-size:10.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg);opacity:.55;padding:7px 11px;
+  transition:opacity .25s;position:relative;
+}
+.nav-r a.nav-link:hover{opacity:.95}
+.nav-r a.nav-link.active{opacity:1}
+.nav-r a.nav-link.active::after{
+  content:'';position:absolute;
+  left:11px;right:11px;bottom:2px;
+  height:1px;background:var(--fg);
+}
+.nav-r a.nav-link .arrow{display:inline-block;margin-left:2px;font-size:10px;opacity:.6;transform:translateY(-1px)}
+
+.nav-socials{display:flex;gap:6px;align-items:center;margin:0 6px 0 4px;padding-left:8px;border-left:1px solid var(--border2)}
+.social-icon{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;color:var(--fg);opacity:.45;transition:all .25s}
+.social-icon:hover{opacity:.9;background:rgba(128,128,128,.08);transform:translateY(-1px)}
+.social-icon svg{width:11px;height:11px;fill:currentColor}
+
+.theme-toggle{
+  width:36px;height:36px;background:transparent;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--fg);opacity:.55;transition:opacity .25s;border-radius:4px;
+}
+.theme-toggle:hover{opacity:.95}
+.theme-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.theme-moon{display:block}.theme-sun{display:none}
+[data-theme="light"] .theme-moon{display:none}
+[data-theme="light"] .theme-sun{display:block}
+
+.btn-nav{
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg);background:transparent;
+  padding:8px 14px;border:1px solid var(--fg);border-radius:3px;
+  cursor:pointer;transition:all .25s;margin-left:6px;
+}
+.btn-nav:hover{background:var(--fg);color:var(--bg)}
+
+/* Hamburger button — mobile only */
+.nav-hamburger{
+  display:none;
+  width:44px;height:44px;
+  background:transparent;border:none;cursor:pointer;
+  align-items:center;justify-content:center;
+  color:var(--fg);
+  margin-right:-8px;
+}
+.nav-hamburger span{
+  display:block;width:18px;height:1.5px;background:currentColor;
+  position:relative;transition:transform .3s;
+}
+.nav-hamburger span::before,
+.nav-hamburger span::after{
+  content:'';position:absolute;left:0;width:18px;height:1.5px;
+  background:currentColor;transition:transform .3s,top .3s;
+}
+.nav-hamburger span::before{top:-6px}
+.nav-hamburger span::after{top:6px}
+body.drawer-open .nav-hamburger span{background:transparent}
+body.drawer-open .nav-hamburger span::before{top:0;transform:rotate(45deg)}
+body.drawer-open .nav-hamburger span::after{top:0;transform:rotate(-45deg)}
+
+/* Mobile drawer */
+.nav-drawer{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(85vw,340px);
+  background:var(--drawer-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-left:1px solid var(--border2);
+  padding:calc(var(--nav-height-mobile) + 24px) 24px 24px;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  z-index:99;display:flex;flex-direction:column;gap:4px;
+}
+body.drawer-open .nav-drawer{transform:translateX(0)}
+.drawer-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.4);
+  opacity:0;pointer-events:none;transition:opacity .3s;z-index:98;
+}
+body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
+.nav-drawer a.drawer-link{
+  font-family:var(--sans);font-size:14px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg);padding:16px 14px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+  opacity:.7;transition:opacity .2s;
+}
+.nav-drawer a.drawer-link:hover,.nav-drawer a.drawer-link.active{opacity:1}
+.nav-drawer a.drawer-link.active{position:relative}
+.nav-drawer a.drawer-link.active::before{
+  content:'';width:14px;height:1px;background:var(--fg);flex-shrink:0;
+}
+.drawer-footer{margin-top:auto;padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.drawer-footer .nav-socials{border-left:none;margin:0;padding:0}
+
+/* ═══ BUTTONS ═══ */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;transition:all .25s;border-radius:var(--radius);min-height:44px}
+.btn-primary{background:var(--btn-bg);color:var(--btn-fg);padding:14px 32px}
+.btn-primary:hover{background:var(--btn-bg);color:var(--btn-fg);transform:translateY(-1px);opacity:.88}
+.btn-ghost{background:transparent;color:var(--fg);padding:12px 28px;border:1px solid var(--btn-ghost-border);border-radius:var(--radius)}
+.btn-ghost:hover{border-color:var(--fg3);background:rgba(128,128,128,.04);transform:translateY(-1px)}
+
+/* ═══ HERO — responsive & ultrawide capped ═══ */
+.hero{
+  min-height:calc(100vh - var(--nav-height-desktop));
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  position:relative;
+  padding:max(90px,12vh) clamp(var(--pad-x-mobile),5vw,var(--pad-x-desktop)) 60px;
+  gap:clamp(24px,5vw,80px);
+  overflow:hidden;
+  max-width:var(--max-content);
+  margin:0 auto;
+}
+.hero-content{z-index:1;max-width:560px}
+.hero h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(32px,4.5vw,60px);
+  line-height:1.06;letter-spacing:-.02em;
+}
+.hero-sub{
+  font-weight:300;
+  font-size:clamp(12.5px,1vw,14px);
+  max-width:460px;margin-top:18px;
+  color:var(--fg2);line-height:1.65;
+}
+
+.subscribe-wrap{margin-top:28px;max-width:420px;width:100%}
+.subscribe-box{display:flex;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.subscribe-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,110,.1)}
+.subscribe-box input{flex:1;background:transparent;border:none;padding:14px 18px;font-family:var(--sans);font-size:14px;font-weight:300;color:var(--fg);outline:none;min-height:44px}
+.subscribe-box input::placeholder{color:var(--fg);opacity:.3}
+.subscribe-box button{background:var(--btn-bg);color:var(--btn-fg);font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:0 22px;border:none;cursor:pointer;transition:background .25s;white-space:nowrap;border-radius:0 var(--radius) var(--radius) 0;min-height:44px}
+.subscribe-box button:hover{opacity:.88}
+.subscribe-box button:disabled{opacity:.6;cursor:wait}
+.subscribe-success{display:none;align-items:center;gap:8px;padding:14px 18px;border:1px solid var(--green);border-radius:var(--radius);font-size:13px;color:var(--green);animation:checkIn .4s ease-out}
+.subscribe-error{display:none;align-items:center;gap:8px;padding:14px 18px;border:1px solid var(--red);border-radius:var(--radius);font-size:13px;color:var(--red);margin-top:8px}
+.subscribe-wrap.submitted .subscribe-box{display:none}
+.subscribe-wrap.submitted .subscribe-success{display:flex}
+.subscribe-wrap.errored .subscribe-error{display:flex}
+
+.sub-meta-row{margin-top:14px;display:flex;align-items:center;gap:12px;font-size:11px;color:var(--fg3);flex-wrap:wrap}
+.live-inline{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--fg2);font-size:10px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite}
+.sub-meta-sep{color:var(--fg4);font-size:10px}
+.sub-meta-text strong{font-weight:500;color:var(--fg2)}
+
+.trusted{margin-top:clamp(28px,5vh,48px);max-width:520px;width:100%}
+.trusted-label{font-size:8px;font-weight:500;letter-spacing:.45em;text-transform:uppercase;color:var(--fg3);margin-bottom:16px;display:block}
+.marquee-wrap{position:relative;overflow:hidden;padding:4px 0;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%)}
+.marquee-track{display:flex;gap:0;animation:marquee 60s linear infinite;width:max-content}
+.marquee-wrap:hover .marquee-track{animation-play-state:paused}
+.logo-chip{display:flex;align-items:center;padding:0 24px;border-right:1px solid var(--border2);height:32px;flex-shrink:0}
+.logo-chip span{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--fg);opacity:.7;white-space:nowrap;transition:opacity .3s}
+.logo-chip:hover span{opacity:1}
+
+/* Globe — scales to container */
+.hero-globe{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-width:0}
+#globe-canvas{width:100%;max-width:min(580px,100%);aspect-ratio:1;cursor:grab;display:block}
+#globe-canvas:active{cursor:grabbing}
+.globe-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68%;height:68%;background:radial-gradient(ellipse at center,var(--glow) 0%,transparent 70%);pointer-events:none;border-radius:50%}
+.eth-glyph{position:absolute;top:50%;left:50%;width:clamp(42px,5vw,60px);height:auto;transform:translate(-50%,-50%);color:var(--fg);opacity:.92;pointer-events:none;z-index:3;animation:ethFloat 6s ease-in-out infinite;filter:drop-shadow(0 0 14px rgba(201,169,110,.14))}
+.eth-glyph svg{width:100%;height:auto;display:block}
+.tx-tooltip{position:absolute;pointer-events:none;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-xs);padding:8px 12px;font-family:var(--mono);font-size:11px;font-weight:400;color:var(--fg);box-shadow:0 4px 20px rgba(0,0,0,.25);transform:translate(-50%,-140%);white-space:nowrap;opacity:0;transition:opacity .2s;z-index:10;line-height:1.5}
+.tx-tooltip.show{opacity:1}
+.tx-tooltip .tx-hash{color:var(--fg3);font-size:10px;display:block}
+.tx-tooltip .tx-asset{color:var(--accent);font-weight:500}
+
+/* ═══ SECTIONS ═══ */
+section{padding:clamp(56px,8vw,100px) clamp(var(--pad-x-mobile),5vw,var(--pad-x-desktop));position:relative;z-index:1}
+.inner{max-width:920px;margin:0 auto}
+.s-label{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:var(--fg3);margin-bottom:12px}
+.s-title{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.2vw,44px);line-height:1.12;letter-spacing:-.015em;margin-bottom:14px}
+.s-desc{font-weight:300;font-size:clamp(13.5px,1.1vw,15px);color:var(--fg2);max-width:520px;line-height:1.75}
+.rule{height:1px;background:var(--border);max-width:920px;margin:0 auto}
+
+/* Newsletter */
+.nl-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.nl-grid{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+.nl-text h3{font-family:var(--serif);font-weight:400;font-size:clamp(18px,1.8vw,22px);margin-bottom:12px}
+.nl-text>p{font-size:13.5px;color:var(--fg2);line-height:1.7;margin-bottom:20px}
+.nl-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.nl-feat{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:400;color:var(--fg2);line-height:1.55}
+.nl-feat-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:7px;opacity:.7}
+.nl-preview{border:1px solid var(--border);border-radius:var(--radius-xs);overflow:hidden;background:var(--bg);box-shadow:var(--card-shadow)}
+.nl-header{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.nl-brand{font-family:var(--serif);font-weight:400;font-size:14px;display:flex;align-items:center;gap:7px}
+.nl-brand svg{opacity:.45}
+.nl-date{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--fg3)}
+.nl-body{padding:20px}
+.nl-news-label{font-family:var(--sans);font-size:8px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--fg3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.nl-story{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.nl-story:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.nl-story-tag{font-family:var(--sans);font-size:8px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:3px;opacity:.85}
+.nl-story h4{font-family:var(--serif);font-weight:400;font-size:15px;line-height:1.35;margin-bottom:3px}
+.nl-story p{font-size:11.5px;font-weight:300;color:var(--fg3);line-height:1.6}
+.nl-insight{margin-top:14px;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xs)}
+.nl-insight-label{font-family:var(--sans);font-size:8px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--fg3);margin-bottom:5px}
+.nl-insight-stat{font-family:var(--mono);font-weight:400;font-size:22px;letter-spacing:-.02em}
+.nl-insight-desc{font-size:11.5px;font-weight:300;color:var(--fg3);margin-top:2px}
+.nl-fade{position:relative}
+.nl-fade::after{content:'';position:absolute;bottom:0;left:0;right:0;height:70px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+
+.archive-section{padding-top:48px;padding-bottom:48px}
+.archive-list{margin-top:28px}
+.archive-item{display:flex;align-items:baseline;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);transition:padding-left .25s;gap:16px}
+.archive-item:first-child{border-top:1px solid var(--border)}
+.archive-item:hover{padding-left:8px}
+.archive-title-wrap{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.archive-item h3{font-family:var(--serif);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.35}
+.latest-tag{font-family:var(--sans);font-size:8px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);padding:3px 8px;border:1px solid var(--accent);border-radius:3px;opacity:.85}
+.archive-item .archive-date{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.04em;color:var(--accent);white-space:nowrap;opacity:.85}
+.archive-more{margin-top:20px;font-size:11.5px;color:var(--fg3)}
+.archive-more a{color:var(--fg2);border-bottom:1px solid var(--border2);padding-bottom:1px;transition:all .25s}
+.archive-more a:hover{color:var(--fg);border-color:var(--fg3)}
+
+.dash-section{padding-top:clamp(72px,10vw,100px);padding-bottom:clamp(72px,10vw,100px)}
+.dash-grid{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-xs);overflow:hidden}
+.dash-card{background:var(--bg);padding:clamp(20px,2.5vw,28px) clamp(18px,2.2vw,26px);transition:background .25s}
+.dash-card:hover{background:var(--bg2)}
+.dash-card-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.dash-card h3{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--fg3)}
+.change{font-family:var(--mono);font-size:11px;font-weight:400}.change.up{color:var(--green)}.change.down{color:var(--red)}
+.dash-val{font-family:var(--mono);font-weight:400;font-size:clamp(22px,2.8vw,32px);letter-spacing:-.03em;margin:6px 0 18px}
+.dash-chart{height:56px;position:relative;overflow:hidden}
+.dash-chart svg{width:100%;height:100%}
+.dash-chart .area{opacity:.08}
+.dash-chart .line{stroke-width:1.5;fill:none;stroke-dasharray:600;stroke-dashoffset:600}
+.line-anim{animation:lineReveal 1.4s ease-out forwards}
+.dash-bar-chart{height:56px;display:flex;align-items:center;gap:2px;position:relative}
+.dash-bar-chart::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border2);opacity:.4}
+.dash-bar-wrap{flex:1;height:100%;display:flex;flex-direction:column;position:relative}
+.dash-bar-pos,.dash-bar-neg{transform-origin:bottom;border-radius:1px 1px 0 0}
+.dash-bar-pos{background:var(--green);opacity:.35;position:absolute;bottom:50%;left:0;right:0}
+.dash-bar-neg{background:var(--red);opacity:.35;position:absolute;top:50%;left:0;right:0;border-radius:0 0 1px 1px;transform-origin:top}
+.bar-anim{animation:chartGrow .5s ease-out forwards}
+.dash-card:hover .dash-bar-pos{opacity:.6}.dash-card:hover .dash-bar-neg{opacity:.6}
+.dash-bar{background:var(--fg);opacity:.05;border-radius:1px 1px 0 0;flex:1;transform-origin:bottom;transition:opacity .25s}
+.dash-bar.hi{opacity:.18}
+.dash-card:hover .dash-bar{opacity:.08}.dash-card:hover .dash-bar.hi{opacity:.28}
+.dash-bottom{grid-column:1/-1;background:var(--bg);padding:24px 26px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.dash-mini h4{font-family:var(--sans);font-size:8px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--fg3);margin-bottom:3px}
+.dash-mini .val{font-family:var(--mono);font-weight:400;font-size:18px;letter-spacing:-.01em}
+.dash-mini .sub{font-family:var(--mono);font-size:10px;font-weight:400;margin-top:1px}
+.dash-fade{position:relative}
+.dash-fade::after{content:'';position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none;z-index:1}
+.dash-cta-wrap{text-align:center;margin-top:-20px;position:relative;z-index:2;padding-top:8px}
+.dash-cta-wrap p{font-size:11.5px;color:var(--fg3);margin-bottom:14px}
+.waitlist-count{font-family:var(--mono);font-weight:400;color:var(--fg2)}
+
+.cov-grid{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cov-pill{font-family:var(--sans);font-size:11.5px;font-weight:400;letter-spacing:.04em;padding:12px 14px;border:1px solid var(--border2);border-radius:var(--radius-xs);color:var(--fg2);transition:all .25s;cursor:default;text-align:center}
+.cov-pill:hover{color:var(--fg);border-color:var(--fg3);background:rgba(128,128,128,.04);transform:translateY(-1px)}
+
+.about-grid{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px)}
+.about-person{display:flex;gap:16px;align-items:flex-start}
+.about-avatar{width:56px;height:56px;border-radius:50%;overflow:hidden;border:1px solid var(--border2);flex-shrink:0;background:var(--bg3)}
+.about-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.about-info{flex:1;min-width:0}
+.about-name-row{display:flex;align-items:center;gap:10px;margin-bottom:2px;flex-wrap:wrap}
+.about-info h3{font-family:var(--serif);font-weight:400;font-size:17px}
+.social-link{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--border2);color:var(--fg3);transition:all .25s}
+.social-link:hover{color:var(--fg);border-color:var(--fg3);background:rgba(128,128,128,.04);transform:translateY(-1px)}
+.social-link svg{width:10px;height:10px;fill:currentColor}
+.about-info .about-role{font-size:11.5px;color:var(--fg3);margin-bottom:6px}
+.about-info p{font-size:13px;color:var(--fg2);line-height:1.6}
+
+.cta-section{text-align:center;padding:clamp(72px,10vw,120px) clamp(var(--pad-x-mobile),5vw,var(--pad-x-desktop));position:relative}
+.cta-orbital{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(380px,85vw);height:min(380px,85vw);opacity:.06;pointer-events:none}
+.orb-s{stroke:var(--orb)}.orb-cbg{fill:var(--orb-cbg)}.orb-cf{fill:var(--orb-cf)}
+.cta-section .s-title{max-width:760px;margin:0 auto 14px}
+.cta-section .s-desc{max-width:420px;margin:0 auto;text-align:center}
+.cta-section .subscribe-wrap{margin:24px auto 0;max-width:440px}
+
+footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile),5vw,var(--pad-x-desktop));display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center}
+.footer-left{font-family:var(--sans);font-size:10px;color:var(--fg3)}
+.footer-center{display:flex;gap:10px;align-items:center;justify-content:center}
+.footer-center .social-icon{opacity:.5}
+.footer-right{display:flex;gap:20px;justify-content:flex-end;align-items:center}
+.footer-right .partner-tag{font-family:var(--sans);font-size:10px;color:var(--fg3);display:inline-flex;align-items:center;gap:8px;letter-spacing:.02em}
+.footer-right .partner-tag a{
+  color:var(--fg);
+  font-weight:500;
+  font-size:10.5px;
+  letter-spacing:.06em;
+  padding:4px 10px;
+  border:1px solid var(--border2);
+  border-radius:3px;
+  transition:all .2s;
+}
+.footer-right .partner-tag a:hover{border-color:var(--fg3);background:rgba(128,128,128,.05)}
+.footer-right .f-links{display:flex;gap:18px}.footer-right .f-links a{font-family:var(--sans);font-size:10px;color:var(--fg3)}.footer-right .f-links a:hover{color:var(--fg2)}
+
+
+/* ═══ SCROLL LEGEND (pq-style side nav) ═══ */
+/* Positioned in outside margin when viewport > 1540px, otherwise hugs left edge */
+.scroll-legend{
+  position:fixed;
+  left:max(14px, calc((100vw - 1400px)/2 - 70px));
+  top:50%;transform:translateY(-50%);
+  z-index:50;
+  display:flex;flex-direction:column;gap:10px;
+  pointer-events:auto;
+}
+.legend-item{
+  display:flex;align-items:center;gap:10px;
+  background:none;border:none;cursor:pointer;
+  padding:2px 0;
+  color:var(--fg3);transition:color .25s;
+  font-family:var(--mono);
+}
+.legend-item:hover{color:var(--fg)}
+.legend-line{
+  width:10px;height:1px;background:currentColor;
+  opacity:.38;transition:width .3s cubic-bezier(.4,0,.2,1),opacity .25s;
+  flex-shrink:0;
+}
+.legend-item:hover .legend-line{width:16px;opacity:.85}
+.legend-label{
+  font-size:8.5px;font-weight:400;letter-spacing:.14em;
+  opacity:0;transform:translateX(-3px);
+  transition:opacity .25s,transform .25s;
+  white-space:nowrap;
+}
+.legend-item.active{color:var(--fg)}
+.legend-item.active .legend-line{width:20px;opacity:1}
+.legend-item.active .legend-label{opacity:1;transform:translateX(0)}
+/* Below 1540px: hide labels (just tiny lines remain, no overlap with H1) */
+@media(max-width:1539px){
+  .scroll-legend .legend-label{display:none}
+}
+@media(max-width:1100px){.scroll-legend{display:none}}
+
+/* ═══ RESPONSIVE BREAKPOINTS ═══ */
+
+/* Tablet (600–900px): 2-col hero shrinks, globe smaller but visible */
+@media(min-width:600px) and (max-width:900px){
+  .hero{grid-template-columns:1.1fr 1fr;gap:24px;padding-top:90px}
+  .hero h1{font-size:clamp(28px,4.5vw,40px)}
+  #globe-canvas{max-width:min(420px,100%)}
+  .eth-glyph{width:42px}
+  .trusted{max-width:100%}
+  /* show hamburger, hide desktop nav items on tablet */
+  .nav-r .nav-link,.nav-r .nav-socials,.nav-r .btn-nav{display:none}
+  .nav-hamburger{display:inline-flex}
+}
+
+/* Mobile (<600px): stack hero, hide globe, hamburger menu */
+@media(max-width:599px){
+  nav{padding:12px 20px}
+  nav.scrolled{padding:10px 20px}
+  .nav-r .nav-link,.nav-r .nav-socials,.nav-r .btn-nav{display:none}
+  .nav-hamburger{display:inline-flex}
+
+  .hero{
+    grid-template-columns:1fr;
+    padding:84px 20px 48px;
+    gap:24px;
+    min-height:auto;
+  }
+  .hero-content{display:flex;flex-direction:column;align-items:flex-start;text-align:left;max-width:100%}
+  .hero-globe{display:none}
+  .hero h1{font-size:clamp(28px,9vw,38px);letter-spacing:-.015em}
+  .hero-sub{font-size:14px;max-width:100%}
+  .subscribe-wrap{max-width:100%}
+  .subscribe-box{flex-direction:column;border-radius:var(--radius-sm)}
+  .subscribe-box input{border-bottom:1px solid var(--border2);padding:14px 16px}
+  .subscribe-box button{padding:14px 22px;border-radius:0 0 var(--radius-sm) var(--radius-sm);font-size:11px}
+  .sub-meta-row{justify-content:flex-start;font-size:11px}
+  .trusted{max-width:100%}
+
+  section{padding:48px 20px}
+  .nl-section .inner,.dash-section .inner{padding:0}
+  .nl-grid{grid-template-columns:1fr;gap:24px}
+  .about-grid{grid-template-columns:1fr;gap:24px}
+  .dash-grid{grid-template-columns:1fr}
+  .dash-bottom{grid-template-columns:repeat(2,1fr);gap:18px;padding:20px}
+  .cov-grid{grid-template-columns:repeat(2,1fr)}
+
+  .archive-item{flex-direction:column;gap:4px;align-items:flex-start;padding:12px 0}
+  .archive-item h3{font-size:15px}
+
+  footer{grid-template-columns:1fr;gap:16px;text-align:center;padding:24px 20px}
+  .footer-right{justify-content:center;flex-wrap:wrap}
+  .cta-section{padding:64px 20px}
+
+  .btn-primary{padding:13px 24px}
+}
+
+/* Large screens (Studio Display etc.): keep hero content together */
+@media(min-width:1400px){
+  .hero{padding-left:var(--pad-x-desktop);padding-right:var(--pad-x-desktop)}
+}
+</style>
 </head>
-<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <img src="https://i.imgur.com/LJ0gSjb.jpeg" alt="Enterprise Onchain" class="w-6 h-6 rounded-full">
-                <span class="text-sm font-semibold tracking-tight">Enterprise Onchain</span>
-            </div>
+<aside class="scroll-legend" id="scroll-legend" aria-label="Page sections">
+  <button class="legend-item" data-target="hero" aria-label="Home"><span class="legend-line"></span><span class="legend-label">HOME</span></button>
+  <button class="legend-item" data-target="newsletter" aria-label="Newsletter"><span class="legend-line"></span><span class="legend-label">NEWSLETTER</span></button>
+  <button class="legend-item" data-target="dashboard" aria-label="Dashboard"><span class="legend-line"></span><span class="legend-label">DASHBOARD</span></button>
+  <button class="legend-item" data-target="coverage" aria-label="Coverage"><span class="legend-line"></span><span class="legend-label">COVERAGE</span></button>
+  <button class="legend-item" data-target="about" aria-label="About"><span class="legend-line"></span><span class="legend-label">ABOUT</span></button>
+  <button class="legend-item" data-target="subscribe" aria-label="Subscribe"><span class="legend-line"></span><span class="legend-label">SUBSCRIBE</span></button>
+</aside>
 
-            <div class="flex items-center gap-3">
-                <button id="themeToggle" class="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-                    </svg>
-                    <svg id="moonIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
-     
-                <a href="#" id="navJoinBtn" class="hidden sm:inline-flex h-8 items-center justify-center rounded-md bg-zinc-900 dark:bg-white px-4 text-xs font-medium text-white dark:text-zinc-900 shadow transition-all hover:bg-zinc-700 dark:hover:bg-zinc-200">
-                    Join Community
-                </a>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <main class="pt-32 sm:pt-40 pb-16 sm:pb-24 overflow-hidden border-b border-zinc-100 dark:border-zinc-800 relative">
-        <div class="absolute inset-0 -z-10 bg-grid-pattern [mask-image:linear-gradient(to_bottom,white,transparent)] dark:[mask-image:linear-gradient(to_bottom,rgba(0,0,0,1),transparent)]"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <!-- Left: Content -->
-            <div class="max-w-xl">
-                <!-- Badges row -->
-                <div class="flex flex-wrap items-center gap-3 mb-6">
-                    <!-- Launch badge -->
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                        </span>
-                        <span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Live Now</span>
-                    </div>
-                </div>
-                
-                <h1 class="text-4xl sm:text-5xl font-manrope text-zinc-900 dark:text-white mb-6 leading-[1.1]">
-                    Track Institutional Adoption of Crypto<br>
-                    <span class="text-zinc-400 dark:text-zinc-500">in One Place.</span>
-                </h1>
-                
-                <p class="text-base text-zinc-500 dark:text-zinc-400 max-w-md mb-8 leading-relaxed">
-                    Intelligence built for decision makers. Track tokenization, adoption, and regulatory shifts from one place.
-                </p>
-
-                <!-- Substack Newsletter Embed - Hero -->
-                <div class="w-full max-w-sm mb-4 rounded-lg overflow-hidden">
-                    <iframe 
-                        src="https://enterpriseonchain.substack.com/embed" 
-                        width="100%" 
-                        height="150" 
-                        style="background: white; border-radius: 8px;" 
-                        frameborder="0" 
-                        scrolling="no">
-                    </iframe>
-                </div>
-                
-                <!-- Subscriber count badge -->
-                <div class="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
-                    <div class="flex -space-x-2">
-                        <div class="w-6 h-6 rounded-full bg-zinc-300 dark:bg-zinc-700 border-2 border-white dark:border-zinc-950"></div>
-                        <div class="w-6 h-6 rounded-full bg-zinc-400 dark:bg-zinc-600 border-2 border-white dark:border-zinc-950"></div>
-                        <div class="w-6 h-6 rounded-full bg-zinc-500 dark:bg-zinc-500 border-2 border-white dark:border-zinc-950"></div>
-                    </div>
-                    <span>Join <strong class="text-zinc-900 dark:text-white">8,443</strong> subscribers from leading institutions</span>
-                </div>
-            </div>
-
-            <!-- Right: Chart Graphic -->
-            <div class="relative h-64 lg:h-96 w-full bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden flex items-end justify-center animate-on-scroll">
-                <!-- Abstract Cityscape -->
-                <div class="absolute inset-0 text-zinc-300 dark:text-zinc-700 pointer-events-none">
-                    <div class="building" style="left: 1rem; width: 2rem; height: 6rem;"></div>
-                    <div class="building" style="left: 3.5rem; width: 3rem; height: 10rem;"></div>
-                    <div class="building" style="left: 7rem; width: 4rem; height: 8rem;"></div>
-                    <div class="building" style="left: 12rem; width: 2.5rem; height: 14rem;"></div>
-                    <div class="building" style="left: 16rem; width: 3.5rem; height: 7rem;"></div>
-                    <div class="building" style="left: 20rem; width: 5rem; height: 12rem;"></div>
-                    <div class="building" style="right: 2.5rem; width: 3rem; height: 9rem;"></div>
-                    <div class="building" style="right: 6rem; width: 4rem; height: 5rem;"></div>
-                    <div class="building" style="right: 11rem; width: 2rem; height: 11rem;"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-white/10 to-white dark:from-zinc-950/10 dark:to-zinc-950 opacity-50"></div>
-                </div>
-
-                <!-- Line Chart SVG -->
-                <div class="absolute inset-0 p-8 flex items-end">
-                    <svg viewBox="0 0 400 200" class="w-full h-full drop-shadow-lg">
-                        <defs>
-                            <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.2"></stop>
-                                <stop offset="100%" stop-color="#10b981" stop-opacity="0"></stop>
-                            </linearGradient>
-                        </defs>
-                        <!-- Grid lines -->
-                        <line x1="0" y1="150" x2="400" y2="150" stroke="currentColor" class="text-zinc-200 dark:text-zinc-800" stroke-width="1" stroke-dasharray="4"></line>
-                        <line x1="0" y1="100" x2="400" y2="100" stroke="currentColor" class="text-zinc-200 dark:text-zinc-800" stroke-width="1" stroke-dasharray="4"></line>
-                        <line x1="0" y1="50" x2="400" y2="50" stroke="currentColor" class="text-zinc-200 dark:text-zinc-800" stroke-width="1" stroke-dasharray="4"></line>
-                        
-                        <!-- The Line -->
-                        <path d="M0,160 Q40,150 80,110 T160,120 T240,80 T320,40 T400,20" fill="url(#chartGradient)" stroke="#10b981" stroke-width="2" stroke-linecap="round"></path>
-                        
-                        <!-- Data Point -->
-                        <circle cx="320" cy="40" r="3" class="fill-white dark:fill-zinc-900 stroke-emerald-500" stroke-width="2"></circle>
-                        <rect x="280" y="10" width="80" height="24" rx="4" class="fill-white dark:fill-zinc-800 stroke-zinc-200 dark:stroke-zinc-700" stroke-width="1"></rect>
-                        <text x="320" y="26" text-anchor="middle" font-family="JetBrains Mono" font-size="10" class="fill-zinc-900 dark:fill-white font-medium">$2.4T TVL</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Trust Bar -->
-    <section class="bg-zinc-50/50 dark:bg-zinc-900/30 border-b border-zinc-100 dark:border-zinc-800/50 py-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <p class="text-center text-xs font-medium text-zinc-400 mb-6 uppercase tracking-wider">Trusted by teams at</p>
-            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 opacity-60 grayscale">
-                <span class="text-lg tracking-tight text-zinc-800 dark:text-zinc-300" style="font-family: serif;">J.P.Morgan</span>
-                <span class="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Morgan Stanley</span>
-                <span class="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-300">Citi</span>
-                <span class="text-lg font-semibold tracking-tighter text-zinc-800 dark:text-zinc-300">BARCLAYS</span>
-                <span class="text-lg font-bold tracking-tight text-zinc-800 dark:text-zinc-300">PwC</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Market Coverage Grid -->
-    <section class="bg-white dark:bg-zinc-950 py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-12 animate-on-scroll">
-                <h2 class="text-2xl font-manrope mb-3 tracking-tight">Market Coverage</h2>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400 max-w-xl">Covering areas such as:</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1 - Institutional Adoption -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-100 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12h4m-4-4h4m0 13v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">Institutional Adoption</h3>
-                </div>
-
-                <!-- Card 2 - Tokenization & RWAs -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-200 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="2" width="8" height="8" rx="1"/><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">Tokenization &amp; RWAs</h3>
-                </div>
-
-                <!-- Card 3 - Stablecoins -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-300 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8m4 2V6"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">Stablecoins</h3>
-                </div>
-
-                <!-- Card 4 - DeFi -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-400 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18v-7m1.12-8.802a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949zM14 18v-7m4 7v-7M3 22h18M6 18v-7"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">DeFi</h3>
-                </div>
-
-                <!-- Card 5 - ETF / ETP Flows -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-100 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">ETF / ETP Flows</h3>
-                </div>
-
-                <!-- Card 6 - Staking Info -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-200 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">Staking Info</h3>
-                </div>
-
-                <!-- Card 7 - L2 Ecosystem -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-300 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">L2 Ecosystem</h3>
-                </div>
-
-                <!-- Card 8 - Regulatory Updates -->
-                <div class="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-all duration-300 hover:shadow-sm animate-on-scroll delay-400 cursor-pointer market-card">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center mb-4 text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18m7-13 3 8a5 5 0 0 1-6 0z"/><path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1M5 8l3 8a5 5 0 0 1-6 0z"/><path d="M3 21h18"/></svg>
-                    </div>
-                    <h3 class="font-medium text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">Regulatory Updates</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Enterprise Onchain Section -->
-    <section id="enterprise" class="py-24 bg-zinc-950 text-white overflow-hidden relative border-y border-zinc-800">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-zinc-800/40 via-zinc-950 to-zinc-950"></div>
-        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22white%22 stroke-width=%221%22%3E%3Cpath d=%22M3 3v18h18%22/%3E%3C/svg%3E'); background-repeat: repeat;"></div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            
-            <!-- Left: Text -->
-            <div class="animate-on-scroll">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm mb-8">
-                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                    <span class="text-xs font-semibold tracking-wide text-zinc-300 uppercase">Enterprise Onchain Podcast</span>
-                </div>
-                
-                <h2 class="text-3xl md:text-4xl font-manrope mb-4 text-white">Enterprise Onchain</h2>
-                
-                <p class="text-zinc-400 text-sm md:text-base leading-relaxed mb-8 max-w-md">
-                    Podcast with leaders from the space. Hear directly from executives driving institutional crypto adoption.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="https://www.youtube.com/@enterpriseonchain" target="_blank" class="h-11 inline-flex items-center justify-center px-6 rounded-lg bg-white text-zinc-950 text-sm font-semibold hover:bg-zinc-200 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-                        Watch
-                    </a>
-                    <a href="https://open.spotify.com/show/6piY0ttC8ZSgYQX1YRuP36?si=5680061a22954b6b" target="_blank" class="h-11 inline-flex items-center justify-center px-6 rounded-lg border border-zinc-800 bg-zinc-900/50 text-white text-sm font-medium hover:bg-zinc-800 hover:border-zinc-700 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M12 19v3m7-12v2a7 7 0 0 1-14 0v-2"/><rect width="6" height="13" x="9" y="2" rx="3"/></svg>
-                        Listen
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Right: Podcast Card Only -->
-            <div class="relative animate-on-scroll delay-200">
-                <div class="absolute -inset-4 bg-emerald-500/10 blur-3xl rounded-full"></div>
-                
-                <div class="relative">
-                    <!-- Podcast Card -->
-                    <div class="p-5 rounded-xl border border-zinc-800 bg-zinc-900/80 backdrop-blur-md shadow-2xl hover:-translate-y-1 transition-transform duration-500">
-                        <div class="flex items-start justify-between mb-4">
-                            <div class="w-10 h-10 rounded bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>
-                            </div>
-                            <span class="text-[10px] font-mono text-zinc-500 border border-zinc-800 px-2 py-1 rounded">EP. 07</span>
-                        </div>
-                        <h3 class="text-sm font-semibold text-white mb-1">Why Traditional Finance is Moving Onchain</h3>
-                        <p class="text-xs text-zinc-500 mb-4">Featuring Head of Digital Assets @ Large Bank</p>
-                        <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-white text-zinc-950 flex items-center justify-center hover:scale-105 transition-transform">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
-                            </button>
-                            <div class="h-1 flex-1 bg-zinc-800 rounded-full overflow-hidden">
-                                <div class="h-full w-1/3 bg-zinc-500 rounded-full"></div>
-                            </div>
-                            <span class="text-[10px] text-zinc-500 font-mono">14:20</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Live News Monitor Section -->
-    <section class="bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 py-20">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 animate-on-scroll">
-                <div>
-                    <h2 class="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Live News Monitor</h2>
-                    <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Latest institutional crypto news and announcements.</p>
-                </div>
-            </div>
-
-            <div class="rounded-xl border border-zinc-200 dark:border-zinc-700/50 bg-white dark:bg-zinc-950 overflow-hidden shadow-sm animate-on-scroll delay-100">
-                <div class="divide-y divide-zinc-100 dark:divide-zinc-800">
-                    <!-- News Item 1 -->
-                    <div class="p-5 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors cursor-pointer news-item">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-zinc-900 text-white flex items-center justify-center text-xs font-bold shrink-0">JPM</div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">J.P. Morgan Launches MONY Tokenized Money Market Fund</h3>
-                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-2">The banking giant announces its first tokenized fund product on Ethereum, targeting institutional investors.</p>
-                                <div class="flex items-center gap-3 text-xs text-zinc-400">
-                                    <span>2 hours ago</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">Tokenization</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- News Item 2 -->
-                    <div class="p-5 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors cursor-pointer news-item">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-blue-900 text-white flex items-center justify-center text-xs font-bold shrink-0">SC</div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Standard Chartered Raises ETH Price Target to $40,000</h3>
-                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-2">Analysts cite growing institutional adoption and ETF inflows as key drivers for the bullish outlook.</p>
-                                <div class="flex items-center gap-3 text-xs text-zinc-400">
-                                    <span>5 hours ago</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">Research</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- News Item 3 -->
-                    <div class="p-5 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors cursor-pointer news-item">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0">MS</div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">Morgan Stanley Goes All-In on Crypto</h3>
-                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-2">The $1.8T bank launches crypto ETFs and announces tokenization wallet.</p>
-                                <div class="flex items-center gap-3 text-xs text-zinc-400">
-                                    <span>Yesterday</span>
-                                    <span class="px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400">Adoption</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / CTA -->
-    <footer id="waitlist" class="bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 pt-20 pb-12">
-        <div class="max-w-2xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-manrope text-zinc-900 dark:text-white mb-4 tracking-tight">Don't Miss the Institutional Crypto Revolution</h2>
-            <p class="text-zinc-500 mb-8">Stay ahead with the latest news, insights, and analysis on institutional adoption.</p>
-            
-            <!-- Substack Newsletter Embed - Footer -->
-            <div class="w-full max-w-sm mx-auto mb-6 rounded-lg overflow-hidden">
-                <iframe 
-                    src="https://enterpriseonchain.substack.com/embed" 
-                    width="100%" 
-                    height="150" 
-                    style="background: white; border-radius: 8px;" 
-                    frameborder="0" 
-                    scrolling="no">
-                </iframe>
-            </div>
-            
-            <!-- Subscriber count -->
-            <p class="text-sm text-zinc-500 mb-16">
-                <strong class="text-zinc-700 dark:text-zinc-300">8,443</strong> executives already subscribed
-            </p>
-
-            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-zinc-400 pt-8 border-t border-zinc-200 dark:border-zinc-800">
-                <div class="mb-4 md:mb-0">
-                    © 2025 Enterprise Onchain. All rights reserved.
-                </div>
-                <div class="flex items-center gap-6">
-                    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition-colors">About</a>
-                    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Privacy</a>
-                    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
-                    <div class="flex items-center gap-4 ml-2">
-                        <!-- YouTube -->
-                        <a href="https://www.youtube.com/@enterpriseonchain" target="_blank" class="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-                        </a>
-                        <!-- X/Twitter -->
-                        <a href="https://x.com/enteronchain?s=20" target="_blank" class="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <!-- LinkedIn -->
-                        <a href="https://www.linkedin.com/company/enterpriseonchain/" target="_blank" class="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <!-- Mail/Substack -->
-                        <a href="https://enterpriseonchain.substack.com/" target="_blank" class="hover:text-zinc-900 dark:hover:text-white transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Exit Intent Popup -->
-    <div id="exitPopup" class="popup-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <div class="popup-content bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl max-w-md w-full p-8 relative border border-zinc-200 dark:border-zinc-800">
-            <!-- Close button -->
-            <button id="closePopup" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-            </button>
-            
-            <!-- Content -->
-            <div class="text-center">
-                <div class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mx-auto mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-                </div>
-                
-                <h3 class="text-xl font-semibold text-zinc-900 dark:text-white mb-2">Don't miss out!</h3>
-                <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
-                    Join 8,443 executives staying ahead of institutional crypto adoption.
-                </p>
-                
-                <!-- Substack Newsletter Embed - Popup -->
-                <div class="w-full rounded-lg overflow-hidden">
-                    <iframe 
-                        src="https://enterpriseonchain.substack.com/embed" 
-                        width="100%" 
-                        height="150" 
-                        style="background: white; border-radius: 8px;" 
-                        frameborder="0" 
-                        scrolling="no">
-                    </iframe>
-                </div>
-                
-                <p class="text-xs text-zinc-400 mt-4">No spam. Unsubscribe anytime.</p>
-            </div>
-        </div>
+<nav id="main-nav">
+  <a href="#" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="data:image/png;base64,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" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="data:image/png;base64,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" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="#" class="nav-link active">Home</a>
+    <a href="#newsletter" class="nav-link">Newsletter</a>
+    <a href="#dashboard" class="nav-link">Dashboard</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="nav-link">Substack <span class="arrow">↗</span></a>
+    <div class="nav-socials">
+      <a href="https://x.com/enteronchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/enterpriseonchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
     </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+        <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/>
+        <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/>
+      </svg>
+    </button>
+    <a href="#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+      <span></span>
+    </button>
+  </div>
+</nav>
 
-    <script>
-        // Thank you message after form submit
-        function showThankYou(form) {
-            const button = form.querySelector('button[type="submit"]');
-            const originalText = button.textContent;
-            button.textContent = '✓ Subscribed!';
-            button.disabled = true;
-            button.classList.add('bg-emerald-600', 'dark:bg-emerald-600', 'text-white', 'dark:text-white');
-            form.querySelector('input[type="email"]').value = '';
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.disabled = false;
-                button.classList.remove('bg-emerald-600', 'dark:bg-emerald-600');
-            }, 3000);
-        }
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="#" class="drawer-link active" onclick="closeDrawer()">Home</a>
+  <a href="#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="drawer-link" onclick="closeDrawer()">Substack ↗</a>
+  <a href="#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <div class="nav-socials">
+      <a href="https://x.com/enteronchain" target="_blank" rel="noopener" class="social-icon" aria-label="X">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/enterpriseonchain" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+        <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/>
+        <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/>
+      </svg>
+    </button>
+  </div>
+</aside>
 
-        // Theme toggle logic - default to dark mode
-        const toggleBtn = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        const sunIcon = document.getElementById('sunIcon');
-        const moonIcon = document.getElementById('moonIcon');
-        
-        // Default to dark mode
-        html.classList.add('dark');
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
+<header class="hero" id="hero">
+  <div class="hero-content">
+    <h1 class="fu d1">Track Institutional<br>Adoption of Crypto<br>in One Place.</h1>
+    <p class="hero-sub fu d2">Leading institutional crypto newsletter for decision makers. Blockchain, tokenization, institutional adoption and regulatory shifts. One source of truth.</p>
+    <div class="subscribe-wrap fu d3" id="hero-subscribe">
+      <form class="subscribe-box" onsubmit="return handleSubscribe(event,'hero-subscribe','hero-email')">
+        <input type="email" placeholder="Enter your email" id="hero-email" aria-label="Email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="subscribe-success"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-width="1"/><path d="M5 8.5L7 10.5L11 6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Check your inbox. Welcome aboard.</div>
+      <div class="subscribe-error" id="hero-error">Couldn't subscribe. Please try again or sign up on Substack.</div>
+    </div>
+    <div class="sub-meta-row fu d4">
+      <span class="live-inline"><span class="live-dot"></span>Live now</span>
+      <span class="sub-meta-sep">|</span>
+      <span class="sub-meta-text">Join <strong>8,443</strong> subscribers from <strong>200+ institutions</strong></span>
+    </div>
+    <div class="trusted fu d5">
+      <span class="trusted-label">Read by leaders at</span>
+      <div class="marquee-wrap"><div class="marquee-track" id="marquee-track"></div></div>
+    </div>
+  </div>
+  <div class="hero-globe fi d6" aria-hidden="true">
+    <div class="globe-glow"></div>
+    <canvas id="globe-canvas"></canvas>
+    <div class="eth-glyph" aria-hidden="true">
+      <svg viewBox="0 0 140 240" xmlns="http://www.w3.org/2000/svg">
+        <path d="M69.9988 239.096L0 136.455L69.9988 181.206L140 136.455L69.9988 239.096Z" fill="currentColor"/>
+        <path d="M140 121.991L69.9988 166.749L0 121.991L69.9988 0L140 121.991Z" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="tx-tooltip" id="tx-tooltip"><span class="tx-asset" id="tx-asset">USDC</span> · <span id="tx-amount">$48,920</span><span class="tx-hash" id="tx-hash">0x7a3f...8c91</span></div>
+  </div>
+</header>
 
-        toggleBtn.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            if (html.classList.contains('dark')) {
-                sunIcon.classList.add('hidden');
-                moonIcon.classList.remove('hidden');
-            } else {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            }
-        });
+<div class="rule"></div>
 
-        // Scroll animation observer
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<section id="newsletter" class="nl-section" aria-labelledby="newsletter-title">
+  <div class="inner reveal">
+    <div class="s-label">The Newsletter</div>
+    <h2 class="s-title" id="newsletter-title">Morning Brew for Institutional Crypto.</h2>
+    <p class="s-desc">Facts, direct quotes, data. No editorialising. Delivered every week.</p>
+    <div class="nl-grid">
+      <div class="nl-text">
+        <h3>What you get each week</h3>
+        <div class="nl-features">
+          <div class="nl-feat"><span class="nl-feat-dot"></span>Curated stories covering leading institutions building onchain</div>
+          <div class="nl-feat"><span class="nl-feat-dot"></span>Insight of the latest data stories onchain</div>
+          <div class="nl-feat"><span class="nl-feat-dot"></span>Podcast pick from enterprise crypto leaders</div>
+          <div class="nl-feat"><span class="nl-feat-dot"></span>Enterprise crypto job listings</div>
+          <div class="nl-feat"><span class="nl-feat-dot"></span>Deep dives on some of the most exciting initiatives onchain</div>
+        </div>
+        <p>Read by teams at J.P. Morgan, BlackRock, Deutsche Bundesbank, Citi, and 200+ other institutions worldwide.</p>
+        <a href="#subscribe" class="btn btn-primary" style="margin-top:12px">Subscribe Free</a>
+      </div>
+      <div class="nl-preview">
+        <div class="nl-header">
+          <div class="nl-brand"><svg width="12" height="20" viewBox="0 0 20 32" fill="none" aria-hidden="true"><path d="M10 0L18.5 16L10 22L1.5 16Z" opacity=".6" class="orb-f"/><path d="M10 24L18.5 18L10 32L1.5 18Z" opacity=".35" class="orb-f"/></svg>Enterprise Onchain Weekly</div>
+          <div class="nl-date">Apr 9, 2026</div>
+        </div>
+        <div class="nl-body nl-fade">
+          <div class="nl-news-label">News</div>
+          <div class="nl-story"><div class="nl-story-tag">Tokenization</div><h4>BlackRock's BUIDL Crosses $2.5B AUM</h4><p>BlackRock's tokenized treasury fund surpassed $2.5B, the largest tokenized fund product globally.</p></div>
+          <div class="nl-story"><div class="nl-story-tag">Stablecoins</div><h4>Circle Files S-1, Targets $5B IPO</h4><p>USDC issuer Circle filed its S-1 with the SEC, revealing $1.7B in 2025 revenue.</p></div>
+          <div class="nl-story"><div class="nl-story-tag">Adoption</div><h4>Deutsche Bank Launches Digital Asset Custody</h4><p>Germany's largest lender goes live with institutional custody for BTC, ETH, and tokenized securities.</p></div>
+          <div class="nl-insight"><div class="nl-insight-label">Insight of the Week</div><div class="nl-insight-stat">$17.1B</div><div class="nl-insight-desc">Tokenized RWAs on public blockchains, up 340% YoY</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+<section class="archive-section" aria-labelledby="archive-title">
+  <div class="inner reveal">
+    <div class="s-label">Archive</div>
+    <h2 class="s-title" id="archive-title">Recent Editions.</h2>
+    <div class="archive-list">
+      <a href="https://enterpriseonchain.substack.com/p/licensed-filed-funded" class="archive-item" target="_blank" rel="noopener">
+        <div class="archive-title-wrap"><h3>Licensed, Filed, Funded</h3><span class="latest-tag">Latest</span></div>
+        <span class="archive-date">Apr 9, 2026</span>
+      </a>
+      <a href="https://enterpriseonchain.substack.com/p/which-blockchain-will-ai-choose" class="archive-item" target="_blank" rel="noopener">
+        <div class="archive-title-wrap"><h3>Which Blockchain Will AI Choose?</h3></div>
+        <span class="archive-date">Apr 2, 2026</span>
+      </a>
+      <a href="https://enterpriseonchain.substack.com/p/both-us-stock-exchanges-pick-sides" class="archive-item" target="_blank" rel="noopener">
+        <div class="archive-title-wrap"><h3>Both US Stock Exchanges Pick Sides</h3></div>
+        <span class="archive-date">Mar 26, 2026</span>
+      </a>
+      <a href="https://enterpriseonchain.substack.com/publish/posts/detail/187939725?referrer=%2Fpublish%2Fposts%2Fpublished" class="archive-item" target="_blank" rel="noopener">
+        <div class="archive-title-wrap"><h3>The Week in Institutional Onchain</h3></div>
+        <span class="archive-date">Mar 19, 2026</span>
+      </a>
+      <a href="https://enterpriseonchain.substack.com/p/tether-is-not-a-stablecoin-company" class="archive-item" target="_blank" rel="noopener">
+        <div class="archive-title-wrap"><h3>Tether Is Not a Stablecoin Company</h3></div>
+        <span class="archive-date">Mar 12, 2026</span>
+      </a>
+    </div>
+    <div class="archive-more">50+ editions published weekly since 2025. <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener">View full archive</a></div>
+  </div>
+</section>
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
+<div class="rule"></div>
 
-        // Exit intent popup
-        const exitPopup = document.getElementById('exitPopup');
-        const closePopup = document.getElementById('closePopup');
-        const navJoinBtn = document.getElementById('navJoinBtn');
-        let popupShown = false;
+<section id="dashboard" class="dash-section" aria-labelledby="dashboard-title">
+  <div class="inner reveal">
+    <div class="s-label">Data Dashboard</div>
+    <h2 class="s-title" id="dashboard-title">Institutional Blockchain Data at a Glance.</h2>
+    <p class="s-desc">Real-time metrics on institutional blockchain adoption. Coming soon for subscribers.</p>
+    <div class="dash-fade">
+      <div class="dash-grid">
+        <div class="dash-card"><div class="dash-card-header"><h3>Tokenized RWAs</h3><span class="change up">+12.4%</span></div><div class="dash-val">$17.1B</div><div class="dash-chart"><svg viewBox="0 0 300 50" preserveAspectRatio="none"><path class="area" fill="#5cb888" d="M0,45 L25,42 50,38 75,35 100,30 125,27 150,22 175,20 200,16 225,13 250,10 275,7 300,4 300,50 0,50Z"/><path class="line" stroke="#5cb888" d="M0,45 25,42 50,38 75,35 100,30 125,27 150,22 175,20 200,16 225,13 250,10 275,7 300,4"/></svg></div></div>
+        <div class="dash-card"><div class="dash-card-header"><h3>ETH ETF Flows (7d)</h3><span class="change up">+$412M</span></div><div class="dash-val">$9.8B</div><div class="dash-bar-chart" id="etf-flows"></div></div>
+        <div class="dash-card"><div class="dash-card-header"><h3>Stablecoin Market Cap</h3><span class="change up">+3.2%</span></div><div class="dash-val">$242B</div><div class="dash-chart"><svg viewBox="0 0 300 50" preserveAspectRatio="none"><path class="area" fill="#5cb888" d="M0,40 L25,38 50,36 75,33 100,30 125,27 150,24 175,20 200,17 225,14 250,11 275,8 300,6 300,50 0,50Z"/><path class="line" stroke="#5cb888" d="M0,40 25,38 50,36 75,33 100,30 125,27 150,24 175,20 200,17 225,14 250,11 275,8 300,6"/></svg></div></div>
+        <div class="dash-card"><div class="dash-card-header"><h3>Ethereum DeFi TVL</h3><span class="change up">+6.3%</span></div><div class="dash-val">$68.4B</div><div class="dash-chart"><svg viewBox="0 0 300 50" preserveAspectRatio="none"><path class="area" fill="#5cb888" d="M0,42 L25,40 50,38 75,36 100,33 125,30 150,27 175,24 200,22 225,18 250,15 275,12 300,8 300,50 0,50Z"/><path class="line" stroke="#5cb888" d="M0,42 25,40 50,38 75,36 100,33 125,30 150,27 175,24 200,22 225,18 250,15 275,12 300,8"/></svg></div></div>
+        <div class="dash-bottom">
+          <div class="dash-mini"><h4>ETH Price</h4><div class="val">$4,218</div><div class="sub change up">+5.2% (7d)</div></div>
+          <div class="dash-mini"><h4>Forum Members</h4><div class="val">43+</div><div class="sub" style="color:var(--fg3)">institutions</div></div>
+          <div class="dash-mini"><h4>L2 TVL</h4><div class="val">$48.2B</div><div class="sub change up">+8.6% (30d)</div></div>
+          <div class="dash-mini"><h4>Active RWA Protocols</h4><div class="val">142</div><div class="sub change up">+18 (30d)</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="dash-cta-wrap"><p>Full dashboard launching in the coming weeks. <span class="waitlist-count">847</span> on the waitlist.</p><a href="#subscribe" class="btn btn-ghost">Get Early Access</a></div>
+  </div>
+</section>
 
-        // Open popup from nav button
-        navJoinBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            exitPopup.classList.add('active');
-        });
+<div class="rule"></div>
 
-        // Open popup from market coverage cards
-        document.querySelectorAll('.market-card').forEach(card => {
-            card.addEventListener('click', () => {
-                exitPopup.classList.add('active');
-            });
-        });
+<section id="coverage" aria-labelledby="coverage-title">
+  <div class="inner reveal">
+    <div class="s-label">Market Coverage</div>
+    <h2 class="s-title" id="coverage-title">What We Cover.</h2>
+    <p class="s-desc">Every dimension of institutional Ethereum and blockchain adoption, curated every week.</p>
+    <div class="cov-grid">
+      <span class="cov-pill">Institutional Adoption</span><span class="cov-pill">Tokenization &amp; RWAs</span><span class="cov-pill">Stablecoins</span><span class="cov-pill">DeFi</span>
+      <span class="cov-pill">ETF / ETP Flows</span><span class="cov-pill">Staking</span><span class="cov-pill">L2 Ecosystem</span><span class="cov-pill">Regulatory Updates</span>
+    </div>
+  </div>
+</section>
 
-        // Open popup from news items
-        document.querySelectorAll('.news-item').forEach(item => {
-            item.addEventListener('click', () => {
-                exitPopup.classList.add('active');
-            });
-        });
+<div class="rule"></div>
 
-        // Show popup when mouse leaves viewport (desktop)
-        document.addEventListener('mouseout', (e) => {
-            if (!popupShown && e.clientY < 10 && e.relatedTarget === null) {
-                exitPopup.classList.add('active');
-                popupShown = true;
-                localStorage.setItem('exitPopupShown', 'true');
-            }
-        });
+<section id="about" aria-labelledby="about-title">
+  <div class="inner reveal">
+    <div class="s-label">Who We Are</div>
+    <h2 class="s-title" id="about-title">Built by Leaders of the Ethereum Foundation.</h2>
+    <p class="s-desc">Enterprise Onchain is produced by the team leading institutional Ethereum and blockchain adoption across the ecosystem.</p>
+    <div class="about-grid">
+      <div class="about-person">
+        <div class="about-avatar"><img src="https://i.imgur.com/uz6I1U5.jpeg" alt="Portrait of James Smith, Head of Ecosystem Development at the Ethereum Foundation" loading="lazy" style="object-position:50% 25%"></div>
+        <div class="about-info">
+          <div class="about-name-row">
+            <h3>James Smith</h3>
+            <a href="https://x.com/snapcrackle" target="_blank" rel="noopener" class="social-link" aria-label="James Smith on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          </div>
+          <div class="about-role">Head of Ecosystem Development, Ethereum Foundation</div>
+          <p>6+ years leading ecosystem at the Ethereum Foundation, shaping blockchain adoption across the community. 2x founder.</p>
+        </div>
+      </div>
+      <div class="about-person">
+        <div class="about-avatar"><img src="https://i.imgur.com/yUR2HMQ.png" alt="Portrait of David Walsh, Head of Institutions at the Ethereum Foundation" loading="lazy"></div>
+        <div class="about-info">
+          <div class="about-name-row">
+            <h3>David Walsh</h3>
+            <a href="https://x.com/davwals" target="_blank" rel="noopener" class="social-link" aria-label="David Walsh on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          </div>
+          <div class="about-role">Head of Institutions, Ethereum Foundation</div>
+          <p>Leads institutional Ethereum and blockchain adoption at the Ethereum Foundation. Former EY. 6 years building staking products. Scaled Liquid Collective protocol to $1B+ in TVL.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Check if popup was already shown this session
-        if (localStorage.getItem('exitPopupShown')) {
-            popupShown = true;
-        }
+<div class="rule"></div>
 
-        // Close popup
-        closePopup.addEventListener('click', () => {
-            exitPopup.classList.remove('active');
-        });
+<section id="subscribe" class="cta-section" aria-labelledby="cta-title">
+  <svg class="cta-orbital" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+    <ellipse cx="200" cy="200" rx="160" ry="120" class="orb-s" stroke-width="1.2" opacity=".3" transform="rotate(-15 200 200)" fill="none"/>
+    <ellipse cx="200" cy="200" rx="130" ry="75" class="orb-s" stroke-width="1.4" opacity=".35" transform="rotate(40 200 200)" fill="none"/>
+    <ellipse cx="200" cy="200" rx="100" ry="90" class="orb-s" stroke-width="1" opacity=".25" transform="rotate(-35 200 200)" fill="none"/>
+    <circle cx="200" cy="200" r="16" class="orb-cbg"/><circle cx="200" cy="200" r="16" fill="none" class="orb-s" stroke-width=".5" opacity=".15"/>
+    <g transform="translate(200,200)"><path d="M0,-10 L7,-1 L0,3Z" class="orb-cf" opacity=".8"/><path d="M0,-10 L-7,-1 L0,3Z" class="orb-cf" opacity=".45"/><path d="M0,12 L7,0 L0,3Z" class="orb-cf" opacity=".8"/><path d="M0,12 L-7,0 L0,3Z" class="orb-cf" opacity=".45"/></g>
+  </svg>
+  <div class="reveal">
+    <div class="s-label">Don't miss out</div>
+    <h2 class="s-title" id="cta-title">The Onchain Revolution Is Here.</h2>
+    <p class="s-desc" style="text-align:center;margin:0 auto">Stay ahead with the weekly blockchain briefing read by leaders at <strong style="font-weight:500;color:var(--fg)">200+ institutions</strong>.</p>
+    <div class="subscribe-wrap" id="cta-subscribe" style="margin:24px auto 0;max-width:440px">
+      <form class="subscribe-box" onsubmit="return handleSubscribe(event,'cta-subscribe','cta-email')">
+        <input type="email" placeholder="Enter your email" id="cta-email" aria-label="Email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="subscribe-success"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-width="1"/><path d="M5 8.5L7 10.5L11 6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Check your inbox. Welcome aboard.</div>
+      <div class="subscribe-error" id="cta-error">Couldn't subscribe. Please try again or sign up on Substack.</div>
+    </div>
+    <div style="text-align:center;margin-top:14px;font-size:11px;color:var(--fg3)">No spam. Unsubscribe anytime.</div>
+  </div>
+</section>
 
-        // Close popup on overlay click
-        exitPopup.addEventListener('click', (e) => {
-            if (e.target === exitPopup) {
-                exitPopup.classList.remove('active');
-            }
-        });
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-center">
+    <a href="https://x.com/enteronchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://www.linkedin.com/company/enterpriseonchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+  </div>
+  <div class="footer-right">
+    <span class="partner-tag">Partners: <a href="https://www.kr1.io/" target="_blank" rel="noopener">KR1</a></span>
+    <div class="f-links"><a href="#">About</a><a href="#">Privacy</a><a href="#">Contact</a></div>
+  </div>
+</footer>
 
-        // Close popup on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                exitPopup.classList.remove('active');
-            }
-        });
-    </script>
+<script>
+/* ═══ Theme ═══ */
+function toggleTheme(){
+  const h=document.documentElement;
+  const n=h.getAttribute('data-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-theme',n);
+  try{localStorage.setItem('eo-theme',n)}catch(e){}
+  if (typeof updateGlobeTheme === 'function') updateGlobeTheme();
+}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
 
+/* ═══ Mobile drawer ═══ */
+function toggleDrawer(){
+  document.body.classList.toggle('drawer-open');
+  const btn=document.querySelector('.nav-hamburger');
+  if(btn)btn.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'));
+}
+function closeDrawer(){
+  document.body.classList.remove('drawer-open');
+  const btn=document.querySelector('.nav-hamburger');
+  if(btn)btn.setAttribute('aria-expanded','false');
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+/* ═══ Nav scroll ═══ */
+const navEl=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{navEl.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+
+/* ═══ Substack subscribe ═══
+   Posts to Substack's free-subscribe endpoint. Uses no-cors mode so we
+   can't read the response, but the email lands. On fetch error, we show
+   a friendly fallback linking to Substack directly. */
+async function handleSubscribe(event,wrapId,inputId){
+  event.preventDefault();
+  const wrap=document.getElementById(wrapId);
+  const input=document.getElementById(inputId);
+  const errEl=wrap.querySelector('.subscribe-error');
+  const btn=wrap.querySelector('button[type="submit"]');
+  const email=input.value.trim();
+  if(!email||!email.includes('@')){
+    input.focus();input.style.borderColor='var(--red)';
+    setTimeout(()=>input.style.borderColor='',1500);
+    return false;
+  }
+  wrap.classList.remove('errored');
+  btn.disabled=true;
+  const original=btn.textContent;
+  btn.textContent='...';
+  try{
+    // Substack free-subscribe endpoint (undocumented but stable)
+    await fetch('https://enterpriseonchain.substack.com/api/v1/free',{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,first_url:location.href,first_referrer:document.referrer,current_url:location.href,current_referrer:document.referrer,referral_code:'',source:'subscribe_page'})
+    });
+    wrap.classList.add('submitted');
+    // Fire Substack analytics beacon if present
+    if(window._ss)window._ss.push({email,site:'enterpriseonchain'});
+  }catch(err){
+    console.warn('Substack subscribe failed:',err);
+    wrap.classList.add('errored');
+    btn.textContent=original;
+    btn.disabled=false;
+  }
+  return false;
+}
+
+/* ═══ Marquee logos ═══ */
+const logos=['J.P. Morgan','Morgan Stanley','BlackRock','Citi','Barclays','European Central Bank','Deutsche Bundesbank','Franklin Templeton','Vanguard','S&P Global','PwC','EY','Accenture','Deloitte','McKinsey','KPMG'];
+const track=document.getElementById('marquee-track');
+track.innerHTML=(logos.map(l=>`<div class="logo-chip"><span>${l}</span></div>`).join('')).repeat(2);
+
+/* ═══ ETF flows ═══ */
+(function(){
+  const etf=document.getElementById('etf-flows');
+  const data=[{v:35,p:1},{v:52,p:1},{v:-18,p:0},{v:68,p:1},{v:85,p:1},{v:-22,p:0},{v:92,p:1},{v:45,p:1},{v:-30,p:0},{v:100,p:1},{v:88,p:1},{v:60,p:1}];
+  etf.innerHTML=data.map(d=>d.p===1?`<div class="dash-bar-wrap"><div class="dash-bar-pos" style="height:${d.v}%"></div></div>`:`<div class="dash-bar-wrap"><div class="dash-bar-neg" style="height:${Math.abs(d.v)}%"></div></div>`).join('');
+})();
+
+/* ═══ Scroll reveal + count-up ═══ */
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');el.target.querySelectorAll('.line').forEach(l=>l.classList.add('line-anim'));el.target.querySelectorAll('.dash-bar,.dash-bar-pos,.dash-bar-neg').forEach((b,i)=>{b.style.animationDelay=i*.04+'s';b.classList.add('bar-anim')});el.target.querySelectorAll('.dash-val').forEach(v=>{const text=v.textContent.trim();const match=text.match(/^\$?([\d,.]+)(B|M|K|%)?$/);if(!match)return;const target=parseFloat(match[1].replace(/,/g,''));const suffix=match[2]||'';const hasPrefix=text.startsWith('$');const decimals=match[1].includes('.')?match[1].split('.')[1].length:0;const st=performance.now();function tick(now){const p=Math.min((now-st)/1200,1);const eased=1-Math.pow(1-p,3);v.textContent=(hasPrefix?'$':'')+(target*eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g,',')+suffix;if(p<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)});obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ═══ GLOBE ═══ */
+const GLOBE={scene:null,camera:null,renderer:null,group:null,arcs:[],arcMeshes:[],raycaster:null,mouse:null,dotMat:null,borderMat:null,hubMats:[],animId:null,worldData:null,landMaskData:null,landMaskW:0,landMaskH:0};
+const canvas=document.getElementById('globe-canvas');
+const tooltip=document.getElementById('tx-tooltip');
+
+const HUBS=[
+  {lat:40.71,lng:-74.00,name:'New York'},{lat:43.65,lng:-79.38,name:'Toronto'},{lat:37.77,lng:-122.42,name:'San Francisco'},{lat:41.88,lng:-87.63,name:'Chicago'},{lat:19.43,lng:-99.13,name:'Mexico City'},{lat:49.28,lng:-123.12,name:'Vancouver'},{lat:25.76,lng:-80.19,name:'Miami'},{lat:34.05,lng:-118.24,name:'Los Angeles'},{lat:47.61,lng:-122.33,name:'Seattle'},{lat:29.76,lng:-95.37,name:'Houston'},{lat:42.36,lng:-71.06,name:'Boston'},{lat:33.75,lng:-84.39,name:'Atlanta'},{lat:39.74,lng:-104.99,name:'Denver'},{lat:30.27,lng:-97.74,name:'Austin'},{lat:45.50,lng:-73.57,name:'Montreal'},{lat:51.05,lng:-114.07,name:'Calgary'},
+  {lat:-23.55,lng:-46.63,name:'São Paulo'},{lat:-34.60,lng:-58.38,name:'Buenos Aires'},{lat:4.71,lng:-74.07,name:'Bogotá'},{lat:-12.05,lng:-77.04,name:'Lima'},{lat:-33.45,lng:-70.67,name:'Santiago'},{lat:-22.91,lng:-43.17,name:'Rio de Janeiro'},{lat:10.49,lng:-66.88,name:'Caracas'},{lat:-0.19,lng:-78.49,name:'Quito'},{lat:-34.90,lng:-56.16,name:'Montevideo'},{lat:8.98,lng:-79.52,name:'Panama City'},
+  {lat:51.51,lng:-0.13,name:'London'},{lat:50.11,lng:8.68,name:'Frankfurt'},{lat:48.85,lng:2.35,name:'Paris'},{lat:47.37,lng:8.54,name:'Zurich'},{lat:52.37,lng:4.90,name:'Amsterdam'},{lat:59.33,lng:18.07,name:'Stockholm'},{lat:40.42,lng:-3.70,name:'Madrid'},{lat:45.46,lng:9.19,name:'Milan'},{lat:53.35,lng:-6.26,name:'Dublin'},{lat:41.01,lng:28.98,name:'Istanbul'},{lat:55.75,lng:37.61,name:'Moscow'},{lat:52.52,lng:13.41,name:'Berlin'},{lat:48.21,lng:16.37,name:'Vienna'},{lat:50.08,lng:14.44,name:'Prague'},{lat:52.23,lng:21.01,name:'Warsaw'},{lat:59.91,lng:10.75,name:'Oslo'},{lat:60.17,lng:24.94,name:'Helsinki'},{lat:55.68,lng:12.57,name:'Copenhagen'},{lat:50.85,lng:4.35,name:'Brussels'},{lat:38.72,lng:-9.14,name:'Lisbon'},{lat:41.38,lng:2.17,name:'Barcelona'},{lat:41.90,lng:12.50,name:'Rome'},{lat:37.98,lng:23.73,name:'Athens'},{lat:50.45,lng:30.52,name:'Kyiv'},{lat:64.15,lng:-21.94,name:'Reykjavik'},
+  {lat:6.52,lng:3.38,name:'Lagos'},{lat:-1.29,lng:36.82,name:'Nairobi'},{lat:-33.93,lng:18.42,name:'Cape Town'},{lat:30.04,lng:31.24,name:'Cairo'},{lat:-26.20,lng:28.04,name:'Johannesburg'},{lat:5.56,lng:-0.20,name:'Accra'},{lat:33.57,lng:-7.59,name:'Casablanca'},{lat:9.03,lng:38.74,name:'Addis Ababa'},{lat:-6.79,lng:39.21,name:'Dar es Salaam'},{lat:-4.44,lng:15.27,name:'Kinshasa'},{lat:14.69,lng:-17.44,name:'Dakar'},{lat:-8.84,lng:13.23,name:'Luanda'},{lat:0.35,lng:32.58,name:'Kampala'},{lat:36.75,lng:3.04,name:'Algiers'},
+  {lat:25.20,lng:55.27,name:'Dubai'},{lat:32.08,lng:34.78,name:'Tel Aviv'},{lat:24.71,lng:46.68,name:'Riyadh'},{lat:25.29,lng:51.53,name:'Doha'},{lat:29.38,lng:47.99,name:'Kuwait City'},{lat:31.95,lng:35.93,name:'Amman'},{lat:33.89,lng:35.51,name:'Beirut'},{lat:40.41,lng:49.87,name:'Baku'},
+  {lat:1.35,lng:103.82,name:'Singapore'},{lat:35.68,lng:139.65,name:'Tokyo'},{lat:22.32,lng:114.17,name:'Hong Kong'},{lat:31.23,lng:121.47,name:'Shanghai'},{lat:19.07,lng:72.87,name:'Mumbai'},{lat:12.97,lng:77.59,name:'Bangalore'},{lat:37.57,lng:126.98,name:'Seoul'},{lat:13.76,lng:100.50,name:'Bangkok'},{lat:-6.21,lng:106.85,name:'Jakarta'},{lat:14.60,lng:120.98,name:'Manila'},{lat:10.82,lng:106.63,name:'Ho Chi Minh'},{lat:25.03,lng:121.57,name:'Taipei'},{lat:28.61,lng:77.21,name:'Delhi'},{lat:22.57,lng:88.36,name:'Kolkata'},{lat:24.86,lng:67.01,name:'Karachi'},{lat:23.81,lng:90.41,name:'Dhaka'},{lat:3.14,lng:101.69,name:'Kuala Lumpur'},{lat:34.69,lng:135.50,name:'Osaka'},{lat:21.03,lng:105.85,name:'Hanoi'},{lat:43.25,lng:76.95,name:'Almaty'},{lat:41.31,lng:69.24,name:'Tashkent'},
+  {lat:-33.86,lng:151.21,name:'Sydney'},{lat:-36.85,lng:174.76,name:'Auckland'},{lat:-37.81,lng:144.96,name:'Melbourne'}
+];
+const ASSETS=['USDC','USDT','ETH','stETH','WBTC','USDE','PYUSD'];
+const LAND_BOXES=[[60,72,-170,-140],[66,72,-140,-95],[52,70,-130,-80],[45,60,-125,-65],[30,49,-125,-65],[24,38,-120,-75],[18,32,-115,-90],[14,20,-92,-82],[8,15,-88,-77],[-10,12,-82,-55],[-25,-5,-75,-35],[-40,-20,-72,-40],[-55,-38,-75,-60],[36,44,-9,3],[40,52,-5,15],[48,60,-10,30],[55,71,5,32],[36,48,10,30],[40,60,20,60],[35,41,21,29],[15,37,-18,35],[5,18,-17,50],[-12,8,10,50],[-35,-10,12,42],[12,33,34,60],[40,75,30,180],[8,37,68,98],[10,28,92,110],[-10,10,95,125],[20,54,75,135],[33,43,124,132],[30,46,128,146],[-10,6,95,141],[5,19,116,127],[-44,-10,112,154],[-47,-34,165,179],[60,84,-55,-20],[63,67,-25,-13]];
+
+function fetchWithTimeout(url,ms){return Promise.race([fetch(url),new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))])}
+
+async function loadWorldData(){
+  if(typeof THREE==='undefined')return;
+  try{
+    if(typeof topojson==='undefined'||!topojson.feature)throw new Error('topojson missing');
+    const res=await fetchWithTimeout('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json',10000);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const topo=await res.json();
+    const countries=topojson.feature(topo,topo.objects.countries);
+    const borders=topojson.mesh(topo,topo.objects.countries,(a,b)=>a!==b);
+    GLOBE.worldData={countries,borders};
+    const W=2048,H=1024;const c=document.createElement('canvas');c.width=W;c.height=H;
+    const ctx=c.getContext('2d');ctx.fillStyle='#fff';
+    const drawPoly=(poly)=>{ctx.beginPath();poly.forEach(ring=>{ring.forEach((p,i)=>{const x=(p[0]+180)/360*W;const y=(90-p[1])/180*H;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.closePath()});ctx.fill('evenodd')};
+    countries.features.forEach(f=>{const g=f.geometry;if(!g)return;if(g.type==='MultiPolygon')g.coordinates.forEach(drawPoly);else if(g.type==='Polygon')drawPoly(g.coordinates)});
+    GLOBE.landMaskData=ctx.getImageData(0,0,W,H).data;GLOBE.landMaskW=W;GLOBE.landMaskH=H;
+  }catch(e){console.warn('[globe] TopoJSON load failed, using fallback:',e.message);GLOBE.worldData=null}
+  buildGlobe();
+}
+
+function isLand(lat,lng){
+  if(GLOBE.landMaskData){
+    const x=Math.floor((lng+180)/360*GLOBE.landMaskW);
+    const y=Math.floor((90-lat)/180*GLOBE.landMaskH);
+    if(x<0||x>=GLOBE.landMaskW||y<0||y>=GLOBE.landMaskH)return false;
+    return GLOBE.landMaskData[(y*GLOBE.landMaskW+x)*4+3]>128;
+  }
+  for(let i=0;i<LAND_BOXES.length;i++){const [lat1,lat2,lng1,lng2]=LAND_BOXES[i];if(lat>=lat1&&lat<=lat2&&lng>=lng1&&lng<=lng2)return true}
+  return false;
+}
+
+function latLngToVec3(lat,lng,r){const phi=(90-lat)*Math.PI/180;const theta=(lng+180)*Math.PI/180;return new THREE.Vector3(-r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta))}
+function getThemeColor(){return document.documentElement.getAttribute('data-theme')==='dark'?0xede8df:0x1a1918}
+
+function buildGlobe(){
+  const rect=canvas.getBoundingClientRect();
+  const w=rect.width||500,h=rect.height||500;
+  const color=getThemeColor();const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  GLOBE.scene=new THREE.Scene();
+  GLOBE.camera=new THREE.PerspectiveCamera(45,1,0.1,1000);GLOBE.camera.position.z=3.2;
+  GLOBE.renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  GLOBE.renderer.setSize(w,h);GLOBE.renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  GLOBE.renderer.setClearColor(0x000000,0);
+  GLOBE.raycaster=new THREE.Raycaster();GLOBE.mouse=new THREE.Vector2();GLOBE.group=new THREE.Group();
+  const positions=[];const R=1.002;const step=1.3;
+  for(let lat=-85;lat<=85;lat+=step){
+    const lngStep=step/Math.max(0.3,Math.cos(lat*Math.PI/180));
+    for(let lng=-180;lng<=180;lng+=lngStep){
+      if(!isLand(lat,lng))continue;
+      const v=latLngToVec3(lat,lng,R);positions.push(v.x,v.y,v.z);
+    }
+  }
+  const dotGeo=new THREE.BufferGeometry();
+  dotGeo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  GLOBE.dotMat=new THREE.PointsMaterial({color,size:isDark?0.014:0.012,transparent:true,opacity:isDark?0.9:0.8,sizeAttenuation:true});
+  GLOBE.group.add(new THREE.Points(dotGeo,GLOBE.dotMat));
+  if(GLOBE.worldData){
+    const borderPositions=[];const BR=1.004;const borders=GLOBE.worldData.borders;
+    const lines=borders.type==='MultiLineString'?borders.coordinates:borders.type==='LineString'?[borders.coordinates]:[];
+    lines.forEach(line=>{for(let i=0;i<line.length-1;i++){const a=latLngToVec3(line[i][1],line[i][0],BR);const b=latLngToVec3(line[i+1][1],line[i+1][0],BR);borderPositions.push(a.x,a.y,a.z,b.x,b.y,b.z)}});
+    if(borderPositions.length>0){
+      const borderGeo=new THREE.BufferGeometry();
+      borderGeo.setAttribute('position',new THREE.Float32BufferAttribute(borderPositions,3));
+      GLOBE.borderMat=new THREE.LineBasicMaterial({color,transparent:true,opacity:0.3});
+      GLOBE.group.add(new THREE.LineSegments(borderGeo,GLOBE.borderMat));
+    }
+  }
+  GLOBE.group.rotation.x=0.3;GLOBE.group.rotation.y=-0.6;GLOBE.scene.add(GLOBE.group);
+  HUBS.forEach(hub=>{
+    const v=latLngToVec3(hub.lat,hub.lng,1.01);
+    const hubGeo=new THREE.BufferGeometry();
+    hubGeo.setAttribute('position',new THREE.Float32BufferAttribute([v.x,v.y,v.z],3));
+    const hubMat=new THREE.PointsMaterial({color,size:0.018,transparent:true,opacity:0.8,sizeAttenuation:true});
+    GLOBE.hubMats.push(hubMat);GLOBE.group.add(new THREE.Points(hubGeo,hubMat));
+  });
+  animateLoop();startArcSpawner();
+}
+
+function createArc(){
+  if(!GLOBE.group)return;
+  const color=getThemeColor();
+  const a=HUBS[Math.floor(Math.random()*HUBS.length)];
+  let b=HUBS[Math.floor(Math.random()*HUBS.length)];
+  while(b===a)b=HUBS[Math.floor(Math.random()*HUBS.length)];
+  const start=latLngToVec3(a.lat,a.lng,1);const end=latLngToVec3(b.lat,b.lng,1);
+  const dist=start.distanceTo(end);
+  const mid=new THREE.Vector3().addVectors(start,end).multiplyScalar(0.5);
+  mid.normalize().multiplyScalar(1.15+dist*0.4);
+  const curve=new THREE.QuadraticBezierCurve3(start,mid,end);
+  const tubeGeo=new THREE.TubeGeometry(curve,40,0.0028,6,false);
+  const tubeMat=new THREE.MeshBasicMaterial({color,transparent:true,opacity:0});
+  const tube=new THREE.Mesh(tubeGeo,tubeMat);
+  const asset=ASSETS[Math.floor(Math.random()*ASSETS.length)];
+  const amount=Math.floor(Math.random()*500000)+1000;
+  const hash='0x'+Math.random().toString(16).slice(2,6)+'...'+Math.random().toString(16).slice(2,6);
+  tube.userData={asset,amount,hash,hubA:a.name,hubB:b.name};
+  const particleGeo=new THREE.BufferGeometry();
+  particleGeo.setAttribute('position',new THREE.Float32BufferAttribute([start.x,start.y,start.z],3));
+  const particleMat=new THREE.PointsMaterial({color,size:0.026,transparent:true,opacity:0,sizeAttenuation:true,blending:THREE.AdditiveBlending});
+  const particle=new THREE.Points(particleGeo,particleMat);
+  GLOBE.group.add(tube);GLOBE.group.add(particle);GLOBE.arcMeshes.push(tube);
+  GLOBE.arcs.push({tube,particle,curve,progress:0,life:0,maxLife:60,speed:0.020+Math.random()*0.014,baseOpacity:0.24,particleOpacity:0.85});
+}
+function updateArcs(){
+  for(let i=GLOBE.arcs.length-1;i>=0;i--){
+    const a=GLOBE.arcs[i];a.progress+=a.speed;a.life++;
+    if(a.progress<1){const pos=a.curve.getPoint(a.progress);const arr=a.particle.geometry.attributes.position.array;arr[0]=pos.x;arr[1]=pos.y;arr[2]=pos.z;a.particle.geometry.attributes.position.needsUpdate=true}
+    if(a.life<10){const k=a.life/10;a.tube.material.opacity=a.baseOpacity*k;a.particle.material.opacity=a.particleOpacity*k}
+    const fadeStart=a.maxLife-18;
+    if(a.life>fadeStart){const k=(a.life-fadeStart)/18;a.tube.material.opacity=a.baseOpacity*(1-k);a.particle.material.opacity=a.particleOpacity*(1-k)}
+    if(a.life>=a.maxLife){GLOBE.group.remove(a.tube);GLOBE.group.remove(a.particle);a.tube.geometry.dispose();a.tube.material.dispose();a.particle.geometry.dispose();a.particle.material.dispose();const idx=GLOBE.arcMeshes.indexOf(a.tube);if(idx>-1)GLOBE.arcMeshes.splice(idx,1);GLOBE.arcs.splice(i,1)}
+  }
+}
+let arcInterval=null;
+function startArcSpawner(){arcInterval=setInterval(()=>{if(GLOBE.arcs.length<40)createArc()},30);for(let i=0;i<25;i++)setTimeout(createArc,i*20)}
+function animateLoop(){GLOBE.animId=requestAnimationFrame(animateLoop);if(!GLOBE.group||!GLOBE.renderer)return;if(!isDraggingGlobe)GLOBE.group.rotation.y+=0.0008;updateArcs();GLOBE.renderer.render(GLOBE.scene,GLOBE.camera)}
+function updateGlobeTheme(){if(!GLOBE.dotMat)return;const isDark=document.documentElement.getAttribute('data-theme')==='dark';const color=getThemeColor();GLOBE.dotMat.color.setHex(color);GLOBE.dotMat.opacity=isDark?0.9:0.8;GLOBE.dotMat.size=isDark?0.014:0.012;if(GLOBE.borderMat)GLOBE.borderMat.color.setHex(color);GLOBE.hubMats.forEach(m=>m.color.setHex(color));GLOBE.arcs.forEach(a=>{a.tube.material.color.setHex(color);a.particle.material.color.setHex(color)})}
+function onGlobeResize(){if(!GLOBE.renderer||!canvas)return;const rect=canvas.getBoundingClientRect();GLOBE.renderer.setSize(rect.width,rect.height);GLOBE.camera.aspect=1;GLOBE.camera.updateProjectionMatrix()}
+window.addEventListener('resize',onGlobeResize);
+
+let isDraggingGlobe=false,prevX=0,prevY=0;
+canvas.addEventListener('pointerdown',e=>{isDraggingGlobe=true;prevX=e.clientX;prevY=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{
+  if(isDraggingGlobe&&GLOBE.group){GLOBE.group.rotation.y+=(e.clientX-prevX)*0.005;GLOBE.group.rotation.x=Math.max(-0.8,Math.min(0.8,GLOBE.group.rotation.x+(e.clientY-prevY)*0.005));prevX=e.clientX;prevY=e.clientY;hideGlobeTooltip();return}
+  if(!GLOBE.raycaster||!GLOBE.arcMeshes.length)return;
+  const rect=canvas.getBoundingClientRect();
+  GLOBE.mouse.x=((e.clientX-rect.left)/rect.width)*2-1;
+  GLOBE.mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;
+  GLOBE.raycaster.setFromCamera(GLOBE.mouse,GLOBE.camera);
+  const hits=GLOBE.raycaster.intersectObjects(GLOBE.arcMeshes);
+  if(hits.length>0)showGlobeTooltip(e.clientX-rect.left,e.clientY-rect.top,hits[0].object.userData);
+  else hideGlobeTooltip();
+});
+canvas.addEventListener('pointerup',()=>isDraggingGlobe=false);
+canvas.addEventListener('pointercancel',()=>isDraggingGlobe=false);
+canvas.addEventListener('pointerleave',()=>{isDraggingGlobe=false;hideGlobeTooltip()});
+
+function showGlobeTooltip(x,y,tx){document.getElementById('tx-asset').textContent=tx.asset;document.getElementById('tx-amount').textContent='$'+tx.amount.toLocaleString();document.getElementById('tx-hash').textContent=tx.hash+' · '+tx.hubA+' → '+tx.hubB;tooltip.style.left=x+'px';tooltip.style.top=y+'px';tooltip.classList.add('show')}
+function hideGlobeTooltip(){tooltip.classList.remove('show')}
+
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loadWorldData);
+else window.addEventListener('load',loadWorldData);
+
+/* ═══ Scroll legend ═══ */
+(function(){
+  const items = document.querySelectorAll('.legend-item');
+  if (!items.length) return;
+  const sections = Array.from(items).map(btn => ({
+    btn, id: btn.dataset.target, el: document.getElementById(btn.dataset.target)
+  })).filter(x => x.el);
+  items.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = document.getElementById(btn.dataset.target);
+      if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  function updateActive(){
+    const y = window.scrollY + window.innerHeight * 0.35;
+    let current = sections[0];
+    for (const s of sections){
+      const top = s.el.getBoundingClientRect().top + window.scrollY;
+      if (y >= top) current = s;
+    }
+    items.forEach(b => b.classList.toggle('active', b === current.btn));
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking){ requestAnimationFrame(() => { updateActive(); ticking = false; }); ticking = true; }
+  });
+  updateActive();
+})();
+</script>
 </body>
 </html>
