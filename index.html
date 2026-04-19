@@ -498,7 +498,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
 
 /* Tablet (600–900px): 2-col hero shrinks, globe smaller but visible */
 @media(min-width:600px) and (max-width:900px){
-  .hero{grid-template-columns:1.1fr 1fr;gap:24px;padding-top:90px}
+  .hero{grid-template-columns:1.1fr 1fr;gap:24px;padding-top:104px}
   .hero h1{font-size:clamp(28px,4.5vw,40px)}
   #globe-canvas{max-width:min(420px,100%)}
   .eth-glyph{width:42px}
@@ -517,9 +517,10 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
 
   .hero{
     grid-template-columns:1fr;
-    padding:84px 20px 48px;
+    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 48px;
     gap:24px;
     min-height:auto;
+    align-items:start;
   }
   .hero-content{display:flex;flex-direction:column;align-items:flex-start;text-align:left;max-width:100%}
   .hero-globe{display:none}
