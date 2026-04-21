@@ -531,7 +531,14 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   .subscribe-box input{border-bottom:1px solid var(--border2);padding:14px 16px}
   .subscribe-box button{padding:14px 22px;border-radius:0 0 var(--radius-sm) var(--radius-sm);font-size:11px}
   .sub-meta-row{justify-content:flex-start;font-size:11px}
-  .trusted{max-width:100%}
+  .trusted{max-width:100%;margin-top:36px}
+  .trusted .marquee-wrap{
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 3%,black 97%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,black 3%,black 97%,transparent 100%);
+  }
+  .trusted .marquee-track{animation-duration:40s}
+  .trusted .logo-chip{padding:0 18px;height:28px}
+  .trusted .logo-chip span{font-size:11.5px}
 
   section{padding:48px 20px}
   .nl-section .inner,.dash-section .inner{padding:0}
@@ -713,8 +720,12 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
     <div class="s-label">Archive</div>
     <h2 class="s-title" id="archive-title">Recent Editions.</h2>
     <div class="archive-list">
+      <a href="https://enterpriseonchain.substack.com/p/full-spectrum" class="archive-item" target="_blank" rel="noopener">
+        <div class="archive-title-wrap"><h3>Full Spectrum</h3><span class="latest-tag">Latest</span></div>
+        <span class="archive-date">Apr 21, 2026</span>
+      </a>
       <a href="https://enterpriseonchain.substack.com/p/licensed-filed-funded" class="archive-item" target="_blank" rel="noopener">
-        <div class="archive-title-wrap"><h3>Licensed, Filed, Funded</h3><span class="latest-tag">Latest</span></div>
+        <div class="archive-title-wrap"><h3>Licensed, Filed, Funded</h3></div>
         <span class="archive-date">Apr 9, 2026</span>
       </a>
       <a href="https://enterpriseonchain.substack.com/p/which-blockchain-will-ai-choose" class="archive-item" target="_blank" rel="noopener">
