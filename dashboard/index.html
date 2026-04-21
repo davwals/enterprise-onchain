@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Enterprise Onchain</title>
+<meta name="description" content="Institutional blockchain data at a glance. Coming soon.">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/newsletter/" class="nav-link">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link active" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/newsletter/" class="drawer-link" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link active" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page page-center">
+  <div class="inner reveal" style="text-align:center;max-width:560px;margin:0 auto">
+    <div class="s-label">Dashboard</div>
+    <h1 class="s-title">Coming Soon.</h1>
+    <p class="s-desc" style="margin:0 auto 28px">
+      Real-time metrics on tokenised RWAs, stablecoin supply, ETH ETF flows,
+      DeFi TVL, and institutional adoption. Launching for subscribers in the
+      coming weeks.
+    </p>
+    <div class="soon-stat-row">
+      <div class="soon-stat"><div class="soon-stat-val">628</div><div class="soon-stat-lbl">on the waitlist</div></div>
+      <div class="soon-stat"><div class="soon-stat-val">43+</div><div class="soon-stat-lbl">forum members</div></div>
+      <div class="soon-stat"><div class="soon-stat-val">200+</div><div class="soon-stat-lbl">institutions reading</div></div>
+    </div>
+    <a href="/#subscribe" class="btn btn-primary" style="margin-top:32px">Get Early Access</a>
+  </div>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>
