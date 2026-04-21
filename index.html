@@ -288,19 +288,10 @@ body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
   color:var(--fg2);line-height:1.65;
 }
 
-.subscribe-wrap{margin-top:28px;max-width:420px;width:100%}
-.subscribe-box{display:flex;border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;transition:border-color .3s,box-shadow .3s}
-.subscribe-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,110,.1)}
-.subscribe-box input{flex:1;background:transparent;border:none;padding:14px 18px;font-family:var(--sans);font-size:14px;font-weight:300;color:var(--fg);outline:none;min-height:44px}
-.subscribe-box input::placeholder{color:var(--fg);opacity:.3}
-.subscribe-box button{background:var(--btn-bg);color:var(--btn-fg);font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:0 22px;border:none;cursor:pointer;transition:background .25s;white-space:nowrap;border-radius:0 var(--radius) var(--radius) 0;min-height:44px}
-.subscribe-box button:hover{opacity:.88}
-.subscribe-box button:disabled{opacity:.6;cursor:wait}
-.subscribe-success{display:none;align-items:center;gap:8px;padding:14px 18px;border:1px solid var(--green);border-radius:var(--radius);font-size:13px;color:var(--green);animation:checkIn .4s ease-out}
-.subscribe-error{display:none;align-items:center;gap:8px;padding:14px 18px;border:1px solid var(--red);border-radius:var(--radius);font-size:13px;color:var(--red);margin-top:8px}
-.subscribe-wrap.submitted .subscribe-box{display:none}
-.subscribe-wrap.submitted .subscribe-success{display:flex}
-.subscribe-wrap.errored .subscribe-error{display:flex}
+.subscribe-wrap{
+  margin-top:28px;max-width:520px;width:100%;
+}
+.subscribe-wrap iframe{display:block;width:100%;max-width:480px}
 
 .sub-meta-row{margin-top:14px;display:flex;align-items:center;gap:12px;font-size:11px;color:var(--fg3);flex-wrap:wrap}
 .live-inline{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--fg2);font-size:10px}
@@ -527,9 +518,6 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   .hero h1{font-size:clamp(28px,9vw,38px);letter-spacing:-.015em}
   .hero-sub{font-size:14px;max-width:100%}
   .subscribe-wrap{max-width:100%}
-  .subscribe-box{flex-direction:column;border-radius:var(--radius-sm)}
-  .subscribe-box input{border-bottom:1px solid var(--border2);padding:14px 16px}
-  .subscribe-box button{padding:14px 22px;border-radius:0 0 var(--radius-sm) var(--radius-sm);font-size:11px}
   .sub-meta-row{justify-content:flex-start;font-size:11px}
   .trusted{max-width:100%;margin-top:36px}
   .trusted .marquee-wrap{
@@ -647,13 +635,8 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   <div class="hero-content">
     <h1 class="fu d1">Track Institutional<br>Adoption of Crypto<br>in One Place.</h1>
     <p class="hero-sub fu d2">Leading institutional crypto newsletter for decision makers. Blockchain, tokenization, institutional adoption and regulatory shifts. One source of truth.</p>
-    <div class="subscribe-wrap fu d3" id="hero-subscribe">
-      <form class="subscribe-box" onsubmit="return handleSubscribe(event,'hero-subscribe','hero-email')">
-        <input type="email" placeholder="Enter your email" id="hero-email" aria-label="Email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-      <div class="subscribe-success"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-width="1"/><path d="M5 8.5L7 10.5L11 6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Check your inbox. Welcome aboard.</div>
-      <div class="subscribe-error" id="hero-error">Couldn't subscribe. Please try again or sign up on Substack.</div>
+    <div class="subscribe-wrap fu d3">
+      <iframe src="https://enterpriseonchain.substack.com/embed" width="480" height="150" style="border:1px solid #EEE;background:white;max-width:100%;display:block;border-radius:8px" frameborder="0" scrolling="no" title="Subscribe to Enterprise Onchain"></iframe>
     </div>
     <div class="sub-meta-row fu d4">
       <span class="live-inline"><span class="live-dot"></span>Live now</span>
@@ -836,13 +819,8 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
     <div class="s-label">Don't miss out</div>
     <h2 class="s-title" id="cta-title">The Onchain Revolution Is Here.</h2>
     <p class="s-desc" style="text-align:center;margin:0 auto">Stay ahead with the weekly blockchain briefing read by leaders at <strong style="font-weight:500;color:var(--fg)">200+ institutions</strong>.</p>
-    <div class="subscribe-wrap" id="cta-subscribe" style="margin:24px auto 0;max-width:440px">
-      <form class="subscribe-box" onsubmit="return handleSubscribe(event,'cta-subscribe','cta-email')">
-        <input type="email" placeholder="Enter your email" id="cta-email" aria-label="Email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-      <div class="subscribe-success"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7.5" stroke="currentColor" stroke-width="1"/><path d="M5 8.5L7 10.5L11 6" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Check your inbox. Welcome aboard.</div>
-      <div class="subscribe-error" id="cta-error">Couldn't subscribe. Please try again or sign up on Substack.</div>
+    <div class="subscribe-wrap" style="margin:24px auto 0;max-width:520px">
+      <iframe src="https://enterpriseonchain.substack.com/embed" width="480" height="150" style="border:1px solid #EEE;background:white;max-width:100%;display:block;border-radius:8px;margin:0 auto" frameborder="0" scrolling="no" title="Subscribe to Enterprise Onchain"></iframe>
     </div>
     <div style="text-align:center;margin-top:14px;font-size:11px;color:var(--fg3)">No spam. Unsubscribe anytime.</div>
   </div>
@@ -889,44 +867,7 @@ const navEl=document.getElementById('main-nav');let ticking=false;
 window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{navEl.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
 
 /* ═══ Substack subscribe ═══
-   Posts to Substack's free-subscribe endpoint. Uses no-cors mode so we
-   can't read the response, but the email lands. On fetch error, we show
-   a friendly fallback linking to Substack directly. */
-async function handleSubscribe(event,wrapId,inputId){
-  event.preventDefault();
-  const wrap=document.getElementById(wrapId);
-  const input=document.getElementById(inputId);
-  const errEl=wrap.querySelector('.subscribe-error');
-  const btn=wrap.querySelector('button[type="submit"]');
-  const email=input.value.trim();
-  if(!email||!email.includes('@')){
-    input.focus();input.style.borderColor='var(--red)';
-    setTimeout(()=>input.style.borderColor='',1500);
-    return false;
-  }
-  wrap.classList.remove('errored');
-  btn.disabled=true;
-  const original=btn.textContent;
-  btn.textContent='...';
-  try{
-    // Substack free-subscribe endpoint (undocumented but stable)
-    await fetch('https://enterpriseonchain.substack.com/api/v1/free',{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,first_url:location.href,first_referrer:document.referrer,current_url:location.href,current_referrer:document.referrer,referral_code:'',source:'subscribe_page'})
-    });
-    wrap.classList.add('submitted');
-    // Fire Substack analytics beacon if present
-    if(window._ss)window._ss.push({email,site:'enterpriseonchain'});
-  }catch(err){
-    console.warn('Substack subscribe failed:',err);
-    wrap.classList.add('errored');
-    btn.textContent=original;
-    btn.disabled=false;
-  }
-  return false;
-}
+   Official Substack iframe embed handles submission directly. */
 
 /* ═══ Marquee logos ═══ */
 const logos=['J.P. Morgan','Morgan Stanley','BlackRock','Citi','Barclays','European Central Bank','Deutsche Bundesbank','Franklin Templeton','Vanguard','S&P Global','PwC','EY','Accenture','Deloitte','McKinsey','KPMG'];
