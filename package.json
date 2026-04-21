@@ -1,0 +1,13 @@
+{
+  "name": "enterprise-onchain",
+  "version": "1.0.0",
+  "description": "Source for www.enterpriseonchain.com",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.1"
+  }
+}

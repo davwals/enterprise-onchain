@@ -1,0 +1,65 @@
+[
+  {
+    "title": "Senior Research Analyst, Tokenisation",
+    "company": "Brevan Howard Digital",
+    "function": "Research",
+    "seniority": "Senior",
+    "location": "London / Remote",
+    "url": "https://example.com/apply/1",
+    "posted": "2026-04-18"
+  },
+  {
+    "title": "Onchain Trading Engineer",
+    "company": "Jump Crypto",
+    "function": "Engineering",
+    "seniority": "Mid",
+    "location": "Chicago",
+    "url": "https://example.com/apply/2",
+    "posted": "2026-04-15"
+  },
+  {
+    "title": "Head of Digital Assets Legal",
+    "company": "Standard Chartered",
+    "function": "Legal",
+    "seniority": "Lead",
+    "location": "Singapore",
+    "url": "https://example.com/apply/3",
+    "posted": "2026-04-11"
+  },
+  {
+    "title": "Stablecoin Operations Associate",
+    "company": "Paxos",
+    "function": "Ops",
+    "seniority": "Junior",
+    "location": "New York",
+    "url": "https://example.com/apply/4",
+    "posted": "2026-04-09"
+  },
+  {
+    "title": "Institutional OTC Trader",
+    "company": "Galaxy",
+    "function": "Trading",
+    "seniority": "Senior",
+    "location": "New York / London",
+    "url": "https://example.com/apply/5",
+    "posted": "2026-04-07"
+  },
+  {
+    "title": "Smart Contract Engineer, RWA",
+    "company": "Ondo Finance",
+    "function": "Engineering",
+    "seniority": "Senior",
+    "location": "Remote",
+    "url": "https://example.com/apply/6",
+    "posted": "2026-04-05"
+  },
+  {
+    "title": "Research Associate, DeFi Markets",
+    "company": "Fidelity Digital Assets",
+    "function": "Research",
+    "seniority": "Mid",
+    "location": "Boston",
+    "url": "https://example.com/apply/7",
+    "posted": "2026-04-02"
+  }
+]
