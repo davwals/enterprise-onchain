@@ -1058,10 +1058,13 @@ else window.addEventListener('load',loadWorldData);
   const sections = Array.from(items).map(btn => ({
     btn, id: btn.dataset.target, el: document.getElementById(btn.dataset.target)
   })).filter(x => x.el);
+  const navOffset = () => (document.getElementById('main-nav')?.getBoundingClientRect().height || 0) + 8;
   items.forEach(btn => {
     btn.addEventListener('click', () => {
       const t = document.getElementById(btn.dataset.target);
-      if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+      if (!t) return;
+      const top = t.getBoundingClientRect().top + window.scrollY - navOffset();
+      window.scrollTo({top, behavior:'smooth'});
     });
   });
   function updateActive(){
