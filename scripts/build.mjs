@@ -200,31 +200,20 @@ function renderArchive(editions) {
     `<button class="filter-btn${f.value === 'All' ? ' active' : ''}" data-filter-format="${f.value}">${f.label}</button>`
   ).join('');
 
-  const tagButtons = ['All', ...NL_TAGS].map(t =>
-    `<button class="filter-btn${t === 'All' ? ' active' : ''}" data-filter-tag="${t}">${t}</button>`
-  ).join('');
-
-  return `${renderHead('Archive', 'Every edition of the Enterprise Onchain weekly newsletter.')}
+  return `${renderHead('Content Library', 'Every edition of the Enterprise Onchain weekly newsletter.')}
 <body>
 ${renderNav('library')}
 
 <main class="page">
   <div class="inner reveal">
-    <div class="s-label">Archive</div>
+    <div class="s-label">Content Library</div>
     <h1 class="s-title">The Weekly Archive.</h1>
-    <p class="s-desc">Every edition of Enterprise Onchain. Filter by format or topic.</p>
+    <p class="s-desc">Every edition of Enterprise Onchain.</p>
 
-    <div class="filter-group">
-      <div class="filter-group-label">Format</div>
-      <div class="filter-row">${formatButtons}</div>
-    </div>
-    <div class="filter-group">
-      <div class="filter-group-label">Topic</div>
-      <div class="filter-row">${tagButtons}</div>
-    </div>
+    <div class="filter-row">${formatButtons}</div>
 
     <div class="archive-list" id="archive-list">${items}</div>
-    <div class="archive-empty" id="archive-empty" style="display:none">No editions match those filters.</div>
+    <div class="archive-empty" id="archive-empty" style="display:none">No editions match that filter.</div>
   </div>
 </main>
 
@@ -234,15 +223,11 @@ ${SHARED_SCRIPT}
 (function(){
   const items = document.querySelectorAll('.archive-item');
   const empty = document.getElementById('archive-empty');
-  const state = { format: 'All', tag: 'All' };
+  let format = 'All';
   function render(){
     let visible = 0;
     items.forEach(it => {
-      const tags = (it.dataset.tags || '').split(',').filter(Boolean);
-      const format = it.dataset.format;
-      const formatMatch = state.format === 'All' || format === state.format;
-      const tagMatch = state.tag === 'All' || tags.includes(state.tag);
-      const show = formatMatch && tagMatch;
+      const show = format === 'All' || it.dataset.format === format;
       it.style.display = show ? '' : 'none';
       if (show) visible++;
     });
@@ -251,13 +236,7 @@ ${SHARED_SCRIPT}
   document.querySelectorAll('[data-filter-format]').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('[data-filter-format]').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
-    state.format = b.dataset.filterFormat;
-    render();
-  }));
-  document.querySelectorAll('[data-filter-tag]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('[data-filter-tag]').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    state.tag = b.dataset.filterTag;
+    format = b.dataset.filterFormat;
     render();
   }));
 })();
