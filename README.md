@@ -98,7 +98,21 @@ Edit `content/jobs.json` and append an entry:
 }
 ```
 
-Functions: `Research`, `Trading`, `Legal`, `Engineering`, `Ops`.
+Functions (five buckets, use the string exactly):
+
+| Function        | Covers                                              |
+|-----------------|-----------------------------------------------------|
+| `Commercial`    | Sales, Business Development, Partnerships           |
+| `Product`       | Product Management, Product Strategy                |
+| `Technical`     | Engineering, Architecture, Software                 |
+| `Strategy / Ops`| General Strategy, Operations, Legal                 |
+| `Research`      | Research and research analyst roles                 |
+
+The build script uses internal slugs (`commercial`, `product`,
+`technical`, `strategy-ops`, `research`) for DOM data attributes, so
+the slash in `Strategy / Ops` does not leak into selectors. Keep the
+JSON value as the full string (`Strategy / Ops`).
+
 Seniority: `Junior`, `Mid`, `Senior`, `Lead`.
 
 `npm run build`, commit, push.

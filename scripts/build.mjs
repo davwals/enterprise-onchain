@@ -12,7 +12,17 @@ const root = resolve(__dirname, '..');
 const md = new MarkdownIt({ html: true, linkify: true, typographer: true });
 
 const NL_TAGS = ['ETF', 'Tokenisation', 'Regulation', 'Stablecoins', 'Infrastructure'];
-const JOB_FUNCTIONS = ['Research', 'Trading', 'Legal', 'Engineering', 'Ops'];
+// Job function taxonomy. Pill order is fixed. `value` matches the
+// "function" field in content/jobs.json; `slug` is used in DOM data
+// attributes (so "Strategy / Ops" doesn't leak spaces/slashes into
+// selectors). `label` is the visible pill text.
+const JOB_FUNCTIONS = [
+  { slug: 'commercial',   value: 'Commercial',     label: 'Commercial'     },
+  { slug: 'product',      value: 'Product',        label: 'Product'        },
+  { slug: 'technical',    value: 'Technical',      label: 'Technical'      },
+  { slug: 'strategy-ops', value: 'Strategy / Ops', label: 'Strategy / Ops' },
+  { slug: 'research',     value: 'Research',       label: 'Research'       },
+];
 const JOB_SENIORITIES = ['Junior', 'Mid', 'Senior', 'Lead'];
 
 // ── Minimal YAML-ish front-matter parser ────────────────────────────────
@@ -284,9 +294,12 @@ ${SHARED_SCRIPT}
 // ── /jobs/ page ─────────────────────────────────────────────────────────
 function renderJobs(jobs) {
   const jobsJSON = JSON.stringify(jobs).replace(/</g, '\\u003c');
-  const fnBtns = ['All', ...JOB_FUNCTIONS].map(f =>
-    `<button class="filter-btn${f === 'All' ? ' active' : ''}" data-filter-fn="${f}">${f}</button>`
+  const fnBtns = [{ slug: 'all', label: 'All' }, ...JOB_FUNCTIONS].map(f =>
+    `<button class="filter-btn${f.slug === 'all' ? ' active' : ''}" data-filter-fn="${f.slug}">${f.label}</button>`
   ).join('');
+  const fnSlugToValue = JSON.stringify(
+    Object.fromEntries([['all', null], ...JOB_FUNCTIONS.map(f => [f.slug, f.value])])
+  );
   const snBtns = ['All', ...JOB_SENIORITIES].map(s =>
     `<button class="filter-btn${s === 'All' ? ' active' : ''}" data-filter-sn="${s}">${s}</button>`
   ).join('');
@@ -299,7 +312,7 @@ ${renderNav('jobs')}
   <div class="inner reveal">
     <div class="s-label">Jobs</div>
     <h1 class="s-title">Institutional Crypto Jobs.</h1>
-    <p class="s-desc">Curated roles across research, trading, legal, engineering, and ops — at firms building onchain.</p>
+    <p class="s-desc">Curated roles across commercial, product, technical, strategy &amp; ops, and research — at firms building onchain.</p>
 
     <div class="filter-group">
       <div class="filter-group-label">Function</div>
@@ -319,14 +332,15 @@ ${renderFooter()}
 ${SHARED_SCRIPT}
 <script>
 const JOBS = ${jobsJSON};
+const FN_SLUG_TO_VALUE = ${fnSlugToValue};
 (function(){
   const list = document.getElementById('jobs-list');
   const empty = document.getElementById('jobs-empty');
-  const state = { fn: 'All', sn: 'All' };
+  const state = { fn: null, sn: 'All' };
   function fmt(iso){const d=new Date(iso);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
   function render(){
     const filtered = JOBS.filter(j =>
-      (state.fn==='All' || j.function===state.fn) &&
+      (state.fn===null || j.function===state.fn) &&
       (state.sn==='All' || j.seniority===state.sn)
     );
     empty.style.display = filtered.length ? 'none' : '';
@@ -349,7 +363,7 @@ const JOBS = ${jobsJSON};
   document.querySelectorAll('[data-filter-fn]').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('[data-filter-fn]').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
-    state.fn = b.dataset.filterFn;
+    state.fn = FN_SLUG_TO_VALUE[b.dataset.filterFn];
     render();
   }));
   document.querySelectorAll('[data-filter-sn]').forEach(b => b.addEventListener('click', () => {
