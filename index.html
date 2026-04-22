@@ -538,6 +538,16 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
      to intrinsic content on some WebKit paths). */
   .trusted{width:100%;max-width:100%;margin-top:36px;display:block;align-self:stretch}
   .marquee-wrap{width:100%}
+  /* Mobile-scaled chips so the trusted block fits below the sub-meta
+     row inside portrait viewports without pushing the rest below the
+     fold. translateZ / will-change on the base rules still apply. */
+  .trusted .logo-chip{padding:0 18px;height:28px}
+  .trusted .logo-chip span{font-size:11.5px}
+  .trusted .marquee-track{animation-duration:40s}
+  .trusted .marquee-wrap{
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 3%,black 97%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,black 3%,black 97%,transparent 100%);
+  }
 
   section{padding:48px 20px}
   .nl-section .inner,.dash-section .inner{padding:0}
