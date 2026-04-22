@@ -90,7 +90,7 @@ Edit `content/jobs.json` and append an entry:
 {
   "title": "Senior Research Analyst",
   "company": "Acme Capital",
-  "function": "Research",
+  "function": "Strategy",
   "seniority": "Senior",
   "location": "London / Remote",
   "url": "https://example.com/apply",
@@ -98,7 +98,9 @@ Edit `content/jobs.json` and append an entry:
 }
 ```
 
-Functions: `Research`, `Trading`, `Legal`, `Engineering`, `Ops`.
+Functions: `Strategy`, `Engineering`, `Research`, `Trading`, `Legal`.
+The `Strategy` value is surfaced on the board as the **Strategy &
+Product** filter pill.
 Seniority: `Junior`, `Mid`, `Senior`, `Lead`.
 
 `npm run build`, commit, push.
