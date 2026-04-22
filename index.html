@@ -522,7 +522,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
 
   .hero{
     grid-template-columns:1fr;
-    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 48px;
+    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 32px;
     gap:24px;
     min-height:auto;
     align-items:start;
@@ -536,7 +536,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   /* Explicit width + block display bulletproofs sizing inside the
      flex-column .hero-content (cross-axis sizing can otherwise shrink
      to intrinsic content on some WebKit paths). */
-  .trusted{width:100%;max-width:100%;margin-top:36px;display:block;align-self:stretch}
+  .trusted{width:100%;max-width:100%;margin-top:24px;display:block;align-self:stretch}
   .marquee-wrap{width:100%}
   /* Mobile-scaled chips so the trusted block fits below the sub-meta
      row inside portrait viewports without pushing the rest below the
