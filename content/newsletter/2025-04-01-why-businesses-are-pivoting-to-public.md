@@ -3,6 +3,7 @@ title: "Why Businesses Are Pivoting to Public Blockchains"
 subtitle: "Breaking Free from Walled Gardens:"
 date: 2025-04-01
 slug: why-businesses-are-pivoting-to-public
+type: deep-dive
 tags: []
 substack_url: https://enterpriseonchain.substack.com/p/why-businesses-are-pivoting-to-public
 ---

@@ -3,6 +3,7 @@ title: "⚡ Read this before your Monday meeting"
 subtitle: "Enterprise Onchain TLDR"
 date: 2026-01-09
 slug: banks-ape-in
+type: deep-dive
 tags: [ETF, Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/banks-ape-in
 ---

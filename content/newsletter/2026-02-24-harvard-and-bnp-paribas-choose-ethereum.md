@@ -3,6 +3,7 @@ title: "⚡Harvard & BNP Paribas choose Ethereum"
 subtitle: "Harvard opens its first ETH position, BNP Paribas tokenizes a euro MMF, and BlackRock reveals the economics of staked ETFs"
 date: 2026-02-24
 slug: harvard-and-bnp-paribas-choose-ethereum
+type: weekly
 tags: [ETF, Tokenisation, Regulation]
 substack_url: https://enterpriseonchain.substack.com/p/harvard-and-bnp-paribas-choose-ethereum
 ---

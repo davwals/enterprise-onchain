@@ -3,6 +3,7 @@ title: "⚡ The Tokenization Tidal Wave"
 subtitle: "Nasdaq partners with Kraken. ICE invests in OKX. U.S. regulators clear capital treatment for tokenized assets. The infrastructure race is on."
 date: 2026-03-11
 slug: the-tokenization-tidal-wave
+type: weekly
 tags: [Tokenisation, Regulation]
 substack_url: https://enterpriseonchain.substack.com/p/the-tokenization-tidal-wave
 ---

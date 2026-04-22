@@ -3,6 +3,7 @@ title: "⚡ mixed signals"
 subtitle: "Enterprise Onchain TLDR"
 date: 2026-01-19
 slug: mixed-signals
+type: weekly
 tags: [ETF, Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/mixed-signals
 ---

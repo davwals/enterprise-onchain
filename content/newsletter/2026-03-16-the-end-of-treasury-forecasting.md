@@ -3,6 +3,7 @@ title: "The End of Treasury Forecasting"
 subtitle: "Enterprise Onchain"
 date: 2026-03-16
 slug: the-end-of-treasury-forecasting
+type: deep-dive
 tags: []
 substack_url: https://enterpriseonchain.substack.com/p/the-end-of-treasury-forecasting
 ---

@@ -3,6 +3,7 @@ title: "⚡ DeFi's biggest week so far?"
 subtitle: "BlackRock lists BUIDL on Uniswap, Goldman reveals $2.36B in crypto, $990B Apollo partners with Morpho, the UK tokenizes sovereign bonds, and Ondo brings stocks to DeFi collateral."
 date: 2026-02-17
 slug: defis-biggest-week-so-far
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/defis-biggest-week-so-far
 ---

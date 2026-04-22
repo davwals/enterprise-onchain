@@ -3,6 +3,7 @@ title: "Aave enters banking. Ethereum unifies L2s. Central Banks buy Bitcoin."
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-11-23
 slug: aave-enters-banking-ethereum-unifies
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/aave-enters-banking-ethereum-unifies
 ---

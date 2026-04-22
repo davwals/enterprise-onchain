@@ -3,6 +3,7 @@ title: "⚡ The Race Is On"
 subtitle: "Fidelity launches first-ever stablecoin, Securitize's 841% growth, UAE's first regulated stablecoin, and regulators are teaming up."
 date: 2026-02-02
 slug: the-race-is-on
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/the-race-is-on
 ---

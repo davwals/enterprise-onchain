@@ -3,6 +3,7 @@ title: "Sony's Entertainment layer 2 Explored"
 subtitle: ""
 date: 2025-01-25
 slug: sonys-entertainment-layer-2-explored
+type: deep-dive
 tags: [Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/sonys-entertainment-layer-2-explored
 ---

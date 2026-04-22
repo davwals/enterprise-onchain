@@ -3,6 +3,7 @@ title: "WHAT EVERYONE MISSED: The Real Game Behind Ripple's $1.25B Hidden Road P
 subtitle: "Ripple Just Dropped $1.25B on Hidden Road and Changed the Game"
 date: 2025-03-08
 slug: what-everyone-missed-the-real-game
+type: deep-dive
 tags: [Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/what-everyone-missed-the-real-game
 ---

@@ -3,6 +3,7 @@ title: "The 10 smartest and 10 honest things said at EthCC[9]"
 subtitle: "Straight from the stage."
 date: 2026-04-19
 slug: the-10-smartest-and-10-honest-things
+type: deep-dive
 tags: [Tokenisation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/the-10-smartest-and-10-honest-things
 ---

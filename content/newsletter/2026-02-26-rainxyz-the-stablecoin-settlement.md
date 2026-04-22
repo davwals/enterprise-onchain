@@ -3,6 +3,7 @@ title: "Rain.xyz: The Stablecoin Settlement Layer"
 subtitle: "The Startup That Eliminated the Sponsor Bank"
 date: 2026-02-26
 slug: rainxyz-the-stablecoin-settlement
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/rainxyz-the-stablecoin-settlement
 ---

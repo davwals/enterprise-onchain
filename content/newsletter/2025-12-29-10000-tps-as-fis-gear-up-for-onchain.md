@@ -3,6 +3,7 @@ title: "10,000 TPS as FIs gear up for onchain boom"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-12-29
 slug: 10000-tps-as-fis-gear-up-for-onchain
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/10000-tps-as-fis-gear-up-for-onchain
 ---

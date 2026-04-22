@@ -3,6 +3,7 @@ title: "How the U.S. Dollar Stole the Show—And Why Stablecoins Might Be Next"
 subtitle: ""
 date: 2025-05-05
 slug: how-the-us-dollar-stole-the-showand
+type: deep-dive
 tags: [Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/how-the-us-dollar-stole-the-showand
 ---

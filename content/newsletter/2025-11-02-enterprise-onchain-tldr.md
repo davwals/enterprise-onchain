@@ -3,6 +3,7 @@ title: "Enterprise Onchain TLDR"
 subtitle: ""
 date: 2025-11-02
 slug: enterprise-onchain-tldr
+type: deep-dive
 tags: [Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/enterprise-onchain-tldr
 ---

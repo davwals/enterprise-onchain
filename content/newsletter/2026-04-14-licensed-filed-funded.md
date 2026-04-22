@@ -3,6 +3,7 @@ title: "Licensed, Filed, Funded"
 subtitle: "Hong Kong issues its first stablecoin licenses. Ondo files with the SEC to put equities on Ethereum. Deutsche Borse puts $200M behind Kraken. Six Swiss banks sandbox a digital franc."
 date: 2026-04-14
 slug: licensed-filed-funded
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/licensed-filed-funded
 ---

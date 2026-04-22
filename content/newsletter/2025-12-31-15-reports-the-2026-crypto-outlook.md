@@ -3,6 +3,7 @@ title: "15 Reports: The 2026 Crypto Outlook Roundup"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-12-31
 slug: 15-reports-the-2026-crypto-outlook
+type: deep-dive
 tags: [ETF, Tokenisation, Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/15-reports-the-2026-crypto-outlook
 ---

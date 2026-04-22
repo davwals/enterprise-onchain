@@ -3,6 +3,7 @@ title: "⚡ Both U.S. Stock Exchanges Pick Sides"
 subtitle: "The SEC greenlit tokenized stock trading. Both exchanges are building. Mastercard made the largest stablecoin acquisition ever. The heat is turning up."
 date: 2026-03-30
 slug: both-us-stock-exchanges-pick-sides
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/both-us-stock-exchanges-pick-sides
 ---

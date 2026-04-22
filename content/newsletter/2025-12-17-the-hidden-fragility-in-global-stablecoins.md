@@ -3,6 +3,7 @@ title: "Stablecoins: The Hidden Fragility"
 subtitle: "Why technology will not determine who wins"
 date: 2025-12-17
 slug: the-hidden-fragility-in-global-stablecoins
+type: deep-dive
 tags: [Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/the-hidden-fragility-in-global-stablecoins
 ---

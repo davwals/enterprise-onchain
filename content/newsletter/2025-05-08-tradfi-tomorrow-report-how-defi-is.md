@@ -3,6 +3,7 @@ title: "TradFi Tomorrow Report: How DeFi Is Revolutionizing Financial Services"
 subtitle: ""
 date: 2025-05-08
 slug: tradfi-tomorrow-report-how-defi-is
+type: deep-dive
 tags: [Tokenisation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/tradfi-tomorrow-report-how-defi-is
 ---

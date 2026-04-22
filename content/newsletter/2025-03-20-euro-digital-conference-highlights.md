@@ -3,6 +3,7 @@ title: "Euro Digital Conference Highlights and Public Blockchains for Enterprise
 subtitle: "Navigating the rapidly evolving intersection of blockchain technology and traditional finance"
 date: 2025-03-20
 slug: euro-digital-conference-highlights
+type: deep-dive
 tags: [Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/euro-digital-conference-highlights
 ---

@@ -3,6 +3,7 @@ title: "Blockchain and Quantum Computing"
 subtitle: "Can blockchain help defend against quantum computing?"
 date: 2025-02-12
 slug: blockchain-and-quantum-computing
+type: deep-dive
 tags: [Regulation]
 substack_url: https://enterpriseonchain.substack.com/p/blockchain-and-quantum-computing
 ---

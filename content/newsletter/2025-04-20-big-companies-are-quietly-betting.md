@@ -3,6 +3,7 @@ title: "Big Companies Are Quietly Betting on Ethereum"
 subtitle: "What Does It Mean for Enterprises?"
 date: 2025-04-20
 slug: big-companies-are-quietly-betting
+type: deep-dive
 tags: [Tokenisation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/big-companies-are-quietly-betting
 ---

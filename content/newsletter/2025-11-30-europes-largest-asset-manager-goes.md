@@ -3,6 +3,7 @@ title: "Europe’s Largest Asset Manager Goes Onchain + Visa, EU stablecoins"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-11-30
 slug: europes-largest-asset-manager-goes
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/europes-largest-asset-manager-goes
 ---

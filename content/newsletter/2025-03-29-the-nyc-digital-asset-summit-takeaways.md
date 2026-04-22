@@ -3,6 +3,7 @@ title: "The NYC Digital Asset Summit Takeaways"
 subtitle: "Highlighted significant trends in blockchain and digital asset adoption"
 date: 2025-03-29
 slug: the-nyc-digital-asset-summit-takeaways
+type: deep-dive
 tags: [ETF, Tokenisation, Regulation]
 substack_url: https://enterpriseonchain.substack.com/p/the-nyc-digital-asset-summit-takeaways
 ---

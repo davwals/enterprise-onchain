@@ -3,6 +3,7 @@ title: "Tether Is Not a Stablecoin Company (Deep Dive)"
 subtitle: "The $10 Billion Machine Nobody Updated Their Mental Model For"
 date: 2026-03-26
 slug: tether-is-not-a-stablecoin-company
+type: deep-dive
 tags: [Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/tether-is-not-a-stablecoin-company
 ---

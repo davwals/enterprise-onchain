@@ -3,6 +3,7 @@ title: "Full Spectrum"
 subtitle: "Goldman files its first Bitcoin ETF. HSBC launches tokenized deposits in the US. Hong Kong goes 24/7. Lazarus Group's DeFi haul hits $575M in 18 days. This week had everything."
 date: 2026-04-21
 slug: full-spectrum
+type: weekly
 tags: [ETF, Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/full-spectrum
 ---

@@ -3,6 +3,7 @@ title: "Blockchains biggest upgrade: zkEVM"
 subtitle: "What Is zkEVM"
 date: 2026-04-01
 slug: blockchains-biggest-upgrade-zkevm
+type: deep-dive
 tags: [Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/blockchains-biggest-upgrade-zkevm
 ---

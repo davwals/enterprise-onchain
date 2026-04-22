@@ -3,6 +3,7 @@ title: "Which Blockchain Will AI Choose?"
 subtitle: "Enterprise Onchain"
 date: 2026-04-09
 slug: which-blockchain-will-ai-choose
+type: deep-dive
 tags: [Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/which-blockchain-will-ai-choose
 ---

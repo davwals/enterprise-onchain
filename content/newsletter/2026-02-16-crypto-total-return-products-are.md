@@ -3,6 +3,7 @@ title: "⚡ Crypto Total Return Products Are Here"
 subtitle: "How Liquid Staking Changes Everything"
 date: 2026-02-16
 slug: crypto-total-return-products-are
+type: deep-dive
 tags: [Regulation, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/crypto-total-return-products-are
 ---

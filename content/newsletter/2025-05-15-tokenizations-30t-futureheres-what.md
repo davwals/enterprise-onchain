@@ -3,6 +3,7 @@ title: "Tokenization’s $30T Future—Here’s What You Need to Know"
 subtitle: "Wall Street Is Moving Fast on Tokenization—Are You Ready?"
 date: 2025-05-15
 slug: tokenizations-30t-futureheres-what
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/tokenizations-30t-futureheres-what
 ---

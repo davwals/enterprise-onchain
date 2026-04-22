@@ -3,6 +3,7 @@ title: "GDPR: Europe's Regulatory Crossroads Europes Blockchain bottle cap momen
 subtitle: "New EU GDPR rules Suggests \"Deleting Whole Blockchains\" for GDPR Compliance"
 date: 2025-04-26
 slug: gdpr-europes-regulatory-crossroads
+type: deep-dive
 tags: [Regulation]
 substack_url: https://enterpriseonchain.substack.com/p/gdpr-europes-regulatory-crossroads
 ---

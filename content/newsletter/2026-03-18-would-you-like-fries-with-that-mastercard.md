@@ -3,6 +3,7 @@ title: "💵 Would you like fries with that Mastercard?"
 subtitle: "Mastercard goes shopping. AI agents can now get a Visa card."
 date: 2026-03-18
 slug: would-you-like-fries-with-that-mastercard
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/would-you-like-fries-with-that-mastercard
 ---

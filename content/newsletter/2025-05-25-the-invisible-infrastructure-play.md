@@ -3,6 +3,7 @@ title: "THE INVISIBLE INFRASTRUCTURE PLAY"
 subtitle: "Ethereum's Long-Term Value Capture Vision"
 date: 2025-05-25
 slug: the-invisible-infrastructure-play
+type: deep-dive
 tags: [Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/the-invisible-infrastructure-play
 ---

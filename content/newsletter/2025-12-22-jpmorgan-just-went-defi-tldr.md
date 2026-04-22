@@ -3,6 +3,7 @@ title: "JPMorgan Just Went DeFi - TLDR"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-12-22
 slug: jpmorgan-just-went-defi-tldr
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/jpmorgan-just-went-defi-tldr
 ---

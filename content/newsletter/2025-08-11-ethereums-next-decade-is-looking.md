@@ -3,6 +3,7 @@ title: "Ethereum’s “Next Decade” Is Looking Very Different"
 subtitle: "From Scrappy vision to internet backbone"
 date: 2025-08-11
 slug: ethereums-next-decade-is-looking
+type: deep-dive
 tags: [Tokenisation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/ethereums-next-decade-is-looking
 ---

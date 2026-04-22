@@ -3,6 +3,7 @@ title: "🤖 Agents Are Paying Each Other $43M"
 subtitle: "Enterprise Onchain"
 date: 2026-03-05
 slug: agents-are-paying-each-other-43m
+type: deep-dive
 tags: [Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/agents-are-paying-each-other-43m
 ---

@@ -3,6 +3,7 @@ title: "⚡ JP Morgan, Base, Morgan Stanley and BNY TLDR"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-11-16
 slug: jp-morgan-base-morgan-stanley-and
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/jp-morgan-base-morgan-stanley-and
 ---

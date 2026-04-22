@@ -3,6 +3,7 @@ title: "Why Banks Stopped Fearing Stablecoins"
 subtitle: "Enterprise Onchain"
 date: 2026-03-09
 slug: why-banks-stopped-fearing-stablecoins
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/why-banks-stopped-fearing-stablecoins
 ---

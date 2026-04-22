@@ -3,6 +3,7 @@ title: "⚡ Crypto Bank Charters Galore"
 subtitle: "Morgan Stanley files for a crypto bank. The Bank of Japan tests blockchain settlement. Nasdaq enters prediction markets."
 date: 2026-03-03
 slug: crypto-bank-charters-galore
+type: weekly
 tags: [Tokenisation, Regulation]
 substack_url: https://enterpriseonchain.substack.com/p/crypto-bank-charters-galore
 ---

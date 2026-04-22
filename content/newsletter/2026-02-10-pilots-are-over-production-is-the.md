@@ -3,6 +3,7 @@ title: "⚡Pilots Are Over. Production Is the Play."
 subtitle: "CME Coin, Banks launching Euro stablecoin on Ethereum, Fidelity FIDD, and Vitalik’s new vision for Ethereum L2s."
 date: 2026-02-10
 slug: pilots-are-over-production-is-the
+type: weekly
 tags: [Tokenisation, Stablecoins, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/pilots-are-over-production-is-the
 ---

@@ -3,6 +3,7 @@ title: "Blockchain Performance: Why Ethereum's \"Slowness\" Is Actually Its Stre
 subtitle: ""
 date: 2025-05-02
 slug: blockchain-performance-why-ethereums
+type: deep-dive
 tags: [Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/blockchain-performance-why-ethereums
 ---

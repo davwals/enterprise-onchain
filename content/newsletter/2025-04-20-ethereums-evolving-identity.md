@@ -3,6 +3,7 @@ title: "Ethereum’s Evolving Identity"
 subtitle: "— Digital Gold, Decentralization, or the Foundation of Economic Security?"
 date: 2025-04-20
 slug: ethereums-evolving-identity
+type: deep-dive
 tags: [Regulation, Infrastructure]
 substack_url: https://enterpriseonchain.substack.com/p/ethereums-evolving-identity
 ---

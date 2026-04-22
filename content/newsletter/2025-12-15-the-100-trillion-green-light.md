@@ -3,6 +3,7 @@ title: "🟢 The $100 Trillion Green Light"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-12-15
 slug: the-100-trillion-green-light
+type: weekly
 tags: [ETF, Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/the-100-trillion-green-light
 ---

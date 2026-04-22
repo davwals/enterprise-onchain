@@ -3,6 +3,7 @@ title: "It's 1996 for Tokenization & Vanguard joins the Party"
 subtitle: "Enterprise Onchain TLDR"
 date: 2025-12-07
 slug: its-1996-for-tokenization-and-vanguard
+type: weekly
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/its-1996-for-tokenization-and-vanguard
 ---

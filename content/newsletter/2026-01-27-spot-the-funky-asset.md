@@ -3,6 +3,7 @@ title: "⚡ Someone just tokenized jet engines"
 subtitle: "Enterprise Onchain TLDR"
 date: 2026-01-27
 slug: spot-the-funky-asset
+type: weekly
 tags: [Tokenisation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/spot-the-funky-asset
 ---

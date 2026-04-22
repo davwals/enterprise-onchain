@@ -3,6 +3,7 @@ title: "⚡ Standard Chartered: $2T RWA market coming by 2028 (mostly on Ethereu
 subtitle: "Enterprise Onchain TLDR – Issue 2"
 date: 2025-11-10
 slug: standard-chartered-2t-rwa-market
+type: deep-dive
 tags: [Tokenisation, Regulation, Stablecoins]
 substack_url: https://enterpriseonchain.substack.com/p/standard-chartered-2t-rwa-market
 ---
