@@ -262,7 +262,7 @@ main.page.page-center{display:flex;align-items:center;justify-content:center;min
 .edition-body img{display:block;width:100%;height:auto;margin:24px 0;border-radius:var(--radius-xs)}
 .edition-sponsor{text-align:center;margin:28px 0}
 .edition-sponsor p{margin:0 0 6px;color:var(--fg2)}
-.edition-sponsor img{width:auto;max-width:120px;max-height:24px;height:auto;margin:0 auto;border-radius:0}
+.edition-sponsor img{width:auto;max-width:120px;max-height:56px;height:auto;margin:0 auto;border-radius:0}
 .edition-sponsor em{font-size:12.5px;color:var(--fg3)}
 .edition-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:1px solid var(--border)}
 
