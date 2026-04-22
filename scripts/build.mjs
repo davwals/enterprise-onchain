@@ -187,7 +187,9 @@ function renderArchive(editions) {
         </div>
         <div class="archive-excerpt">${e.excerpt}</div>
         <div class="archive-meta">
-          ${e.type === 'deep-dive' ? '<span class="tag-chip format-chip">Deep Dive</span>' : ''}
+          ${e.type === 'deep-dive'
+            ? '<span class="tag-chip format-chip">Deep Dive</span>'
+            : '<span class="tag-chip weekly-chip">Weekly</span>'}
           <span class="archive-date">${formatDate(e.date)}</span>
         </div>
       </a>`).join('');

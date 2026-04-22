@@ -234,6 +234,7 @@ main.page.page-center{display:flex;align-items:center;justify-content:center;min
   color:var(--accent);opacity:.85;
 }
 .format-chip{background:var(--accent);color:var(--btn-fg);opacity:1}
+.weekly-chip{color:var(--fg3);border-color:var(--border2);background:transparent;opacity:.9}
 
 /* ═══ EDITION PAGE ═══ */
 .edition{max-width:720px}
