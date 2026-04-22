@@ -314,7 +314,10 @@ body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
 
 .trusted{margin-top:clamp(28px,5vh,48px);max-width:520px;width:100%}
 .trusted-label{font-size:8px;font-weight:500;letter-spacing:.45em;text-transform:uppercase;color:var(--fg3);margin-bottom:16px;display:block}
-.marquee-wrap{position:relative;overflow:hidden;padding:4px 0;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%);transform:translateZ(0)}
+.marquee-wrap{position:relative;overflow:hidden;padding:4px 0;transform:translateZ(0)}
+.marquee-wrap::before,.marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,var(--bg) 0%,transparent 100%)}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,var(--bg) 0%,transparent 100%)}
 .marquee-track{display:flex;gap:0;animation:marquee 60s linear infinite;width:max-content;will-change:transform}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused}
 .logo-chip{display:flex;align-items:center;padding:0 24px;border-right:1px solid var(--border2);height:32px;flex-shrink:0}
@@ -533,20 +536,15 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   .hero-sub{font-size:14px;max-width:100%}
   .subscribe-wrap{max-width:100%}
   .sub-meta-row{justify-content:flex-start;font-size:11px}
-  /* Explicit width + block display bulletproofs sizing inside the
-     flex-column .hero-content (cross-axis sizing can otherwise shrink
-     to intrinsic content on some WebKit paths). */
-  .trusted{width:100%;max-width:100%;margin-top:24px;display:block;align-self:stretch}
-  .marquee-wrap{width:100%}
-  /* Mobile-scaled chips so the trusted block fits below the sub-meta
-     row inside portrait viewports without pushing the rest below the
-     fold. translateZ / will-change on the base rules still apply.
-     Note: we deliberately do NOT re-declare mask-image here — doing
-     so invalidates the compositing layer the base rule creates,
-     re-triggering the iOS Safari bug that hides the whole track. */
-  .trusted .logo-chip{padding:0 18px;height:28px}
-  .trusted .logo-chip span{font-size:11.5px}
-  .trusted .marquee-track{animation-duration:40s}
+  .trusted{max-width:100%;margin-top:24px}
+  /* Narrower fade overlays on mobile so more of the visible track
+     shows through the small viewport. translateZ / will-change on
+     the base rules still apply; chip sizing scoped via ID-free
+     selectors to keep specificity low and iOS layers stable. */
+  .marquee-wrap::before,.marquee-wrap::after{width:16px}
+  .logo-chip{padding:0 18px;height:28px}
+  .logo-chip span{font-size:11.5px}
+  .marquee-track{animation-duration:40s}
 
   section{padding:48px 20px}
   .nl-section .inner,.dash-section .inner{padding:0}
