@@ -70,6 +70,7 @@ it as static files.
    ---
    title: Full Spectrum
    date: 2026-04-21
+   type: weekly
    tags: [ETF, Tokenisation]
    excerpt: One-line summary shown in the archive list.
    ---
@@ -79,8 +80,20 @@ it as static files.
 3. `npm run build`, commit both the `.md` source and the generated
    `newsletter/<slug>/index.html`, push to `main`.
 
+**Required fields:** `title`, `date`, `type`. The `type` field is
+how the archive page tells weekly editions from deep dives. Allowed
+values:
+
+| `type`      | Archive treatment                                   |
+|-------------|-----------------------------------------------------|
+| `weekly`    | Shown under the *Weekly* format filter. No chip.    |
+| `deep-dive` | Shown under the *Deep Dives* format filter. Gets a "Deep Dive" chip next to the date on the archive card. |
+
+Per-edition pages render identically regardless of `type`.
+
 Supported tags: `ETF`, `Tokenisation`, `Regulation`, `Stablecoins`,
-`Infrastructure`.
+`Infrastructure`. Tags are optional — an edition with no tags only
+appears under the *All* topic filter.
 
 ## Adding a job
 
