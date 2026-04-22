@@ -489,6 +489,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   transition:opacity .25s,transform .25s;
   white-space:nowrap;
 }
+.legend-item:hover .legend-label{opacity:.85;transform:translateX(0)}
 .legend-item.active{color:var(--fg)}
 .legend-item.active .legend-line{width:20px;opacity:1}
 .legend-item.active .legend-label{opacity:1;transform:translateX(0)}
@@ -1065,14 +1066,28 @@ else window.addEventListener('load',loadWorldData);
       if (!t) return;
       const top = t.getBoundingClientRect().top + window.scrollY - navOffset();
       window.scrollTo({top, behavior:'smooth'});
+      // If we're already at the end of the scrollable range the browser
+      // can't scroll further, so no scroll events fire — update the
+      // active state directly.
+      updateActive();
     });
   });
   function updateActive(){
-    const y = window.scrollY + window.innerHeight * 0.35;
-    let current = sections[0];
-    for (const s of sections){
-      const top = s.el.getBoundingClientRect().top + window.scrollY;
-      if (y >= top) current = s;
+    // Near the bottom of the page, force the last section active. Its
+    // top may sit below the 35% viewport line and so would never
+    // qualify under the normal rule, leaving the last legend item
+    // permanently inactive.
+    const nearBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    let current;
+    if (nearBottom) {
+      current = sections[sections.length - 1];
+    } else {
+      const y = window.scrollY + window.innerHeight * 0.35;
+      current = sections[0];
+      for (const s of sections){
+        const top = s.el.getBoundingClientRect().top + window.scrollY;
+        if (y >= top) current = s;
+      }
     }
     items.forEach(b => b.classList.toggle('active', b === current.btn));
   }
