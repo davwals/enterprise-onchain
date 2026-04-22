@@ -1,0 +1,446 @@
+#!/usr/bin/env node
+// Static site builder: Markdown editions → /newsletter/,
+// JSON jobs → /jobs/, and a placeholder /dashboard/.
+
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import MarkdownIt from 'markdown-it';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const root = resolve(__dirname, '..');
+const md = new MarkdownIt({ html: true, linkify: true, typographer: true });
+
+const NL_TAGS = ['ETF', 'Tokenisation', 'Regulation', 'Stablecoins', 'Infrastructure'];
+// Job function taxonomy. Pill order is fixed. `value` matches the
+// "function" field in content/jobs.json; `slug` is used in DOM data
+// attributes (so "Strategy / Ops" doesn't leak spaces/slashes into
+// selectors). `label` is the visible pill text.
+const JOB_FUNCTIONS = [
+  { slug: 'commercial',   value: 'Commercial',     label: 'Commercial'     },
+  { slug: 'product',      value: 'Product',        label: 'Product'        },
+  { slug: 'technical',    value: 'Technical',      label: 'Technical'      },
+  { slug: 'strategy-ops', value: 'Strategy / Ops', label: 'Strategy / Ops' },
+  { slug: 'research',     value: 'Research',       label: 'Research'       },
+];
+const JOB_SENIORITIES = ['Junior', 'Mid', 'Senior', 'Lead'];
+
+// ── Minimal YAML-ish front-matter parser ────────────────────────────────
+function parseFrontMatter(src) {
+  if (!src.startsWith('---\n')) return { data: {}, body: src };
+  const end = src.indexOf('\n---', 4);
+  if (end === -1) return { data: {}, body: src };
+  const raw = src.slice(4, end);
+  const body = src.slice(end + 4).replace(/^\n/, '');
+  const data = {};
+  for (const line of raw.split('\n')) {
+    const m = line.match(/^(\w+):\s*(.*)$/);
+    if (!m) continue;
+    let [, key, val] = m;
+    val = val.trim();
+    if (val.startsWith('[') && val.endsWith(']')) {
+      val = val.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+    } else if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
+    }
+    data[key] = val;
+  }
+  return { data, body };
+}
+
+// ── Shared nav HTML for every sub-page ──────────────────────────────────
+// `current` is one of: 'library' | 'jobs' | null
+function renderNav(current) {
+  const link = (href, label, key, external = false) => {
+    const active = current === key ? ' active' : '';
+    const ext = external ? ' target="_blank" rel="noopener"' : '';
+    return `<a href="${href}" class="nav-link${active}"${ext}>${label}</a>`;
+  };
+  const drawerLink = (href, label, key, external = false) => {
+    const active = current === key ? ' active' : '';
+    const ext = external ? ' target="_blank" rel="noopener"' : '';
+    return `<a href="${href}" class="drawer-link${active}"${ext} onclick="closeDrawer()">${label}</a>`;
+  };
+  return `
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    ${link('/newsletter/', 'Content Library', 'library')}
+    ${link('/jobs/', 'Jobs', 'jobs')}
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  ${drawerLink('/newsletter/', 'Content Library', 'library')}
+  ${drawerLink('/jobs/', 'Jobs', 'jobs')}
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>`;
+}
+
+// ── Shared footer (mirrors the landing-page footer) ────────────────────
+function renderFooter() {
+  return `
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-center">
+    <a href="https://x.com/enteronchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    <a href="https://www.linkedin.com/company/enterpriseonchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+  </div>
+  <div class="footer-right">
+    <span class="partner-tag">Partners: <a href="https://www.kr1.io/" target="_blank" rel="noopener">KR1</a></span>
+  </div>
+</footer>`;
+}
+
+// ── Shared <head> fragment ──────────────────────────────────────────────
+function renderHead(title, description) {
+  return `<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title} | Enterprise Onchain</title>
+<meta name="description" content="${description}">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>`;
+}
+
+// ── Shared bottom script (theme toggle + drawer) ────────────────────────
+const SHARED_SCRIPT = `<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>`;
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// Detect sponsor blocks in rendered Markdown and wrap them so CSS can
+// size the small logo down from the full-column default. Two patterns,
+// both forms Substack exports today:
+//
+//   1. Logo + caption: <p><img></p>\n<p><em>Together with ...</em></p>
+//   2. Banner-as-alt:  <p><img alt="Together with ..."></p>
+//
+// Pass 2 uses a negative lookbehind to avoid double-wrapping images
+// already wrapped by pass 1.
+function wrapSponsorBlock(html) {
+  html = html.replace(
+    /<p><img\b[^>]*><\/p>\s*<p><em>\s*Together with[\s\S]*?<\/em><\/p>/gi,
+    m => `<div class="edition-sponsor">${m}</div>`
+  );
+  html = html.replace(
+    /(?<!edition-sponsor">)<p><img\b[^>]*\balt="[^"]*Together with[^"]*"[^>]*><\/p>/gi,
+    m => `<div class="edition-sponsor">${m}</div>`
+  );
+  return html;
+}
+
+// ── Load newsletter editions ────────────────────────────────────────────
+function loadEditions() {
+  const dir = resolve(root, 'content/newsletter');
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter(f => f.endsWith('.md'))
+    .map(file => {
+      const src = readFileSync(resolve(dir, file), 'utf8');
+      const { data, body } = parseFrontMatter(src);
+      const slug = file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+      const tags = Array.isArray(data.tags) ? data.tags : [];
+      const type = data.type === 'deep-dive' ? 'deep-dive' : 'weekly';
+      return {
+        slug,
+        title: data.title || slug,
+        date: data.date || '',
+        tags,
+        type,
+        excerpt: data.excerpt || data.subtitle || '',
+        html: wrapSponsorBlock(md.render(body)),
+      };
+    })
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+// ── /newsletter/ archive index ─────────────────────────────────────────
+function renderArchive(editions) {
+  const items = editions.map(e => `
+      <a href="/newsletter/${e.slug}/" class="archive-item" data-tags="${e.tags.join(',')}" data-format="${e.type}">
+        <div class="archive-title-wrap">
+          <h3>${e.title}</h3>
+          ${e.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}
+        </div>
+        <div class="archive-excerpt">${e.excerpt}</div>
+        <div class="archive-meta">
+          ${e.type === 'deep-dive'
+            ? '<span class="tag-chip format-chip">Deep Dive</span>'
+            : '<span class="tag-chip weekly-chip">Weekly</span>'}
+          <span class="archive-date">${formatDate(e.date)}</span>
+        </div>
+      </a>`).join('');
+
+  const formatButtons = [
+    { value: 'All',        label: 'All' },
+    { value: 'weekly',     label: 'Weekly' },
+    { value: 'deep-dive',  label: 'Deep Dives' },
+  ].map(f =>
+    `<button class="filter-btn${f.value === 'All' ? ' active' : ''}" data-filter-format="${f.value}">${f.label}</button>`
+  ).join('');
+
+  return `${renderHead('Content Library', 'Every edition of the Enterprise Onchain weekly newsletter.')}
+<body>
+${renderNav('library')}
+
+<main class="page">
+  <div class="inner reveal">
+    <div class="s-label">Content Library</div>
+    <h1 class="s-title">The Weekly Archive.</h1>
+    <p class="s-desc">Every edition of Enterprise Onchain.</p>
+
+    <div class="filter-row">${formatButtons}</div>
+
+    <div class="archive-list" id="archive-list">${items}</div>
+    <div class="archive-empty" id="archive-empty" style="display:none">No editions match that filter.</div>
+  </div>
+</main>
+
+${renderFooter()}
+${SHARED_SCRIPT}
+<script>
+(function(){
+  const items = document.querySelectorAll('.archive-item');
+  const empty = document.getElementById('archive-empty');
+  let format = 'All';
+  function render(){
+    let visible = 0;
+    items.forEach(it => {
+      const show = format === 'All' || it.dataset.format === format;
+      it.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    empty.style.display = visible ? 'none' : '';
+  }
+  document.querySelectorAll('[data-filter-format]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter-format]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    format = b.dataset.filterFormat;
+    render();
+  }));
+})();
+</script>
+</body></html>`;
+}
+
+// ── /newsletter/<slug>/ edition page ───────────────────────────────────
+function renderEdition(e) {
+  return `${renderHead(e.title, e.excerpt)}
+<body>
+${renderNav('library')}
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · ${formatDate(e.date)}</div>
+    <h1 class="edition-title">${e.title}</h1>
+    <div class="edition-tags">${e.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}</div>
+    <div class="edition-body">${e.html}</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+${renderFooter()}
+${SHARED_SCRIPT}
+</body></html>`;
+}
+
+// ── /jobs/ page ─────────────────────────────────────────────────────────
+function renderJobs(jobs) {
+  const jobsJSON = JSON.stringify(jobs).replace(/</g, '\\u003c');
+  const fnBtns = [{ slug: 'all', label: 'All' }, ...JOB_FUNCTIONS].map(f =>
+    `<button class="filter-btn${f.slug === 'all' ? ' active' : ''}" data-filter-fn="${f.slug}">${f.label}</button>`
+  ).join('');
+  const fnSlugToValue = JSON.stringify(
+    Object.fromEntries([['all', null], ...JOB_FUNCTIONS.map(f => [f.slug, f.value])])
+  );
+  const snBtns = ['All', ...JOB_SENIORITIES].map(s =>
+    `<button class="filter-btn${s === 'All' ? ' active' : ''}" data-filter-sn="${s}">${s}</button>`
+  ).join('');
+
+  return `${renderHead('Jobs', 'Curated roles in institutional crypto, stablecoins, tokenisation, and onchain finance.')}
+<body>
+${renderNav('jobs')}
+
+<main class="page">
+  <div class="inner reveal">
+    <div class="s-label">Jobs</div>
+    <h1 class="s-title">Institutional Crypto Jobs.</h1>
+    <p class="s-desc">Curated roles across commercial, product, technical, strategy &amp; ops, and research — at firms building onchain.</p>
+
+    <div class="filter-group">
+      <div class="filter-group-label">Function</div>
+      <div class="filter-row">${fnBtns}</div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-label">Seniority</div>
+      <div class="filter-row">${snBtns}</div>
+    </div>
+
+    <div class="jobs-list" id="jobs-list"></div>
+    <div class="jobs-empty" id="jobs-empty" style="display:none">No roles match those filters right now.</div>
+  </div>
+</main>
+
+${renderFooter()}
+${SHARED_SCRIPT}
+<script>
+const JOBS = ${jobsJSON};
+const FN_SLUG_TO_VALUE = ${fnSlugToValue};
+(function(){
+  const list = document.getElementById('jobs-list');
+  const empty = document.getElementById('jobs-empty');
+  const state = { fn: null, sn: 'All' };
+  function fmt(iso){const d=new Date(iso);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+  function render(){
+    const filtered = JOBS.filter(j =>
+      (state.fn===null || j.function===state.fn) &&
+      (state.sn==='All' || j.seniority===state.sn)
+    );
+    empty.style.display = filtered.length ? 'none' : '';
+    list.innerHTML = filtered.map(j => \`
+      <a href="\${j.url}" target="_blank" rel="noopener" class="job-item">
+        <div class="job-main">
+          <div class="job-title-row">
+            <h3>\${j.title}</h3>
+            <span class="job-company">\${j.company}</span>
+          </div>
+          <div class="job-meta">
+            <span class="tag-chip">\${j.function}</span>
+            <span class="tag-chip">\${j.seniority}</span>
+            <span class="job-location">\${j.location}</span>
+          </div>
+        </div>
+        <span class="job-date">\${fmt(j.posted)} <span class="job-arrow">↗</span></span>
+      </a>\`).join('');
+  }
+  document.querySelectorAll('[data-filter-fn]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter-fn]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.fn = FN_SLUG_TO_VALUE[b.dataset.filterFn];
+    render();
+  }));
+  document.querySelectorAll('[data-filter-sn]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter-sn]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.sn = b.dataset.filterSn;
+    render();
+  }));
+  render();
+})();
+</script>
+</body></html>`;
+}
+
+// ── /dashboard/ placeholder ────────────────────────────────────────────
+function renderDashboard() {
+  return `${renderHead('Dashboard', 'Institutional blockchain data at a glance. Coming soon.')}
+<body>
+${renderNav(null)}
+
+<main class="page page-center">
+  <div class="inner reveal" style="text-align:center;max-width:560px;margin:0 auto">
+    <div class="s-label">Dashboard</div>
+    <h1 class="s-title">Coming Soon.</h1>
+    <p class="s-desc" style="margin:0 auto 28px">
+      Real-time metrics on tokenised RWAs, stablecoin supply, ETH ETF flows,
+      DeFi TVL, and institutional adoption. Launching for subscribers in the
+      coming weeks.
+    </p>
+    <div class="soon-stat-row">
+      <div class="soon-stat"><div class="soon-stat-val">628</div><div class="soon-stat-lbl">on the waitlist</div></div>
+      <div class="soon-stat"><div class="soon-stat-val">43+</div><div class="soon-stat-lbl">forum members</div></div>
+      <div class="soon-stat"><div class="soon-stat-val">200+</div><div class="soon-stat-lbl">institutions reading</div></div>
+    </div>
+    <a href="/#subscribe" class="btn btn-primary" style="margin-top:32px">Get Early Access</a>
+  </div>
+</main>
+
+${renderFooter()}
+${SHARED_SCRIPT}
+</body></html>`;
+}
+
+// ── Build orchestration ────────────────────────────────────────────────
+function writeFile(relPath, content) {
+  const full = resolve(root, relPath);
+  mkdirSync(dirname(full), { recursive: true });
+  writeFileSync(full, content);
+  console.log('  wrote', relPath);
+}
+
+function clean(dir) {
+  const full = resolve(root, dir);
+  if (existsSync(full)) rmSync(full, { recursive: true, force: true });
+}
+
+function build() {
+  console.log('Building sub-pages...');
+
+  console.log('→ /newsletter/');
+  clean('newsletter');
+  const editions = loadEditions();
+  writeFile('newsletter/index.html', renderArchive(editions));
+  for (const e of editions) writeFile(`newsletter/${e.slug}/index.html`, renderEdition(e));
+
+  console.log('→ /jobs/');
+  clean('jobs');
+  const jobsPath = resolve(root, 'content/jobs.json');
+  const jobs = existsSync(jobsPath) ? JSON.parse(readFileSync(jobsPath, 'utf8')) : [];
+  writeFile('jobs/index.html', renderJobs(jobs));
+
+  console.log('→ /dashboard/');
+  clean('dashboard');
+  writeFile('dashboard/index.html', renderDashboard());
+
+  console.log('Done.');
+}
+
+build();

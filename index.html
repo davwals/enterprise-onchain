@@ -110,7 +110,7 @@
 }
 [data-theme="dark"]{--bg:#111110;--bg2:#161614;--bg3:#1c1c19;--fg:#ede8df;--fg2:rgba(237,232,223,0.72);--fg3:rgba(237,232,223,0.42);--fg4:rgba(237,232,223,0.22);--border:rgba(237,232,223,0.07);--border2:rgba(237,232,223,0.14);--glow:rgba(201,169,110,.035);--orb:#ede8df;--orb-cbg:#111110;--orb-cf:#ede8df;--btn-bg:#ede8df;--btn-fg:#111110;--btn-ghost-border:rgba(237,232,223,0.18);--dot-pattern:radial-gradient(circle,rgba(237,232,223,.04) 1px,transparent 1px);--card-shadow:none;--nav-solid:rgba(17,17,16,.95);--drawer-bg:rgba(17,17,16,.98)}
 [data-theme="light"]{--bg:#f0ece4;--bg2:#e8e4db;--bg3:#ddd9d0;--fg:#1a1918;--fg2:rgba(26,25,24,0.75);--fg3:rgba(26,25,24,0.55);--fg4:rgba(26,25,24,0.28);--border:rgba(26,25,24,0.08);--border2:rgba(26,25,24,0.16);--glow:rgba(201,169,110,.05);--orb:#1a1918;--orb-cbg:#1a1918;--orb-cf:#f0ece4;--btn-bg:#1a1918;--btn-fg:#f0ece4;--btn-ghost-border:rgba(26,25,24,0.2);--dot-pattern:radial-gradient(circle,rgba(26,25,24,.06) 1px,transparent 1px);--card-shadow:0 1px 3px rgba(0,0,0,.04);--nav-solid:rgba(240,236,228,.96);--drawer-bg:rgba(240,236,228,.98)}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background var(--t),color var(--t)}
 body.drawer-open{overflow:hidden}
 a{color:inherit;text-decoration:none}::selection{background:rgba(201,169,110,.3)}
@@ -314,8 +314,11 @@ body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
 
 .trusted{margin-top:clamp(28px,5vh,48px);max-width:520px;width:100%}
 .trusted-label{font-size:8px;font-weight:500;letter-spacing:.45em;text-transform:uppercase;color:var(--fg3);margin-bottom:16px;display:block}
-.marquee-wrap{position:relative;overflow:hidden;padding:4px 0;-webkit-mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%)}
-.marquee-track{display:flex;gap:0;animation:marquee 60s linear infinite;width:max-content}
+.marquee-wrap{position:relative;overflow:hidden;padding:4px 0;transform:translateZ(0)}
+.marquee-wrap::before,.marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,var(--bg) 0%,transparent 100%)}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,var(--bg) 0%,transparent 100%)}
+.marquee-track{display:flex;gap:0;animation:marquee 60s linear infinite;width:max-content;will-change:transform}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused}
 .logo-chip{display:flex;align-items:center;padding:0 24px;border-right:1px solid var(--border2);height:32px;flex-shrink:0}
 .logo-chip span{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--fg);opacity:.7;white-space:nowrap;transition:opacity .3s}
@@ -489,6 +492,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   transition:opacity .25s,transform .25s;
   white-space:nowrap;
 }
+.legend-item:hover .legend-label{opacity:.85;transform:translateX(0)}
 .legend-item.active{color:var(--fg)}
 .legend-item.active .legend-line{width:20px;opacity:1}
 .legend-item.active .legend-label{opacity:1;transform:translateX(0)}
@@ -521,9 +525,16 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
 
   .hero{
     grid-template-columns:1fr;
-    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 48px;
+    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 72px;
     gap:24px;
-    min-height:auto;
+    /* 100svh = small-viewport height = the visible area below iOS
+       Safari's URL bar. Older iOS that doesn't grok svh falls back
+       to 100vh, which is the taller no-chrome value — either way the
+       hero gets at least a full screen of room for the trusted
+       block + marquee, which otherwise gets clipped or visually
+       crushed on portrait. */
+    min-height:100vh;
+    min-height:100svh;
     align-items:start;
   }
   .hero-content{display:flex;flex-direction:column;align-items:flex-start;text-align:left;max-width:100%}
@@ -533,13 +544,14 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   .subscribe-wrap{max-width:100%}
   .sub-meta-row{justify-content:flex-start;font-size:11px}
   .trusted{max-width:100%;margin-top:36px}
-  .trusted .marquee-wrap{
-    -webkit-mask-image:linear-gradient(to right,transparent 0%,black 3%,black 97%,transparent 100%);
-    mask-image:linear-gradient(to right,transparent 0%,black 3%,black 97%,transparent 100%);
-  }
-  .trusted .marquee-track{animation-duration:40s}
-  .trusted .logo-chip{padding:0 18px;height:28px}
-  .trusted .logo-chip span{font-size:11.5px}
+  /* Narrower fade overlays on mobile so more of the visible track
+     shows through the small viewport. translateZ / will-change on
+     the base rules still apply; chip sizing scoped via ID-free
+     selectors to keep specificity low and iOS layers stable. */
+  .marquee-wrap::before,.marquee-wrap::after{width:16px}
+  .logo-chip{padding:0 18px;height:28px}
+  .logo-chip span{font-size:11.5px}
+  .marquee-track{animation-duration:40s}
 
   section{padding:48px 20px}
   .nl-section .inner,.dash-section .inner{padding:0}
@@ -588,7 +600,8 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
     <a href="#newsletter" class="nav-link" data-section="newsletter">Newsletter</a>
     <a href="#dashboard" class="nav-link" data-section="dashboard">Dashboard</a>
     <a href="#about" class="nav-link" data-section="about">About</a>
-    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="nav-link">Substack <span class="arrow">↗</span></a>
+    <a href="/newsletter/" class="nav-link">Content Library</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
     <div class="nav-socials">
       <a href="https://x.com/enteronchain" target="_blank" rel="noopener" class="social-icon" aria-label="Enterprise Onchain on X">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -620,7 +633,8 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   <a href="#newsletter" class="drawer-link" data-section="newsletter" onclick="closeDrawer()">Newsletter</a>
   <a href="#dashboard" class="drawer-link" data-section="dashboard" onclick="closeDrawer()">Dashboard</a>
   <a href="#about" class="drawer-link" data-section="about" onclick="closeDrawer()">About</a>
-  <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="drawer-link" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/newsletter/" class="drawer-link" onclick="closeDrawer()">Content Library</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
   <a href="#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
   <div class="drawer-footer">
     <div class="nav-socials">
@@ -714,19 +728,19 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
     <div class="s-label">Archive</div>
     <h2 class="s-title" id="archive-title">Recent Editions.</h2>
     <div class="archive-list">
-      <a href="https://enterpriseonchain.substack.com/p/full-spectrum" class="archive-item" target="_blank" rel="noopener">
+      <a href="/newsletter/full-spectrum/" class="archive-item">
         <div class="archive-title-wrap"><h3>Full Spectrum</h3><span class="latest-tag">Latest</span></div>
         <span class="archive-date">Apr 21, 2026</span>
       </a>
-      <a href="https://enterpriseonchain.substack.com/p/licensed-filed-funded" class="archive-item" target="_blank" rel="noopener">
+      <a href="/newsletter/licensed-filed-funded/" class="archive-item">
         <div class="archive-title-wrap"><h3>Licensed, Filed, Funded</h3></div>
         <span class="archive-date">Apr 9, 2026</span>
       </a>
-      <a href="https://enterpriseonchain.substack.com/p/which-blockchain-will-ai-choose" class="archive-item" target="_blank" rel="noopener">
+      <a href="/newsletter/which-blockchain-will-ai-choose/" class="archive-item">
         <div class="archive-title-wrap"><h3>Which Blockchain Will AI Choose?</h3></div>
         <span class="archive-date">Apr 2, 2026</span>
       </a>
-      <a href="https://enterpriseonchain.substack.com/p/both-us-stock-exchanges-pick-sides" class="archive-item" target="_blank" rel="noopener">
+      <a href="/newsletter/both-us-stock-exchanges-pick-sides/" class="archive-item">
         <div class="archive-title-wrap"><h3>Both US Stock Exchanges Pick Sides</h3></div>
         <span class="archive-date">Mar 26, 2026</span>
       </a>
@@ -734,12 +748,12 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
         <div class="archive-title-wrap"><h3>The Week in Institutional Onchain</h3></div>
         <span class="archive-date">Mar 19, 2026</span>
       </a>
-      <a href="https://enterpriseonchain.substack.com/p/tether-is-not-a-stablecoin-company" class="archive-item" target="_blank" rel="noopener">
+      <a href="/newsletter/tether-is-not-a-stablecoin-company/" class="archive-item">
         <div class="archive-title-wrap"><h3>Tether Is Not a Stablecoin Company</h3></div>
         <span class="archive-date">Mar 12, 2026</span>
       </a>
     </div>
-    <div class="archive-more">50+ editions published weekly since 2025. <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener">View full archive</a></div>
+    <div class="archive-more">50+ editions published weekly since 2025. <a href="/newsletter/">View full archive</a></div>
   </div>
 </section>
 
@@ -1063,18 +1077,35 @@ else window.addEventListener('load',loadWorldData);
   const sections = Array.from(items).map(btn => ({
     btn, id: btn.dataset.target, el: document.getElementById(btn.dataset.target)
   })).filter(x => x.el);
+  const navOffset = () => (document.getElementById('main-nav')?.getBoundingClientRect().height || 0) + 8;
   items.forEach(btn => {
     btn.addEventListener('click', () => {
       const t = document.getElementById(btn.dataset.target);
-      if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+      if (!t) return;
+      const top = t.getBoundingClientRect().top + window.scrollY - navOffset();
+      window.scrollTo({top, behavior:'smooth'});
+      // If we're already at the end of the scrollable range the browser
+      // can't scroll further, so no scroll events fire — update the
+      // active state directly.
+      updateActive();
     });
   });
   function updateActive(){
-    const y = window.scrollY + window.innerHeight * 0.35;
-    let current = sections[0];
-    for (const s of sections){
-      const top = s.el.getBoundingClientRect().top + window.scrollY;
-      if (y >= top) current = s;
+    // Near the bottom of the page, force the last section active. Its
+    // top may sit below the 35% viewport line and so would never
+    // qualify under the normal rule, leaving the last legend item
+    // permanently inactive.
+    const nearBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    let current;
+    if (nearBottom) {
+      current = sections[sections.length - 1];
+    } else {
+      const y = window.scrollY + window.innerHeight * 0.35;
+      current = sections[0];
+      for (const s of sections){
+        const top = s.el.getBoundingClientRect().top + window.scrollY;
+        if (y >= top) current = s;
+      }
     }
     items.forEach(b => b.classList.toggle('active', b === current.btn));
   }
