@@ -153,14 +153,25 @@ function formatDate(iso) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-// Wrap the sponsor logo + "Together with ..." caption in a dedicated
-// div so CSS can size the small logo down from the full-column default.
-// Matches the standard two-paragraph block Substack exports.
+// Detect sponsor blocks in rendered Markdown and wrap them so CSS can
+// size the small logo down from the full-column default. Two patterns,
+// both forms Substack exports today:
+//
+//   1. Logo + caption: <p><img></p>\n<p><em>Together with ...</em></p>
+//   2. Banner-as-alt:  <p><img alt="Together with ..."></p>
+//
+// Pass 2 uses a negative lookbehind to avoid double-wrapping images
+// already wrapped by pass 1.
 function wrapSponsorBlock(html) {
-  return html.replace(
-    /<p><img\b[^>]*><\/p>\s*<p><em>Together with[\s\S]*?<\/em><\/p>/g,
+  html = html.replace(
+    /<p><img\b[^>]*><\/p>\s*<p><em>\s*Together with[\s\S]*?<\/em><\/p>/gi,
     m => `<div class="edition-sponsor">${m}</div>`
   );
+  html = html.replace(
+    /(?<!edition-sponsor">)<p><img\b[^>]*\balt="[^"]*Together with[^"]*"[^>]*><\/p>/gi,
+    m => `<div class="edition-sponsor">${m}</div>`
+  );
+  return html;
 }
 
 // ── Load newsletter editions ────────────────────────────────────────────
