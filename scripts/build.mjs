@@ -58,8 +58,11 @@ function renderNav(current) {
   </a>
   <div class="nav-r">
     <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
     ${link('/newsletter/', 'Archive', 'archive')}
     ${link('/jobs/', 'Jobs', 'jobs')}
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
     ${link('https://enterpriseonchain.substack.com/', 'Substack <span class="arrow">↗</span>', null, true)}
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -73,8 +76,11 @@ function renderNav(current) {
 <div class="drawer-backdrop" onclick="toggleDrawer()"></div>
 <aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
   <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
   ${drawerLink('/newsletter/', 'Archive', 'archive')}
   ${drawerLink('/jobs/', 'Jobs', 'jobs')}
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
   ${drawerLink('https://enterpriseonchain.substack.com/', 'Substack ↗', null, true)}
   <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
   <div class="drawer-footer">
