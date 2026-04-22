@@ -153,6 +153,16 @@ function formatDate(iso) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
+// Wrap the sponsor logo + "Together with ..." caption in a dedicated
+// div so CSS can size the small logo down from the full-column default.
+// Matches the standard two-paragraph block Substack exports.
+function wrapSponsorBlock(html) {
+  return html.replace(
+    /<p><img\b[^>]*><\/p>\s*<p><em>Together with[\s\S]*?<\/em><\/p>/g,
+    m => `<div class="edition-sponsor">${m}</div>`
+  );
+}
+
 // ── Load newsletter editions ────────────────────────────────────────────
 function loadEditions() {
   const dir = resolve(root, 'content/newsletter');
@@ -172,7 +182,7 @@ function loadEditions() {
         tags,
         type,
         excerpt: data.excerpt || data.subtitle || '',
-        html: md.render(body),
+        html: wrapSponsorBlock(md.render(body)),
       };
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
