@@ -12,13 +12,7 @@ const root = resolve(__dirname, '..');
 const md = new MarkdownIt({ html: true, linkify: true, typographer: true });
 
 const NL_TAGS = ['ETF', 'Tokenisation', 'Regulation', 'Stablecoins', 'Infrastructure'];
-const JOB_FUNCTIONS = [
-  { value: 'Strategy',    label: 'Strategy & Product' },
-  { value: 'Engineering', label: 'Engineering' },
-  { value: 'Research',    label: 'Research' },
-  { value: 'Trading',     label: 'Trading' },
-  { value: 'Legal',       label: 'Legal' },
-];
+const JOB_FUNCTIONS = ['Research', 'Trading', 'Legal', 'Engineering', 'Ops'];
 const JOB_SENIORITIES = ['Junior', 'Mid', 'Senior', 'Lead'];
 
 // ── Minimal YAML-ish front-matter parser ────────────────────────────────
@@ -290,8 +284,8 @@ ${SHARED_SCRIPT}
 // ── /jobs/ page ─────────────────────────────────────────────────────────
 function renderJobs(jobs) {
   const jobsJSON = JSON.stringify(jobs).replace(/</g, '\\u003c');
-  const fnBtns = [{ value: 'All', label: 'All' }, ...JOB_FUNCTIONS].map(f =>
-    `<button class="filter-btn${f.value === 'All' ? ' active' : ''}" data-filter-fn="${f.value}">${f.label}</button>`
+  const fnBtns = ['All', ...JOB_FUNCTIONS].map(f =>
+    `<button class="filter-btn${f === 'All' ? ' active' : ''}" data-filter-fn="${f}">${f}</button>`
   ).join('');
   const snBtns = ['All', ...JOB_SENIORITIES].map(s =>
     `<button class="filter-btn${s === 'All' ? ' active' : ''}" data-filter-sn="${s}">${s}</button>`
@@ -305,7 +299,7 @@ ${renderNav('jobs')}
   <div class="inner reveal">
     <div class="s-label">Jobs</div>
     <h1 class="s-title">Institutional Crypto Jobs.</h1>
-    <p class="s-desc">Curated roles across strategy, engineering, research, trading, and legal — at firms building onchain.</p>
+    <p class="s-desc">Curated roles across research, trading, legal, engineering, and ops — at firms building onchain.</p>
 
     <div class="filter-group">
       <div class="filter-group-label">Function</div>
