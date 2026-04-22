@@ -525,9 +525,16 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
 
   .hero{
     grid-template-columns:1fr;
-    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 32px;
+    padding:calc(env(safe-area-inset-top, 0px) + 108px) 20px 72px;
     gap:24px;
-    min-height:auto;
+    /* 100svh = small-viewport height = the visible area below iOS
+       Safari's URL bar. Older iOS that doesn't grok svh falls back
+       to 100vh, which is the taller no-chrome value — either way the
+       hero gets at least a full screen of room for the trusted
+       block + marquee, which otherwise gets clipped or visually
+       crushed on portrait. */
+    min-height:100vh;
+    min-height:100svh;
     align-items:start;
   }
   .hero-content{display:flex;flex-direction:column;align-items:flex-start;text-align:left;max-width:100%}
@@ -536,7 +543,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
   .hero-sub{font-size:14px;max-width:100%}
   .subscribe-wrap{max-width:100%}
   .sub-meta-row{justify-content:flex-start;font-size:11px}
-  .trusted{max-width:100%;margin-top:24px}
+  .trusted{max-width:100%;margin-top:36px}
   /* Narrower fade overlays on mobile so more of the visible track
      shows through the small viewport. translateZ / will-change on
      the base rules still apply; chip sizing scoped via ID-free
