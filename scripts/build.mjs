@@ -35,7 +35,9 @@ function parseFrontMatter(src) {
     let [, key, val] = m;
     val = val.trim();
     if (val.startsWith('[') && val.endsWith(']')) {
-      val = val.slice(1, -1).split(',').map(s => s.trim()).filter(Boolean);
+      val = val.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+    } else if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
     }
     data[key] = val;
   }
@@ -159,12 +161,14 @@ function loadEditions() {
       const { data, body } = parseFrontMatter(src);
       const slug = file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
       const tags = Array.isArray(data.tags) ? data.tags : [];
+      const type = data.type === 'deep-dive' ? 'deep-dive' : 'weekly';
       return {
         slug,
         title: data.title || slug,
         date: data.date || '',
         tags,
-        excerpt: data.excerpt || '',
+        type,
+        excerpt: data.excerpt || data.subtitle || '',
         html: md.render(body),
       };
     })
@@ -174,17 +178,28 @@ function loadEditions() {
 // ── /newsletter/ archive index ─────────────────────────────────────────
 function renderArchive(editions) {
   const items = editions.map(e => `
-      <a href="/newsletter/${e.slug}/" class="archive-item" data-tags="${e.tags.join(',')}">
+      <a href="/newsletter/${e.slug}/" class="archive-item" data-tags="${e.tags.join(',')}" data-format="${e.type}">
         <div class="archive-title-wrap">
           <h3>${e.title}</h3>
           ${e.tags.map(t => `<span class="tag-chip">${t}</span>`).join('')}
         </div>
         <div class="archive-excerpt">${e.excerpt}</div>
-        <span class="archive-date">${formatDate(e.date)}</span>
+        <div class="archive-meta">
+          ${e.type === 'deep-dive' ? '<span class="tag-chip format-chip">Deep Dive</span>' : ''}
+          <span class="archive-date">${formatDate(e.date)}</span>
+        </div>
       </a>`).join('');
 
+  const formatButtons = [
+    { value: 'All',        label: 'All' },
+    { value: 'weekly',     label: 'Weekly' },
+    { value: 'deep-dive',  label: 'Deep Dives' },
+  ].map(f =>
+    `<button class="filter-btn${f.value === 'All' ? ' active' : ''}" data-filter-format="${f.value}">${f.label}</button>`
+  ).join('');
+
   const tagButtons = ['All', ...NL_TAGS].map(t =>
-    `<button class="filter-btn${t === 'All' ? ' active' : ''}" data-filter="${t}">${t}</button>`
+    `<button class="filter-btn${t === 'All' ? ' active' : ''}" data-filter-tag="${t}">${t}</button>`
   ).join('');
 
   return `${renderHead('Archive', 'Every edition of the Enterprise Onchain weekly newsletter.')}
@@ -195,11 +210,19 @@ ${renderNav('archive')}
   <div class="inner reveal">
     <div class="s-label">Archive</div>
     <h1 class="s-title">The Weekly Archive.</h1>
-    <p class="s-desc">Every edition of Enterprise Onchain. Filter by topic.</p>
+    <p class="s-desc">Every edition of Enterprise Onchain. Filter by format or topic.</p>
 
-    <div class="filter-row">${tagButtons}</div>
+    <div class="filter-group">
+      <div class="filter-group-label">Format</div>
+      <div class="filter-row">${formatButtons}</div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-group-label">Topic</div>
+      <div class="filter-row">${tagButtons}</div>
+    </div>
 
     <div class="archive-list" id="archive-list">${items}</div>
+    <div class="archive-empty" id="archive-empty" style="display:none">No editions match those filters.</div>
   </div>
 </main>
 
@@ -207,16 +230,33 @@ ${renderFooter()}
 ${SHARED_SCRIPT}
 <script>
 (function(){
-  const btns = document.querySelectorAll('.filter-btn');
   const items = document.querySelectorAll('.archive-item');
-  btns.forEach(b => b.addEventListener('click', () => {
-    btns.forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    const f = b.dataset.filter;
+  const empty = document.getElementById('archive-empty');
+  const state = { format: 'All', tag: 'All' };
+  function render(){
+    let visible = 0;
     items.forEach(it => {
-      const tags = (it.dataset.tags || '').split(',');
-      it.style.display = (f === 'All' || tags.includes(f)) ? '' : 'none';
+      const tags = (it.dataset.tags || '').split(',').filter(Boolean);
+      const format = it.dataset.format;
+      const formatMatch = state.format === 'All' || format === state.format;
+      const tagMatch = state.tag === 'All' || tags.includes(state.tag);
+      const show = formatMatch && tagMatch;
+      it.style.display = show ? '' : 'none';
+      if (show) visible++;
     });
+    empty.style.display = visible ? 'none' : '';
+  }
+  document.querySelectorAll('[data-filter-format]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter-format]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.format = b.dataset.filterFormat;
+    render();
+  }));
+  document.querySelectorAll('[data-filter-tag]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter-tag]').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.tag = b.dataset.filterTag;
+    render();
   }));
 })();
 </script>
