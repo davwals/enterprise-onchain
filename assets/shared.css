@@ -259,6 +259,7 @@ main.page.page-center{display:flex;align-items:center;justify-content:center;min
 .edition-body pre{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-xs);padding:14px 18px;overflow-x:auto;margin:0 0 18px}
 .edition-body pre code{background:transparent;padding:0}
 .edition-body hr{border:none;border-top:1px solid var(--border);margin:32px 0}
+.edition-body img{display:block;width:100%;height:auto;margin:24px 0;border-radius:var(--radius-xs)}
 .edition-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:1px solid var(--border)}
 
 /* ═══ JOBS LIST ═══ */
