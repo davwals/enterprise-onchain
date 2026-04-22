@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The End of Treasury Forecasting | Enterprise Onchain</title>
+<meta name="description" content="Enterprise Onchain">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/newsletter/" class="nav-link active">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/newsletter/" class="drawer-link active" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · Mar 16, 2026</div>
+    <h1 class="edition-title">The End of Treasury Forecasting</h1>
+    <div class="edition-tags"></div>
+    <div class="edition-body"><h3></h3>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/f50d5fc8-5fe4-48d8-9ecf-e1bc492ad1fc_878x340.png" alt=""></p>
+<p>“If you have real-time availability to funds anywhere in the world, you don’t need forecasting anymore.”</p>
+<p>That quote comes from a bank executive interviewed for Cambridge University’s new report on tokenised money. It sounds like hyperbole. It isn’t.</p>
+<p>Forecasting exists because moving money is slow. Make money instant and programmable, and you don’t eliminate the treasury function. You eliminate the <em>reason</em> the treasury function exists in its current form.</p>
+<p>This is not a technology story. It’s an org chart story. And the numbers behind it are enormous.</p>
+<hr>
+<h2>The Scale of the Problem Nobody Talks About</h2>
+<p>Start with the banking system. Correspondent banks maintain pre-funded nostro and vostro accounts across jurisdictions to facilitate cross-border payments. The global nostro/vostro system ties up somewhere between $400 billion and over $1 trillion in low-yielding capital, depending on the estimate. Some analyses put the figure at $28 trillion when you include the full scope of defensive liquidity positions.</p>
+<p>Swift’s own data indicates that roughly 35% of the cost of an international payment transaction is related to nostro/vostro reconciliation and liquidity, including the opportunity cost of trapped capital. A single major correspondent bank like JPMorgan probably has $15-25 billion tied up in nostro accounts globally. That’s capital earning central bank rates when it could be deployed in higher-yielding activities.</p>
+<p>Now layer on the corporate side. PricewaterhouseCoopers examined approximately 14,700 publicly traded companies and found $1.5 trillion worth of capital trapped by working capital inefficiencies alone. That’s over $100 million per company. US corporate cash holdings have ballooned from $1.6 trillion at the turn of the century to about $5.8 trillion, according to Northwestern’s Kellogg School of Management. Much of that is “defensive” cash, parked across jurisdictions because companies can’t move it quickly or cheaply enough when they need it.</p>
+<p>Deloitte’s 2024 Global Corporate Treasury Survey tells the human side. 58% of respondents identified visibility into global operations and cash as their single most critical challenge. 83% cited lack of visibility to FX exposures and unreliable forecasts as their top concern. 62% said improving liquidity management was their top priority for the next 12 months.</p>
+<p>These aren’t technology problems. They’re latency problems. Every dollar sitting in a nostro buffer, every hour spent on cash forecasting, every FX hedge placed “just in case” exists for one reason: money moves too slowly.</p>
+<h2>What Corporate Treasurers Actually Do All Day</h2>
+<p>To understand what changes, you need to understand what a multinational treasury operation actually looks like.</p>
+<p>A Fortune 500 company operating in 30+ countries maintains bank accounts across dozens of jurisdictions and currencies. The treasury team’s core job is answering a deceptively simple question: “Where is our money, and where will we need it?”</p>
+<p>That question drives an enormous amount of operational activity. Cash flow forecasting models project where funds will be needed days or weeks ahead. Pre-funding positions move capital into country accounts before it’s needed, because it can’t be moved fast enough when it is. Nostro buffers provide cushion in case forecasts are wrong, which they often are. FX hedging locks in exchange rates speculatively, because you’re converting currencies before you know the exact amount you’ll need. Manual reconciliation verifies that money has actually arrived where it was supposed to.</p>
+<p>The Cambridge report found that treasury and liquidity management is the second most important use case for tokenised money, behind only cross-border payments. One of the bank executives interviewed described how constant availability of funds “may eliminate or materially reduce the need for complex treasury forecasting and pre-positioning of liquidity.”</p>
+<p>The logic is straightforward. If your Singapore subsidiary needs $10 million for a Tuesday payment, the current process starts the previous Thursday. Treasury forecasts the need, initiates a wire on Friday, hopes it clears Monday, and builds in buffer capital in case it doesn’t. Each step involves cost, delay, and risk.</p>
+<p>With 24/7 programmable money, Tuesday morning Singapore time, the payment triggers. Funds move from the global liquidity pool. FX conversion happens atomically. Settlement is instant. No forecast needed. No buffer needed. No manual reconciliation needed.</p>
+<p>As the Cambridge report puts it, the transformation is from “just in case” to “just in time.”</p>
+<h2>The Toyota Parallel</h2>
+<p>That language isn’t accidental. It maps directly to the most significant operational transformation in manufacturing over the last 50 years.</p>
+<p>Before Toyota revolutionised manufacturing in the 1970s and 80s, every factory ran on “just in case” inventory. You kept warehouses full of parts because your supply chain was too slow and unreliable to deliver what you needed when you needed it. Entire departments existed to forecast demand, manage inventory buffers, and reconcile what you had against what you thought you had.</p>
+<p>Toyota’s insight was that inventory management wasn’t the problem. Inventory management was a symptom of slow, unreliable supply chains. Fix the supply chain, make it fast and reliable enough to deliver parts just in time, and you don’t need the warehouses. You don’t need the forecasting models. You don’t need the buffer stock.</p>
+<p>The results were staggering. Toyota didn’t just reduce inventory costs. It eliminated entire categories of operational overhead. Companies that adopted just-in-time manufacturing saw inventory carrying costs drop by 20-50%. But the bigger impact was second-order: freed-up warehouse space, reduced working capital requirements, simplified operations, and faster response to market changes.</p>
+<p>Corporate treasury is in the “pre-Toyota” era of money movement. The nostro accounts are the warehouses. The forecasting models are the demand planning teams. The FX hedges are the buffer stock. They all exist because the supply chain for money is slow and unreliable.</p>
+<p>Programmable, 24/7 tokenised money is the equivalent of Toyota’s production system for capital flows. It doesn’t optimise the forecasting. It eliminates the need for it.</p>
+<h2>The Second-Order Effects</h2>
+<p>The first-order effect (faster payments, lower transaction costs) is what most people focus on. It’s also the least interesting part.</p>
+<p>The second-order effects are where the real value sits.</p>
+<p><strong>Working capital release.</strong> When you no longer need to pre-fund accounts across 30 jurisdictions “just in case,” that capital comes off the balance sheet. For a large multinational, we’re talking about hundreds of millions, potentially billions, in freed-up working capital. That’s capital that can be redeployed into operations, returned to shareholders, or invested in growth. That’s not a treasury efficiency gain. That’s a material balance sheet event.</p>
+<p><strong>The yield gap closes.</strong> The Cambridge report identified a critical dynamic: institutional clients won’t hold non-yielding tokenised money for treasury purposes. This creates natural demand for dynamic swapping between stablecoins (for movement) and tokenised money market funds (for yield at rest). The practical implication is that idle cash stops being idle. Every dollar is either in motion or earning yield. The gap between “money at rest” and “money working” collapses toward zero.</p>
+<p><strong>FX hedging simplifies radically.</strong> A huge portion of corporate FX hedging exists because you’re converting currencies speculatively, before you know the exact amount and timing of the transaction. If FX conversion happens atomically at the moment of payment, you hedge against actual exposures rather than forecasted ones. The hedging book shrinks. The complexity drops. The cost falls.</p>
+<p><strong>Reconciliation becomes automatic.</strong> The Cambridge report notes that tokenised deposits enable “straight through processing programmability” with “encumbrance of value.” In practice, that means payments are self-reconciling. The ledger is the record. There’s no separate step where someone checks that the money arrived and matches the invoice. This alone eliminates enormous operational overhead.</p>
+<p><strong>The treasury function transforms.</strong> None of this means treasury teams disappear. It means they get redeployed from operational firefighting to strategic capital allocation. Instead of spending 80% of their time on forecasting, reconciliation, and liquidity management, they spend 80% of their time on investment strategy, risk management, and business enablement. The Deloitte survey already shows this shift in aspiration: 49% of respondents now prioritise creating a “scalable corporate treasury,” up from 39% in 2022. The constraint isn’t ambition. It’s infrastructure.</p>
+<h2>The Barriers Are Real but Temporary</h2>
+<p>None of this happens overnight. The Cambridge report is clear-eyed about the barriers.</p>
+<p>Interoperability is the biggest one. If tokenised money systems become 100 new walled gardens, you’ve just replaced the correspondent banking problem with a different version of the same problem. The report rates interoperability at 8.9 out of 10 in importance across all industry interviews.</p>
+<p>Regulatory fragmentation is the second. Different jurisdictions are taking fundamentally different approaches to tokenised money. The EU is protecting monetary sovereignty. The US is promoting dollar dominance. Singapore and Hong Kong are competing for hub status. Until these frameworks converge enough to enable cross-border institutional use, the full treasury transformation remains constrained.</p>
+<p>The yield prohibition is the third. In most jurisdictions, yield-bearing stablecoins are prohibited by regulation. This forces awkward workarounds: dynamic swapping between stablecoins and tokenised MMFs, or using tokenised deposits that are yield-bearing but limited to single-bank networks. The regulatory framework hasn’t caught up with the institutional use case.</p>
+<p>And integration with legacy systems is the fourth. As the Cambridge report notes, successful implementations must bridge traditional and tokenised systems rather than requiring complete replacement. This means a lengthy period of coexistence, which is a cost the industry will need to bear during the transition.</p>
+<h2>The Timeline</h2>
+<p>Cross-border payments are already happening. J.P. Morgan’s Kinexys has processed over $1.5 trillion cumulatively. DBS Token Services is commercially live. Stablecoins are settling trades and remittances globally. The infrastructure exists.</p>
+<p>Treasury management is next. The Cambridge report shows it as the second most cited use case, with banks rating their readiness between 3 and 10 out of 10. That range tells you everything: some institutions are already deploying, others are still exploring. The variance will close over the next 2-3 years as regulatory frameworks solidify and interoperability solutions mature.</p>
+<p>The full transformation, where programmable money eliminates treasury forecasting as a core function, is a 5-7 year horizon for early adopters and probably a decade for broad adoption. That sounds slow until you remember that Toyota’s production system took 20 years to reshape global manufacturing.</p>
+<p>The difference is that money moves faster than car parts. And the incentive, hundreds of billions in trapped capital, is impossible to ignore indefinitely.</p>
+<h2>What This Means for Enterprise Leaders</h2>
+<p>If you’re running treasury at a multinational, the question isn’t whether to engage with tokenised money. It’s where to start.</p>
+<p>The Cambridge report suggests a clear adoption path: basic cross-border payments first, then treasury management, then more complex applications like trade finance and capital markets. That sequencing tracks with what the most advanced institutions are doing.</p>
+<p>But the strategic question is bigger than which pilot to run. It’s about recognising that treasury forecasting, in its current form, is a symptom of broken infrastructure. Every dollar you spend on forecasting models, every FTE devoted to cash positioning, every basis point lost on defensive liquidity is a cost imposed by slow money.</p>
+<p>When the money speeds up, those costs evaporate. And the organisations that prepare for that shift, that build their treasury operations around “just in time” rather than “just in case”, will have a structural advantage that compounds over years.</p>
+<p>Toyota didn’t just build better cars. It built a fundamentally different kind of company. The same opportunity exists here, for organisations willing to rethink what treasury should be when money finally moves at the speed of information.</p>
+<hr>
+<p><em>This article draws on findings from “Tokenised Money: Use Cases, Interoperability and Regulation” (February 2026), published by the Cambridge Centre for Alternative Finance (CCAF) at Cambridge Judge Business School, University of Cambridge, in collaboration with Financial Innovation for Impact (Fii).</em></p>
+<p><em>Additional data from Deloitte’s 2024 Global Corporate Treasury Survey, PricewaterhouseCoopers working capital research, and Swift’s global payments innovation initiative.The full report “Tokenised Money: Use Cases, Interoperability and Regulation” is available from the Cambridge Centre for Alternative Finance (CCAF) at Cambridge Judge Business School. It was produced in collaboration with Financial Innovation for Impact (Fii).</em></p>
+<p><strong>- Enterprise Onchain</strong></p>
+<hr>
+<p><a href="https://www.linkedin.com/company/enterpriseonchain/">Follow Us on LinkedIn</a></p>
+<p><strong>Contact Us</strong></p>
+<p>We are starting a podcast - have a view you would like to talk about? Or want to sponsor? Reach out to us at our contact form <a href="https://link.sbstck.com/redirect/666a6dfa-c2e4-45e3-8cb9-2c757d4ab113?j=eyJ1IjoiNDRtcDIifQ.4_JeNjZe7A6pZ1lrs0Iqz-3a-XcJMv2d-CHsWiy9nLE">here</a>.</p>
+<p><em><strong>Thanks for reading - until next week!</strong></em></p>
+<p>Until next week,</p>
+<p><a href="https://www.linkedin.com/in/jamesmith/">James Smith</a> &amp; <a href="https://x.com/davwals">David Walsh</a></p>
+</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>

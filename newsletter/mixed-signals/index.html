@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ mixed signals | Enterprise Onchain</title>
+<meta name="description" content="Enterprise Onchain TLDR">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/newsletter/" class="nav-link active">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/newsletter/" class="drawer-link active" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · Jan 19, 2026</div>
+    <h1 class="edition-title">⚡ mixed signals</h1>
+    <div class="edition-tags"><span class="tag-chip">ETF</span><span class="tag-chip">Tokenisation</span><span class="tag-chip">Regulation</span><span class="tag-chip">Stablecoins</span></div>
+    <div class="edition-body"><p><img src="https://substack-post-media.s3.amazonaws.com/public/images/056f98d3-7a96-4164-8111-1daa4c591b12_1664x1126.png" alt=""></p>
+<h3><strong>The TLDR 👇</strong></h3>
+<h3>NYSE Plans Blockchain Platform for 24/7 Stock Trading</h3>
+<p>The New York Stock Exchange is seeking SEC approval for a blockchain-based platform that would allow round-the-clock trading of tokenized stocks and ETFs. Launch is targeted for later this year.</p>
+<p>The venue would use private blockchain networks to enable instant settlement, dollar-denominated orders, and stablecoin-based funding, all while preserving traditional shareholder rights like dividends and governance. If approved, retail investors could soon trade NYSE-listed securities on a Saturday morning.</p>
+<p>This is the NYSE, not a crypto startup. ICE, its parent company, is already working with BNY and Citi on tokenized deposits and 24/7 clearing. Nasdaq is building similar capabilities. The largest exchanges in the world are converging on the same conclusion: blockchain rails are the future of market infrastructure. <a href="https://www.coindesk.com/markets/2026/01/19/nyse-to-launch-24-7-blockchain-powered-tokenized-stock-and-etf-trading">Source</a>.</p>
+<hr>
+<h3>Banks Look to Win Battle as Crypto Bill Bars Stablecoin Interest Payments</h3>
+<p>Senate lawmakers released an updated crypto market structure draft on Tuesday that prohibits digital asset service providers from paying “any form of interest or yield” solely for holding payment stablecoins.</p>
+<p>The provision directly addresses months of lobbying from community banks warning that stablecoin yield could drain deposits from traditional finance. Last week, the American Bankers Association warned that up to $6.6 trillion in deposits could be at risk, citing concerns that crypto companies were circumventing the GENIUS Act by funneling rewards through affiliated exchanges.</p>
+<p>Rewards remain allowed for active participation like providing liquidity but passive yield on idle balances is now off the table. The move has sparked pushback with Coinbase warning lawmakers it may pull support if reward rules go too far.</p>
+<p>Banking groups argue these programs look like unregulated deposits; crypto firms counter that banks simply want less competition. Expect this fight to shape how stablecoin economics evolve in 2026.</p>
+<hr>
+<h3>State Street Launches Digital Asset Platform to Power Tokenized Finance</h3>
+<p>One of the world’s largest custodian banks just made its move. State Street has unveiled its Digital Asset Platform, a full-stack infrastructure play designed to bridge traditional and digital finance.</p>
+<p>The platform includes wallet management, custody, and cash capabilities across both private and public permissioned blockchains. State Street is building the rails for tokenized money market funds, ETFs, deposits, and stablecoins, all with integrated compliance controls and seamless connectivity to existing systems.</p>
+<p>With $44 trillion in assets under custody, this signals that the backbone of traditional finance is retooling for an onchain future. <a href="https://investors.statestreet.com/investor-news-events/press-releases/news-details/2026/State-Street-Launches-Digital-Asset-Platform-to-Power-Tokenized-Finance/default.aspx">Source</a>.</p>
+<hr>
+<h3>Standard Chartered Bets on $40k ETH by 2030</h3>
+<p>Standard Chartered’s digital assets research team has planted its flag: 2026 is Ethereum’s year. Geoffrey Kendrick, the bank’s Global Head of Digital Assets Research, argues that ETH will outperform Bitcoin as real-world crypto adoption accelerates, driven by tokenization, staking yields, and DeFi activity.</p>
+<p>Their bull case rests on three pillars. First, the tokenization market is projected to hit $2 trillion by 2028, and Ethereum remains the dominant settlement layer. Second, the GENIUS Act’s passage in July 2025 gave stablecoin issuers regulatory clarity, opening the door for institutional capital. Third, Ethereum’s staking yield offers something Bitcoin cannot: an “internet bond” for institutions seeking active returns.</p>
+<p>Price targets? Standard Chartered sees ETH breaking $5,000 and racing past $7,500 by year-end, with an upper range of $12,000. By 2030, they forecast <strong>$40,000 per ETH</strong> as the mainnet evolves into global financial infrastructure. <a href="http://theblock.co/post/385097/standard-chartered-says-2026-will-be-the-year-of-ethereum">Source</a>.</p>
+<hr>
+<h3>LSEG Brings Commercial Bank Money Onto Blockchain Rails</h3>
+<p>The London Stock Exchange Group has rolled out its Digital Settlement House (DiSH), a new service that enables instant, round-the-clock settlement across blockchain and traditional payment networks.</p>
+<p>At the core is DiSH Cash: a ledger-based representation of commercial bank deposits. Rather than relying on stablecoins, the system uses tokenized claims on actual bank deposits, providing what LSEG describes as a “real cash leg” for FX, securities, and digital asset transactions.</p>
+<p>Market participants can now conduct payment-versus-payment (PvP) or delivery-versus-payment (DvP) settlements using any asset, orchestrating payments on any connected network, digital and traditional. 24/7 settlement without the stablecoin dependency. <a href="https://www.bloomberg.com/news/articles/2026-01-15/lseg-starts-new-digital-settlement-platform-in-blockchain-push">Source</a>.</p>
+<hr>
+<h3>SWIFT Tests Euro Stablecoin for Tokenized Bond Settlements</h3>
+<p>SWIFT just completed a live test of Societe Generale’s euro-pegged stablecoin (EURCV) for tokenized bond settlements, marking a milestone in bridging legacy financial infrastructure with blockchain rails.</p>
+<p>SG-Forge, Societe Generale’s digital asset arm, announced that the collaboration demonstrated tokenized bonds can leverage existing payment infrastructure while enabling faster settlements and compliant operational processes through ISO 20022 standards. EURCV, which launched on Ethereum in 2023, is also the first MiCA-compliant stablecoin to participate in SWIFT’s interoperability initiatives.</p>
+<p>The messaging network that underpins global banking is continually building bridges to onchain finance. <a href="https://cointelegraph.com/news/sg-forge-swift-tokenized-bonds-eur-coinvertible-stablecoin">Source</a>.</p>
+<hr>
+<h3>Alpaca Hits $1.15B Valuation as Tokenized Stock Infrastructure Scales</h3>
+<p>Alpaca, the API-based brokerage infrastructure provider, closed a $150 million Series D led by Drive Capital, valuing the company at $1.15 billion. Citadel Securities, BNP Paribas’ VC arm, and MUFG Innovation Partners also participated.</p>
+<p>The company provides brokerage-as-a-service for fintechs, exchanges, and financial institutions to embed U.S. stocks and options trading directly into their products. Alpaca is a self-clearing broker-dealer in both the U.S. and Japan, meaning it executes, clears, settles, and custodies assets end-to-end.</p>
+<p>The client list includes Kraken and SBI Securities. 300 companies across 40 countries now run on Alpaca’s rails. <a href="https://alpaca.markets/blog/alpaca-raises-150-million-at-a-1-15b-valuation-to-build-the-global-standard-for-brokerage-infrastructure/">Source</a>.</p>
+<hr>
+<h2>Insight of the Week</h2>
+<p>Revolut’s stablecoin transfer volume grew 87% in 2025, from $642 million in January to $1.2 billion by December. <a href="https://x.com/obchakevich_/status/2010432847006343520?s=20">Source</a>.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/8bcf5603-1362-41fb-9515-e03fa97543dc_1090x848.jpeg" alt=""></p>
+<hr>
+<h2>Podcast of the Week</h2>
+<p>🎙️ <strong>DeFi Risk Ratings &amp; Credora’s Approach</strong> — <em>Credora Network Livestream</em></p>
+<p>Low-risk DeFi is affecting more lives than ever. Jason Chaskin and Binji from the EF deep dive on how Credora is building institutional-grade risk ratings for DeFi protocols. <a href="https://x.com/i/broadcasts/1YqGolyRRAjJv?s=20">Link</a>.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/9b91a2ea-d111-4d59-8786-ebaf53386cc3_1200x675.jpeg" alt=""></p>
+<hr>
+<h2>5 Enterprise Job Opportunities in Crypto</h2>
+<p><strong>→ <a href="https://careers.blackrock.com/job/new-york/digital-assets-associate/45831/89128546912">Digital Assets Associate</a></strong>— BlackRock (New York)</p>
+<p><strong>→ <a href="https://jobs.fidelity.com/en/jobs/2116271/director-digital-asset-strategist-tokenization-ecosystem/">Director, Digital Asset Strategist, Tokenization Ecosystem</a></strong> — Fidelity Digital Assets (New Jersey)</p>
+<p><strong>→ <a href="https://morganstanley.eightfold.ai/careers?query=digital+assets&amp;start=0&amp;pid=549794290541&amp;sort_by=relevance">Digital Assets Strategist, Vice President/Executive Director</a></strong> — Morgan Stanley(New York)</p>
+<p><strong>→ <a href="https://job-boards.greenhouse.io/fireblocks/jobs/4614909006">Director of Sales Western Europe</a></strong>— Fireblocks (France)</p>
+<p><strong>→ <a href="https://corporate.visa.com/en/jobs/REF075293W">Sr. Product Manager, Crypto-Enabled Solutions</a> —</strong> Visa (San Francisco)</p>
+<hr>
+<p>If you have read this far, dm us to redeem your $5 USDC prize</p>
+<p><a href="https://www.linkedin.com/company/enterpriseonchain/">Follow Us on LinkedIn</a></p>
+<p><strong>Contact Us</strong></p>
+<p>Reach out to us at our contact form <a href="https://link.sbstck.com/redirect/666a6dfa-c2e4-45e3-8cb9-2c757d4ab113?j=eyJ1IjoiNDRtcDIifQ.4_JeNjZe7A6pZ1lrs0Iqz-3a-XcJMv2d-CHsWiy9nLE">here</a>.</p>
+<p><em><strong>Thanks for reading - until next week!</strong></em></p>
+<p>Until next week,</p>
+<p><a href="https://x.com/Snapcrackle?s=20">James Smith</a> &amp; <a href="https://x.com/davwals">David Walsh</a></p>
+</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>

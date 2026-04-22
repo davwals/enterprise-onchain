@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE INVISIBLE INFRASTRUCTURE PLAY | Enterprise Onchain</title>
+<meta name="description" content="Ethereum's Long-Term Value Capture Vision">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/newsletter/" class="nav-link active">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/newsletter/" class="drawer-link active" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · May 25, 2025</div>
+    <h1 class="edition-title">THE INVISIBLE INFRASTRUCTURE PLAY</h1>
+    <div class="edition-tags"><span class="tag-chip">Infrastructure</span></div>
+    <div class="edition-body"><p>Is Ethereum bleeding value or executing the most brilliant infrastructure strategy in crypto?</p>
+<p>While critics wring their hands over L2s “stealing” Ethereum’s value, institutions bet billions that Ethereum’s approach is genius, not weakness.</p>
+<p>BlackRock’s Robert Mitchnick put it bluntly: “Many of the fears around Ethereum’s future are overdone.”</p>
+<p>He’s right. And here’s why.</p>
+<p>The Great Misunderstanding</p>
+<p>Critics see Ethereum’s numbers and panic.</p>
+<p>Arbitrum: $1.1M revenue, $55K costs = $1M+ profit. Base: $15M revenue, $1.6M costs = $13M+ profit.</p>
+<p>“Those profits should go to ETH holders!” they cry.</p>
+<p>This perspective fundamentally misunderstands what Ethereum is building.</p>
+<p>Ethereum isn’t trying to extract maximum value. That’s by design. It’s the strategy, not a bug.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/db689094-d733-4048-aaf7-905100d0dc46_1292x645.avif" alt=""></p>
+<p>The Permissionless Infrastructure Pattern</p>
+<p>History’s most transformative technologies follow a pattern:</p>
+<p>TCP/IP: Captured virtually zero value. Enabled trillions in commerce.</p>
+<p>Linux: Minimal direct revenue. Powers 96% of servers, 100% of supercomputers, 73% of smartphones.</p>
+<p>They won by being:</p>
+<p>Permissionless - no gatekeepers</p>
+<p>Neutral - no controlling interests</p>
+<p>Open-universal standards</p>
+<p>Resilient - distributed architecture</p>
+<p>Their impact was massive, but their value capture was minimal.</p>
+<p>Lorem ipsum dolor sit amet. Id dicta repellendus ea omnis odit et modi similique ut odit adipisci et aperiam deserunt est nihil atque nam sapiente illum?</p>
+<p>Ethereum’s Revolutionary Break</p>
+<p>Ethereum is the first permissionless infrastructure with built-in value capture:</p>
+<p>Native asset (ETH) required for all network activity</p>
+<p>Security model generating sustainable yield through staking</p>
+<p>Fee-burning mechanism that reduces supply as usage increases</p>
+<p>Settlement role for an entire ecosystem of applications</p>
+<p>This innovation solves the paradox that plagued previous open infrastructure.</p>
+<p>The Economic No-Brainer</p>
+<p>The numbers are staggering.</p>
+<p>If Arbitrum operated as an independent chain, its costs would increase 24-65x.</p>
+<p>From $660K annually to $16-43M.</p>
+<p>Celo saw this reality and “came home” to Ethereum, saving up to $25M annually in security costs alone.</p>
+<p>Independent L1s face a brutal economic reality:</p>
+<p>4-6% of tokens issued just for security</p>
+<p>No retained profit margin</p>
+<p>Limited reinvestment ability</p>
+<p>Security costs that don’t decrease with scale</p>
+<p>Building on Ethereum gives you:</p>
+<p>World-class security at a fraction of the cost</p>
+<p>Immediate access to liquidity and users</p>
+<p>Thousands of the world’s best blockchain developers continuously improving your infrastructure</p>
+<p>It’s not even close.</p>
+<p><strong>The Value Extraction vs. Value Distribution Philosophy</strong></p>
+<p>Centralized alternatives like BSC (21 validators) and Tron (27 validators) pursue maximum value extraction for their operators.</p>
+<p>Their entire design philosophy: control the platform, extract the fees.</p>
+<p>Ethereum’s approach? Become an invisible infrastructure that empowers thousands of projects to flourish independently.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/275bbd29-0fc4-4a62-bdda-e11d6aa7b249_1292x499.avif" alt=""></p>
+<p>For enterprises, using BSC or Tron means accepting you’re on someone else’s platform—the blockchain equivalent of building your business on Facebook, where the platform owner changes rules at will.</p>
+<p>Ethereum offers neutral ground no single entity controls.</p>
+<p>What Financial Giants See</p>
+<p>Major financial institutions aren’t fooled by the “bleeding value” narrative.</p>
+<p>BlackRock’s tokenized fund on Ethereum grew to $1.7B with 361% monthly growth, while versions on other chains stagnated.</p>
+<p>Deutsche Bank is building an Ethereum L2 with zkSync technology, creating a “public but permissioned” network for institutional finance.</p>
+<p>They chose Ethereum for reasons that alternative chains simply cannot match:</p>
+<p>100% uptime since 2015</p>
+<p>Security backed by billions in staked ETH</p>
+<p>Geopolitical neutrality</p>
+<p>Censorship resistance</p>
+<p>Global developer ecosystem</p>
+<p>These institutions did their homework. They’re betting on Ethereum’s approach because it works.</p>
+<p>The Strategic Flywheel</p>
+<p>Ethereum’s strategy creates a powerful flywheel effect:</p>
+<p>L2s make Ethereum accessible to more users and developers</p>
+<p>More activity increases demand for ETH (for security, gas, staking)</p>
+<p>Higher ETH value strengthens network security</p>
+<p>Stronger security attracts more institutions and enterprises</p>
+<p>Institutional adoption drives more L2 development</p>
+<p>This virtuous cycle is already spinning. Every new L2, every institutional adoption, every migrating project accelerates it.</p>
+<p>The Long Game</p>
+<p>The “bleeding value” critique focuses on short-term fee distribution while missing the strategic brilliance.</p>
+<p>Ethereum is deliberately seeding an ecosystem that will circle back to reinforce its dominance.</p>
+<p>By positioning itself as the secure settlement layer for a diverse ecosystem of L2 solutions, Ethereum becomes the TCP/IP of crypto—the indispensable base layer everyone relies on.</p>
+<p>But unlike TCP/IP, Ethereum captures value through ETH, staking yield, and fee burning.</p>
+<p><strong>The Key Insight</strong></p>
+<p>Most blockchains are trying to become the next Visa or Mastercard—extracting maximum fees from each transaction.</p>
+<p>Ethereum is becoming the settlement layer for a new financial system.</p>
+<p>Like TCP/IP became the backbone of the internet.</p>
+<p>Like Linux became the foundation for most computing.</p>
+<p>But with one crucial difference: built-in economic alignment.</p>
+<p><strong>What This Means For You</strong></p>
+<p>For developers: Building on Ethereum (via L2s) gives you maximum security at minimum cost, plus access to the deepest liquidity and talent pool.</p>
+<p>For investors: Look beyond short-term fee metrics. Ethereum’s strategic positioning creates multiple long-term value drivers through ETH’s essential role in the ecosystem.</p>
+<p>For enterprises: Ethereum offers unique qualities that centralized alternatives cannot match—neutrality, resilience, and security no single entity can compromise.</p>
+<p>The next time someone claims Ethereum is “bleeding value,” ask them if they think TCP/IP was a failure because it didn’t charge per packet.</p>
+<p>Ethereum isn’t bleeding value. It’s strategically seeding an ecosystem that makes it indispensable.</p>
+<p><strong>That’s not a weakness. That’s genius.</strong></p>
+<p>Did you find this analysis valuable? Please share it with your network and subscribe to our weekly intelligence reports for more strategic insights on the evolving blockchain landscape.</p>
+</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>

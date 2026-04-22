@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPMorgan Just Went DeFi - TLDR | Enterprise Onchain</title>
+<meta name="description" content="Enterprise Onchain TLDR">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/newsletter/" class="nav-link active">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/newsletter/" class="drawer-link active" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · Dec 22, 2025</div>
+    <h1 class="edition-title">JPMorgan Just Went DeFi - TLDR</h1>
+    <div class="edition-tags"><span class="tag-chip">Tokenisation</span><span class="tag-chip">Regulation</span><span class="tag-chip">Stablecoins</span><span class="tag-chip">Infrastructure</span></div>
+    <div class="edition-body"><p><img src="https://substack-post-media.s3.amazonaws.com/public/images/022639d8-70de-48ea-8ead-77aa9660fc86_400x400.png" alt="With A+ - a turnkey solution for regulated financial institutions to issue GENIUS compliant stablecoins on Ethereum"></p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/c98c7b3f-1dbc-4faf-8c4a-0b8bd7df3378_1882x1128.png" alt=""></p>
+<h4><strong>The TLDR 👇</strong></h4>
+<p><strong><a href="https://am.jpmorgan.com/us/en/asset-management/adv/products/jpmorgan-prime-money-market-fund-morgan-4812a2702">JP Morgan launches first-ever tokenized MMF on Ethereum</a></strong></p>
+<p>J.P. Morgan Asset Management went live with its first tokenized money market fund “My OnChain Net Yield Fund (MONY)” on public chain - Ethereum. The bank will seed the fund with $100 million of its own capital.</p>
+<p>It is available only to qualified investors. That includes individuals with at least $5 million in investable assets and institutions with a minimum of $25 million. The minimum investment is set at $1 million.</p>
+<p>J.P. Morgan is the largest systemically important bank to launch a tokenized MMF. That’s not a pilot, that’s a statement.</p>
+<p><strong><a href="https://www.coindesk.com/business/2025/12/18/jpmorgan-s-tokenized-dollars-are-quietly-rewiring-how-wall-street-moves-money?utm_social_post_id=626520311&amp;utm_social_handle_id=1333467482">JPM Coin Migrates to Base</a></strong></p>
+<p>J.P. Morgan moved its tokenized deposit product, JPM Coin (JPMD), from its internal Kinexys blockchain to Coinbase’s Ethereum L2, Base.</p>
+<p>Why the shift? Institutional clients want payments, collateral, and margin settlement on public chains and stablecoins alone don’t cut it for everyone. A bank deposit product fills the gap.</p>
+<p>On Base, JPM Coin can be used to hold collateral or make margin payments for crypto transactions. The bank is meeting clients where they’re headed.</p>
+<p><strong><a href="https://x.com/ADIChain_/status/2001597296459551002?s=20">BlackRock, Mastercard, and Franklin Templeton Announce Collaboration with the ADI Foundation Signaling Institutional Adoption</a></strong></p>
+<p>The ADI Foundation (the MENA region’s first institutional L2) locked in partnerships with three heavyweights: BlackRock, Mastercard, and Franklin Templeton.</p>
+<p>BlackRock signed an MoU to explore tokenized asset structures and regulatory frameworks in Abu Dhabi. Mastercard is focused on stablecoin settlement and cross-border payments across the Middle East. Franklin Templeton is building compliant infrastructure for tokenized product launches within ADGM.</p>
+<p>The foundation also announced a UAE expansion on December 10. Institutional blockchain adoption in the region is accelerating and the big names are coming onchain.</p>
+<p><strong><a href="https://cointelegraph.com/news/sec-tokenized-securities-custody-trading-framework">SEC Clarifies Custody Framework for Tokenized Securities</a></strong></p>
+<p>The SEC’s Trading and Markets Division <a href="https://www.sec.gov/newsroom/speeches-statements/trading-markets-121725-statement-custody-crypto-asset-securities-broker-dealers">spelled out</a> how broker-dealers can custody tokenized stocks and bonds under existing customer protection rules.</p>
+<p>The key signal: blockchain-based securities aren’t getting a new regulatory category. They’re being slotted into traditional safeguards as long as firms meet operational, security, and governance conditions.</p>
+<p>It’s not a formal rule, but it’s a clear message. Tokenized securities will live inside existing frameworks, even when they settle on-chain.</p>
+<p><strong><a href="https://investors.sofi.com/news/news-details/2025/SoFi-Launches-Fully-Reserved-Stablecoin-to-Power-Financial-Infrastructure-for-Banks-Fintechs-and-Enterprise-Partners/default.aspx">SoFi unveils the first bank-issued stablecoin for enterprise payments</a></strong></p>
+<p>SoFi unveiled SoFiUSD - a dollar stablecoin backed 1:1 by cash held at the Federal Reserve and issued by its FDIC-insured national bank.</p>
+<p>It runs on Ethereum with instant, low-cost settlement and opens the door to white-labeled stablecoin services for fintechs, banks, and enterprises.</p>
+<p>For now, it’s internal-only. But expect a rollout to SoFi members in the coming months as part of a broader payments push.</p>
+<hr>
+<h3><strong>Quote of the Week</strong></h3>
+<p>Crypto as a self-contained industry dissolves. The sharp line between “crypto” and “fintech,” “AI infra,” “payments,” “markets,” and “casino” blurs.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/28a9b121-d079-4a1a-a507-900b15840d99_1200x756.png" alt=""></p>
+<hr>
+<h3><strong>Stat of the Week</strong></h3>
+<p>📊 The world is moving <em>ONCHAIN</em>, and we are just getting started!</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/8609e29a-48ad-4eab-8a8b-30a4384b1387_812x810.png" alt=""></p>
+<hr>
+<h3><strong>Podcast of the Week</strong></h3>
+<h3>🎙️ How Stablecoins Won: Bridge Co-Founder &amp; USDC Co-Creator Share the Story Behind Crypto’s Killer App - A16Z Podcast</h3>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/36eb7a71-8ad5-4baa-ad65-2be61451079f_3104x1838.png" alt=""></p>
+<h3><strong>5 Enterprise Job Opportunities in Crypto</strong></h3>
+<p>→ <a href="https://jobs.lever.co/ethereumfoundation">Enterprise Relationship Lead (APAC and US Roles) - Ethereum Foundation</a></p>
+<p>→ <a href="https://careers.blackrock.com/job/-/-/45831/89314536672?source=LinkedIn">Managing Director, Head of Research, Digital Assets - BlackRock</a></p>
+<p>→ <a href="https://www.revolut.com/en-PT/careers/position/head-of-risk-crypto-af27246c-00db-454f-add7-ff9bcdc0f89f/">Head of Risk (Crypto) - Revolut</a></p>
+<p>→ <a href="https://jobs.fidelity.com/en/jobs/2120211/director-engineering-manager-digital-asset-management-blockchain-defi/">Director, Engineering Manager- Digital Asset Management- Blockchain, DeFi - Fidelity</a></p>
+<p>→ <a href="https://jobs.ashbyhq.com/Lido.fi/74b1a7bb-c906-4876-85a1-a191bc7be70a">Institutional Growth Lead (USA) - Lido</a></p>
+<hr>
+<p><em><strong>Thank you</strong></em> for being part of the Enterprise Onchain community!</p>
+<p>If you found value in this newsletter, <em><strong>share it with colleagues or friends</strong></em> and <em><strong>follow us on X</strong></em>🙏</p>
+<p><a href="https://x.com/enteronchain?s=20">Follow Enterprise Onchain on X</a></p>
+<p><strong>Contact Us</strong></p>
+<p>Reach out to us at our contact form <a href="https://link.sbstck.com/redirect/666a6dfa-c2e4-45e3-8cb9-2c757d4ab113?j=eyJ1IjoiNDRtcDIifQ.4_JeNjZe7A6pZ1lrs0Iqz-3a-XcJMv2d-CHsWiy9nLE">here</a>.</p>
+<p><em><strong>Thanks for reading - until next week!</strong></em></p>
+<p>Until next week,</p>
+<p><a href="https://x.com/Snapcrackle?s=20">James Smith</a> &amp; <a href="https://x.com/davwals">David Walsh</a></p>
+</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>

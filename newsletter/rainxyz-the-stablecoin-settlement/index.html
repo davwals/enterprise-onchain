@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rain.xyz: The Stablecoin Settlement Layer | Enterprise Onchain</title>
+<meta name="description" content="The Startup That Eliminated the Sponsor Bank">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/newsletter/" class="nav-link active">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/newsletter/" class="drawer-link active" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · Feb 26, 2026</div>
+    <h1 class="edition-title">Rain.xyz: The Stablecoin Settlement Layer</h1>
+    <div class="edition-tags"><span class="tag-chip">Tokenisation</span><span class="tag-chip">Regulation</span><span class="tag-chip">Stablecoins</span></div>
+    <div class="edition-body"><p><strong>DEEP DIVE</strong></p>
+<p><em>How Rain became a Visa Principal Member, a status usually held by banks and a small set of highly regulated payments institutions, and turned that into a $1.95B platform that lets any fintech issue stablecoin-powered cards without a single banking relationship.</em></p>
+<p><em>I’ve spent the last few days going down the Rain rabbit hole, and the deeper I got, the more I realised this isn’t a crypto story. It’s a payments infrastructure story that happens to settle on a blockchain. That distinction matters.</em></p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/cb8d3e56-7c05-4a49-b78f-6b2541bc083e_884x384.png" alt=""></p>
+<p><em>Fair warning: when a company is called Rain, the puns write themselves. I could not help myself. You have been warned.</em></p>
+<h1><strong>The Bottom Line</strong></h1>
+<p>JPMorgan Chase has 300,000 employees, $4 trillion in assets, and more than 200 years of history. It is one of a small number of banks that sit directly on the Visa network as a Principal Member. This gives it the ability to issue cards, settle transactions, and sponsor other companies’ card programs without any intermediary.</p>
+<p>Rain, a startup founded in 2021, now holds that same status.</p>
+<p>That alone would be remarkable. But Rain did something even more unusual with that access: it opened it up. Through a single API, any fintech, crypto wallet, neobank, or enterprise can now launch a full Visa card program without a single banking relationship.</p>
+<p>One integration. Live in as little as two months (That’s fast). Cards accepted at 150+ million merchants in 150+ countries. And then it settled those transactions in stablecoins.</p>
+<p>This translates to Rain using 80% less working capital to run a card program than a traditional setup.</p>
+<p>And then it went further.</p>
+<p>When someone taps a Rain-powered Visa card at a coffee shop, Visa pays the merchant through the acquiring bank. But Rain, as the card issuer, now owes Visa for that transaction.</p>
+<p>Rain must settle that obligation to Visa within the settlement cycle. That means Rain needs working capital. Every card tap creates a liability that Rain must fund.</p>
+<p>At $3B+ in annualized volume, that’s a massive, continuous capital requirement. Traditionally, a card issuer would go to a bank and say, “We’re processing $50M a week in Visa transactions, lend us the working capital to cover settlement.”</p>
+<p>The lender does due diligence, looks at spreadsheets, trusts your accounting, and lends you the money. It is slow, opaque, and expensive because the lender can’t see in real time what transaction flows are backing their capital.</p>
+<p>Rain did something different.</p>
+<p>It tokenized its payment flows onchain. Instead of showing lenders a spreadsheet that says “we’re processing $50M a week through Visa,” Rain gives capital providers real-time, blockchain-level visibility into the transaction volumes flowing through its system.</p>
+<p>Onchain lenders, including protocols like Huma Finance and Credit Coop, provide USDC to fund Rain’s settlement obligations to Visa. In return, they can see on the blockchain exactly what transaction activity backs their capital, updated in real time. No quarterly audits. No trusting the spreadsheet. Smart contracts manage the capital cycle, automating the flow between lenders, Rain, and Visa settlement.</p>
+<p><strong>The result: cheaper capital.</strong></p>
+<p>When lenders have more visibility and less risk, they charge less. When repayment is automatic, operational overhead drops. That lower cost of capital flows through Rain’s entire business, enabling cheaper card programs for partners, cheaper products for consumers, and potentially credit access in markets that couldn’t get it before.</p>
+<p>Think of it as supply chain finance, but transparent, real-time, and programmable. People have tokenized real estate, bonds, and art. But tokenizing live payment flows from the world’s largest card network and using DeFi capital to fund settlement is new.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/524ca486-8077-4fc5-9f20-3a59596c32b0_1186x640.png" alt=""></p>
+<p>The underlying activity is not static. It is a continuous stream of commercial transactions flowing through Visa, giving lenders unprecedented visibility into the payment flows backing their capital. It is, as far as we can tell, the first mechanism of its kind.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/9827e0bc-6ed4-4fc9-8421-ea8aeb156625_1194x638.png" alt=""></p>
+<p>To understand why, you need to know what it replaces.</p>
+<p>If you want to issue a Visa card today, you almost certainly need a <strong>BIN sponsor</strong>: a licensed bank that holds the BIN (Bank Identification Number, the first six to eight digits on a payment card that identify the issuer and route transactions through the network).</p>
+<p>The BIN sponsor sits between you and Visa, controls the relationship, charges a per-transaction take rate and layered fees, dictates compliance terms, and can pull out at any time.</p>
+<p>We saw this play out painfully across fintech in 2023–2024. The poster child was Synapse Financial Technologies, an Andreessen Horowitz-backed middleware company that connected about 100 fintechs to small banks.</p>
+<p>In April 2024, Synapse filed for bankruptcy. In May, it switched off the dashboard that its partner bank used to process transactions.</p>
+<p>Overnight, over 200,000 accounts were frozen. People could not pay rent. Could not make mortgage payments. Around $85 million in customer funds went missing.</p>
+<p>A bankruptcy judge called it a “hot mess.”</p>
+<p>Meanwhile, regulators cracked down hard: Formal enforcement actions tripled, and by early 2024, enforcement actions against fintech partner banks accounted for 35% of all regulatory notices, up from 10% a year earlier.</p>
+<p>Unsurprisingly, Enthusiasm for the BIN sponsor model was dampened</p>
+<p>The result is a $1.95B company processing $3B+ in annualized volume, with the majority of its new customers not being crypto companies.</p>
+<p>They are traditional financial institutions. <strong>Why are they all running to Rain?</strong></p>
+<p>The traditional card issuance hierarchy is a rigid and expensive:</p>
+<ol>
+<li>
+<p><strong>Visa</strong> operates the network and sets the rules.</p>
+</li>
+<li>
+<p><strong>Principal Members</strong> (major banks) hold BINs and have direct settlement relationships with Visa.</p>
+</li>
+<li>
+<p><strong>BIN Sponsors</strong> (a subset of Principal Members) rent out their BIN access to fintechs and program managers, charging fees and imposing constraints.</p>
+</li>
+<li>
+<p><strong>Fintechs</strong> build the consumer-facing products but are entirely dependent on their sponsor bank’s risk appetite, regulatory standing, and willingness to support them.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/efc15ce3-e14d-4108-9104-a3eecb2b6747_1376x752.png" alt=""></p>
+<p>This hierarchy creates three critical problems for fintechs.</p>
+<p>First, <strong>cost</strong>: BIN sponsorship commonly adds a per-transaction take rate and layered fees, a significant margin hit at scale.</p>
+<p>Second, <strong>control</strong>: the sponsor bank dictates program terms, can restrict features, and imposes compliance requirements that may not fit the fintech’s business model.</p>
+<p>Third, and most dangerously, <strong>counterparty risk</strong>: if the sponsor bank runs into regulatory trouble, changes strategy, or simply decides that crypto-adjacent programs are too risky, the fintech’s entire card program could be shut down with little notice.</p>
+<p>Rain’s Visa Principal Membership eliminates all three problems. Rain <em>becomes</em> the BIN sponsor for its 200+ partner companies.</p>
+<p>A fintech in Latin America, a crypto exchange in Asia, or a gig-economy platform in Africa doesn’t need to find a willing bank. They integrate one API with Rain and get: card issuance (physical and virtual), transaction routing, real-time crypto-to-fiat conversion, compliance and KYC, FX, onchain settlement, Apple Pay and Google Pay support, and dispute/chargeback handling. All from a single partner.</p>
+</li>
+</ol>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/384ecdf7-880a-460c-a4bd-76abaaeb7b64_1374x752.png" alt=""></p>
+<p>This is why Rain’s partner count doubled from 100+ to 200+ in roughly six months, and why Malik (CEO) reports the majority of new sign-ups are now TradFi programs, not crypto-native ones. The value proposition transcends crypto: any company that has struggled with BIN sponsor access, cost, or reliability has a reason to evaluate Rain.</p>
+<blockquote>
+<p><em>The winning infrastructure companies in payments won’t be crypto companies that “add TradFi.” They’ll be payment companies that happen to settle on blockchain rails. Rain doesn’t lead with Blockchain or USDC. It leads with Visa Principal Membership, 200+ partners, and $3B in volume. The blockchain is the engine, not the brand.</em></p>
+</blockquote>
+<h1><strong>Who’s Behind It</strong></h1>
+<p>Rain was founded in 2021 by <strong>Farooq Malik (CEO)</strong> and <strong>Charles Yoo-Naut (CTO)</strong>.</p>
+<p>They met through the On-Deck Founder Fellowship and started with an entirely different product: a document-generation tool for angel investments called Sign and Wire.</p>
+<p>When customers requested USDC payments and settlement happened instantly, rather than the 7–10-day ACH purgatory, the founders had what Malik calls their “aha moment.”</p>
+<p>They showed the proof of concept to potential customers, and people asked for the login link within five minutes. As Malik puts it: “Sometimes you just have to be wrong until you’re right.</p>
+<p>If you’re confident that you’re directionally correct, you just have to stick around long enough and not die.”</p>
+<p>Remember Tiny Speck? I thought not. They built an internal chat tool while making a video game nobody remembers, and are now called Slack.</p>
+<p>Rain built a payment rail while making a document tool nobody remembers. The best infrastructure companies are often discovered rather than planned.</p>
+<p>Their backgrounds are complementary. Malik served as <strong>Treasurer &amp; Investment Officer at the North American Development Bank</strong>, where he built deep expertise in regulatory frameworks, cross-border transactions, and the painful reality of moving billions of dollars via email, PDF, and wire.</p>
+<p>That TradFi fluency proved critical for securing Visa Principal Member status, a process that typically takes years for established banks and is almost unheard-of for a startup.</p>
+<p>Yoo-Naut brings the engineering depth. He started as a product manager at <strong>Microsoft</strong>, founded <strong>PlaybookHR (acquired by Intuit)</strong>, and served as a principal engineer on the QuickBooks team. He architected Rain’s multi-chain settlement infrastructure from scratch.</p>
+<p>Sapphire Ventures, which led the Series B, described the founding team as the kind “this space desperately needs, one that can navigate both the technical complexity of blockchain infrastructure and the regulatory intricacies of traditional finance.”</p>
+<p>Norwest Venture Partners, an investor since the seed stage, noted they’ve been partners since the company “was just an idea and a Notion doc.”</p>
+<p>A few details that reveal the culture. Rain stayed at 11 to 15 people for the first two years, scaling to ~75 only when business dynamics required it. They never had a single down quarter, even through Luna, FTX, SVB, and the full bear market.</p>
+<p>In one interview, Malik said he hired a dedicated critic, someone whose job was specifically not to say positive things about the business, but to stress-test every assumption.</p>
+<p>That kind of discipline is rare in a startup, and it shows in how they navigated the regulatory gray area that killed most of their peers.</p>
+<h2><strong>Company Snapshot</strong></h2>
+<p><strong>Founded -</strong> 2021 (New York, NY)</p>
+<p><strong>Founders -</strong> Farooq Malik (CEO), Charles Yoo-Naut (CTO)</p>
+<p><strong>Employees -</strong> Growing rapidly (”Rainmakers”)</p>
+<p><strong>Valuation</strong> $1.95B (Jan 2026), 17x increase in 10 months</p>
+<p><strong>Total Funding</strong> $338M across Seed, Series A, B, and C</p>
+<p><strong>Key Investors</strong></p>
+<p>ICONIQ (led C), Sapphire (led B), Norwest (led A), Lightspeed, Dragonfly, Bessemer, Galaxy, Coinbase Ventures, Samsung Next, Endeavor Catalyst, FirstMark</p>
+<p><strong>Visa Status -</strong> Principal Member (direct card issuance, no bank sponsor needed)</p>
+<p><strong>Ann. Transaction Vol. -</strong> $3B+ across 200+ partners</p>
+<p><strong>Geographic Reach -</strong> Cards accepted in 150+ countries</p>
+<p><strong>Key Partners -</strong> Western Union, Nuvei, KAST, Wyoming (FRNT stablecoin)</p>
+<h1><strong>Growth Metrics</strong></h1>
+<p>The numbers Rain reported at its Series C announcement on January 9, 2026 show a company in hypergrowth:</p>
+<ul>
+<li><strong>30x</strong> increase in active card base (in 2025)</li>
+<li><strong>38x</strong> increase in annualized payment volume (in 2025)</li>
+<li><strong>$3B+</strong> in annualized transaction volume</li>
+<li><strong>200+</strong> partners signed (up from 100+ at Series B)</li>
+<li><strong>10x</strong> transaction volume growth between Jan–Aug 2025 alone</li>
+<li><strong>15x</strong> company growth in the 12 months before Series A (per Norwest)</li>
+<li>Cards operational in <strong>150+ countries</strong> at Visa-accepting merchants</li>
+</ul>
+<p>This growth sits within a broader stablecoin tailwind: total stablecoin transaction volume jumped 72% in 2025, hitting $33 trillion according to Artemis Analytics.</p>
+<p>USDC led with $18.3 trillion, followed by USDT at $13.3 trillion. Total stablecoin supply now exceeds $290–300 billion.</p>
+<h1><strong>How It Actually Works</strong></h1>
+<p>Rain’s core innovation is a proprietary settlement stack that enables Visa card transactions to be interoperable with stablecoins across multiple blockchains. Here’s the flow:</p>
+<ol>
+<li>
+<p><strong>User taps card.</strong> A consumer or business uses a Rain-issued Visa card (physical, virtual, Apple Pay, Google Pay) at any of 150M+ Visa-accepting merchants.</p>
+</li>
+<li>
+<p><strong>Visa routes the authorization.</strong> The transaction hits Visa’s network and is routed to Rain as the issuer.</p>
+</li>
+<li>
+<p><strong>Rain queries onchain.</strong> Rain’s system queries the cardholder’s onchain balance across supported blockchains, verifies funds, prevents double-spending, and authorizes the transaction, all in under 200 milliseconds.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/8995e03f-1a51-4463-afad-d160d0f4ba84_1366x718.png" alt=""></p>
+</li>
+<li>
+<p><strong>Merchant gets paid normally.</strong> Visa settles with the merchant acquirer in local fiat as usual. The merchant experience is identical to any other Visa transaction.</p>
+</li>
+<li>
+<p><strong>Rain settles with Visa in stablecoins.</strong> This is the breakthrough: Rain settles its obligations to Visa using USDC onchain, 7 days a week, 365 days a year, including weekends and holidays. According to Rain, it was the first partner to achieve a fully automated seven-day settlement with Visa.</p>
+</li>
+</ol>
+<h2><strong>Why Seven-Day Settlement Matters</strong></h2>
+<p>Traditional Visa settlement operates on a five-day cycle constrained by banking hours and holidays. The system is, quite literally, under the weather: Cuy Sheffield, Visa’s Head of Crypto, has noted that different countries observe different holidays, creating random gaps when value simply cannot move through the system. Credit risk accumulates during those gaps. Rain’s stablecoin-native settlement delivers a 40% increase in settlement availability, reducing credit risk and dramatically improving capital efficiency.</p>
+<p>As Malik put it: stablecoins’ merge money movement and reconciliation into a single digital packet.” Traditional “instant” payments still rely on layered IOUs and pre-funding.</p>
+<p>Stablecoins collapse that structure.</p>
+<p>Ensuring a transaction “flows into your financial statements, is audit-ready, and GAAP compliant” is the expensive part, and that’s precisely what onchain settlement simplifies.</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/9299129a-594a-4c5f-80cc-d95d91588d5f_1372x734.png" alt=""></p>
+<h2><strong>Multi-Chain Architecture</strong></h2>
+<p>A critical strategic decision: Rain is <strong>blockchain-agnostic and stablecoin-agnostic</strong>.</p>
+<p>Rather than betting on a single chain, they built an omni-chain stack supporting native settlement on multiple networks, including <strong>Ethereum, Base, Polygon, Optimism, Avalanche, Arbitrum, ZKsync, Solana, Stellar, and Tron</strong>.</p>
+<p>This flexibility proved essential as different markets show a preference for different chains and as Visa expanded support beyond USDC on Ethereum.</p>
+<p>One part that excites me the most is Rain’s platform has tokenized its card payment flows onchain, enabling more transparent capital management and giving onchain lenders like Huma Finance and Credit Coop direct blockchain-level visibility into the transaction activity backing their capital.</p>
+<blockquote>
+<p>*Two things I want to flag here. First, chain agnosticism is smart business, but it means Ethereum is one settlement option among many, competing with Solana, Base, and others on speed, cost, and liquidity for each corridor.</p>
+<p>As Stripe’s Tempo and Circle’s Arc launch purpose-built payment chains, the question of which settlement layer wins enterprise payments volume is genuinely open.</p>
+<p>Second, the tokenized receivables we described above are the quiet story with the loudest long-term implications. Rain has proved the mechanism works with lenders like Huma Finance and Credit Coop. The next question is whether more DeFi protocols start competing to provide that settlement capital, driving Rain’s borrowing costs down even further.</p>
+<p>If that happens, you are looking at a genuinely new credit market.*</p>
+</blockquote>
+<h1><strong>Business Model &amp; Revenue</strong></h1>
+<p>Rain monetizes through two primary channels:</p>
+<ul>
+<li><strong>Interchange revenue:</strong> As the card issuer, Rain earns interchange on every transaction processed through its cards. With $3B+ in annualized volume and growing, this is a significant and scaling revenue stream.</li>
+<li><strong>Subscription/platform fees:</strong> Partners pay for access to Rain’s API-driven platform, which includes card issuance, compliance layers, settlement logic, FX, KYC, and onchain wallet infrastructure.</li>
+</ul>
+<p>The model feels structurally similar to Brex or Ramp, but with dramatically lower underlying infrastructure costs thanks to stablecoin rails.</p>
+<p>Where traditional card programs require multiple banking partners, pre-funding, and complex correspondent banking relationships, Rain’s stablecoin-native approach eliminates several layers of cost. Malik has emphasized that the hidden working-capital costs embedded in traditional fintech flows (layered IOUs, pre-funding, multi-day settlement float) are drastically reduced when settlement occurs in real time with digital cash.</p>
+<p>Exact margin figures are not publicly disclosed. However, the structural advantages are clear:</p>
+<p>As a Visa Principal Member, Rain doesn’t pay a sponsoring bank’s per-transaction take rate or layered fees (a meaningful cost for BIN-sponsored programs that can amount to millions per year at Rain’s volume).</p>
+<p>Stablecoin settlement eliminates pre-funding requirements and reduces working capital needs. The company’s ability to raise $338M at a $1.95B valuation suggests strong unit economics and a path to profitability that investors find compelling.</p>
+<blockquote>
+<p><em><strong>Back-of-envelope economics (estimates, not disclosed figures):</strong> On $3B annualized volume, if Rain’s net issuer interchange averages 0.7–1.8% (varying by region, debit vs. credit, card-present vs. CNP), that implies $21M–$54M in gross interchange revenue before chargebacks, processing, compliance, and any revenue share to program partners.</em></p>
+<p><em>The sponsor-bank cost headroom they avoid, estimated at $3M–$15M per year at their volume, is either retained as margin or deployed to undercut competitors on pricing.</em></p>
+<p><em>Platform and SaaS fees (compliance workflow, onboarding, risk tooling) likely carry significantly higher gross margins than interchange and become the real profit engine at scale. Interchange scales with spend but has pass-through costs; platform fees are stickier, higher-margin, and price-discriminate by complexity.</em></p>
+</blockquote>
+<h1><strong>What Use Cases Rain Enables:</strong></h1>
+<p>Rain is a B2B infrastructure play. Their technology disappears behind consumer-facing products built by their 200+ partners:</p>
+<ul>
+<li><strong>USD neobanks:</strong> Consumers hold dollar-denominated balances and spend with Visa cards, replacing expensive remittances and volatile local currencies. The term “dollar cards” is entering everyday vocabulary in LatAm.</li>
+<li><strong>Freelancer payment platforms:</strong> Gig workers earn and hold dollars globally, with instant settlement instead of multi-day wire delays.</li>
+<li><strong>Enterprise expense management:</strong> Crypto-native companies (exchanges, DAOs, protocols) spend their stablecoin treasuries on real-world expenses like cloud infrastructure, travel, and advertising.</li>
+<li><strong>Cross-border payroll:</strong> Earned wage access and salary disbursement in markets that previously lacked such capabilities.</li>
+<li><strong>Traditional finance programs:</strong> Health spending accounts (HSAs/FSAs), commuter benefits, and conventional card programs, all upgraded with 24/7 stablecoin settlement underneath.</li>
+<li><strong>State-issued stablecoins:</strong> Rain partnered with Wyoming and Avalanche to enable spending of the Frontier Stable Token (FRNT), the first U.S. state-issued stablecoin, anywhere Visa is accepted.</li>
+</ul>
+<p>Enterprise partners reportedly include <strong>Western Union, Nuvei, KAST, and Rizon</strong>. Notably, Malik has said that the majority of new customers signing up are now TradFi programs, not crypto-native ones, a powerful signal of mainstream adoption.</p>
+<h1><strong>Rain Is Hard to Replicate</strong></h1>
+<p>To summarize Rain’s defensibility. The Visa Principal Membership is the moat that matters most, and historically, that’s been nearly impossible to replicate.</p>
+<p>Layer on chain-agnostic architecture, two acquisitions (Uptop for rewards, Fern for FX) that complete the full-stack offering, regulatory licenses across multiple jurisdictions, and emerging closed-loop network effects, and you have an infrastructure position that gets more defensible as it scales.</p>
+<p>You can copy the software, but you cannot easily copy the position. For every fintech that didn’t pursue direct licensing when the window was open, <em>that’s looking like a missed opportunity.</em></p>
+<p>Malik puts it bluntly: “The only true moat that anybody can really build is a technical moat. A partner moat or a price moat, these are not really moats. If you want to build this and you want to compete with us, you have to relearn all the things that we learned over the last four years and you’d have to speedrun them all.”</p>
+<p>One stat that illustrates the structural advantage: Rain’s stablecoin-native settlement reduces the working capital required for a card program by roughly 80% compared to a traditional setup. That’s not an incremental improvement.</p>
+<p>That’s a fundamentally different cost structure. And 60% of the programs Rain powers today don’t even look like crypto products. They look like standard dollar payment apps, HSA cards, commuter benefit programs.</p>
+<p>The blockchain is completely invisible to the end user, which is exactly how Malik wants it: “Consumers should not have to change their behaviour to facilitate a change in technology infrastructure.”</p>
+<p>As Malik said in a recent interview, “Everything that Rain has done has been built for the day after regulatory clarity. And now that that’s here, we’re ready.”</p>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/cc749993-3e65-44b0-a849-4afa9d7e4327_1348x732.png" alt=""></p>
+<h1><strong>Market Context</strong></h1>
+<p>Rain sits at the intersection of two massive trends: the $12+ trillion global payments industry and the explosive growth of stablecoins.</p>
+<p>Total stablecoin supply has grown from $208 billion in January 2025 to over $300 billion by early 2026, with industry projections pointing to $400 billion by year-end 2026 and potentially $2.8 trillion by 2028.</p>
+<p>Cross-border stablecoin payment fees have dropped to as low as 0.5%, compared to traditional remittance costs of 6–7%.</p>
+<p>Cuy Sheffield at Visa frames stablecoins as “the first global banking-as-a-service layer”, enabling fintech entrepreneurs to build dollar-denominated products that work in any country, without a single traditional banking relationship.</p>
+<h1><strong>What To Watch</strong></h1>
+<ul>
+<li><strong>ACH and SEPA integration:</strong> Rain is building connections to U.S. ACH and European SEPA networks through partner banks, bridging stablecoin rails to traditional banking systems.</li>
+<li><strong>Further M&amp;A:</strong> The company has signaled more acquisitions are coming to deepen the platform stack. With $250M in fresh capital, they have significant firepower.</li>
+<li><strong>Tokenized bank deposits:</strong> Malik expects the interplay between stablecoins and tokenized bank deposits to be a dominant narrative, and Rain is building to support both.</li>
+<li><strong>State stablecoin expansion:</strong> Following Wyoming’s FRNT, North Dakota and Nebraska are developing their own state-issued stablecoins. Rain’s existing FRNT partnership positions it as the infrastructure partner of choice.</li>
+<li><strong>Onchain capital markets:</strong> Rain’s model of using DeFi lenders to fund Visa settlement obligations is the groundwork for a broader onchain credit market for payment infrastructure.</li>
+</ul>
+<h1><strong>My Take</strong></h1>
+<p>Sapphire Ventures compared Rain to “what Stripe did for online payments: abstracting complexity into elegant APIs and unleashing innovation on top.” I think that’s the right frame, but with one crucial addition. Stripe abstracted away payment processing complexity. Rain abstracts away the <em>banking relationship itself</em>.</p>
+<p>For hundreds of fintechs, exchanges, and platforms globally, Rain is the answer to the question: “How do I issue Visa cards without spending two years finding a BIN sponsor who’ll work with me?”</p>
+<p>That’s why the Visa Principal Membership is the moat that matters most. It’s not just a technical integration. It’s a regulatory and institutional position that takes years to achieve and gives Rain the ability to be the BIN sponsor for an entire ecosystem of companies.</p>
+<p>Combined with chain-agnostic architecture, a full-stack platform, 7-day stablecoin settlement, and regulatory readiness across multiple jurisdictions, Rain has built the kind of infrastructure position that becomes increasingly defensible as it scales. Every new partner adds transaction volume. Every new market adds licensing moats. Every new stablecoin integration extends the network.</p>
+<p>When Visa’s Head of Crypto says the company may become “a layer two on top of stablecoins as a new settlement network,” Rain is the company actually building that bridge.</p>
+<p>The open question, and the one I’ll be watching closely, is whether Rain’s chain-agnostic model wins the infrastructure layer, or whether purpose-built payment chains like Stripe’s Tempo and Circle’s Arc capture the settlement volume directly.</p>
+<p>I think onchain payment infrastructure financing will be a standalone asset class within two years. Rain and its lending partners like Huma Finance have the first proof point….</p>
+<p>Either way, the BIN sponsor model is being unbundled in real time, and the companies that move fastest into the gap will define the next decade of payments. Rain is currently setting the pace. And when it rains, it pours.</p>
+<p><strong>Enterprise Onchain</strong> covers the institutional adoption of blockchain technology. Subscribe for weekly analysis of enterprise blockchain, stablecoins, tokenization, and onchain infrastructure.</p>
+<p><em><strong>Thanks for reading</strong></em></p>
+<p><a href="https://www.linkedin.com/in/jamesmith/">James Smith</a></p>
+</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blockchain and Quantum Computing | Enterprise Onchain</title>
+<meta name="description" content="Can blockchain help defend against quantum computing?">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5.0.19/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-300.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-400.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-500.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.17/latin-600.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/shared.css">
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="/" class="nav-logo" aria-label="Enterprise Onchain — home">
+    <img class="nav-logo-mark logo-dark" src="/assets/logo-dark.png" alt="" aria-hidden="true">
+    <img class="nav-logo-mark logo-light" src="/assets/logo-light.png" alt="" aria-hidden="true">
+    Enterprise Onchain
+  </a>
+  <div class="nav-r">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/#newsletter" class="nav-link">Newsletter</a>
+    <a href="/newsletter/" class="nav-link active">Archive</a>
+    <a href="/jobs/" class="nav-link">Jobs</a>
+    <a href="/#dashboard" class="nav-link">Dashboard</a>
+    <a href="/#about" class="nav-link">About</a>
+    <a href="https://enterpriseonchain.substack.com/" class="nav-link" target="_blank" rel="noopener">Substack <span class="arrow">↗</span></a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+    <a href="/#subscribe" class="btn-nav">Subscribe</a>
+    <button class="nav-hamburger" onclick="toggleDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer"><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer-backdrop" onclick="toggleDrawer()"></div>
+<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile menu">
+  <a href="/" class="drawer-link" onclick="closeDrawer()">Home</a>
+  <a href="/#newsletter" class="drawer-link" onclick="closeDrawer()">Newsletter</a>
+  <a href="/newsletter/" class="drawer-link active" onclick="closeDrawer()">Archive</a>
+  <a href="/jobs/" class="drawer-link" onclick="closeDrawer()">Jobs</a>
+  <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
+  <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
+  <a href="https://enterpriseonchain.substack.com/" class="drawer-link" target="_blank" rel="noopener" onclick="closeDrawer()">Substack ↗</a>
+  <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
+  <div class="drawer-footer">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
+    </button>
+  </div>
+</aside>
+
+<main class="page">
+  <article class="inner reveal edition">
+    <div class="s-label">Newsletter · Feb 12, 2025</div>
+    <h1 class="edition-title">Blockchain and Quantum Computing</h1>
+    <div class="edition-tags"><span class="tag-chip">Regulation</span></div>
+    <div class="edition-body"><p><strong>Who’s actually preparing for Quantum Computing disruption?</strong></p>
+<p>If you’re still thinking quantum computing is “some future thing,” it’s time to rethink. <strong>Quantum</strong> is quickly moving from labs into the real world—and it’s poised to break much of the <strong>encryption</strong> that underpins modern business.</p>
+<p>That includes the <strong>financial transactions</strong>, <strong>emails</strong>, and <strong>cloud services</strong> your organization relies on daily.</p>
+<h3><strong>Quantum Threats: A Reality Check</strong></h3>
+<ul>
+<li><strong>Cracked Encryption</strong>: Algorithms like Shor’s could shatter RSA/ECC in minutes, exposing old and new data.</li>
+<li><strong>Harvest Now, Decrypt Later</strong>: Adversaries are <strong>stealing encrypted data now</strong>, waiting to decrypt it once they have quantum capability.</li>
+<li><strong>60%</strong> of enterprises say they’re worried about quantum threats.</li>
+<li><strong>81%</strong> admit they’re not prepared.</li>
+</ul>
+<p>In other words, quantum security isn’t a “maybe someday” issue. <strong>It’s here—and it could upend entire industries</strong> if organizations fail to adapt.</p>
+<h3><strong>Blockchain Defense</strong></h3>
+<p>So, what’s the plan if quantum computers break today’s encryption? <strong>Enter blockchain-based security models.</strong></p>
+<ul>
+<li><strong>Estonia’s Approach</strong>: Estonia secures its government data with a <strong>blockchain-backed</strong> system. Even if encryption is compromised, any unauthorized changes get flagged by the tamper-proof ledger. (explained below)</li>
+<li><strong>Industry Use Cases</strong>: NATO, Lockheed Martin, and major banks use <strong>decentralized security</strong> for real-time breach detection and <strong>zero-trust</strong> verification.</li>
+<li><strong>Quantum-Resistant Tech</strong>: Leading blockchains are moving to or already using <strong>post-quantum</strong> algorithms (e.g., hash-based signatures) to <strong>withstand quantum assaults</strong>.</li>
+</ul>
+<p>If <strong>encryption alone</strong> can’t be trusted, you need a <strong>verifiable audit trail</strong> that <strong>can’t be stealthily altered</strong>—even by a quantum-capable adversary.</p>
+<h3><strong>Key Takeaways for Enterprises</strong></h3>
+<ol>
+<li>
+<p><strong>Map Out a Quantum Roadmap</strong></p>
+<ul>
+<li>Audit your current encryption. Which systems rely on RSA or ECC? Where are your vulnerabilities?</li>
+<li>Plan for <strong>post-quantum cryptography (PQC)</strong> rollouts—NIST is already finalizing new standards.</li>
+</ul>
+</li>
+<li>
+<p><strong>Explore Blockchain-Based Security Layers</strong></p>
+<ul>
+<li>Decentralized audit trails make tampering <strong>instantly visible</strong>, complementing traditional defenses.</li>
+<li>Enterprise-grade blockchain solutions can integrate with existing systems (e.g., supply chain, finance, HR).</li>
+</ul>
+</li>
+<li>
+<p><strong>Watch the Timeline</strong></p>
+<ul>
+<li>Quantum computing could achieve major breakthroughs within the next decade—or even sooner.</li>
+<li>“Harvest Now, Decrypt Later” means <strong>sensitive data</strong> stolen today can be exposed <strong>years</strong> from now.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cross-Industry Collaboration</strong></p>
+<ul>
+<li>Finance, pharma, government, and defense are leading the charge in quantum-safe tech.</li>
+<li>Share best practices with peers, join industry consortia, and <strong>engage regulators</strong> who are prioritizing quantum security.</li>
+</ul>
+</li>
+</ol>
+<h2><strong>Estonia’s Blockchain-Backed Security Model</strong></h2>
+<p><img src="https://substack-post-media.s3.amazonaws.com/public/images/a9843c30-617a-4e41-bc4c-259d0bc1e488_1024x1024.jpeg" alt=""></p>
+<p><em>Estonia Blockchain Defence</em></p>
+<h3><strong>How It Works</strong></h3>
+<ul>
+<li>
+<p><strong>Keyless Signature Infrastructure (KSI):</strong> Estonia uses a blockchain-based system called <strong>KSI</strong>. Unlike many public blockchains (e.g., Bitcoin), KSI is permissioned and optimized for <strong>data integrity</strong> rather than financial transactions.</p>
+<p><strong>Keyless Signature Infrastructure (KSI)</strong> works by creating a unique “fingerprint” (hash) for each record—like a health file or property registry—and anchoring that fingerprint on a <strong>permissioned blockchain</strong>.</p>
+<p>Rather than storing the actual data, KSI stores these hashes, which instantly reveal any unauthorized change (because even a tiny alteration changes the hash). Multiple trusted parties validate each new hash, preventing a single actor from secretly rewriting records. By using <strong>quantum-resistant</strong> hash-based signatures, KSI ensures that even if powerful quantum computers break older encryption methods, the core integrity of Estonia’s data remains intact.</p>
+</li>
+<li>
+<p><strong>Tamper-Proof Hashing:</strong> Instead of storing citizen data directly on the blockchain, Estonia anchors <strong>cryptographic hashes</strong> of that data. If any record (say, a health file or property registry) is altered, its hash no longer matches the one stored on the blockchain. This mismatch is immediately detectable.</p>
+</li>
+<li>
+<p><strong>Distributed Validation:</strong> Multiple nodes (government agencies, trusted partners) verify each new entry, creating a <strong>consensus</strong> on the integrity of every record. No single party can secretly change or delete information without the system flagging it.</p>
+</li>
+<li>
+<p><strong>Quantum-Resistant by Design:</strong> KSI relies on <strong>hash-based signatures</strong>, which are widely considered more resistant to quantum attacks than RSA or elliptic curve cryptography. This means the system’s <strong>core security</strong> isn’t easily broken, even if a powerful quantum computer emerges.</p>
+</li>
+</ul>
+<h3><strong>Why It’s Effective</strong></h3>
+<ol>
+<li><strong>Real-Time Breach Detection:</strong> Traditional systems can take <strong>months</strong> to detect intrusions (if ever). Estonia’s blockchain approach <strong>alerts administrators instantly</strong> if a database record has been tampered with, dramatically reducing dwell time.</li>
+<li><strong>Immutable Audit Trail:</strong> The blockchain’s ledger is <strong>append-only</strong>—meaning new entries get added, but old entries can’t be altered without detection. This creates an <strong>unforgeable</strong> history of all transactions and data changes.</li>
+<li><strong>No Single Point of Failure:</strong> Because validation is distributed, even a compromised administrator or server can’t <strong>silently</strong> rewrite records. The system’s checks and balances ensure <strong>integrity</strong> is maintained.</li>
+<li><strong>Quantum-Safe Future-Proofing:</strong> By avoiding reliance on classical public-key encryption, Estonia is <strong>preempting</strong> quantum threats. Even if quantum computers break RSA tomorrow, the blockchain’s <strong>hash-based</strong> security stands firm.</li>
+</ol>
+<p>A <strong>permissionless blockchain</strong> could strengthen this even further as distributing trust across a wide network of nodes—reduces the risk of hacks or insider tampering.</p>
+<h3><strong>Why Enterprises Should Start Now</strong></h3>
+<ul>
+<li><strong>Compliance &amp; Liability</strong>: Failing to protect data in a quantum world isn’t just an IT problem—it’s a <strong>C-suite, board-level risk</strong>.</li>
+<li><strong>Competitive Advantage</strong>: Early movers who adopt <strong>quantum-safe</strong> and <strong>blockchain-secured</strong> solutions stand to <strong>win customers’ trust</strong> and lead their markets.</li>
+<li><strong>Future-Proofing</strong>: Shifting to decentralized security models and PQC is a <strong>long-term investment</strong>—like Y2K, but with far more at stake.</li>
+</ul>
+</div>
+    <div class="edition-cta">
+      <a href="/newsletter/" class="btn btn-ghost">← Back to archive</a>
+      <a href="/#subscribe" class="btn btn-primary">Subscribe</a>
+    </div>
+  </article>
+</main>
+
+
+<footer>
+  <div class="footer-left">&copy; 2026 Enterprise Onchain. All rights reserved.</div>
+  <div class="footer-right">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/newsletter/" class="footer-link">Archive</a>
+    <a href="/jobs/" class="footer-link">Jobs</a>
+    <a href="https://enterpriseonchain.substack.com/" target="_blank" rel="noopener" class="footer-link">Substack ↗</a>
+  </div>
+</footer>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);try{localStorage.setItem('eo-theme',n)}catch(e){}}
+try{const s=localStorage.getItem('eo-theme');if(s)document.documentElement.setAttribute('data-theme',s)}catch(e){}
+function toggleDrawer(){document.body.classList.toggle('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded',document.body.classList.contains('drawer-open'))}
+function closeDrawer(){document.body.classList.remove('drawer-open');const b=document.querySelector('.nav-hamburger');if(b)b.setAttribute('aria-expanded','false')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+const nav=document.getElementById('main-nav');let ticking=false;
+window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
+</script>
+</body></html>
