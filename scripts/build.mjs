@@ -74,7 +74,6 @@ function renderNav(current) {
     <a href="/#dashboard" class="nav-link">Dashboard</a>
     <a href="/#about" class="nav-link">About</a>
     ${link('/newsletter/', 'Content Library', 'library')}
-    ${link('/jobs/', 'Jobs', 'jobs')}
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
       <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/><line x1="4.93" y1="19.07" x2="7.05" y2="16.95"/><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"/></svg>
@@ -91,7 +90,6 @@ function renderNav(current) {
   <a href="/#dashboard" class="drawer-link" onclick="closeDrawer()">Dashboard</a>
   <a href="/#about" class="drawer-link" onclick="closeDrawer()">About</a>
   ${drawerLink('/newsletter/', 'Content Library', 'library')}
-  ${drawerLink('/jobs/', 'Jobs', 'jobs')}
   <a href="/#subscribe" class="drawer-link" onclick="closeDrawer()" style="border-bottom:none;margin-top:12px;padding:14px;border:1px solid var(--fg);border-radius:3px;justify-content:center;opacity:1">Subscribe</a>
   <div class="drawer-footer">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
