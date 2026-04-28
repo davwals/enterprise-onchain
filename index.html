@@ -295,23 +295,12 @@ body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
 }
 
 .subscribe-wrap{
-  margin-top:28px;max-width:520px;width:100%;
+  margin-top:28px;max-width:560px;width:100%;
 }
-/* Beehiiv subscribe-form iframe. Fixed 150px height locks the hero
-   layout — embed.js auto-resize is intentionally overridden so the
-   form's footprint stays at exactly 480 x 150. */
-.beehiiv-embed{
-  display:block;
-  width:100% !important;
-  max-width:480px !important;
-  height:150px !important;
-  margin:0;
-  border:0;
-  background:transparent;
-  box-shadow:none;
-  border-radius:0;
-}
-.substack-iframe-centered .beehiiv-embed,
+/* Beehiiv subscribe-form iframe — sizing is on the inline style
+   attribute (matches the canonical Beehiiv embed). Class kept for
+   targeting if any other rule needs it. */
+.beehiiv-embed{display:block;border:0}
 .cta-section .beehiiv-embed{margin:0 auto}
 
 .sub-meta-row{margin-top:14px;display:flex;align-items:center;gap:12px;font-size:11px;color:var(--fg3);flex-wrap:wrap}
@@ -669,7 +658,7 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
     <h1 class="fu d1">Track Institutional<br>Adoption of Crypto<br>in One Place.</h1>
     <p class="hero-sub fu d2">Leading institutional crypto newsletter for decision makers. Blockchain, tokenization, institutional adoption and regulatory shifts. One source of truth.</p>
     <div class="subscribe-wrap fu d3">
-      <iframe src="https://subscribe-forms.beehiiv.com/e726abc4-455b-42fb-9761-1c91dffc5438" width="480" height="150" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" title="Subscribe to Enterprise Onchain"></iframe>
+      <iframe src="https://subscribe-forms.beehiiv.com/e726abc4-455b-42fb-9761-1c91dffc5438" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 315px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
     </div>
     <div class="sub-meta-row fu d4">
       <span class="sub-meta-text">Join <strong>8,000+</strong> subscribers from <strong>200+ institutions</strong></span>
@@ -846,8 +835,8 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
     <div class="s-label">Don't miss out</div>
     <h2 class="s-title" id="cta-title">The Onchain Revolution Is Here.</h2>
     <p class="s-desc" style="text-align:center;margin:0 auto">Stay ahead with the weekly blockchain briefing read by leaders at <strong style="font-weight:500;color:var(--fg)">200+ institutions</strong>.</p>
-    <div class="subscribe-wrap" style="margin:24px auto 0;max-width:520px">
-      <iframe src="https://subscribe-forms.beehiiv.com/e726abc4-455b-42fb-9761-1c91dffc5438" width="480" height="150" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" title="Subscribe to Enterprise Onchain"></iframe>
+    <div class="subscribe-wrap" style="margin:24px auto 0;max-width:560px">
+      <iframe src="https://subscribe-forms.beehiiv.com/e726abc4-455b-42fb-9761-1c91dffc5438" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 315px; margin: 0 auto; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
     </div>
     <div style="text-align:center;margin-top:14px;font-size:11px;color:var(--fg3)">No spam. Unsubscribe anytime.</div>
   </div>
