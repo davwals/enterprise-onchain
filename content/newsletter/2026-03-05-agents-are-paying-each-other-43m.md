@@ -58,14 +58,6 @@ We went deep on this one. The report covers the full ecosystem breakdown, market
 
 **Download the full report here:**
 
-Enterprise Onchain Agent Economy Report
-
-22.3KB ∙ PDF file
-
-[Download](https://enterpriseonchain.substack.com/api/v1/file/46414d9a-d05d-4685-b7a9-d0dcdb7b306d.pdf)
-
-[Download](https://enterpriseonchain.substack.com/api/v1/file/46414d9a-d05d-4685-b7a9-d0dcdb7b306d.pdf)
-
 *For the raw data, visit [stateofagents.com](https://stateofagents.com).*
 
 The agent economy is here. The data says so.

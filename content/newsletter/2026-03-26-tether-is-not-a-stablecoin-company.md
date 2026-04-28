@@ -73,7 +73,7 @@ The growth was organic, crisis-driven. Ardoino says they didn’t even understan
 >   
 > He’s described the R&D push into AI, energy, and telecoms explicitly as a hedge against eventual rate cuts.*
 >
-> [Share](https://enterpriseonchain.substack.com/p/tether-is-not-a-stablecoin-company?action=share)
+> [Share](/newsletter/tether-is-not-a-stablecoin-company/)
 
 # **What’s In The Vault (And What Isn’t)**
 

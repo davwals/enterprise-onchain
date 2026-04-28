@@ -299,7 +299,7 @@ body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
 }
 /* Beehiiv subscribe-form iframe. Fixed 150px height locks the hero
    layout — embed.js auto-resize is intentionally overridden so the
-   form's footprint matches the prior Substack iframe exactly. */
+   form's footprint stays at exactly 480 x 150. */
 .beehiiv-embed{
   display:block;
   width:100% !important;
@@ -755,10 +755,6 @@ footer{border-top:1px solid var(--border);padding:32px clamp(var(--pad-x-mobile)
         <div class="archive-title-wrap"><h3>Both US Stock Exchanges Pick Sides</h3></div>
         <span class="archive-date">Mar 26, 2026</span>
       </a>
-      <a href="https://enterpriseonchain.substack.com/publish/posts/detail/187939725?referrer=%2Fpublish%2Fposts%2Fpublished" class="archive-item" target="_blank" rel="noopener">
-        <div class="archive-title-wrap"><h3>The Week in Institutional Onchain</h3></div>
-        <span class="archive-date">Mar 19, 2026</span>
-      </a>
     </div>
     <div class="archive-more">50+ editions published weekly since 2025. <a href="/newsletter/">View full archive</a></div>
   </div>
@@ -897,8 +893,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
 const navEl=document.getElementById('main-nav');let ticking=false;
 window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{navEl.classList.toggle('scrolled',window.scrollY>60);ticking=false});ticking=true}});
 
-/* ═══ Substack subscribe ═══
-   Official Substack iframe embed handles submission directly. */
+/* ═══ Subscribe form ═══
+   The Beehiiv iframe handles submission directly via embed.js. */
 
 /* ═══ Marquee logos ═══ */
 const logos=['J.P. Morgan','Morgan Stanley','BlackRock','Citi','Barclays','European Central Bank','Deutsche Bundesbank','Franklin Templeton','Vanguard','S&P Global','PwC','EY','Accenture','Deloitte','McKinsey','KPMG'];

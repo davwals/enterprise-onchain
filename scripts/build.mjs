@@ -152,8 +152,8 @@ function formatDate(iso) {
 }
 
 // Detect sponsor blocks in rendered Markdown and wrap them so CSS can
-// size the small logo down from the full-column default. Two patterns,
-// both forms Substack exports today:
+// size the small logo down from the full-column default. Two patterns
+// supported:
 //
 //   1. Logo + caption: <p><img></p>\n<p><em>Together with ...</em></p>
 //   2. Banner-as-alt:  <p><img alt="Together with ..."></p>
